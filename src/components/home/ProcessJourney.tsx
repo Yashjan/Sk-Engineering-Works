@@ -9,7 +9,9 @@ import "./process-journey.css";
 
 type StageWithAsset = ProcessStage & { hasImage: boolean };
 const number = (value: number) => String(value).padStart(2, "0");
-const HOLD = 0.65;
+const HOLD_STAGE_1 = 0.65;
+const HOLD_STAGE_2 = 0.8;
+const HOLD_STAGE_3 = 0.8;
 const TRANSITION = 1.2;
 
 export default function ProcessJourney({ stages }: { stages: StageWithAsset[] }) {
@@ -58,8 +60,8 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
 
         panels.forEach((panel, index) => {
           gsap.set(visual(panel), {
-            x: index === 0 ? 0 : travel(index === 1 ? 280 : 240), y: index === 0 ? 0 : 40,
-            scale: index === 0 ? 1 : 0.84, autoAlpha: index === 0 ? 1 : 0,
+            x: index === 0 ? 0 : travel(index === 1 ? 250 : 220), y: index === 0 ? 0 : 34,
+            scale: index === 0 ? 1 : 0.88, autoAlpha: index === 0 ? 1 : 0,
           });
           gsap.set(info(panel), { y: index === 0 ? 0 : 60, autoAlpha: index === 0 ? 1 : 0 });
           gsap.set(numeral(panel), { x: index === 0 ? 0 : 40, y: index === 0 ? 0 : 25, autoAlpha: index === 0 ? 1 : 0 });
@@ -74,17 +76,18 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
             timeline.addLabel(`transition${index}${index + 1}`, start);
             // Machinery overlaps; text follows the incoming machine by 0.2 units.
             timeline
-              .to(visual(previous), { x: travel(index === 1 ? -180 : -220), y: -30, scale: index === 1 ? 0.82 : 0.84, autoAlpha: 0, duration: 1 }, start)
-              .to(info(previous), { x: travel(-40), y: -80, autoAlpha: 0, duration: 0.8 }, start)
-              .to(numeral(previous), { x: -45, y: -30, autoAlpha: 0, duration: 1.1 }, start)
+              .to(visual(previous), { x: travel(index === 1 ? -190 : -230), y: -34, scale: index === 1 ? 0.86 : 0.87, autoAlpha: 0, duration: 1 }, start)
+              .to(info(previous), { x: travel(-58), y: -78, autoAlpha: 0, duration: 0.8 }, start)
+              .to(numeral(previous), { x: index === 1 ? -48 : -56, y: -34, autoAlpha: 0, duration: 1.1 }, start)
               .to(visual(panel), { x: 0, y: 0, scale: 1, autoAlpha: 1, duration: 1 }, start + 0.2)
               .to(info(panel), { y: 0, autoAlpha: 1, duration: 0.7 }, start + 0.4)
-              .to(numeral(panel), { x: 0, y: 0, autoAlpha: 1, duration: 1 }, start + 0.2)
-              .to(".process-grid", { x: index * 20, y: index * -8, duration: TRANSITION }, start);
-            dominance.push(start + 0.6);
+              .to(numeral(panel), { x: 0, y: 0, autoAlpha: 1, duration: 1.15, ease: "none" }, start + 0.2)
+              .to(".process-grid", { x: index === 1 ? 22 : 34, y: index === 1 ? -10 : -6, duration: TRANSITION }, start);
+            // The incoming machine is dominant here (rather than merely visible).
+            dominance.push(start + 0.95);
           }
           timeline.addLabel(`stage${index + 1}`);
-          timeline.to({}, { duration: HOLD });
+          timeline.to({}, { duration: [HOLD_STAGE_1, HOLD_STAGE_2, HOLD_STAGE_3][index] });
         });
 
         const duration = timeline.duration();
@@ -100,7 +103,8 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
           invalidateOnRefresh: true, anticipatePin: 1,
         });
         jumpToStage.current = (index) => {
-          const time = timeline.labels[`stage${index + 1}`] + HOLD / 2;
+          const stageHold = [HOLD_STAGE_1, HOLD_STAGE_2, HOLD_STAGE_3][index];
+          const time = timeline.labels[`stage${index + 1}`] + stageHold / 2;
           window.scrollTo({ top: trigger.start + (time / duration) * (trigger.end - trigger.start), behavior: "smooth" });
         };
       } else {

@@ -1,21 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { waitForIntro } from "@/components/layout/intro-coordination";
 
 export default function Hero({ hasImage }: { hasImage: boolean }) {
   const root = useRef<HTMLElement>(null);
-  useEffect(() => {
+  useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
       let stopWaiting = () => {};
       const context = gsap.context(() => {
         const entrance = gsap.timeline({ paused: true, defaults: { ease: "power2.out" } })
-          .from("[data-navbar]", { opacity: 0, y: -12, duration: 0.7 })
+          .to("[data-navbar]", { opacity: 1, y: 0, duration: 0.7 })
           .to(".hero-eyebrow", { opacity: 1, y: 0, duration: 0.6 }, "-=0.3")
           .to(".headline-line > span", { y: 0, yPercent: 0, duration: 0.9, stagger: 0.13 }, "-=0.25")
           .to(".hero-description", { opacity: 1, y: 0, duration: 0.6 }, "-=0.5")

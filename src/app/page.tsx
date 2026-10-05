@@ -4,7 +4,9 @@ import Navbar from "@/components/layout/Navbar";
 import SiteIntro from "@/components/layout/SiteIntro";
 import Hero from "@/components/home/Hero";
 import ProcessJourney from "@/components/home/ProcessJourney";
+import ProjectsSection from "@/components/home/ProjectsSection";
 import { processStages } from "@/data/process";
+import { projects } from "@/data/projects";
 
 export default function Home() {
   const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
@@ -13,5 +15,9 @@ export default function Home() {
     ...stage,
     hasImage: existsSync(path.join(process.cwd(), "public", stage.image)),
   }));
-  return <><SiteIntro /><a className="skip-link" href="#main">Skip to content</a><Navbar hasLogo={hasLogo} /><main id="main"><Hero hasImage={hasHeroImage} /><ProcessJourney stages={stages} /></main></>;
+  const projectRecords = projects.map((project) => ({
+    ...project,
+    hasImage: existsSync(path.join(process.cwd(), "public", project.image)),
+  }));
+  return <><SiteIntro /><a className="skip-link" href="#main">Skip to content</a><Navbar hasLogo={hasLogo} /><main id="main"><Hero hasImage={hasHeroImage} /><ProcessJourney stages={stages} /><ProjectsSection projects={projectRecords} /></main></>;
 }

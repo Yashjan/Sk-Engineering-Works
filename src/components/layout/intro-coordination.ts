@@ -1,8 +1,8 @@
 const waiting = new Set<() => void>();
-let released = false;
 
 export function waitForIntro(start: () => void) {
-  if (released || document.documentElement.dataset.skIntro !== "active") {
+  const { skIntro, skIntroRevealing } = document.documentElement.dataset;
+  if (skIntroRevealing === "true" || skIntro !== "active") {
     start();
     return () => {};
   }
@@ -11,7 +11,7 @@ export function waitForIntro(start: () => void) {
 }
 
 export function releaseHeroEntrance() {
-  released = true;
+  document.documentElement.dataset.skIntroRevealing = "true";
   waiting.forEach((start) => start());
   waiting.clear();
 }

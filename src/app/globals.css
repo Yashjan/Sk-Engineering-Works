@@ -10,17 +10,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 ::selection { background: #a5bcbc; color: #141615; }
 .skip-link { position: fixed; top: 12px; left: 12px; z-index: 100; padding: 12px 20px; background: var(--foreground); color: var(--background); transform: translateY(-150%); }
 .skip-link:focus { transform: translateY(0); }
-.site-intro { display: none; position: fixed; inset: 0; width: 100%; height: 100dvh; z-index: 1000; background: #0b0d0e; align-items: center; justify-content: center; pointer-events: none; }
-.site-intro-content { display: flex; flex-direction: column; align-items: center; padding: 24px; }
-.site-intro-logo { width: clamp(150px, 12vw, 210px); height: auto; object-fit: contain; opacity: 0; transform: translateY(10px) scale(.97); }
-.site-intro-tagline { margin: 28px 0 24px; font-size: 10px; line-height: 1.6; letter-spacing: .19em; color: #c4ccc6; opacity: 0; transform: translateY(8px); }
-.site-intro-line { width: 180px; height: 1px; background: #303936; }
-.site-intro-line > span { display: block; width: 100%; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; }
-@media (prefers-reduced-motion: no-preference) {
-  html[data-sk-intro="active"] .site-intro { display: flex; pointer-events: auto; }
-  html[data-sk-intro="active"]:has(.site-intro), html[data-sk-intro="active"]:has(.site-intro) body { overflow: hidden; }
-}
-@media (max-width: 600px) { .site-intro-logo { width: 140px; }.site-intro-tagline { font-size: 8px; }.site-intro-line { width: 150px; } }
 .navbar { position: fixed; inset: 0 0 auto; z-index: 30; transition: background .35s, backdrop-filter .35s; }
 .navbar.is-scrolled { background: rgb(17 20 19 / 88%); backdrop-filter: blur(14px); }
 .nav-inner { display: flex; align-items: center; gap: 36px; max-width: 1920px; min-height: 112px; margin: auto; padding: 20px 4.5vw; border-bottom: 1px solid rgb(255 255 255 / 13%); }
@@ -67,6 +56,7 @@ h1 { margin: 0; font-size: clamp(60px, 8.1vw, 148px); font-weight: 600; line-hei
 .scroll-track > span { display: block; width: 1px; height: 12px; background: #e4e7df; animation: scroll-line 2.4s ease-in-out infinite; }
 /* Entrance states must apply to the server-rendered Hero before hydration. */
 @media (prefers-reduced-motion: no-preference) {
+  [data-navbar] { opacity: 0; transform: translateY(-12px); }
   .hero .hero-eyebrow { opacity: 0; transform: translateY(14px); }
   .hero .headline-line > span { transform: translateY(105%); }
   .hero .hero-description { opacity: 0; transform: translateY(16px); }

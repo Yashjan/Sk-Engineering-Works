@@ -9,6 +9,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="en" suppressHydrationWarning><head>
     {/* Parser-blocking session decision: runs before the body can paint. */}
-    <script dangerouslySetInnerHTML={{ __html: `(function(){try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&sessionStorage.getItem('sk-intro-played')!=='true'){document.documentElement.dataset.skIntro='active';}}catch(e){}})();` }} />
+    <script dangerouslySetInnerHTML={{ __html: `(function(){try{if(location.pathname==='/'&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&sessionStorage.getItem('sk-intro-played')!=='true'){sessionStorage.setItem('sk-intro-played','true');document.documentElement.dataset.skIntro='active';}}catch(e){}})();` }} />
   </head><body>{children}</body></html>;
 }
