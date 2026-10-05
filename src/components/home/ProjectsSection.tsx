@@ -1,16 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import type { Project } from "@/data/projects";
+import type { Project, ProjectMedia } from "@/data/projects";
+import ProjectArchive from "./ProjectArchive";
 import "./projects-section.css";
 
 type ProjectWithAsset = Project & { hasImage: boolean };
 
-function ProjectVisual({ project }: { project: ProjectWithAsset }) {
+function ProjectVisual({ project, media, videoRef, muted, onPlayStateChange }: { project: ProjectWithAsset; media?: ProjectMedia; videoRef: React.RefObject<HTMLVideoElement | null>; muted: boolean; onPlayStateChange: (playing: boolean) => void }) {
+  if (media?.type === "video") {
+    return <video ref={videoRef} className="projects-video" src={media.src} poster={project.hasImage ? project.coverImage : undefined} muted={muted} playsInline loop preload="metadata" aria-label={`${project.title} — ${media.label.toLowerCase()}`} onPlay={() => onPlayStateChange(true)} onPause={() => onPlayStateChange(false)} />;
+  }
+  if (media?.type === "image" && media.src) {
+    return <Image src={media.src} alt={`${project.title} — ${media.label.toLowerCase()}`} fill sizes="(min-width: 900px) 58vw, 94vw" className="projects-image" priority={project.id === "jagdamba-phalodi"} />;
+  }
   return project.hasImage ? (
-    <Image src={project.image} alt={`${project.title} installation`} fill sizes="(min-width: 900px) 58vw, 94vw" className="projects-image" priority={project.id === "jagdamba-phalodi"} />
+    <Image src={project.coverImage} alt={`${project.title} installation`} fill sizes="(min-width: 900px) 58vw, 94vw" className="projects-image" priority={project.id === "jagdamba-phalodi"} />
   ) : (
     <div className="projects-image-placeholder" aria-hidden="true">
       <span className="projects-placeholder-grid" />
@@ -23,17 +30,54 @@ function ProjectVisual({ project }: { project: ProjectWithAsset }) {
 
 export default function ProjectsSection({ projects }: { projects: ProjectWithAsset[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
+  const [muted, setMuted] = useState(true);
+  const [playing, setPlaying] = useState(false);
+  const [entered, setEntered] = useState(false);
   const media = useRef<HTMLDivElement>(null);
+  const video = useRef<HTMLVideoElement>(null);
   const copy = useRef<HTMLDivElement>(null);
+  const visible = useRef(false);
   const active = projects[activeIndex];
+  const activeMedia = active.media[activeMediaIndex];
+
+  const playVideo = () => {
+    if (!video.current || !visible.current) return;
+    void video.current.play().catch(() => setPlaying(false));
+  };
+
+  useEffect(() => {
+    const section = media.current;
+    if (!section) return;
+    const currentVideo = video.current;
+    const observer = new IntersectionObserver(([entry]) => {
+      visible.current = entry.isIntersecting;
+      if (entry.isIntersecting) setEntered(true);
+      if (entry.isIntersecting) playVideo();
+      else {
+        video.current?.pause();
+        setPlaying(false);
+      }
+    }, { threshold: 0.2 });
+    observer.observe(section);
+    return () => { observer.disconnect(); currentVideo?.pause(); };
+  }, []);
+
+  useEffect(() => {
+    const currentVideo = video.current;
+    currentVideo?.pause();
+    playVideo();
+    return () => { currentVideo?.pause(); };
+  }, [activeIndex, activeMediaIndex]);
 
   useLayoutEffect(() => {
+    if (!entered) return;
     const context = gsap.context(() => {
       gsap.fromTo([media.current, copy.current],
         { autoAlpha: 0, y: 16 },
         { autoAlpha: 1, y: 0, duration: 0.55, ease: "power2.out", stagger: 0.04 },
       );
-      const image = media.current?.querySelector(".projects-image, .projects-image-placeholder");
+      const image = media.current?.querySelector(".projects-image, .projects-video, .projects-image-placeholder");
       if (image) {
         gsap.fromTo(image,
           { scale: 1.02 },
@@ -42,7 +86,12 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
       }
     }, media);
     return () => context.revert();
-  }, [activeIndex]);
+  }, [activeIndex, activeMediaIndex, entered]);
+
+  const selectProject = (index: number) => {
+    setActiveIndex(index);
+    setActiveMediaIndex(0);
+  };
 
   return (
     <section id="projects" className="projects-section" aria-labelledby="projects-heading">
@@ -55,7 +104,7 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
           </div>
         </header>
 
-        <div className="projects-feature">
+        <div id="projects-featured" className="projects-feature" tabIndex={-1}>
           <div ref={copy} className="projects-copy">
             <p className="projects-feature-label">FEATURED INSTALLATION <span>— {String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span></p>
             <p className="projects-client">{active.client || "INSTALLED PLANT PROJECT"}</p>
@@ -70,25 +119,27 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
             <a className="projects-view-link" href="#projects">VIEW PROJECT <span aria-hidden="true">→</span></a>
           </div>
           <div ref={media} className="projects-media">
-            <ProjectVisual key={active.id} project={active} />
-            <span className="projects-media-index">{String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
+            <div className="projects-media-stage">
+              <ProjectVisual key={`${active.id}-${activeMedia?.id || "cover"}`} project={active} media={activeMedia} videoRef={video} muted={muted} onPlayStateChange={setPlaying} />
+              <div className="projects-media-overlay">
+                <p>{active.client || "INSTALLED PLANT PROJECT"}</p>
+                <strong>{activeMedia?.label || "PROJECT VIEW"}</strong>
+                <small>{active.location.toUpperCase()}</small>
+              </div>
+              {activeMedia?.type === "video" && <div className="projects-media-controls">
+                <button type="button" onClick={() => { if (playing) video.current?.pause(); else playVideo(); }} aria-label={playing ? "Pause project video" : "Play project video"}>{playing ? "PAUSE" : "PLAY"}</button>
+                <button type="button" onClick={() => setMuted((value) => !value)} aria-label={muted ? "Turn project video sound on" : "Mute project video"}>{muted ? "SOUND OFF" : "SOUND ON"}</button>
+              </div>}
+              <span className="projects-media-index">{String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
+            </div>
+            {active.media.length > 0 && <nav className="projects-chapters" aria-label={`${active.client || active.title} media chapters`}>
+              {active.media.map((item, index) => <button key={item.id} type="button" aria-current={index === activeMediaIndex ? "true" : undefined} onClick={() => setActiveMediaIndex(index)}><span>{String(index + 1).padStart(2, "0")}</span><i aria-hidden="true" />{item.label}</button>)}
+            </nav>}
           </div>
         </div>
 
-        <nav className="projects-selector" aria-label="Installed plant projects">
-          <div className="projects-selector-line" aria-hidden="true" />
-          <ol>
-            {projects.map((project, index) => (
-              <li key={project.id}>
-                <button type="button" className="project-selector-button" aria-current={index === activeIndex ? "true" : undefined} onClick={() => setActiveIndex(index)}>
-                  <span className="project-selector-thumb" aria-hidden="true"><span /></span>
-                  <span className="project-selector-copy"><strong>{String(index + 1).padStart(2, "0")}</strong><span>{project.capacity}</span><small>{project.location}</small></span>
-                </button>
-              </li>
-            ))}
-          </ol>
-        </nav>
       </div>
+      <ProjectArchive projects={projects} onSelect={selectProject} />
     </section>
   );
 }

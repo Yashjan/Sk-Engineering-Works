@@ -6,10 +6,18 @@ export type Project = {
   capacity: string;
   scope: string;
   projectType: string;
-  image: string;
+  coverImage: string;
   isPlaceholder: boolean;
+  media: ProjectMedia[];
   scopeChips?: string[];
   completeScope?: string[];
+};
+
+export type ProjectMedia = {
+  id: string;
+  type: "image" | "video";
+  src: string;
+  label: string;
 };
 
 export const projects: Project[] = [
@@ -21,8 +29,14 @@ export const projects: Project[] = [
     capacity: "15 TPH",
     scope: "Process equipment supply & complete plant fitting",
     projectType: "Salt Refinery Plant",
-    image: "/images/projects/jagdamba-phalodi.jpg",
+    coverImage: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg",
     isPlaceholder: false,
+    media: [
+      { id: "fabrication", type: "video", src: "/images/projects/jagdamba/01_jagdamba_fabrication.mp4", label: "FABRICATION" },
+      { id: "installation", type: "video", src: "/images/projects/jagdamba/02_jagdamba_site_installation.mp4", label: "SITE INSTALLATION" },
+      { id: "completed", type: "video", src: "/images/projects/jagdamba/03_jagdamba_completed_plant.mp4", label: "COMPLETED PLANT" },
+      { id: "overview", type: "image", src: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg", label: "OVERVIEW" },
+    ],
     scopeChips: ["HOPPER", "WET MILL", "WASHING", "DRYING", "CONVEYING", "STORAGE", "INSTALLATION"],
     completeScope: [
       "Raw Salt Hopper", "Belt Conveyor", "Wet Mill", "Tank 1", "Tank 2", "Thickener",
@@ -38,8 +52,9 @@ export const projects: Project[] = [
     capacity: "20 TPH",
     scope: "Refinery process equipment, conveying, drying and storage",
     projectType: "Salt Refinery Plant",
-    image: "/images/projects/project-02.jpg",
+    coverImage: "/images/projects/project-02.jpg",
     isPlaceholder: true,
+    media: [],
   },
   // Temporary layout record. Replace with a verified project before publishing.
   {
@@ -49,8 +64,9 @@ export const projects: Project[] = [
     capacity: "10 TPH",
     scope: "Washing, drying, conveying and silo systems",
     projectType: "Salt Refinery Plant",
-    image: "/images/projects/project-03.jpg",
+    coverImage: "/images/projects/project-03.jpg",
     isPlaceholder: true,
+    media: [],
   },
   // Temporary layout record. Replace with a verified project before publishing.
   {
@@ -60,8 +76,9 @@ export const projects: Project[] = [
     capacity: "25 TPH",
     scope: "Process line equipment, drying, handling and integration",
     projectType: "Salt Refinery Plant",
-    image: "/images/projects/project-04.jpg",
+    coverImage: "/images/projects/project-04.jpg",
     isPlaceholder: true,
+    media: [],
   },
   // Temporary layout record. Replace with a verified project before publishing.
   {
@@ -71,8 +88,9 @@ export const projects: Project[] = [
     capacity: "12 TPH",
     scope: "Conveying, wet processing, drying and storage",
     projectType: "Salt Processing Plant",
-    image: "/images/projects/project-05.jpg",
+    coverImage: "/images/projects/project-05.jpg",
     isPlaceholder: true,
+    media: [],
   },
   // Temporary layout record. Replace with a verified project before publishing.
   {
@@ -82,7 +100,8 @@ export const projects: Project[] = [
     capacity: "30 TPH",
     scope: "Large-capacity process equipment and plant handling systems",
     projectType: "Salt Refinery Plant",
-    image: "/images/projects/project-06.jpg",
+    coverImage: "/images/projects/project-06.jpg",
     isPlaceholder: true,
+    media: [],
   },
 ];
