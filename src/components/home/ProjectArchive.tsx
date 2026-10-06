@@ -9,7 +9,7 @@ import "./project-archive.css";
 
 type ArchiveProject = Project & { hasImage: boolean };
 const number = (value: number) => String(value).padStart(2, "0");
-const SCROLL_SCREENS = 2.2;
+const SCROLL_PER_TRAVEL_PIXEL = 0.45;
 
 export default function ProjectArchive({ projects, onSelect }: {
   projects: ArchiveProject[];
@@ -73,6 +73,8 @@ export default function ProjectArchive({ projects, onSelect }: {
           }
           if (pinned) moveImages[index](gsap.utils.clamp(-5, 5, -relative / viewportWidth * 8));
         });
+        // A wide viewport can still center the penultimate tile at the end.
+        if (travel > 0 && offset >= travel - 1) nearest = tiles.length - 1;
         if (nearest !== active) {
           active = nearest;
           counter.textContent = number(active + 1);
@@ -98,7 +100,8 @@ export default function ProjectArchive({ projects, onSelect }: {
             id: "project-archive",
             trigger: archive,
             start: "top top",
-            end: () => `+=${window.innerHeight * SCROLL_SCREENS}`,
+            // Use the same live geometry for the tween and its pin duration.
+            end: () => { measure(); return `+=${travel * SCROLL_PER_TRAVEL_PIXEL}`; },
             pin: true,
             scrub: 0.65,
             invalidateOnRefresh: true,

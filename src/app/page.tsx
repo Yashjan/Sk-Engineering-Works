@@ -5,6 +5,7 @@ import SiteIntro from "@/components/layout/SiteIntro";
 import Hero from "@/components/home/Hero";
 import ProcessJourney from "@/components/home/ProcessJourney";
 import ProjectsSection from "@/components/home/ProjectsSection";
+import ManufacturingSection from "@/components/home/ManufacturingSection";
 import { processStages } from "@/data/process";
 import { projects } from "@/data/projects";
 
@@ -19,5 +20,5 @@ export default function Home() {
     ...project,
     hasImage: existsSync(path.join(process.cwd(), "public", project.coverImage)),
   }));
-  return <><SiteIntro /><a className="skip-link" href="#main">Skip to content</a><Navbar hasLogo={hasLogo} /><main id="main"><Hero hasImage={hasHeroImage} /><ProcessJourney stages={stages} /><ProjectsSection projects={projectRecords} /></main></>;
+  return <><SiteIntro /><a className="skip-link" href="#main">Skip to content</a><Navbar hasLogo={hasLogo} /><main id="main"><Hero hasImage={hasHeroImage} /><ProcessJourney stages={stages} /><ProjectsSection projects={projectRecords} /><ManufacturingSection /></main></>;
 }

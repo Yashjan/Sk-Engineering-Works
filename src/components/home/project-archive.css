@@ -311,6 +311,8 @@
 
   .project-archive.is-pinned .project-archive-track {
     height: 100%;
+    /* Release once the last tile reaches the trailing gutter. */
+    padding-right: var(--archive-gutter);
     will-change: transform;
   }
 
