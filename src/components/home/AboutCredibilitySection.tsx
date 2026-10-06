@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./about-credibility-section.css";
@@ -104,6 +105,15 @@ export default function AboutCredibilitySection() {
                 <p>From Rajasthan to Gujarat, our experience has been shaped on real plant floors through fabrication, installation and long-term engineering support.</p>
               </div>
             </div>
+            <figure className="about-factory-media">
+              <Image
+                src="/images/projects/jagdamba/04_jagdamba_project_cover.jpg"
+                alt="S.K. Engineering Works salt refinery installation"
+                fill
+                sizes="(max-width: 479px) 0px, (max-width: 767px) 88vw, 36vw"
+              />
+              <figcaption><span>PROJECT INSTALLATION / JAGDAMBA</span><span>ENGINEERING IN PRACTICE</span></figcaption>
+            </figure>
           </div>
         </header>
 
@@ -114,7 +124,7 @@ export default function AboutCredibilitySection() {
         </div>
 
         <div className="about-proof">
-          <p className="about-proof-number">10+</p>
+          <p className="about-proof-number">10 +</p>
           <div className="about-proof-copy">
             <p>COMPLETE FACTORIES<br />BUILT FROM<br />THE GROUND UP.</p>
             <small>RAJASTHAN <span>→</span> GUJARAT <span>→</span> GLOBAL NEXT</small>
