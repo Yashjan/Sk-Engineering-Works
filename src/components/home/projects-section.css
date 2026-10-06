@@ -20,8 +20,6 @@
 .projects-meta dd { margin: 0; color: #c0cbc3; font-size: 11px; line-height: 1.4; }
 .projects-chips { display: flex; flex-wrap: wrap; gap: 7px; max-width: 470px; padding: 0; margin: 0 0 32px; list-style: none; }
 .projects-chips li { padding: 6px 8px; border: 1px solid #3b4b40; color: #94a79b; font-size: 8px; letter-spacing: .12em; }
-.projects-view-link { display: inline-flex; align-items: center; gap: 32px; padding: 11px 0; border-bottom: 1px solid #81998d; color: #e7ebe4; font-size: 10px; letter-spacing: .1em; }
-.projects-view-link span { font-size: 18px; line-height: 1; }
 .projects-media { position: relative; display: flex; min-height: 600px; overflow: hidden; flex-direction: column; background: #141a19; }
 .projects-media-stage { position: relative; flex: 1; min-height: 520px; overflow: hidden; }
 .projects-image, .projects-video, .projects-image-placeholder { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: center; }

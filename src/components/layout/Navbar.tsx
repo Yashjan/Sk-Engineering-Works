@@ -5,8 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const links = ["Home", "Salt Refinery Plants", "Machinery", "Projects", "About", "Contact"];
-// Routes can be assigned as the corresponding pages are built.
-const destinations = ["/", "#process", "#process", "#process", "#process", "#process"];
+const destinations = ["/", "#process", "#process", "#projects", "#about", "#contact"];
 
 export default function Navbar({ hasLogo }: { hasLogo: boolean }) {
   const [open, setOpen] = useState(false);
@@ -48,11 +47,11 @@ export default function Navbar({ hasLogo }: { hasLogo: boolean }) {
         {hasLogo ? <Image src="/images/sk-logo.png" alt="S.K. Engineering Works" width={160} height={64} className="logo" priority /> : <span className="logo-placeholder" aria-hidden="true" />}
       </Link>
       <div className="desktop-links">{links.map((label, i) => <Link key={label} href={destinations[i]} aria-current={i === 0 ? "page" : undefined}>{label}</Link>)}</div>
-      <a className="nav-quote" href="#process">Get a Quote <span aria-hidden="true">→</span></a>
+      <a className="nav-quote" href="#contact">Get a Quote <span aria-hidden="true">→</span></a>
       <button ref={toggle} className="menu-toggle" aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Close navigation menu" : "Open navigation menu"} onClick={() => setOpen(!open)}><span /><span /></button>
       <div ref={panel} id="mobile-navigation" className="mobile-panel" hidden={!open}>
         {links.map((label, i) => <Link key={label} href={destinations[i]} aria-current={i === 0 ? "page" : undefined} onClick={() => { setOpen(false); toggle.current?.focus(); }}><span className="menu-index">0{i + 1}</span>{label}</Link>)}
-        <a href="#process" className="mobile-quote" onClick={() => setOpen(false)}>Get a Quote →</a>
+        <a href="#contact" className="mobile-quote" onClick={() => setOpen(false)}>Get a Quote →</a>
       </div>
     </nav>
   </header>;

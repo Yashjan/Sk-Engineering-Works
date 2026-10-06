@@ -64,7 +64,8 @@ h1 { margin: 0; font-size: clamp(60px, 8.1vw, 148px); font-weight: 600; line-hei
   .hero .hero-footer { opacity: 0; transform: translateY(10px); }
 }
 @keyframes scroll-line { 0% { transform: translateY(-12px); } 70%, 100% { transform: translateY(28px); } }
-#process { min-height: 12svh; scroll-margin-top: 112px; }
+#process, #projects, #manufacturing, #about, #contact { scroll-margin-top: 112px; }
+#process { min-height: 12svh; }
 @media (min-width: 1700px) { .hero-copy { max-width: none; } }
 @media (max-width: 1099px) {
   .nav-inner { min-height: 92px; gap: 24px; }.desktop-links { display: none; }.nav-quote { border: 0; padding: 0; }

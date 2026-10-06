@@ -42,7 +42,7 @@
 @media (prefers-reduced-motion: no-preference) {
   .manufacturing-eyebrow, .manufacturing-description, .manufacturing-film-caption, .manufacturing-proof, .manufacturing-capability { opacity: 0; transform: translateY(16px); }
   .manufacturing-title-line > span, .manufacturing-secondary-line > span { opacity: 0; transform: translateY(105%); }
-  .manufacturing-film-frame { opacity: 0; transform: scale(.94); clip-path: inset(6% 7% 6% 7%); }
+  .manufacturing-film-frame { opacity: 0; transform: scale(.94); clip-path: inset(5% 4% 5% 4%); }
   .manufacturing-rule > span { transform: scaleX(0); }
 }
 @media (max-width: 1100px) {
@@ -56,7 +56,7 @@
 }
 @media (max-width: 767px) {
   .manufacturing-section { --video-safe-x: 16px; --video-safe-y: 16px; }
-  .manufacturing-intro { padding: 48px 6vw 44px; }
+  .manufacturing-intro { padding: 48px 6vw 44px; padding-bottom: 0px; }
   .manufacturing-eyebrow { flex-wrap: wrap; gap: 9px 15px; margin-bottom: 18px; font-size: 8px; }
   .manufacturing-eyebrow span + span { padding-left: 15px; }
   .manufacturing-title { font-size: clamp(43px, 10.1vw, 77px); }

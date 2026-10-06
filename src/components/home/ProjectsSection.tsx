@@ -116,7 +116,6 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
               <div><dt>PROJECT TYPE</dt><dd>{active.projectType}</dd></div>
             </dl>
             {active.scopeChips && <ul className="projects-chips" aria-label="Selected project scope">{active.scopeChips.map((chip) => <li key={chip}>{chip}</li>)}</ul>}
-            <a className="projects-view-link" href="#projects">VIEW PROJECT <span aria-hidden="true">→</span></a>
           </div>
           <div ref={media} className="projects-media">
             <div className="projects-media-stage">
