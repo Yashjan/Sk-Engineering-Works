@@ -7,8 +7,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" suppressHydrationWarning><head>
+  return <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning><head>
     {/* Parser-blocking session decision: runs before the body can paint. */}
-    <script dangerouslySetInnerHTML={{ __html: `(function(){try{if(location.pathname==='/'&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.dataset.skIntro='active';}}catch(e){}})();` }} />
+    <script dangerouslySetInnerHTML={{ __html: `(function(){try{var home=location.pathname==='/';var mobilePlants=location.pathname==='/salt-refinery-plants'&&window.matchMedia('(max-width: 767px)').matches;if((home||mobilePlants)&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.dataset.skIntro='active';}}catch(e){}})();` }} />
   </head><body>{children}</body></html>;
 }

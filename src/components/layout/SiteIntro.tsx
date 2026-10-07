@@ -7,7 +7,7 @@ import "./site-intro.css";
 
 const INTRO_DURATION = 2.45;
 
-export default function SiteIntro() {
+export default function SiteIntro({ force = false, mobileOnly = false }: { force?: boolean; mobileOnly?: boolean }) {
   const root = useRef<HTMLDivElement>(null);
   const text = useRef<SVGTextElement>(null);
   const zoom = useRef<SVGGElement>(null);
@@ -17,7 +17,9 @@ export default function SiteIntro() {
 
   useLayoutEffect(() => {
     const html = document.documentElement;
-    eligible.current ??= html.dataset.skIntro === "active";
+    const allowedViewport = !mobileOnly || window.matchMedia("(max-width: 767px)").matches;
+    if (force && allowedViewport) html.dataset.skIntro = "active";
+    eligible.current ??= (force && allowedViewport) || html.dataset.skIntro === "active";
     if (!eligible.current || !root.current || !text.current || !zoom.current) return;
 
     // Keep the pre-paint decision through React's development effect replay.
@@ -103,8 +105,10 @@ export default function SiteIntro() {
 
     // Decode the image already rendered by Hero; no second image or crop exists.
     const heroImage = document.querySelector<HTMLImageElement>(".hero-image");
-    if (motion.matches || !heroImage) {
+    if (motion.matches) {
       finish();
+    } else if (!heroImage) {
+      start();
     } else {
       void heroImage.decode().then(start).catch(finish);
     }
@@ -120,7 +124,7 @@ export default function SiteIntro() {
       html.dataset.skIntro = "done";
       restoreInteraction();
     };
-  }, []);
+  }, [force, mobileOnly]);
 
   if (!mounted) return null;
 
