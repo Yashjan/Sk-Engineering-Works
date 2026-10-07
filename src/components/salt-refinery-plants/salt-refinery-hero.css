@@ -16,7 +16,7 @@
 .salt-hero-scope strong { color: #c5c9c6; font-size: 13px; font-weight: 500; letter-spacing: .1em; }
 .salt-process-rail { position: relative; overflow: hidden; padding: 25px 0 30px; border-top: 1px solid rgb(243 242 237 / 23%); }
 .salt-process-line { position: absolute; top: 31px; right: 0; left: 0; height: 1px; background: rgb(243 242 237 / 24%); transform-origin: left; }
-.salt-process-rail ol { display: grid; position: relative; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.salt-process-rail ol { display: grid; position: relative; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
 .salt-process-stage { display: flex; position: relative; min-width: 0; padding-top: 20px; flex-direction: column; gap: 12px; color: #939a9b; font-size: clamp(10px, .72vw, 11px); line-height: 1.35; letter-spacing: .1em; white-space: nowrap; }
 .salt-process-stage span { position: absolute; top: 1px; left: 0; width: 9px; height: 9px; border: 2px solid #0b0d0e; border-radius: 50%; background: #b8bfba; box-shadow: 0 0 0 1px rgb(243 242 237 / 45%); }
 

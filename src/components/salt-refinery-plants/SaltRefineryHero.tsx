@@ -6,6 +6,7 @@ import "./salt-refinery-hero.css";
 
 const stages = [
   "RAW SALT",
+  "CRUSHING",
   "WASHING",
   "CENTRIFUGING",
   "DRYING",

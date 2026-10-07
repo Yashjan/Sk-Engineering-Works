@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
 import SiteIntro from "@/components/layout/SiteIntro";
+import RawSaltProcessStage from "@/components/salt-refinery-plants/RawSaltProcessStage";
 import SaltRefineryHero from "@/components/salt-refinery-plants/SaltRefineryHero";
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function SaltRefineryPlantsPage() {
       <Navbar hasLogo={hasLogo} />
       <main id="main">
         <SaltRefineryHero />
+        <RawSaltProcessStage />
       </main>
     </>
   );
