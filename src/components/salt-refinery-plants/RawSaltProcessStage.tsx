@@ -202,7 +202,7 @@ function syncVideoPlayback(video: HTMLVideoElement | null, shouldPlay: boolean) 
 
 export default function RawSaltProcessStage() {
   const [hoveredStage, setHoveredStage] = useState<string | null>(null);
-  const [selectedMobileStage, setSelectedMobileStage] = useState("raw-salt");
+  const [selectedMobileStage, setSelectedMobileStage] = useState<string | null>("raw-salt");
   const [renderedStage, setRenderedStage] = useState("raw-salt");
   const [isMobile, setIsMobile] = useState(false);
   const preview = useRef<HTMLDivElement>(null);
@@ -375,7 +375,9 @@ export default function RawSaltProcessStage() {
                   >
                     <button
                       type="button"
-                      onClick={() => setSelectedMobileStage(process.id)}
+                      onClick={() => {
+                        setSelectedMobileStage((current) => current === process.id ? null : process.id);
+                      }}
                       aria-expanded={selected}
                       aria-controls={mobileDetailId}
                     >
