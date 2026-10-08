@@ -201,7 +201,7 @@
   top: clamp(14px, calc(var(--active-stage) * 52px - 72px), 154px);
   left: clamp(130px, 13vw, 210px);
   z-index: 5;
-  width: clamp(420px, 32vw, 520px);
+  width: clamp(420px, 32vw, 592px);
   aspect-ratio: 1.55 / 1;
   overflow: hidden;
   border: 1px solid rgb(17 20 21 / 12%);
@@ -212,6 +212,7 @@
   opacity: 0;
   visibility: hidden;
   transition: top .3s ease;
+  border-radius: 7px;
 }
 
 .raw-process-preview-content {
@@ -468,6 +469,7 @@
     overflow: hidden;
     border: 1px solid rgb(17 20 21 / 12%);
     background: rgb(17 20 21 / 3.5%);
+    border-radius: 7px;
   }
 
   .raw-process-mobile-media video,
