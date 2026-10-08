@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
 import SiteIntro from "@/components/layout/SiteIntro";
+import CompleteExecutionSection from "@/components/salt-refinery-plants/CompleteExecutionSection";
 import RawSaltProcessStage from "@/components/salt-refinery-plants/RawSaltProcessStage";
 import SaltRefineryHero from "@/components/salt-refinery-plants/SaltRefineryHero";
 
@@ -22,6 +23,7 @@ export default function SaltRefineryPlantsPage() {
       <main id="main">
         <SaltRefineryHero />
         <RawSaltProcessStage />
+        <CompleteExecutionSection />
       </main>
     </>
   );
