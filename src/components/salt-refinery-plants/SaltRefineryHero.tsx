@@ -86,7 +86,8 @@ export default function SaltRefineryHero() {
             <p className="salt-hero-eyebrow">SALT REFINERY PLANTS / 01</p>
             <h1 id="salt-refinery-heading" className="salt-hero-heading">
               <span className="salt-hero-heading-line">FROM RAW SALT</span>
-              <span className="salt-hero-heading-line">TO FINISHED PRODUCT.</span>
+              <span className="salt-hero-heading-line">TO FINISHED</span>
+              <span className="salt-hero-heading-line">PRODUCT.</span>
             </h1>
             <p className="salt-hero-support">Complete salt refinery engineering, equipment fabrication and plant installation for modern salt production lines.</p>
           </div>

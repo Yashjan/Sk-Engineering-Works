@@ -9,6 +9,7 @@ import {
   type RefObject,
 } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./raw-salt-process-stage.css";
 
 type ProcessStage = {
@@ -201,6 +202,7 @@ function syncVideoPlayback(video: HTMLVideoElement | null, shouldPlay: boolean) 
 }
 
 export default function RawSaltProcessStage() {
+  const root = useRef<HTMLElement>(null);
   const [hoveredStage, setHoveredStage] = useState<string | null>(null);
   const [selectedMobileStage, setSelectedMobileStage] = useState<string | null>("raw-salt");
   const [renderedStage, setRenderedStage] = useState("raw-salt");
@@ -214,6 +216,60 @@ export default function RawSaltProcessStage() {
   const activeIndex = processStages.findIndex((stage) => stage.id === displayedDesktopStage);
   const renderedProcess = processStages.find((stage) => stage.id === renderedStage) ?? processStages[0];
   const desktopMediaVisible = hoveredStage !== null;
+
+  useLayoutEffect(() => {
+    const section = root.current;
+    if (!section) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+    const media = gsap.matchMedia();
+
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      const context = gsap.context(() => {
+        gsap.timeline({
+          defaults: { ease: "power3.out" },
+          scrollTrigger: {
+            trigger: section,
+            start: "top 78%",
+            once: true,
+          },
+        })
+          .fromTo(
+            ".raw-process-eyebrow",
+            { autoAlpha: 0, y: 12 },
+            { autoAlpha: 1, y: 0, duration: 0.45 },
+          )
+          .fromTo(
+            ".raw-process-heading > span",
+            { autoAlpha: 0, y: 30 },
+            { autoAlpha: 1, y: 0, duration: 0.68, stagger: 0.08 },
+            "-=0.18",
+          )
+          .fromTo(
+            ".raw-process-support",
+            { autoAlpha: 0, y: 14 },
+            { autoAlpha: 1, y: 0, duration: 0.5 },
+            "-=0.34",
+          )
+          .fromTo(
+            ".raw-process-desktop-row, .raw-process-mobile-list > .raw-process-stage-item > button",
+            { autoAlpha: 0, y: 10 },
+            { autoAlpha: 1, y: 0, duration: 0.38, stagger: 0.035 },
+            "-=0.18",
+          )
+          .fromTo(
+            ".raw-process-copy > *",
+            { autoAlpha: 0, y: 10 },
+            { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.045 },
+            "-=0.48",
+          );
+      }, section);
+
+      return () => context.revert();
+    });
+
+    return () => media.revert();
+  }, []);
 
   useEffect(() => {
     const query = window.matchMedia("(max-width: 767px)");
@@ -315,7 +371,7 @@ export default function RawSaltProcessStage() {
   } as CSSProperties;
 
   return (
-    <section id="process-map" className="raw-process" aria-labelledby="raw-process-heading">
+    <section ref={root} id="process-map" className="raw-process" aria-labelledby="raw-process-heading">
       <div className="raw-process-shell">
         <header className="raw-process-intro">
           <p className="raw-process-eyebrow">PROCESS / 02</p>
