@@ -100,7 +100,7 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
           <p className="projects-eyebrow">PROJECTS <span>/ 02</span></p>
           <div className="projects-intro-row">
             <h2 id="projects-heading">BUILT FOR<br /><em>REAL PRODUCTION.</em></h2>
-            <p>Salt refinery projects engineered for performance, reliability and long-term operation across diverse production requirements.</p>
+            <p>Installed salt plants and process equipment that demonstrate our fabrication, integration and site-execution capability.</p>
           </div>
         </header>
 

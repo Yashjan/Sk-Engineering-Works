@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const links = ["Home", "Salt Refinery Plants", "Machinery", "Projects", "About", "Contact"];
-const homepageDestinations = ["/", "/salt-refinery-plants", "#process", "#projects", "#about", "#contact"];
-const innerPageDestinations = ["/", "/salt-refinery-plants", "/#process", "/#projects", "/#about", "/#contact"];
+const homepageDestinations = ["/", "/salt-refinery-plants", "/machinery", "#projects", "#about", "#contact"];
+const innerPageDestinations = ["/", "/salt-refinery-plants", "/machinery", "/#projects", "/#about", "/#contact"];
 
 export default function Navbar({ hasLogo }: { hasLogo: boolean }) {
   const pathname = usePathname();

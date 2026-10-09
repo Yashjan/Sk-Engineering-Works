@@ -144,7 +144,7 @@ export default function ManufacturingSection() {
               <span className="manufacturing-secondary-line"><span>ENGINEERED FOR</span></span>
               <span className="manufacturing-secondary-line"><span>THE PLANT FLOOR.</span></span>
             </p>
-            <p className="manufacturing-description">From raw steel to installed machinery, our equipment is fabricated, assembled and prepared for demanding salt refinery operations.</p>
+            <p className="manufacturing-description">From raw steel to installed machinery, our process equipment, material-handling systems and structural assemblies are fabricated, assembled and prepared in-house for demanding plant-floor operation.</p>
           </div>
         </div>
       </header>

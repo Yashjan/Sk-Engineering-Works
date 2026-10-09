@@ -36,6 +36,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .hero-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 10px; line-height: 1.6; letter-spacing: .19em; margin: 0 0 30px; color: #c4ccc6; }
 .hero-eyebrow > span { width: 6px; height: 6px; background: #9aafad; flex-shrink: 0; }
 h1 { margin: 0; font-size: clamp(60px, 8.1vw, 148px); font-weight: 600; line-height: .95; letter-spacing: -.055em; }
+.hero-positioning-heading { font-size: clamp(54px, 7vw, 124px); }
+.hero-mobile-break { display: none; }
 .headline-line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.02em; }
 .headline-line > span { display: block; }
 .headline-final { color: #b7bdb5; }
@@ -81,7 +83,7 @@ h1 { margin: 0; font-size: clamp(60px, 8.1vw, 148px); font-weight: 600; line-hei
   .nav-inner { min-height: 82px; padding: 16px 6vw; gap: 16px; }.logo-placeholder { width: 100px; height: 40px; }.logo { width: 110px; height: 44px; }.nav-quote { font-size: 11px; gap: 10px; }.nav-quote span { font-size: 16px; }
   .mobile-panel:not([hidden]) { top: 82px; height: calc(100svh - 82px); }
   .hero { padding: 145px 6vw 160px; }.hero-eyebrow { max-width: 290px; font-size: 8px; letter-spacing: .14em; margin-bottom: 26px; align-items: flex-start; }.hero-eyebrow > span { margin-top: 4px; }
-  h1 { font-size: clamp(39px, 10.8vw, 65px); line-height: 1.02; letter-spacing: -.05em; }.hero-support { margin-top: 25px; }.hero-description { font-size: 13px; max-width: 310px; }.hero-actions { flex-wrap: wrap; gap: 12px 22px; }.button-primary, .button-secondary { font-size: 9px; gap: 16px; min-height: 48px; }.button-primary { padding-inline: 14px; }
+  h1 { font-size: clamp(39px, 10.8vw, 65px); line-height: 1.02; letter-spacing: -.05em; }.hero-positioning-heading { font-size: clamp(36px, 10vw, 52px); }.hero-mobile-break { display: inline; }.hero-support { margin-top: 25px; }.hero-description { font-size: 13px; max-width: 320px; }.hero-actions { flex-wrap: wrap; gap: 12px 22px; }.button-primary, .button-secondary { font-size: 9px; gap: 16px; min-height: 48px; }.button-primary { padding-inline: 14px; }
   .hero-footer { left: 6vw; right: 6vw; bottom: 25px; padding-top: 20px; }.engineering-labels { flex-direction: column; gap: 10px; font-size: 8px; }.engineering-labels span + span { border: 0; padding: 0; }.scroll-track { height: 38px; }.structure-one { right: 12%; width: 35%; }.structure-two { right: -10%; width: 16%; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }

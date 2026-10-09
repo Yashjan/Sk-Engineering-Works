@@ -51,18 +51,18 @@ export default function AboutCredibilitySection() {
           <div className="about-meta"><span>ABOUT / 04</span><span>SINCE 2003</span></div>
           <div className="about-intro-grid">
             <div className="about-authority">
-              <p><span>THREE DECADES</span><br />OF ENGINEERING.</p>
-              <small>IN SALT<br />SINCE 2003.</small>
+              <p><span>THREE DECADES</span><br />OF FABRICATION.</p>
+              <small>SALT PROCESSING<br />SINCE 2003.</small>
             </div>
             <div className="about-narrative">
               <h2 id="about-heading" className="about-statement">
-                <span>WE DIDN&apos;T LEARN SALT ENGINEERING<br />FROM A DRAWING.</span>
-                <strong>WE LEARNED IT<br />ON THE PLANT FLOOR.</strong>
+                <span>INDUSTRIAL EQUIPMENT.<br />PLANT ENGINEERING.</span>
+                <strong>DEEP EXPERTISE<br />IN SALT PROCESSING.</strong>
               </h2>
               <div className="about-story">
-                <p>For more than three decades, engineering has been at the core of S.K. Engineering Works.</p>
-                <p>Since entering the salt industry in 2003, we have worked alongside manufacturers, solved production challenges, fabricated machinery and helped build complete refinery plants from the ground up.</p>
-                <p>From Rajasthan to Gujarat, our experience has been shaped on real plant floors through fabrication, installation and long-term engineering support.</p>
+                <p>For more than three decades, fabrication and equipment engineering have been at the core of S.K. Engineering Works.</p>
+                <p>We manufacture industrial process equipment, material-handling systems and plant machinery. Since entering the salt industry in 2003, we have also helped build complete refinery plants from the ground up.</p>
+                <p>From Rajasthan to Gujarat, our experience has been shaped on real workshop and plant floors through fabrication, integration, installation and long-term engineering support.</p>
               </div>
             </div>
             <figure className="about-factory-media">

@@ -144,7 +144,7 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
         <p className="process-eyebrow">PROCESS 01 <span> / THE REFINERY JOURNEY</span></p>
         <div className="process-intro-row">
           <h2 id="process-heading">FROM RAW SALT<br />TO FINISHED PRODUCT</h2>
-          <p>Follow the engineered process from raw salt intake through refining, drying and final product handling.</p>
+          <p><span className="process-specialization">A CORE PROCESS-ENGINEERING SPECIALIZATION.</span>Follow the engineered process from raw salt intake through refining, drying and final product handling.</p>
         </div>
       </header>
       <div className="process-scene">
