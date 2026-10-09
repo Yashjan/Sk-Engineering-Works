@@ -10,6 +10,7 @@ import {
 } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { assetPath } from "@/lib/asset-path";
 import "./raw-salt-process-stage.css";
 
 type ProcessStage = {
@@ -36,7 +37,7 @@ const processStages: ProcessStage[] = [
     description: "Raw salt is received through the hopper and transferred by belt conveyor toward the crushing stage.",
     relatedEquipment: "HOPPER / BELT CONVEYOR",
     mediaType: "video",
-    mediaSrc: "/videos/salt-refinery/raw-salt-hover.mp4",
+    mediaSrc: assetPath("/videos/salt-refinery/raw-salt-hover.mp4"),
   },
   {
     id: "crushing",

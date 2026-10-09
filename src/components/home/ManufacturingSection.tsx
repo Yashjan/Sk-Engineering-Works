@@ -3,10 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { assetPath } from "@/lib/asset-path";
 import "./manufacturing-section.css";
 
-const videoSource = "/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4";
-const videoPoster = "/images/projects/jagdamba/04_jagdamba_project_cover.jpg";
+const videoSource = assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4");
+const videoPoster = assetPath("/images/projects/jagdamba/04_jagdamba_project_cover.jpg");
 
 const capabilities = [
   { number: "01", title: "FABRICATION", detail: "Steel structures & machine bodies" },
@@ -150,7 +151,7 @@ export default function ManufacturingSection() {
       </header>
 
       <div className="manufacturing-film-shell">
-        <div ref={frameRef} className="manufacturing-film-frame">
+        <div ref={frameRef} className="manufacturing-film-frame" style={{ backgroundImage: `url("${videoPoster}")` }}>
           <video
             ref={videoRef}
             className="manufacturing-video"
@@ -165,7 +166,7 @@ export default function ManufacturingSection() {
             onPause={() => setPlaying(false)}
             onError={() => { setVideoFailed(true); setPlaying(false); }}
           />
-          {videoFailed && <div className="manufacturing-video-fallback" role="img" aria-label="S.K. Engineering Works installed salt refinery equipment" />}
+          {videoFailed && <div className="manufacturing-video-fallback" style={{ backgroundImage: `url("${videoPoster}")` }} role="img" aria-label="S.K. Engineering Works installed salt refinery equipment" />}
           <div className="manufacturing-film-shade" aria-hidden="true" />
           <div className="manufacturing-film-caption">
             <p>S.K. ENGINEERING WORKS</p>

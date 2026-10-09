@@ -10,9 +10,9 @@
 .manufacturing-secondary { margin: 0 0 26px; color: #87978c; font-size: clamp(20px, 2.5vw, 38px); line-height: 1.04; letter-spacing: -.045em; font-weight: 400; white-space: nowrap; }
 .manufacturing-description { max-width: 340px; margin: 0; color: #aab6ad; font-size: 12px; line-height: 1.8; }
 .manufacturing-film-shell { width: 94vw; max-width: 1600px; margin: 0 auto; }
-.manufacturing-film-frame { position: relative; isolation: isolate; width: 100%; height: clamp(520px, 72vh, 850px); overflow: hidden; background: #171d1c url('/images/projects/jagdamba/04_jagdamba_project_cover.jpg') center / cover no-repeat; }
+.manufacturing-film-frame { position: relative; isolation: isolate; width: 100%; height: clamp(520px, 72vh, 850px); overflow: hidden; background-color: #171d1c; background-position: center; background-size: cover; background-repeat: no-repeat; }
 .manufacturing-video, .manufacturing-video-fallback { position: absolute; inset: -28px 0; width: 100%; height: calc(100% + 56px); object-fit: cover; object-position: center; }
-.manufacturing-video-fallback { background: url('/images/projects/jagdamba/04_jagdamba_project_cover.jpg') center / cover no-repeat; }
+.manufacturing-video-fallback { background-position: center; background-size: cover; background-repeat: no-repeat; }
 .manufacturing-film-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgb(11 13 14 / 40%), transparent 42%); }
 .manufacturing-film-caption { position: absolute; bottom: 30px; left: 34px; z-index: 1; text-shadow: 0 1px 9px rgb(0 0 0 / 35%); }
 .manufacturing-film-caption p, .manufacturing-film-caption strong, .manufacturing-film-caption span { display: block; margin: 0; }

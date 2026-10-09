@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { assetPath } from "@/lib/asset-path";
 
 const links = ["Home", "Salt Refinery Plants", "Machinery", "Projects", "About", "Contact"];
 const homepageDestinations = ["/", "/salt-refinery-plants", "/machinery", "#projects", "#about", "#contact"];
@@ -49,7 +50,7 @@ export default function Navbar({ hasLogo }: { hasLogo: boolean }) {
   return <header className={`navbar ${pathname === "/" ? "" : "is-inner-page"} ${scrolled ? "is-scrolled" : ""} ${open ? "menu-open" : ""}`} data-navbar>
     <nav className="nav-inner" aria-label="Main navigation">
       <Link href="/" className="logo-link" aria-label="S.K. Engineering Works home">
-        {hasLogo ? <Image src="/images/sk-logo.png" alt="S.K. Engineering Works" width={160} height={64} className="logo" priority /> : <span className="logo-placeholder" aria-hidden="true" />}
+        {hasLogo ? <Image src={assetPath("/images/sk-logo.png")} alt="S.K. Engineering Works" width={160} height={64} className="logo" priority /> : <span className="logo-placeholder" aria-hidden="true" />}
       </Link>
       <div className="desktop-links">{links.map((label, i) => <Link key={label} href={destinations[i]} aria-current={(pathname === "/" && i === 0) || (pathname === "/salt-refinery-plants" && i === 1) ? "page" : undefined}>{label}</Link>)}</div>
       <Link className="nav-quote" href={quoteDestination}>Get a Quote <span aria-hidden="true">→</span></Link>

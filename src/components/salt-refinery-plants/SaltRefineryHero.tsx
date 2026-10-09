@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { assetPath } from "@/lib/asset-path";
 import "./salt-refinery-hero.css";
 
 const stages = [
@@ -95,8 +96,8 @@ export default function SaltRefineryHero() {
           <div className="salt-hero-media" aria-hidden="true">
             <video
               ref={video}
-              src="/videos/salt-refinery/SK_Salt_Refinery_Plants_Hero_10s.mp4"
-              poster="/videos/salt-refinery/SK_Salt_Refinery_Plants_Hero_Poster.jpg"
+              src={assetPath("/videos/salt-refinery/SK_Salt_Refinery_Plants_Hero_10s.mp4")}
+              poster={assetPath("/videos/salt-refinery/SK_Salt_Refinery_Plants_Hero_Poster.jpg")}
               autoPlay={motionAllowed}
               muted
               loop

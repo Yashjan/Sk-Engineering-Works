@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { assetPath } from "@/lib/asset-path";
 import "./complete-execution-section.css";
 
 type ExecutionStage = {
@@ -53,17 +54,17 @@ const executionStages: ExecutionStage[] = [
 
 const executionImages = [
   {
-    src: "/images/salt-refinery/execution/plant-structure.jpeg",
+    src: assetPath("/images/salt-refinery/execution/plant-structure.jpeg"),
     alt: "Salt refinery machinery integrated into a steel plant structure",
     caption: "PLANT STRUCTURE / SITE INTEGRATION",
   },
   {
-    src: "/images/salt-refinery/execution/fabrication-blower.jpeg",
+    src: assetPath("/images/salt-refinery/execution/fabrication-blower.jpeg"),
     alt: "Industrial blower fabricated inside the S.K. Engineering Works workshop",
     caption: "PROCESS EQUIPMENT / FABRICATION",
   },
   {
-    src: "/images/salt-refinery/execution/fabricated-equipment.jpeg",
+    src: assetPath("/images/salt-refinery/execution/fabricated-equipment.jpeg"),
     alt: "Large stainless-steel salt processing equipment under fabrication",
     caption: "HEAVY EQUIPMENT / WORKSHOP",
   },

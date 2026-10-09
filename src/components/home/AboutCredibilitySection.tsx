@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TrustedClientsSection from "./TrustedClientsSection";
+import { assetPath } from "@/lib/asset-path";
 import "./about-credibility-section.css";
 
 export default function AboutCredibilitySection() {
@@ -67,7 +68,7 @@ export default function AboutCredibilitySection() {
             </div>
             <figure className="about-factory-media">
               <Image
-                src="/images/projects/jagdamba/04_jagdamba_project_cover.jpg"
+                src={assetPath("/images/projects/jagdamba/04_jagdamba_project_cover.jpg")}
                 alt="S.K. Engineering Works salt refinery installation"
                 fill
                 sizes="(max-width: 479px) 0px, (max-width: 767px) 88vw, 36vw"

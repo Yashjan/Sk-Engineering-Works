@@ -7,8 +7,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  const introScript = `(function(){try{var base=${JSON.stringify(basePath)};var path=location.pathname.replace(/\\/+$/,'')||'/';var home=path===(base||'/');var mobilePlants=path===base+'/salt-refinery-plants'&&window.matchMedia('(max-width: 767px)').matches;if((home||mobilePlants)&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.dataset.skIntro='active';}}catch(e){}})();`;
   return <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning><head>
     {/* Parser-blocking session decision: runs before the body can paint. */}
-    <script dangerouslySetInnerHTML={{ __html: `(function(){try{var home=location.pathname==='/';var mobilePlants=location.pathname==='/salt-refinery-plants'&&window.matchMedia('(max-width: 767px)').matches;if((home||mobilePlants)&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.dataset.skIntro='active';}}catch(e){}})();` }} />
+    <script dangerouslySetInnerHTML={{ __html: introScript }} />
   </head><body>{children}</body></html>;
 }

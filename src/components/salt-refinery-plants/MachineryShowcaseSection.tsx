@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { assetPath } from "@/lib/asset-path";
 import "./machinery-showcase-section.css";
 
 type MachineryItem = {
@@ -30,7 +31,7 @@ const machinery: MachineryItem[] = [
     number: "01",
     name: "HOPPER",
     mediaType: "image",
-    mediaSrc: "/images/process/hopper.png",
+    mediaSrc: assetPath("/images/process/hopper.png"),
     mediaAlt: "Hopper machinery",
     mediaFit: "contain",
   },
@@ -39,7 +40,7 @@ const machinery: MachineryItem[] = [
     number: "02",
     name: "BELT CONVEYOR",
     mediaType: "image",
-    mediaSrc: "/images/process/belt-conveyor.png",
+    mediaSrc: assetPath("/images/process/belt-conveyor.png"),
     mediaAlt: "Belt conveyor machinery",
     mediaFit: "contain",
   },
@@ -48,7 +49,7 @@ const machinery: MachineryItem[] = [
     number: "03",
     name: "WET MILL",
     mediaType: "image",
-    mediaSrc: "/images/process/wet-mill.png",
+    mediaSrc: assetPath("/images/process/wet-mill.png"),
     mediaAlt: "Wet mill machinery",
     mediaFit: "contain",
   },

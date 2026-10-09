@@ -6,6 +6,7 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { waitForIntro } from "@/components/layout/intro-coordination";
+import { assetPath } from "@/lib/asset-path";
 
 export default function Hero({ hasImage }: { hasImage: boolean }) {
   const root = useRef<HTMLElement>(null);
@@ -34,7 +35,7 @@ export default function Hero({ hasImage }: { hasImage: boolean }) {
   return <section ref={root} className="hero" aria-labelledby="hero-heading">
     {/* Replace this media layer with a muted, playsInline factory video later. */}
     <div className={`hero-media ${hasImage ? "has-image" : ""}`} aria-hidden="true">
-      {hasImage ? <Image src="/images/Golden Hour Salt Processing Plant.png" alt="" fill sizes="100vw" priority className="hero-image" /> : <div className="industrial-fallback"><div className="structure structure-one" /><div className="structure structure-two" /><div className="structure structure-three" /><div className="structure-crossbeam" /><div className="technical-grid" /></div>}
+      {hasImage ? <Image src={assetPath("/images/Golden Hour Salt Processing Plant.png")} alt="" fill sizes="100vw" priority className="hero-image" /> : <div className="industrial-fallback"><div className="structure structure-one" /><div className="structure structure-two" /><div className="structure structure-three" /><div className="structure-crossbeam" /><div className="technical-grid" /></div>}
     </div>
     <div className="hero-overlay" aria-hidden="true" />
     <div className="hero-copy">

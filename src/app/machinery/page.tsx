@@ -1,5 +1,16 @@
-import { redirect } from "next/navigation";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+const machineryShowcase = "/salt-refinery-plants#machinery-showcase-title";
 
 export default function MachineryRoute() {
-  redirect("/salt-refinery-plants#machinery-showcase-title");
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace(machineryShowcase);
+  }, [router]);
+
+  return null;
 }
