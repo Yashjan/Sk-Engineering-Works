@@ -53,7 +53,7 @@
 
 @media (max-width: 767px) {
   .machinery-showcase-shell { min-height: 0; padding: 70px 6vw 64px; }
-  .machinery-showcase-eyebrow { margin-bottom: 22px; font-size: 9px; }
+  .machinery-showcase-eyebrow { margin-bottom: 22px; font-size: 10px; }
   .machinery-showcase-heading { font-size: clamp(34px, 10.5vw, 42px); line-height: .93; letter-spacing: -.052em; }
   .machinery-showcase-stage { width: 100%; margin-top: 38px; }
   .machinery-showcase-watermark { top: 46%; font-size: 58vw; }

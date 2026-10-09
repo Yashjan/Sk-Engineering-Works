@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "./machinery-architecture-section.css";
+import "./machinery-showcase-section.css";
 
 type MachineryItem = {
   id: string;
@@ -116,7 +116,7 @@ function MachineVisual({
   );
 }
 
-export default function MachineryArchitectureSection() {
+export default function MachineryShowcaseSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const transitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const nextLayerKeyRef = useRef(1);
@@ -126,6 +126,7 @@ export default function MachineryArchitectureSection() {
     { key: 0, machineIndex: 0, state: "active" },
   ]);
   const [sectionVisible, setSectionVisible] = useState(false);
+  const [motionAllowed, setMotionAllowed] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -141,12 +142,21 @@ export default function MachineryArchitectureSection() {
   }, []);
 
   useEffect(() => {
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setMotionAllowed(!motion.matches);
+
+    update();
+    motion.addEventListener("change", update);
+    return () => motion.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
     section.querySelectorAll<HTMLVideoElement>(".machinery-showcase-media video").forEach((video) => {
       const layer = video.closest<HTMLElement>(".machinery-showcase-media");
-      const shouldPlay = sectionVisible && layer?.dataset.mediaState === "active";
+      const shouldPlay = motionAllowed && sectionVisible && layer?.dataset.mediaState === "active";
 
       if (shouldPlay) {
         void video.play().catch(() => {});
@@ -162,7 +172,7 @@ export default function MachineryArchitectureSection() {
         }
       }
     });
-  }, [mediaLayers, sectionVisible]);
+  }, [mediaLayers, motionAllowed, sectionVisible]);
 
   useEffect(() => () => {
     if (transitionTimerRef.current) clearTimeout(transitionTimerRef.current);
@@ -261,7 +271,7 @@ export default function MachineryArchitectureSection() {
                   machine={machine}
                   machineIndex={layer.machineIndex}
                   state={layer.state}
-                  shouldPlay={sectionVisible && layer.state === "active"}
+                  shouldPlay={motionAllowed && sectionVisible && layer.state === "active"}
                 />
               );
             })}

@@ -11,7 +11,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .skip-link { position: fixed; top: 12px; left: 12px; z-index: 100; padding: 12px 20px; background: var(--foreground); color: var(--background); transform: translateY(-150%); }
 .skip-link:focus { transform: translateY(0); }
 .navbar { position: fixed; inset: 0 0 auto; z-index: 30; transition: background .35s, backdrop-filter .35s; }
-.navbar.is-inner-page { opacity: 1; transform: none; }
+.navbar.is-inner-page { background: rgb(11 13 14 / 72%); opacity: 1; transform: none; backdrop-filter: blur(10px); }
 .navbar.is-scrolled { background: rgb(17 20 19 / 88%); backdrop-filter: blur(14px); }
 .nav-inner { display: flex; align-items: center; gap: 36px; max-width: 1920px; min-height: 112px; margin: auto; padding: 20px 4.5vw; border-bottom: 1px solid rgb(255 255 255 / 13%); }
 .logo-link { display: flex; align-items: center; margin-right: auto; flex-shrink: 0; }

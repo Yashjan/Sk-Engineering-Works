@@ -305,18 +305,6 @@
   max-width: 680px;
 }
 
-.raw-process-empty {
-  margin: 3px 0 0;
-  color: #62686a;
-  font-size: 10px;
-  line-height: 1.7;
-  letter-spacing: .16em;
-}
-
-.raw-process-empty span {
-  display: block;
-}
-
 .raw-process-mobile-detail {
   display: none;
 }
@@ -375,12 +363,6 @@
   letter-spacing: .12em;
 }
 
-.raw-process-related i {
-  margin: 0 10px;
-  color: rgb(17 20 21 / 40%);
-  font-style: normal;
-}
-
 @media (min-width: 900px) and (max-width: 1199px) {
   .raw-process-preview {
     left: 90px;
@@ -416,7 +398,7 @@
 
   .raw-process-eyebrow {
     margin-bottom: 17px;
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .raw-process-heading {

@@ -132,23 +132,26 @@ function StageMedia({
   stage,
   videoRef,
   shouldPlay,
+  loadMedia = true,
 }: {
   stage: ProcessStage;
   videoRef?: RefObject<HTMLVideoElement | null>;
   shouldPlay: boolean;
+  loadMedia?: boolean;
 }) {
   if (stage.mediaType === "video" && stage.mediaSrc) {
     return (
       <>
         <video
           ref={videoRef}
-          src={stage.mediaSrc}
+          src={loadMedia ? stage.mediaSrc : undefined}
           autoPlay={shouldPlay}
           muted
           loop
           playsInline
-          preload="metadata"
+          preload={loadMedia ? "metadata" : "none"}
           tabIndex={-1}
+          aria-hidden="true"
         />
         <span className="raw-process-preview-label">{stage.equipment}</span>
       </>
@@ -207,6 +210,7 @@ export default function RawSaltProcessStage() {
   const [selectedMobileStage, setSelectedMobileStage] = useState<string | null>("raw-salt");
   const [renderedStage, setRenderedStage] = useState("raw-salt");
   const [isMobile, setIsMobile] = useState(false);
+  const [motionAllowed, setMotionAllowed] = useState(false);
   const preview = useRef<HTMLDivElement>(null);
   const previewContent = useRef<HTMLDivElement>(null);
   const copyContent = useRef<HTMLElement>(null);
@@ -273,11 +277,18 @@ export default function RawSaltProcessStage() {
 
   useEffect(() => {
     const query = window.matchMedia("(max-width: 767px)");
-    const update = () => setIsMobile(query.matches);
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateViewport = () => setIsMobile(query.matches);
+    const updateMotion = () => setMotionAllowed(!motion.matches);
 
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
+    updateViewport();
+    updateMotion();
+    query.addEventListener("change", updateViewport);
+    motion.addEventListener("change", updateMotion);
+    return () => {
+      query.removeEventListener("change", updateViewport);
+      motion.removeEventListener("change", updateMotion);
+    };
   }, []);
 
   useLayoutEffect(() => {
@@ -357,14 +368,14 @@ export default function RawSaltProcessStage() {
     const desktopVideoElement = desktopVideo.current;
     const mobileVideoElement = mobileVideo.current;
 
-    syncVideoPlayback(desktopVideoElement, desktopRawSaltActive);
-    syncVideoPlayback(mobileVideoElement, mobileRawSaltActive);
+    syncVideoPlayback(desktopVideoElement, motionAllowed && desktopRawSaltActive);
+    syncVideoPlayback(mobileVideoElement, motionAllowed && mobileRawSaltActive);
 
     return () => {
       desktopVideoElement?.pause();
       mobileVideoElement?.pause();
     };
-  }, [hoveredStage, isMobile, renderedStage, selectedMobileStage]);
+  }, [hoveredStage, isMobile, motionAllowed, renderedStage, selectedMobileStage]);
 
   const previewPosition = {
     "--active-stage": activeIndex,
@@ -407,11 +418,20 @@ export default function RawSaltProcessStage() {
                       if (event.pointerType === "mouse") setHoveredStage(process.id);
                     }}
                   >
-                    <div className="raw-process-desktop-row">
+                    <button
+                      type="button"
+                      className="raw-process-desktop-row"
+                      aria-pressed={active}
+                      aria-controls="process-stage-copy process-stage-preview"
+                      onFocus={() => setHoveredStage(process.id)}
+                      onBlur={(event) => {
+                        if (!event.currentTarget.parentElement?.contains(event.relatedTarget)) setHoveredStage(null);
+                      }}
+                    >
                       <span className="raw-process-stage-number">{process.number}</span>
                       <strong>{process.name}</strong>
                       <span className="raw-process-stage-marker" aria-hidden="true" />
-                    </div>
+                    </button>
                   </li>
                 );
               })}
@@ -448,7 +468,8 @@ export default function RawSaltProcessStage() {
                           <StageMedia
                             stage={process}
                             videoRef={process.id === "raw-salt" ? mobileVideo : undefined}
-                            shouldPlay={isMobile && process.id === "raw-salt"}
+                            shouldPlay={motionAllowed && isMobile && process.id === "raw-salt"}
+                            loadMedia={isMobile}
                           />
                         </div>
                         <div className="raw-process-mobile-copy">
@@ -466,7 +487,8 @@ export default function RawSaltProcessStage() {
                 <StageMedia
                   stage={renderedProcess}
                   videoRef={renderedProcess.id === "raw-salt" ? desktopVideo : undefined}
-                  shouldPlay={!isMobile && hoveredStage === "raw-salt"}
+                  shouldPlay={motionAllowed && !isMobile && hoveredStage === "raw-salt"}
+                  loadMedia={!isMobile}
                 />
               </div>
             </div>

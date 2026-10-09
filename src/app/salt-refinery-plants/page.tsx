@@ -6,7 +6,7 @@ import SiteIntro from "@/components/layout/SiteIntro";
 import ProjectEnquirySection from "@/components/home/ProjectEnquirySection";
 import TrustedClientsSection from "@/components/home/TrustedClientsSection";
 import CompleteExecutionSection from "@/components/salt-refinery-plants/CompleteExecutionSection";
-import MachineryArchitectureSection from "@/components/salt-refinery-plants/MachineryArchitectureSection";
+import MachineryShowcaseSection from "@/components/salt-refinery-plants/MachineryShowcaseSection";
 import PlantConfigurationSection from "@/components/salt-refinery-plants/PlantConfigurationSection";
 import RawSaltProcessStage from "@/components/salt-refinery-plants/RawSaltProcessStage";
 import SaltRefineryHero from "@/components/salt-refinery-plants/SaltRefineryHero";
@@ -29,7 +29,7 @@ export default function SaltRefineryPlantsPage() {
         <RawSaltProcessStage />
         <CompleteExecutionSection />
         <PlantConfigurationSection />
-        <MachineryArchitectureSection />
+        <MachineryShowcaseSection />
         <TrustedClientsSection standalone />
         <ProjectEnquirySection appearance="light" />
       </main>

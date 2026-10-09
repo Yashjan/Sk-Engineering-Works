@@ -12,7 +12,7 @@
   min-height: inherit;
   max-width: 1920px;
   margin: 0 auto;
-  padding: 112px 3.8vw clamp(32px, 3.6vh, 44px);
+  padding: 112px 4.5vw clamp(32px, 3.6vh, 44px);
   flex-direction: column;
 }
 .salt-hero-grid {
