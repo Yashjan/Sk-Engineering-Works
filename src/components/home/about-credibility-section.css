@@ -59,6 +59,7 @@
 @media (max-width: 1023px) {
   .about-shell { padding-inline: 6vw; }
   .about-intro-grid { grid-template-columns: minmax(220px, 35%) 1fr; gap: 5vw; }
+  .about-authority p { font-size: clamp(30px, 3.8vw, 38px); }
   .about-statement { font-size: clamp(36px, 5.2vw, 52px); }
   .about-flash { min-height: 390px; }
   .about-proof { grid-template-columns: .8fr 1fr; }

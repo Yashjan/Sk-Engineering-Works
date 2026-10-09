@@ -14,16 +14,16 @@ function ProjectVisual({ project, media, videoRef, muted, onPlayStateChange }: {
     return <video ref={videoRef} className="projects-video" src={media.src} poster={project.hasImage ? project.coverImage : undefined} muted={muted} playsInline loop preload="metadata" aria-label={`${project.title} — ${media.label.toLowerCase()}`} onPlay={() => onPlayStateChange(true)} onPause={() => onPlayStateChange(false)} />;
   }
   if (media?.type === "image" && media.src) {
-    return <Image src={media.src} alt={`${project.title} — ${media.label.toLowerCase()}`} fill sizes="(min-width: 900px) 58vw, 94vw" className="projects-image" priority={project.id === "jagdamba-phalodi"} />;
+    return <Image src={media.src} alt={`${project.title} — ${media.label.toLowerCase()}`} fill sizes="(min-width: 900px) 58vw, 94vw" className="projects-image" />;
   }
   return project.hasImage ? (
-    <Image src={project.coverImage} alt={`${project.title} installation`} fill sizes="(min-width: 900px) 58vw, 94vw" className="projects-image" priority={project.id === "jagdamba-phalodi"} />
+    <Image src={project.coverImage} alt={`${project.title} installation`} fill sizes="(min-width: 900px) 58vw, 94vw" className="projects-image" />
   ) : (
     <div className="projects-image-placeholder" aria-hidden="true">
       <span className="projects-placeholder-grid" />
       <span className="projects-placeholder-frame projects-placeholder-frame-one" />
       <span className="projects-placeholder-frame projects-placeholder-frame-two" />
-      <span className="projects-placeholder-label">INSTALLATION VIEW / {project.capacity}</span>
+      <span className="projects-placeholder-label">{project.kind === "equipment" ? `${project.title} / MEDIA PENDING` : `INSTALLATION VIEW / ${project.capacity}`}</span>
     </div>
   );
 }
@@ -40,6 +40,7 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
   const visible = useRef(false);
   const active = projects[activeIndex];
   const activeMedia = active.media[activeMediaIndex];
+  const isEquipment = active.kind === "equipment";
 
   const playVideo = () => {
     if (!video.current || !visible.current) return;
@@ -106,24 +107,26 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
 
         <div id="projects-featured" className="projects-feature" tabIndex={-1}>
           <div ref={copy} className="projects-copy">
-            <p className="projects-feature-label">FEATURED INSTALLATION <span>— {String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span></p>
-            <p className="projects-client">{active.client || "INSTALLED PLANT PROJECT"}</p>
+            <p className="projects-feature-label">{isEquipment ? "EQUIPMENT" : "FEATURED INSTALLATION"} <span>— {String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span></p>
+            <p className="projects-client">{isEquipment ? active.category : active.client || "INSTALLED PLANT PROJECT"}</p>
             <h3>{active.title}</h3>
-            <p className="projects-location">{active.location}</p>
-            <dl className="projects-meta">
-              <div><dt>CAPACITY</dt><dd>{active.capacity}</dd></div>
-              <div><dt>SCOPE</dt><dd>{active.scope}</dd></div>
-              <div><dt>PROJECT TYPE</dt><dd>{active.projectType}</dd></div>
-            </dl>
-            {active.scopeChips && <ul className="projects-chips" aria-label="Selected project scope">{active.scopeChips.map((chip) => <li key={chip}>{chip}</li>)}</ul>}
+            {!isEquipment && <>
+              <p className="projects-location">{active.location}</p>
+              <dl className="projects-meta">
+                <div><dt>CAPACITY</dt><dd>{active.capacity}</dd></div>
+                <div><dt>SCOPE</dt><dd>{active.scope}</dd></div>
+                <div><dt>PROJECT TYPE</dt><dd>{active.projectType}</dd></div>
+              </dl>
+              {active.scopeChips && <ul className="projects-chips" aria-label="Selected project scope">{active.scopeChips.map((chip) => <li key={chip}>{chip}</li>)}</ul>}
+            </>}
           </div>
           <div ref={media} className="projects-media">
             <div className="projects-media-stage">
               <ProjectVisual key={`${active.id}-${activeMedia?.id || "cover"}`} project={active} media={activeMedia} videoRef={video} muted={muted} onPlayStateChange={setPlaying} />
               <div className="projects-media-overlay">
-                <p>{active.client || "INSTALLED PLANT PROJECT"}</p>
-                <strong>{activeMedia?.label || "PROJECT VIEW"}</strong>
-                <small>{active.location.toUpperCase()}</small>
+                <p>{isEquipment ? "INDUSTRIAL EQUIPMENT" : active.client || "INSTALLED PLANT PROJECT"}</p>
+                <strong>{activeMedia?.label || active.category || "PROJECT VIEW"}</strong>
+                {!isEquipment && <small>{active.location.toUpperCase()}</small>}
               </div>
               {activeMedia?.type === "video" && <div className="projects-media-controls">
                 <button type="button" onClick={() => { if (playing) video.current?.pause(); else playVideo(); }} aria-label={playing ? "Pause project video" : "Play project video"}>{playing ? "PAUSE" : "PLAY"}</button>

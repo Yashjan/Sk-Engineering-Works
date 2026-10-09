@@ -1,5 +1,7 @@
 export type Project = {
   id: string;
+  kind?: "project" | "equipment";
+  category?: string;
   title: string;
   client?: string;
   location: string;
@@ -7,7 +9,6 @@ export type Project = {
   scope: string;
   projectType: string;
   coverImage: string;
-  isPlaceholder: boolean;
   media: ProjectMedia[];
   scopeChips?: string[];
   completeScope?: string[];
@@ -30,7 +31,6 @@ export const projects: Project[] = [
     scope: "Process equipment supply & complete plant fitting",
     projectType: "Salt Refinery Plant",
     coverImage: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg",
-    isPlaceholder: false,
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/jagdamba/01_jagdamba_fabrication.mp4", label: "FABRICATION" },
       { id: "installation", type: "video", src: "/images/projects/jagdamba/02_jagdamba_site_installation.mp4", label: "SITE INSTALLATION" },
@@ -44,64 +44,82 @@ export const projects: Project[] = [
       "Screw Conveyors", "Complete Plant Fitting / Installation",
     ],
   },
-  // Temporary layout record. Replace with a verified project before publishing.
   {
-    id: "project-02",
-    title: "20 TPH SALT REFINERY PLANT",
-    location: "Kutch, Gujarat",
-    capacity: "20 TPH",
-    scope: "Refinery process equipment, conveying, drying and storage",
-    projectType: "Salt Refinery Plant",
-    coverImage: "/images/projects/project-02.jpg",
-    isPlaceholder: true,
+    id: "id-fan-blower",
+    kind: "equipment",
+    category: "AIR HANDLING",
+    title: "ID FAN / BLOWER",
+    location: "",
+    capacity: "",
+    scope: "",
+    projectType: "Industrial Equipment",
+    coverImage: "/images/salt-refinery/execution/fabrication-blower.jpeg",
+    media: [
+      { id: "workshop-view", type: "image", src: "/images/salt-refinery/execution/fabrication-blower.jpeg", label: "AIR HANDLING" },
+    ],
+  },
+  {
+    id: "belt-conveyor",
+    kind: "equipment",
+    category: "MATERIAL HANDLING",
+    title: "BELT CONVEYOR",
+    location: "",
+    capacity: "",
+    scope: "",
+    projectType: "Industrial Equipment",
+    coverImage: "/images/process/belt-conveyor.png",
+    media: [
+      { id: "equipment-view", type: "image", src: "/images/process/belt-conveyor.png", label: "MATERIAL HANDLING" },
+    ],
+  },
+  {
+    id: "screw-conveyor",
+    kind: "equipment",
+    category: "MATERIAL HANDLING",
+    title: "SCREW CONVEYOR",
+    location: "",
+    capacity: "",
+    scope: "",
+    projectType: "Industrial Equipment",
+    coverImage: "/images/projects/equipment/screw-conveyor.jpg",
     media: [],
   },
-  // Temporary layout record. Replace with a verified project before publishing.
   {
-    id: "project-03",
-    title: "10 TPH SALT REFINERY PLANT",
-    location: "Sambhar, Rajasthan",
-    capacity: "10 TPH",
-    scope: "Washing, drying, conveying and silo systems",
-    projectType: "Salt Refinery Plant",
-    coverImage: "/images/projects/project-03.jpg",
-    isPlaceholder: true,
+    id: "portable-belt-conveyor",
+    kind: "equipment",
+    category: "MOBILE CONVEYING",
+    title: "PORTABLE BELT CONVEYOR",
+    location: "",
+    capacity: "",
+    scope: "",
+    projectType: "Industrial Equipment",
+    coverImage: "/images/projects/equipment/portable-belt-conveyor.jpg",
     media: [],
   },
-  // Temporary layout record. Replace with a verified project before publishing.
   {
-    id: "project-04",
-    title: "25 TPH SALT REFINERY PLANT",
-    location: "Santalpur, Gujarat",
-    capacity: "25 TPH",
-    scope: "Process line equipment, drying, handling and integration",
-    projectType: "Salt Refinery Plant",
-    coverImage: "/images/projects/project-04.jpg",
-    isPlaceholder: true,
+    id: "bag-filter",
+    kind: "equipment",
+    category: "DUST COLLECTION",
+    title: "BAG FILTER",
+    location: "",
+    capacity: "",
+    scope: "",
+    projectType: "Industrial Equipment",
+    coverImage: "/images/projects/equipment/bag-filter.jpg",
     media: [],
   },
-  // Temporary layout record. Replace with a verified project before publishing.
   {
-    id: "project-05",
-    title: "12 TPH SALT PROCESSING PLANT",
-    location: "Nawa, Rajasthan",
-    capacity: "12 TPH",
-    scope: "Conveying, wet processing, drying and storage",
-    projectType: "Salt Processing Plant",
-    coverImage: "/images/projects/project-05.jpg",
-    isPlaceholder: true,
-    media: [],
-  },
-  // Temporary layout record. Replace with a verified project before publishing.
-  {
-    id: "project-06",
-    title: "30 TPH SALT REFINERY PLANT",
-    location: "Gujarat",
-    capacity: "30 TPH",
-    scope: "Large-capacity process equipment and plant handling systems",
-    projectType: "Salt Refinery Plant",
-    coverImage: "/images/projects/project-06.jpg",
-    isPlaceholder: true,
-    media: [],
+    id: "cyclone",
+    kind: "equipment",
+    category: "AIR / DUST SEPARATION",
+    title: "CYCLONE",
+    location: "",
+    capacity: "",
+    scope: "",
+    projectType: "Industrial Equipment",
+    coverImage: "/images/salt-refinery/execution/plant-structure.jpeg",
+    media: [
+      { id: "installed-view", type: "image", src: "/images/salt-refinery/execution/plant-structure.jpeg", label: "AIR / DUST SEPARATION" },
+    ],
   },
 ];

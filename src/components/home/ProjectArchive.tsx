@@ -186,7 +186,7 @@ export default function ProjectArchive({ projects, onSelect }: {
   return (
     <section ref={root} id="project-archive" className="project-archive" aria-labelledby="project-archive-heading">
       <header className="project-archive-header">
-        <h3 id="project-archive-heading">PROJECT ARCHIVE</h3>
+        <h3 id="project-archive-heading">PROJECTS / EQUIPMENT</h3>
         <p className="project-archive-counter" aria-label="Current project">
           <span data-archive-current>01</span> / {number(projects.length)}
         </p>
@@ -201,7 +201,7 @@ export default function ProjectArchive({ projects, onSelect }: {
                 href="#projects-featured"
                 onClick={() => onSelect(index)}
                 aria-current={index === 0 ? "true" : undefined}
-                aria-label={`View ${project.client ? `${project.client}, ` : ""}${project.title}, ${project.location}`}
+                aria-label={project.kind === "equipment" ? `View ${project.title}, ${project.category}` : `View ${project.client ? `${project.client}, ` : ""}${project.title}, ${project.location}`}
               >
                 <div className="project-archive-image">
                   <div className="project-archive-parallax">
@@ -209,7 +209,7 @@ export default function ProjectArchive({ projects, onSelect }: {
                       {project.hasImage ? (
                         <Image
                           src={project.coverImage}
-                          alt={`${project.client || project.projectType} — ${project.location}, ${project.capacity}`}
+                          alt={project.kind === "equipment" ? `${project.title} — ${project.category}` : `${project.client || project.projectType} — ${project.location}, ${project.capacity}`}
                           fill
                           sizes="(max-width: 767px) 95vw, (max-width: 1023px) 85vw, (min-width: 1452px) 1010px, 70vw"
                           loading="lazy"
@@ -217,7 +217,7 @@ export default function ProjectArchive({ projects, onSelect }: {
                         />
                       ) : (
                         <span className="project-archive-placeholder" aria-hidden="true">
-                          <span className="project-archive-placeholder-label">{project.projectType} / {project.capacity}</span>
+                          <span className="project-archive-placeholder-label">{project.kind === "equipment" ? `${project.title} / MEDIA PENDING` : `${project.projectType} / ${project.capacity}`}</span>
                         </span>
                       )}
                     </div>
@@ -226,11 +226,11 @@ export default function ProjectArchive({ projects, onSelect }: {
                 <div className="project-archive-info">
                   <span className="project-archive-number" aria-hidden="true">{number(index + 1)}</span>
                   <div className="project-archive-caption">
-                    {project.client && <p className="project-archive-client">{project.client}</p>}
+                    {(project.client || project.category) && <p className="project-archive-client">{project.client || project.category}</p>}
                     <h4>{project.title}</h4>
-                    <p className="project-archive-location">{project.location}</p>
+                    {project.kind !== "equipment" && <p className="project-archive-location">{project.location}</p>}
                   </div>
-                  <span className="project-archive-action">VIEW PROJECT <span aria-hidden="true">→</span></span>
+                  <span className="project-archive-action">{project.kind === "equipment" ? "VIEW EQUIPMENT" : "VIEW PROJECT"} <span aria-hidden="true">→</span></span>
                 </div>
               </a>
             </li>
