@@ -9,7 +9,11 @@ const whatsappMessage = encodeURIComponent(
   "Hello S.K. Engineering Works, I would like to discuss a salt refinery / machinery requirement.",
 );
 
-export default function ProjectEnquirySection() {
+type ProjectEnquirySectionProps = {
+  appearance?: "dark" | "light";
+};
+
+export default function ProjectEnquirySection({ appearance = "dark" }: ProjectEnquirySectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -50,7 +54,7 @@ export default function ProjectEnquirySection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="contact" className="project-enquiry" aria-labelledby="project-enquiry-heading">
+    <section ref={sectionRef} id="contact" className={`project-enquiry${appearance === "light" ? " project-enquiry-light" : ""}`} aria-labelledby="project-enquiry-heading">
       <div className="enquiry-background" aria-hidden="true">LET&apos;S BUILD.</div>
       <div className="enquiry-shell">
         <div className="enquiry-meta">

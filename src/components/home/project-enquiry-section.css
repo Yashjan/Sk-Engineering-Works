@@ -101,3 +101,38 @@
 @media (max-width: 359px) {
   .enquiry-lower-proof { grid-template-columns: auto 1fr; }
 }
+
+/* The Salt Refinery Plants route reuses this exact section with a light surface. */
+.project-enquiry-light { background: #f3f2ed; color: #111415; }
+.project-enquiry-light::before,
+.project-enquiry-light .enquiry-region-line { background: rgb(17 20 21 / 22%); }
+.project-enquiry-light .enquiry-background { color: rgb(17 20 21 / 3%); }
+.project-enquiry-light .enquiry-meta { border-color: rgb(17 20 21 / 18%); color: rgb(17 20 21 / 58%); }
+.project-enquiry-light .enquiry-meta a:hover,
+.project-enquiry-light .enquiry-heading-muted .enquiry-heading-line:last-child,
+.project-enquiry-light .enquiry-answer,
+.project-enquiry-light .enquiry-lower-proof > strong,
+.project-enquiry-light .enquiry-phone,
+.project-enquiry-light .enquiry-maps:hover { color: #111415; }
+.project-enquiry-light .enquiry-heading { color: rgb(17 20 21 / 78%); }
+.project-enquiry-light .enquiry-conversion { border-color: rgb(17 20 21 / 14%); }
+.project-enquiry-light .enquiry-support,
+.project-enquiry-light .enquiry-cta-note,
+.project-enquiry-light .enquiry-lower-proof small,
+.project-enquiry-light .enquiry-lower-contact,
+.project-enquiry-light .enquiry-lower-contact p,
+.project-enquiry-light .enquiry-maps,
+.project-enquiry-light .enquiry-scope-compact { color: rgb(17 20 21 / 58%); }
+.project-enquiry-light .enquiry-primary,
+.project-enquiry-light .enquiry-secondary { border-color: #111415; }
+.project-enquiry-light .enquiry-primary { background: #111415; color: #f3f2ed; }
+.project-enquiry-light .enquiry-primary:hover { border-color: #313738; background: #313738; }
+.project-enquiry-light .enquiry-secondary { color: #111415; }
+.project-enquiry-light .enquiry-secondary:hover { border-color: #111415; }
+.project-enquiry-light .enquiry-scope,
+.project-enquiry-light .enquiry-lower { border-color: rgb(17 20 21 / 22%); }
+.project-enquiry-light .enquiry-scope li { border-color: rgb(17 20 21 / 14%); }
+.project-enquiry-light .enquiry-scope li span { color: rgb(17 20 21 / 44%); }
+.project-enquiry-light .enquiry-scope li strong,
+.project-enquiry-light .enquiry-lower-proof p,
+.project-enquiry-light .enquiry-lower-contact > strong { color: rgb(17 20 21 / 82%); }

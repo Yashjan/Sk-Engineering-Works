@@ -1,0 +1,34 @@
+.trusted-clients-standalone {
+  overflow: clip;
+  padding: 0;
+  background: #0b0d0e;
+  color: #f3f2ed;
+}
+
+.trusted-clients-shell {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 64px 4.5vw 52px;
+}
+
+.trusted-clients-standalone .about-trust-meta {
+  border-color: rgb(243 242 237 / 28%);
+  color: rgb(243 242 237 / 58%);
+}
+
+.trusted-clients-standalone .about-marquee-row + .about-marquee-row,
+.trusted-clients-standalone .about-client-mark {
+  border-color: rgb(243 242 237 / 14%);
+}
+
+.trusted-clients-standalone .about-client-mark { color: #f3f2ed; }
+.trusted-clients-standalone .about-client-logo { filter: grayscale(1) saturate(0) invert(1) contrast(1.15); }
+.trusted-clients-standalone .about-client-mark small { color: rgb(243 242 237 / 52%); }
+
+@media (max-width: 1023px) {
+  .trusted-clients-shell { padding-inline: 6vw; }
+}
+
+@media (max-width: 767px) {
+  .trusted-clients-shell { padding: 42px 6vw 11px 38px; }
+}

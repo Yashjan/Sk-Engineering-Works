@@ -1,0 +1,85 @@
+.machinery-showcase { overflow: clip; background: #F5EDE1; color: #111415; }
+.machinery-showcase-shell { width: min(100%, 1920px); min-height: 100svh; margin: 0 auto; padding: clamp(52px, 3.5vw, 58px) 4.5vw clamp(34px, 2.5vw, 38px); }
+.machinery-showcase-header { position: relative; z-index: 2; }
+.machinery-showcase-eyebrow { margin: 0 0 16px; color: rgb(17 20 21 / 42%); font-size: 10px; font-weight: 500; line-height: 1.4; letter-spacing: .18em; }
+.machinery-showcase-heading { max-width: 920px; margin: 0; color: #111415; font-size: clamp(54px, 5.3vw, 82px); font-weight: 500; line-height: .88; letter-spacing: -.06em; }
+.machinery-showcase-heading-line, .machinery-showcase-heading-line > span { display: block; }
+.machinery-showcase-heading-line { overflow: hidden; padding: .04em 0; margin: -.04em 0; }
+
+.machinery-showcase-stage { position: relative; isolation: isolate; width: clamp(650px, 55vw, 980px); margin: clamp(10px, 1.2vw, 16px) auto 0; }
+.machinery-showcase-watermark { position: absolute; top: 49%; left: 50%; z-index: -1; color: rgb(17 20 21 / 3%); font-size: clamp(220px, 28vw, 500px); font-weight: 600; line-height: .72; letter-spacing: -.09em; transform: translate(-50%, -50%); pointer-events: none; user-select: none; }
+.machinery-showcase-count { position: relative; z-index: 3; margin: 0 0 12px; color: #111415; font-size: 11px; font-weight: 500; line-height: 1.4; letter-spacing: .14em; }
+.machinery-showcase-count span { color: rgb(17 20 21 / 42%); }
+.machinery-showcase-visual { position: relative; width: 100%; height: clamp(400px, 55vh, 620px); overflow: hidden; border-top: 1px solid rgb(17 20 21 / 14%); border-bottom: 1px solid rgb(17 20 21 / 14%); background: rgb(17 20 21 / 1.8%); }
+.machinery-showcase-media { position: absolute; inset: 0; display: grid; place-items: center; transform-origin: 50% 54%; }
+.machinery-showcase-media[data-media-state="active"] { z-index: 2; animation: machinery-showcase-media-in 480ms cubic-bezier(.22, 1, .36, 1) both; }
+.machinery-showcase-media[data-media-state="outgoing"] { z-index: 1; animation: machinery-showcase-media-out 360ms cubic-bezier(.22, 1, .36, 1) both; pointer-events: none; }
+.machinery-showcase-media img, .machinery-showcase-media video { display: block; width: 100%; height: 100%; }
+.machinery-showcase-media[data-media-fit="contain"] img, .machinery-showcase-media[data-media-fit="contain"] video { object-fit: contain; padding: clamp(18px, 2vw, 34px); }
+.machinery-showcase-media[data-media-fit="cover"] img, .machinery-showcase-media[data-media-fit="cover"] video { object-fit: cover; }
+.machinery-showcase-placeholder { display: flex; width: min(76%, 620px); height: min(64%, 340px); align-items: center; justify-content: center; flex-direction: column; border-top: 1px solid rgb(17 20 21 / 14%); border-bottom: 1px solid rgb(17 20 21 / 14%); color: rgb(17 20 21 / 42%); text-align: center; }
+.machinery-showcase-placeholder span { font-size: 10px; letter-spacing: .18em; }
+.machinery-showcase-placeholder strong { margin-top: 10px; color: rgb(17 20 21 / 58%); font-size: 13px; font-weight: 500; letter-spacing: .14em; }
+.machinery-showcase-current-name { position: relative; z-index: 3; margin: 12px 0 0; color: #111415; font-size: clamp(34px, 3.4vw, 58px); font-weight: 500; line-height: .96; letter-spacing: -.045em; }
+
+.machinery-showcase-footer { margin-top: clamp(14px, 1.4vw, 20px); }
+.machinery-showcase-nav { display: grid; position: relative; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 1px solid rgb(17 20 21 / 14%); border-bottom: 1px solid rgb(17 20 21 / 14%); }
+.machinery-showcase-nav::after { position: absolute; top: 50%; right: 0; left: 0; height: 1px; background: rgb(17 20 21 / 10%); content: ""; pointer-events: none; }
+.machinery-showcase-nav-item { min-width: 0; min-height: 40px; padding: 8px clamp(8px, 1vw, 18px) 8px 0; border: 0; background: transparent; color: rgb(17 20 21 / 38%); font: inherit; font-size: clamp(9px, .72vw, 12px); font-weight: 500; line-height: 1.25; letter-spacing: .08em; text-align: left; cursor: pointer; transition: color 220ms ease; }
+.machinery-showcase-nav-item:hover, .machinery-showcase-nav-item:focus-visible, .machinery-showcase-nav-item[data-active="true"] { color: #111415; }
+.machinery-showcase-nav-item:focus-visible { outline: 1px solid #111415; outline-offset: -3px; }
+.machinery-showcase-link { display: flex; width: min(280px, 100%); align-items: center; justify-content: space-between; gap: 30px; margin: 14px 0 0 auto; padding: 9px 0; border-bottom: 1px solid rgb(17 20 21 / 32%); color: #111415; font-size: 11px; font-weight: 600; letter-spacing: .1em; }
+.machinery-showcase-link span { font-size: 17px; font-weight: 400; transition: transform 220ms ease; }
+.machinery-showcase-link:hover span { transform: translateX(4px); }
+
+@keyframes machinery-showcase-media-in {
+  from { opacity: 0; transform: translateY(12px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes machinery-showcase-media-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-8px) scale(.97); }
+}
+
+@media (max-width: 1199px) {
+  .machinery-showcase-shell { padding-inline: 6vw; }
+  .machinery-showcase-stage { width: min(82vw, 860px); }
+  .machinery-showcase-visual { height: clamp(360px, 52vw, 520px); }
+  .machinery-showcase-nav { display: flex; gap: clamp(26px, 4vw, 52px); overflow-x: auto; padding: 0 1px; overscroll-behavior-inline: contain; scroll-padding-inline: 1px 32px; scrollbar-width: none; }
+  .machinery-showcase-nav::-webkit-scrollbar { display: none; }
+  .machinery-showcase-nav::after { display: none; }
+  .machinery-showcase-nav-item { flex: 0 0 auto; min-height: 54px; padding: 17px 0; font-size: 12px; white-space: nowrap; }
+}
+
+@media (max-width: 767px) {
+  .machinery-showcase-shell { min-height: 0; padding: 70px 6vw 64px; }
+  .machinery-showcase-eyebrow { margin-bottom: 22px; font-size: 9px; }
+  .machinery-showcase-heading { font-size: clamp(34px, 10.5vw, 42px); line-height: .93; letter-spacing: -.052em; }
+  .machinery-showcase-stage { width: 100%; margin-top: 38px; }
+  .machinery-showcase-watermark { top: 46%; font-size: 58vw; }
+  .machinery-showcase-count { margin-bottom: 10px; font-size: 11px; }
+  .machinery-showcase-visual { height: clamp(240px, 72vw, 320px); }
+  .machinery-showcase-media[data-media-fit="contain"] img, .machinery-showcase-media[data-media-fit="contain"] video { padding: 12px; }
+  .machinery-showcase-placeholder { width: 84%; height: 64%; }
+  .machinery-showcase-placeholder span { font-size: 9px; }
+  .machinery-showcase-placeholder strong { font-size: 11px; }
+  .machinery-showcase-current-name { margin-top: 16px; font-size: clamp(30px, 9.8vw, 40px); }
+  .machinery-showcase-footer { margin-top: 34px; }
+  .machinery-showcase-nav { gap: 28px; margin-inline: -6vw; padding-inline: 6vw; scroll-padding-inline: 6vw; }
+  .machinery-showcase-nav::after { display: block; position: relative; flex: 0 0 1px; width: 1px; height: 1px; background: transparent; }
+  .machinery-showcase-nav-item { min-height: 52px; padding: 16px 0; font-size: 14px; letter-spacing: .05em; }
+  .machinery-showcase-link { width: 100%; margin-top: 28px; }
+}
+
+@media (min-width: 1000px) and (max-height: 800px) {
+  .machinery-showcase-shell { padding-top: 54px; padding-bottom: 44px; }
+  .machinery-showcase-heading { font-size: clamp(52px, 5.2vw, 78px); }
+  .machinery-showcase-stage { margin-top: 16px; }
+  .machinery-showcase-visual { height: 400px; }
+  .machinery-showcase-footer { margin-top: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .machinery-showcase-eyebrow, .machinery-showcase-heading-line > span, .machinery-showcase-media { opacity: 1; transform: none; animation: none; }
+  .machinery-showcase-nav-item, .machinery-showcase-link span { transition: none; }
+}
