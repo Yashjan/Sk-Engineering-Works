@@ -3,6 +3,9 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
 import MachineryHero from "@/components/machinery/MachineryHero";
+import MaterialHandlingTheatre from "@/components/machinery/MaterialHandlingTheatre";
+import GlobalMachinerySearch from "@/components/machinery/GlobalMachinerySearch";
+import { MachineryDirectory } from "@/components/machinery/MachineryDirectory";
 
 export const metadata: Metadata = {
   title: "Industrial Machinery | S.K. Engineering Works",
@@ -18,6 +21,10 @@ export default function MachineryPage() {
       <Navbar hasLogo={hasLogo} />
       <main id="main">
         <MachineryHero />
+        <MachineryDirectory>
+          <GlobalMachinerySearch />
+          <MaterialHandlingTheatre />
+        </MachineryDirectory>
       </main>
     </>
   );

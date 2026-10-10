@@ -89,7 +89,7 @@ export default function MachineryHero() {
           <h1 id="machinery-hero-heading" className="machinery-hero-heading">
             <span className="machinery-hero-heading-line"><span>ENGINEERED</span></span>
             <span className="machinery-hero-heading-line"><span>TO KEEP</span></span>
-            <span className="machinery-hero-heading-line"><span>INDUSTRY MOVING.</span></span>
+            <span className="machinery-hero-heading-line machinery-hero-heading-line-wide"><span>INDUSTRY MOVING.</span></span>
           </h1>
 
           <div className="machinery-hero-media" aria-label="S.K. Engineering Works machinery fabrication">

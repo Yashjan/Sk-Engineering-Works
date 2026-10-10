@@ -1,0 +1,27 @@
+.machinery-finder { position: relative; z-index: 7; background: #f3f2ed; color: #111415; }
+.machinery-finder-inner { display: grid; width: min(100%, 1920px); grid-template-columns: minmax(0, 1fr) minmax(300px, 31vw); align-items: start; gap: clamp(40px, 7vw, 130px); margin: 0 auto; padding: clamp(48px, 5vw, 76px) 4.5vw clamp(28px, 3vw, 48px); }
+.machinery-finder-inner > p { margin: 0; color: rgb(17 20 21 / 48%); font-size: 10px; font-weight: 500; line-height: 1.4; letter-spacing: .18em; }
+.machinery-finder-control { position: relative; width: min(100%, 430px); justify-self: end; }
+.machinery-finder-control > label { display: block; margin-bottom: 15px; color: rgb(17 20 21 / 62%); font-size: 10px; font-weight: 500; letter-spacing: .15em; }
+.machinery-finder-field { position: relative; border-bottom: 1px solid rgb(17 20 21 / 22%); transition: border-color 180ms ease; }
+.machinery-finder-field:focus-within { border-color: rgb(17 20 21 / 70%); }
+.machinery-finder-field input { width: 100%; height: 42px; padding: 0 34px 0 0; border: 0; outline: 0; background: transparent; color: #111415; font: inherit; font-size: 13px; letter-spacing: .025em; }
+.machinery-finder-field input::placeholder { color: rgb(17 20 21 / 38%); opacity: 1; }
+.machinery-finder-field input::-webkit-search-cancel-button { opacity: .52; }
+.machinery-finder-field > span { position: absolute; top: 12px; right: 2px; width: 14px; height: 14px; border: 1px solid rgb(17 20 21 / 54%); border-radius: 50%; pointer-events: none; }
+.machinery-finder-field > span::after { position: absolute; right: -4px; bottom: -3px; width: 6px; height: 1px; background: rgb(17 20 21 / 54%); content: ""; transform: rotate(45deg); transform-origin: left center; }
+.machinery-finder-results { position: absolute; top: 78px; right: 0; left: 0; z-index: 8; border-top: 1px solid rgb(17 20 21 / 12%); background: rgb(243 242 237 / 97%); backdrop-filter: blur(10px); }
+.machinery-finder-results button { display: flex; width: 100%; min-height: 52px; align-items: center; justify-content: space-between; gap: 20px; padding: 0; border: 0; border-bottom: 1px solid rgb(17 20 21 / 12%); background: transparent; color: #111415; font: inherit; text-align: left; cursor: pointer; transition: padding 180ms ease; }
+.machinery-finder-results button strong { font-size: 11px; font-weight: 500; letter-spacing: .08em; }
+.machinery-finder-results button span { color: rgb(17 20 21 / 38%); font-size: 8px; font-weight: 500; letter-spacing: .13em; text-align: right; }
+.machinery-finder-results button:hover, .machinery-finder-results button:focus-visible { padding-inline: 6px; }
+.machinery-finder-results > p { margin: 0; padding: 17px 0; color: rgb(17 20 21 / 45%); font-size: 10px; letter-spacing: .13em; }
+@media (max-width: 1199px) { .machinery-finder-inner { grid-template-columns: minmax(0, 1fr) minmax(250px, 34vw); gap: 5vw; padding-inline: 6vw; } }
+@media (max-width: 767px) {
+  .machinery-finder-inner { display: block; padding: 44px 6vw 34px; }
+  .machinery-finder-inner > p { margin-bottom: 27px; }
+  .machinery-finder-control { width: 100%; }
+  .machinery-finder-results { position: static; background: transparent; backdrop-filter: none; }
+  .machinery-finder-results button { min-height: 50px; }
+}
+@media (prefers-reduced-motion: reduce) { .machinery-finder-field, .machinery-finder-results button { transition: none; } }
