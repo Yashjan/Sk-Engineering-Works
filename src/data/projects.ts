@@ -8,6 +8,7 @@ export type Project = {
   capacity: string;
   scope: string;
   projectType: string;
+  detailHref?: string;
   coverImage: string;
   media: ProjectMedia[];
   scopeChips?: string[];
@@ -30,6 +31,7 @@ export const projects: Project[] = [
     capacity: "15 TPH",
     scope: "Process equipment supply & complete plant fitting",
     projectType: "Salt Refinery Plant",
+    detailHref: "/projects/jagdamba-salt-15tph",
     coverImage: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/jagdamba/01_jagdamba_fabrication.mp4", label: "FABRICATION" },

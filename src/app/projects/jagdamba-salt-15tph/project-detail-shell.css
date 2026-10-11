@@ -1,0 +1,19 @@
+.project-detail-shell { display: flex; min-height: 100svh; align-items: flex-start; justify-content: center; flex-direction: column; padding: clamp(140px, 14vw, 220px) max(6vw, 24px) clamp(72px, 8vw, 120px); background: #0b0d0e; color: #f3f2ed; }
+.project-detail-shell p { margin: 0; }
+.project-detail-record { color: rgb(243 242 237 / 44%); font-size: 9px; font-weight: 500; letter-spacing: .17em; }
+.project-detail-client { margin-top: clamp(36px, 5vw, 72px) !important; color: rgb(243 242 237 / 56%); font-size: 11px; font-weight: 500; letter-spacing: .14em; }
+.project-detail-shell h1 { margin: 20px 0 0; font-size: clamp(52px, 9vw, 148px); font-weight: 500; line-height: .88; letter-spacing: -.06em; }
+.project-detail-shell h1 span { display: block; }
+.project-detail-location { margin-top: 24px !important; color: rgb(243 242 237 / 52%); font-size: 10px; letter-spacing: .15em; }
+.project-detail-status { margin-top: clamp(46px, 6vw, 88px) !important; color: rgb(243 242 237 / 48%); font-size: 9px; letter-spacing: .16em; }
+.project-detail-shell > a { display: inline-flex; align-items: center; gap: 18px; margin-top: 28px; padding-bottom: 8px; border-bottom: 1px solid rgb(243 242 237 / 40%); font-size: 10px; font-weight: 600; letter-spacing: .1em; }
+.project-detail-shell > a span { font-size: 16px; font-weight: 400; transition: transform 200ms ease; }
+.project-detail-shell > a:hover span, .project-detail-shell > a:focus-visible span { transform: translateX(4px); }
+.project-detail-shell > a:focus-visible { outline: 2px solid #f3f2ed; outline-offset: 6px; }
+@media (max-width: 600px) {
+  .project-detail-shell { padding-top: 132px; }
+  .project-detail-shell h1 { font-size: clamp(48px, 15vw, 68px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-detail-shell > a span { transition: none; }
+}
