@@ -30,7 +30,7 @@ export default async function MachinePage({ params }: MachinePageProps) {
       <p>{machine.number} / {machine.category.replaceAll("-", " ")}</p>
       <h1>{machine.name}</h1>
       <span>MACHINE EXPERIENCE COMING NEXT</span>
-      <Link href="/machinery#material-handling">BACK TO MACHINERY <b aria-hidden="true">&rarr;</b></Link>
+      <Link href={`/machinery#${machine.categorySlug}`}>BACK TO MACHINERY <b aria-hidden="true">&rarr;</b></Link>
     </main>
   );
 }

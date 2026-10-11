@@ -4,6 +4,7 @@ import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
 import MachineryHero from "@/components/machinery/MachineryHero";
 import MaterialHandlingTheatre from "@/components/machinery/MaterialHandlingTheatre";
+import MillingTheatre from "@/components/machinery/MillingTheatre";
 import GlobalMachinerySearch from "@/components/machinery/GlobalMachinerySearch";
 import { MachineryDirectory } from "@/components/machinery/MachineryDirectory";
 
@@ -24,6 +25,7 @@ export default function MachineryPage() {
         <MachineryDirectory>
           <GlobalMachinerySearch />
           <MaterialHandlingTheatre />
+          <MillingTheatre />
         </MachineryDirectory>
       </main>
     </>

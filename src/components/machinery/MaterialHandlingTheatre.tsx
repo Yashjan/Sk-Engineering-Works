@@ -17,7 +17,7 @@ type MediaLayer = {
 };
 
 const transitionDuration = 560;
-export const AUTO_ADVANCE_MS = 2000;
+export const AUTO_ADVANCE_MS = 4000;
 
 function MachineMedia({ machine, layer, shouldPlay }: { machine: MachineryItem; layer: MediaLayer; shouldPlay: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);

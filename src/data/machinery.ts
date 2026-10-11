@@ -71,10 +71,45 @@ export const machineryCatalog: readonly MachineryItem[] = [
     mediaFit: "contain",
     detailHref: "/machinery/hopper",
   },
+  {
+    id: "wet-mill",
+    number: "01",
+    name: "WET MILL",
+    slug: "wet-mill",
+    category: "MILLING & SIZE REDUCTION",
+    categorySlug: "milling-size-reduction",
+    mediaType: "image",
+    mediaSrc: "/images/process/wet-mill.png",
+    mediaAlt: "S.K. Engineering Works wet mill",
+    mediaFit: "contain",
+    detailHref: "/machinery/wet-mill",
+  },
+  {
+    id: "pin-mill",
+    number: "02",
+    name: "PIN MILL",
+    slug: "pin-mill",
+    category: "MILLING & SIZE REDUCTION",
+    categorySlug: "milling-size-reduction",
+    detailHref: "/machinery/pin-mill",
+  },
+  {
+    id: "hammer-mill-crusher",
+    number: "03",
+    name: "HAMMER MILL / CRUSHER",
+    slug: "hammer-mill-crusher",
+    category: "MILLING & SIZE REDUCTION",
+    categorySlug: "milling-size-reduction",
+    detailHref: "/machinery/hammer-mill-crusher",
+  },
 ] as const;
 
 export const materialHandlingMachines = machineryCatalog.filter(
   (machine) => machine.categorySlug === "material-handling",
+);
+
+export const millingMachines = machineryCatalog.filter(
+  (machine) => machine.categorySlug === "milling-size-reduction",
 );
 
 export function getMachineBySlug(slug: string) {
