@@ -5,6 +5,9 @@ import Navbar from "@/components/layout/Navbar";
 import MachineryHero from "@/components/machinery/MachineryHero";
 import MaterialHandlingTheatre from "@/components/machinery/MaterialHandlingTheatre";
 import MillingTheatre from "@/components/machinery/MillingTheatre";
+import AirDustTheatre from "@/components/machinery/AirDustTheatre";
+import ScreeningTheatre from "@/components/machinery/ScreeningTheatre";
+import StorageTheatre from "@/components/machinery/StorageTheatre";
 import GlobalMachinerySearch from "@/components/machinery/GlobalMachinerySearch";
 import { MachineryDirectory } from "@/components/machinery/MachineryDirectory";
 
@@ -26,6 +29,9 @@ export default function MachineryPage() {
           <GlobalMachinerySearch />
           <MaterialHandlingTheatre />
           <MillingTheatre />
+          <AirDustTheatre />
+          <ScreeningTheatre />
+          <StorageTheatre />
         </MachineryDirectory>
       </main>
     </>

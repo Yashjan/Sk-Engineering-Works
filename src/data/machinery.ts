@@ -102,6 +102,69 @@ export const machineryCatalog: readonly MachineryItem[] = [
     categorySlug: "milling-size-reduction",
     detailHref: "/machinery/hammer-mill-crusher",
   },
+  {
+    id: "id-fan-blower",
+    number: "01",
+    name: "ID FAN / BLOWER",
+    slug: "id-fan-blower",
+    category: "AIR + DUST HANDLING",
+    categorySlug: "air-dust-handling",
+    mediaType: "image",
+    mediaSrc: "/images/salt-refinery/execution/fabrication-blower.jpeg",
+    mediaAlt: "S.K. Engineering Works ID fan / blower inside the fabrication workshop",
+    mediaFit: "contain",
+    detailHref: "/machinery/id-fan-blower",
+  },
+  {
+    id: "bag-filter",
+    number: "02",
+    name: "BAG FILTER",
+    slug: "bag-filter",
+    category: "AIR + DUST HANDLING",
+    categorySlug: "air-dust-handling",
+    detailHref: "/machinery/bag-filter",
+  },
+  {
+    id: "cyclone",
+    number: "03",
+    name: "CYCLONE",
+    slug: "cyclone",
+    category: "AIR + DUST HANDLING",
+    categorySlug: "air-dust-handling",
+    mediaType: "image",
+    mediaSrc: "/images/salt-refinery/execution/plant-structure.jpeg",
+    mediaAlt: "Installed S.K. Engineering Works cyclone equipment and plant structure",
+    mediaFit: "contain",
+    detailHref: "/machinery/cyclone",
+  },
+  {
+    id: "vibro-screen",
+    number: "01",
+    name: "VIBRO SCREEN",
+    slug: "vibro-screen",
+    category: "SCREENING & SEPARATION",
+    categorySlug: "screening-separation",
+    detailHref: "/machinery/vibro-screen",
+  },
+  {
+    id: "storage-silos",
+    number: "01",
+    name: "STORAGE SILOS",
+    slug: "storage-silos",
+    category: "STORAGE & PROCESS EQUIPMENT",
+    categorySlug: "storage-process-equipment",
+    detailHref: "/machinery/storage-silos",
+  },
+  {
+    id: "process-tanks",
+    number: "02",
+    name: "PROCESS TANKS / WASHING TANKS",
+    shortName: "PROCESS TANKS",
+    slug: "process-tanks",
+    category: "STORAGE & PROCESS EQUIPMENT",
+    categorySlug: "storage-process-equipment",
+    detailHref: "/machinery/process-tanks",
+  },
 ] as const;
 
 export const materialHandlingMachines = machineryCatalog.filter(
@@ -110,6 +173,18 @@ export const materialHandlingMachines = machineryCatalog.filter(
 
 export const millingMachines = machineryCatalog.filter(
   (machine) => machine.categorySlug === "milling-size-reduction",
+);
+
+export const airDustMachines = machineryCatalog.filter(
+  (machine) => machine.categorySlug === "air-dust-handling",
+);
+
+export const screeningMachines = machineryCatalog.filter(
+  (machine) => machine.categorySlug === "screening-separation",
+);
+
+export const storageMachines = machineryCatalog.filter(
+  (machine) => machine.categorySlug === "storage-process-equipment",
 );
 
 export function getMachineBySlug(slug: string) {
