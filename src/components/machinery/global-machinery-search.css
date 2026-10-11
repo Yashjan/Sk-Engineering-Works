@@ -10,7 +10,7 @@
 .machinery-finder-field input::-webkit-search-cancel-button { opacity: .52; }
 .machinery-finder-field > span { position: absolute; top: 12px; right: 2px; width: 14px; height: 14px; border: 1px solid rgb(17 20 21 / 54%); border-radius: 50%; pointer-events: none; }
 .machinery-finder-field > span::after { position: absolute; right: -4px; bottom: -3px; width: 6px; height: 1px; background: rgb(17 20 21 / 54%); content: ""; transform: rotate(45deg); transform-origin: left center; }
-.machinery-finder-results { position: absolute; top: 78px; right: 0; left: 0; z-index: 8; border-top: 1px solid rgb(17 20 21 / 12%); background: rgb(243 242 237 / 97%); backdrop-filter: blur(10px); }
+.machinery-finder-results { position: absolute; top: 78px; right: 0; left: 0; z-index: 8; max-height: min(360px, 50svh); overflow-y: auto; overscroll-behavior: contain; border-top: 1px solid rgb(17 20 21 / 12%); background: rgb(243 242 237 / 97%); backdrop-filter: blur(10px); }
 .machinery-finder-results button { display: flex; width: 100%; min-height: 52px; align-items: center; justify-content: space-between; gap: 20px; padding: 0; border: 0; border-bottom: 1px solid rgb(17 20 21 / 12%); background: transparent; color: #111415; font: inherit; text-align: left; cursor: pointer; transition: padding 180ms ease; }
 .machinery-finder-results button strong { font-size: 11px; font-weight: 500; letter-spacing: .08em; }
 .machinery-finder-results button span { color: rgb(17 20 21 / 38%); font-size: 8px; font-weight: 500; letter-spacing: .13em; text-align: right; }

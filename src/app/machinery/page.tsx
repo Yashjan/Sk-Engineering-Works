@@ -8,6 +8,10 @@ import MillingTheatre from "@/components/machinery/MillingTheatre";
 import AirDustTheatre from "@/components/machinery/AirDustTheatre";
 import ScreeningTheatre from "@/components/machinery/ScreeningTheatre";
 import StorageTheatre from "@/components/machinery/StorageTheatre";
+import ManufacturingProof from "@/components/machinery/ManufacturingProof";
+import CompletePlantBridge from "@/components/machinery/CompletePlantBridge";
+import TrustedClientsSection from "@/components/home/TrustedClientsSection";
+import ProjectEnquirySection from "@/components/home/ProjectEnquirySection";
 import GlobalMachinerySearch from "@/components/machinery/GlobalMachinerySearch";
 import { MachineryDirectory } from "@/components/machinery/MachineryDirectory";
 
@@ -33,6 +37,10 @@ export default function MachineryPage() {
           <ScreeningTheatre />
           <StorageTheatre />
         </MachineryDirectory>
+        <ManufacturingProof />
+        <CompletePlantBridge />
+        <TrustedClientsSection standalone sectionNumber="09" />
+        <ProjectEnquirySection appearance="light" sectionNumber="10" showNavigation />
       </main>
     </>
   );

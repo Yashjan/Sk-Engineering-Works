@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./project-enquiry-section.css";
@@ -11,9 +12,11 @@ const whatsappMessage = encodeURIComponent(
 
 type ProjectEnquirySectionProps = {
   appearance?: "dark" | "light";
+  sectionNumber?: string;
+  showNavigation?: boolean;
 };
 
-export default function ProjectEnquirySection({ appearance = "dark" }: ProjectEnquirySectionProps) {
+export default function ProjectEnquirySection({ appearance = "dark", sectionNumber = "06", showNavigation = false }: ProjectEnquirySectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -54,11 +57,11 @@ export default function ProjectEnquirySection({ appearance = "dark" }: ProjectEn
   }, []);
 
   return (
-    <section ref={sectionRef} id="contact" className={`project-enquiry${appearance === "light" ? " project-enquiry-light" : ""}`} aria-labelledby="project-enquiry-heading">
+    <section ref={sectionRef} id="contact" className={`project-enquiry${appearance === "light" ? " project-enquiry-light" : ""}${showNavigation ? " enquiry-with-navigation" : ""}`} aria-labelledby="project-enquiry-heading">
       <div className="enquiry-background" aria-hidden="true">LET&apos;S BUILD.</div>
       <div className="enquiry-shell">
         <div className="enquiry-meta">
-          <span>PROJECT ENQUIRY / 06</span>
+          <span>PROJECT ENQUIRY / {sectionNumber}</span>
           <a href="tel:+919828460532">START A PROJECT <span aria-hidden="true">→</span></a>
         </div>
 
@@ -132,6 +135,16 @@ export default function ProjectEnquirySection({ appearance = "dark" }: ProjectEn
         <div className="enquiry-region">
           <span className="enquiry-region-line" aria-hidden="true" />
         </div>
+        {showNavigation ? <footer className="enquiry-footer">
+          <nav aria-label="Footer navigation">
+            <Link href="/">HOME</Link>
+            <Link href="/salt-refinery-plants">SALT REFINERY PLANTS</Link>
+            <Link href="/machinery" aria-current="page">MACHINERY</Link>
+            <Link href="/#projects">PROJECTS</Link>
+            <Link href="/#about">ABOUT</Link>
+            <Link href="#contact">CONTACT</Link>
+          </nav>
+        </footer> : null}
       </div>
     </section>
   );

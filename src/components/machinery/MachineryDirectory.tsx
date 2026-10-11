@@ -2,8 +2,7 @@
 
 import { createContext, useCallback, useContext, useMemo, useRef, useState, type ReactNode } from "react";
 import type { MachineryItem } from "@/data/machinery";
-
-export const SEARCH_SELECTION_HOLD_MS = 3500;
+import { SEARCH_SELECTION_HOLD_MS } from "./machinery-timing";
 
 type CategoryRegistration = {
   categorySlug: string;
@@ -41,7 +40,7 @@ export function MachineryDirectory({ children }: { children: ReactNode }) {
     category.activateMachine(machine.id, SEARCH_SELECTION_HOLD_MS);
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     category.section.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-    requestAnimationFrame(() => category.focusTarget?.focus({ preventScroll: true }));
+    category.focusTarget?.focus({ preventScroll: true });
     return true;
   }, []);
 

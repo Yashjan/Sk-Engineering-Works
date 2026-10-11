@@ -1,0 +1,2 @@
+export const AUTO_ADVANCE_MS = 4000;
+export const SEARCH_SELECTION_HOLD_MS = 6000;

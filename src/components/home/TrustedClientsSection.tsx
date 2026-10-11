@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { assetPath } from "@/lib/asset-path";
 import "./about-credibility-section.css";
 import "./trusted-clients-section.css";
 
@@ -14,8 +15,8 @@ const clients: Client[] = [
   { name: "Adhinath Chemfood Private Limited" },
   { name: "Kasturi Chemfood Private Limited" },
   { name: "Jagdamba Salt Pvt. Ltd." },
-  { name: "Pankaj Salt Pvt. Ltd.", logo: "https://www.pankajsalt.com/images/logo_new1.png" },
-  { name: "Pragati Salt Pvt. Ltd.", logo: "https://www.pragatisalt.com/images/logo1.png" },
+  { name: "Pankaj Salt Pvt. Ltd.", logo: assetPath("/images/clients/pankaj-salt.png") },
+  { name: "Pragati Salt Pvt. Ltd.", logo: assetPath("/images/clients/pragati-salt.png") },
   { name: "Bharat Salt" },
   { name: "Arihant Salt Production" },
   { name: "JK Salt Pvt. Ltd." },
@@ -50,9 +51,10 @@ function MarqueeRow({ items, reverse = false }: { items: Client[]; reverse?: boo
 type TrustedClientsSectionProps = {
   animate?: boolean;
   standalone?: boolean;
+  sectionNumber?: string;
 };
 
-export default function TrustedClientsSection({ animate = true, standalone = false }: TrustedClientsSectionProps) {
+export default function TrustedClientsSection({ animate = true, standalone = false, sectionNumber = "05" }: TrustedClientsSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -63,12 +65,11 @@ export default function TrustedClientsSection({ animate = true, standalone = fal
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
       const context = gsap.context(() => {
-        gsap.to(".about-trust-heading", {
+        gsap.timeline({ scrollTrigger: { trigger: section, start: "top 84%", toggleActions: "play none none none" } }).to(".about-trust-heading", {
           autoAlpha: 1,
           y: 0,
           duration: 0.65,
           ease: "power2.out",
-          scrollTrigger: { trigger: section, start: "top 84%", once: true },
         });
       }, section);
       return () => context.revert();
@@ -79,7 +80,7 @@ export default function TrustedClientsSection({ animate = true, standalone = fal
 
   const content = (
     <>
-      <div className="about-trust-meta"><span>INDUSTRY TRUST / 05</span><span>CLIENT NETWORK / 12+</span></div>
+      <div className="about-trust-meta"><span>INDUSTRY TRUST / {sectionNumber}</span><span>CLIENT NETWORK / 12+</span></div>
       <h3 id="about-trust-heading" className="about-trust-heading">TRUSTED BY<br />SALT MANUFACTURERS.</h3>
       <div className="about-marquees" aria-label="S.K. Engineering Works client network">
         <MarqueeRow items={clients.slice(0, 6)} />

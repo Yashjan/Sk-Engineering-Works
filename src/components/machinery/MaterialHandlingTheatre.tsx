@@ -8,6 +8,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { materialHandlingMachines, type MachineryItem } from "@/data/machinery";
 import { assetPath } from "@/lib/asset-path";
 import { useMachineryDirectory } from "./MachineryDirectory";
+import { AUTO_ADVANCE_MS } from "./machinery-timing";
+import { useTheatreEnvironment } from "./useTheatreEnvironment";
 import "./material-handling-theatre.css";
 
 type MediaLayer = {
@@ -17,7 +19,6 @@ type MediaLayer = {
 };
 
 const transitionDuration = 560;
-export const AUTO_ADVANCE_MS = 4000;
 
 function MachineMedia({ machine, layer, shouldPlay }: { machine: MachineryItem; layer: MediaLayer; shouldPlay: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -27,6 +28,7 @@ function MachineMedia({ machine, layer, shouldPlay }: { machine: MachineryItem; 
     if (!video) return;
     if (shouldPlay) void video.play().catch(() => {});
     else video.pause();
+    return () => video.pause();
   }, [shouldPlay]);
 
   return (
@@ -58,7 +60,7 @@ export default function MaterialHandlingTheatre() {
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const railItemsRef = useRef(new Map<string, HTMLButtonElement>());
-  const previouslyCenteredIndex = useRef(0);
+  const railRef = useRef<HTMLElement>(null);
   const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const autoplayTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pauseUntil = useRef(0);
@@ -66,39 +68,10 @@ export default function MaterialHandlingTheatre() {
   const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [layers, setLayers] = useState<MediaLayer[]>([{ key: 0, machineIndex: 0, state: "active" }]);
-  const [sectionVisible, setSectionVisible] = useState(false);
-  const [autoplayVisible, setAutoplayVisible] = useState(false);
-  const [autoplayCapable, setAutoplayCapable] = useState(false);
-  const [navigationPaused, setNavigationPaused] = useState(false);
+  const { sectionVisible, autoplayVisible, desktopInput: autoplayCapable, motionAllowed, tabVisible } = useTheatreEnvironment(sectionRef);
+  const [pointerPaused, setPointerPaused] = useState(false);
+  const [focusPaused, setFocusPaused] = useState(false);
   const [autoplayRevision, setAutoplayRevision] = useState(0);
-  const [motionAllowed, setMotionAllowed] = useState(false);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      setSectionVisible(entry.isIntersecting);
-      setAutoplayVisible(entry.intersectionRatio >= 0.4);
-    }, { threshold: [0, 0.08, 0.4] });
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setMotionAllowed(!query.matches);
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-
-  useEffect(() => {
-    const query = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 768px)");
-    const update = () => setAutoplayCapable(query.matches);
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -171,7 +144,7 @@ export default function MaterialHandlingTheatre() {
 
   useEffect(() => {
     if (autoplayTimer.current) clearTimeout(autoplayTimer.current);
-    const canAutoplay = autoplayCapable && autoplayVisible && motionAllowed && !navigationPaused && !searchInteracting;
+    const canAutoplay = materialHandlingMachines.length > 1 && autoplayCapable && autoplayVisible && motionAllowed && tabVisible && !pointerPaused && !focusPaused && !searchInteracting;
     if (!canAutoplay) return;
 
     const delay = Math.max(AUTO_ADVANCE_MS, pauseUntil.current - Date.now());
@@ -185,17 +158,20 @@ export default function MaterialHandlingTheatre() {
       if (autoplayTimer.current) clearTimeout(autoplayTimer.current);
       autoplayTimer.current = null;
     };
-  }, [activeIndex, activateMachine, autoplayCapable, autoplayRevision, autoplayVisible, motionAllowed, navigationPaused, searchInteracting]);
+  }, [activeIndex, activateMachine, autoplayCapable, autoplayRevision, autoplayVisible, motionAllowed, pointerPaused, focusPaused, searchInteracting, tabVisible]);
 
   useEffect(() => {
-    if (previouslyCenteredIndex.current === activeIndex) return;
-    previouslyCenteredIndex.current = activeIndex;
-    if (!window.matchMedia("(max-width: 767px)").matches) return;
-    railItemsRef.current.get(materialHandlingMachines[activeIndex].id)?.scrollIntoView({
-      behavior: motionAllowed ? "smooth" : "auto",
-      inline: "center",
-      block: "nearest",
-    });
+    const centerRail = () => {
+      if (!window.matchMedia("(max-width: 767px)").matches) return;
+      const rail = railRef.current;
+      const item = railItemsRef.current.get(materialHandlingMachines[activeIndex].id);
+      if (!rail || !item) return;
+      const left = rail.scrollLeft + item.getBoundingClientRect().left - rail.getBoundingClientRect().left - (rail.clientWidth - item.offsetWidth) / 2;
+      rail.scrollTo({ left, behavior: motionAllowed ? "smooth" : "auto" });
+    };
+    centerRail();
+    window.addEventListener("resize", centerRail);
+    return () => window.removeEventListener("resize", centerRail);
   }, [activeIndex, motionAllowed]);
 
   const moveMachine = (direction: -1 | 1) => {
@@ -220,22 +196,17 @@ export default function MaterialHandlingTheatre() {
           </h2>
         </header>
 
-        <div className="material-theatre-system">
+        <div className="material-theatre-system" onFocusCapture={(event) => {
+          if (event.target !== stageRef.current) setFocusPaused(true);
+        }} onBlurCapture={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) { setFocusPaused(false); holdAutoplay(AUTO_ADVANCE_MS); }
+        }}>
           <nav
+            ref={railRef}
             className="material-theatre-index"
             aria-label="Material handling machines"
-            onPointerEnter={() => setNavigationPaused(true)}
-            onPointerLeave={() => {
-              setNavigationPaused(false);
-              holdAutoplay(AUTO_ADVANCE_MS);
-            }}
-            onFocusCapture={() => setNavigationPaused(true)}
-            onBlurCapture={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget)) {
-                setNavigationPaused(false);
-                holdAutoplay(AUTO_ADVANCE_MS);
-              }
-            }}
+            onPointerEnter={(event) => { if (event.pointerType === "mouse") setPointerPaused(true); }}
+            onPointerLeave={(event) => { if (event.pointerType === "mouse") { setPointerPaused(false); holdAutoplay(AUTO_ADVANCE_MS); } }}
           >
             {materialHandlingMachines.map((machine, index) => (
               <button
@@ -247,7 +218,7 @@ export default function MaterialHandlingTheatre() {
                 type="button"
                 className="material-theatre-index-item"
                 aria-pressed={activeIndex === index}
-                onMouseEnter={() => handleManualActivation(index)}
+                onPointerEnter={(event) => { if (event.pointerType === "mouse" && autoplayCapable) handleManualActivation(index); }}
                 onFocus={() => handleManualActivation(index)}
                 onClick={() => handleManualActivation(index)}
               >
@@ -262,7 +233,7 @@ export default function MaterialHandlingTheatre() {
               <span className="material-theatre-watermark" aria-hidden="true">{activeMachine.number}</span>
               {layers.map((layer) => {
                 const machine = materialHandlingMachines[layer.machineIndex];
-                return <MachineMedia key={layer.key} machine={machine} layer={layer} shouldPlay={motionAllowed && sectionVisible && layer.state === "active"} />;
+                return <MachineMedia key={layer.key} machine={machine} layer={layer} shouldPlay={motionAllowed && sectionVisible && tabVisible && layer.state === "active"} />;
               })}
               <span className="material-theatre-visual-label">MATERIAL TRANSFER / SYSTEM VIEW</span>
             </div>

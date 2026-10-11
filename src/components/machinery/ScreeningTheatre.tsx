@@ -8,7 +8,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { screeningMachines, type MachineryItem } from "@/data/machinery";
 import { assetPath } from "@/lib/asset-path";
 import { useMachineryDirectory } from "./MachineryDirectory";
-import { AUTO_ADVANCE_MS } from "./MaterialHandlingTheatre";
+import { AUTO_ADVANCE_MS } from "./machinery-timing";
+import { useTheatreEnvironment } from "./useTheatreEnvironment";
 import "./screening-theatre.css";
 
 const TRANSITION_MS = 620;
@@ -70,42 +71,10 @@ export default function ScreeningTheatre() {
   const pauseUntil = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [layers, setLayers] = useState<MediaLayer[]>([{ key: 0, machineIndex: 0, state: "active" }]);
-  const [sectionVisible, setSectionVisible] = useState(false);
-  const [autoplayVisible, setAutoplayVisible] = useState(false);
-  const [desktopInput, setDesktopInput] = useState(false);
-  const [motionAllowed, setMotionAllowed] = useState(false);
-  const [tabVisible, setTabVisible] = useState(true);
+  const { sectionVisible, autoplayVisible, desktopInput, motionAllowed, tabVisible } = useTheatreEnvironment(sectionRef);
   const [pointerPaused, setPointerPaused] = useState(false);
   const [focusPaused, setFocusPaused] = useState(false);
   const [autoplayRevision, setAutoplayRevision] = useState(0);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      setSectionVisible(entry.isIntersecting);
-      setAutoplayVisible(entry.isIntersecting && entry.intersectionRatio >= 0.4);
-    }, { threshold: [0, 0.4] });
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const desktop = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 768px)");
-    const update = () => { setMotionAllowed(!motion.matches); setDesktopInput(desktop.matches); };
-    const visibility = () => setTabVisible(document.visibilityState === "visible");
-    update();
-    visibility();
-    motion.addEventListener("change", update);
-    desktop.addEventListener("change", update);
-    document.addEventListener("visibilitychange", visibility);
-    return () => {
-      motion.removeEventListener("change", update);
-      desktop.removeEventListener("change", update);
-      document.removeEventListener("visibilitychange", visibility);
-    };
-  }, []);
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
