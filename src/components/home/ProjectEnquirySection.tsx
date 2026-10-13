@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./project-enquiry-section.css";
@@ -18,6 +19,8 @@ type ProjectEnquirySectionProps = {
 
 export default function ProjectEnquirySection({ appearance = "dark", sectionNumber = "06", showNavigation = false }: ProjectEnquirySectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
+  const currentPath = pathname === "/" ? pathname : pathname.replace(/\/+$/, "");
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -137,10 +140,10 @@ export default function ProjectEnquirySection({ appearance = "dark", sectionNumb
         </div>
         {showNavigation ? <footer className="enquiry-footer">
           <nav aria-label="Footer navigation">
-            <Link href="/">HOME</Link>
-            <Link href="/salt-refinery-plants">SALT REFINERY PLANTS</Link>
-            <Link href="/machinery" aria-current="page">MACHINERY</Link>
-            <Link href="/#projects">PROJECTS</Link>
+            <Link href="/" aria-current={currentPath === "/" ? "page" : undefined}>HOME</Link>
+            <Link href="/salt-refinery-plants" aria-current={currentPath === "/salt-refinery-plants" ? "page" : undefined}>SALT REFINERY PLANTS</Link>
+            <Link href="/machinery" aria-current={currentPath === "/machinery" ? "page" : undefined}>MACHINERY</Link>
+            <Link href="/projects" aria-current={currentPath === "/projects" ? "page" : undefined}>PROJECTS</Link>
             <Link href="/#about">ABOUT</Link>
             <Link href="#contact">CONTACT</Link>
           </nav>
