@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
-import FeaturedProject from "@/components/projects/FeaturedProject";
 import ProjectsHero from "@/components/projects/ProjectsHero";
+import ProjectsFieldArchive from "@/components/projects/ProjectsFieldArchive";
 
 export const metadata: Metadata = {
   title: "Projects | S.K. Engineering Works",
@@ -19,7 +19,7 @@ export default function ProjectsPage() {
       <Navbar hasLogo={hasLogo} />
       <main id="main">
         <ProjectsHero />
-        <FeaturedProject />
+        <ProjectsFieldArchive />
       </main>
     </>
   );

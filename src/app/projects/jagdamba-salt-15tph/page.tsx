@@ -23,7 +23,7 @@ export default function JagdambaProjectPage() {
         <h1><span>15 TPH</span><span>SALT REFINERY.</span></h1>
         <p className="project-detail-location">PHALODI, RAJASTHAN</p>
         <p className="project-detail-status">PROJECT EXPERIENCE COMING NEXT</p>
-        <Link href="/projects#featured-project">BACK TO PROJECTS <span aria-hidden="true">&rarr;</span></Link>
+        <Link href="/projects#field-records">BACK TO PROJECTS <span aria-hidden="true">&rarr;</span></Link>
       </main>
     </>
   );

@@ -1,5 +1,6 @@
 export type Project = {
   id: string;
+  isFeatured?: boolean;
   kind?: "project" | "equipment";
   category?: string;
   title: string;
@@ -22,9 +23,28 @@ export type ProjectMedia = {
   label: string;
 };
 
+export type ProjectArchiveRecord = {
+  id: string;
+  slug: string;
+  name: string;
+  category: "salt-plants" | "material-handling" | "air-dust" | "process-equipment";
+  location?: string;
+  capacity?: string;
+  mediaType: "image" | "video";
+  mediaSrc: string;
+  poster?: string;
+  mediaLabel: string;
+  mediaAlt: string;
+  detailHref: string;
+  isFeatured: boolean;
+  supportingMediaSrc?: string;
+  supportingMediaAlt?: string;
+};
+
 export const projects: Project[] = [
   {
     id: "jagdamba-phalodi",
+    isFeatured: true,
     title: "15 TPH SALT REFINERY PLANT",
     client: "Jagdamba Salt Pvt. Ltd.",
     location: "Phalodi, Rajasthan",
@@ -123,5 +143,113 @@ export const projects: Project[] = [
     media: [
       { id: "installed-view", type: "image", src: "/images/salt-refinery/execution/plant-structure.jpeg", label: "AIR / DUST SEPARATION" },
     ],
+  },
+];
+
+const jagdambaProject = projects.find((project) => project.id === "jagdamba-phalodi");
+const jagdambaCompletedMedia = jagdambaProject?.media.find((media) => media.id === "completed");
+const blowerProject = projects.find((project) => project.id === "id-fan-blower");
+const beltConveyorProject = projects.find((project) => project.id === "belt-conveyor");
+const cycloneProject = projects.find((project) => project.id === "cyclone");
+
+if (!jagdambaProject?.client || !jagdambaProject.detailHref || jagdambaCompletedMedia?.type !== "video") {
+  throw new Error("The Jagdamba project archive record is incomplete.");
+}
+
+// One ordered archive for the combined field-record section. Jagdamba is derived
+// from its existing project record; unverified capacities remain omitted.
+export const projectArchive: ProjectArchiveRecord[] = [
+  {
+    id: jagdambaProject.id,
+    slug: "jagdamba-salt-15tph",
+    name: jagdambaProject.client,
+    category: "salt-plants",
+    location: jagdambaProject.location,
+    capacity: jagdambaProject.capacity,
+    mediaType: "video",
+    mediaSrc: jagdambaCompletedMedia.src,
+    poster: jagdambaProject.coverImage,
+    mediaLabel: "COMPLETED PLANT / PROJECT FOOTAGE",
+    mediaAlt: "Completed 15 TPH Jagdamba salt refinery in Phalodi, Rajasthan",
+    detailHref: jagdambaProject.detailHref,
+    isFeatured: true,
+    supportingMediaSrc: jagdambaProject.coverImage,
+    supportingMediaAlt: "Completed Jagdamba salt refinery project overview",
+  },
+  {
+    id: "jk-salt-santalpur",
+    slug: "jk-salt-santalpur",
+    name: "JK Salt Pvt. Ltd.",
+    category: "salt-plants",
+    location: "Santalpur, Gujarat",
+    mediaType: "image",
+    mediaSrc: "/images/salt-refinery/execution/plant-structure.jpeg",
+    mediaLabel: "PLANT STRUCTURE / FIELD EXECUTION",
+    mediaAlt: "Salt refinery process equipment installed within a fabricated plant structure",
+    detailHref: "/projects/jk-salt-santalpur",
+    isFeatured: false,
+  },
+  {
+    id: "royal-salt-jambusar",
+    slug: "royal-salt-jambusar",
+    name: "Royal Salt",
+    category: "salt-plants",
+    location: "Jambusar, Gujarat",
+    mediaType: "video",
+    mediaSrc: "/videos/salt-refinery/SK_Salt_Refinery_Plants_Hero_10s.mp4",
+    poster: "/videos/salt-refinery/SK_Salt_Refinery_Plants_Hero_Poster.jpg",
+    mediaLabel: "SALT REFINERY / PROJECT FOOTAGE",
+    mediaAlt: "Salt refinery machinery operating inside a completed plant",
+    detailHref: "/projects/royal-salt-jambusar",
+    isFeatured: false,
+  },
+  {
+    id: "bharat-salt-santalpur",
+    slug: "bharat-salt-santalpur",
+    name: "Bharat Salt",
+    category: "salt-plants",
+    location: "Santalpur, Gujarat",
+    mediaType: "image",
+    mediaSrc: "/images/salt-refinery/execution/fabricated-equipment.jpeg",
+    mediaLabel: "PROCESS EQUIPMENT / WORKSHOP FABRICATION",
+    mediaAlt: "Stainless-steel salt processing equipment during workshop fabrication",
+    detailHref: "/projects/bharat-salt-santalpur",
+    isFeatured: false,
+  },
+  {
+    id: blowerProject?.id ?? "id-fan-blower",
+    slug: "id-fan-blower",
+    name: blowerProject?.title ?? "ID FAN / BLOWER",
+    category: "air-dust",
+    mediaType: "image",
+    mediaSrc: blowerProject?.coverImage ?? "/images/salt-refinery/execution/fabrication-blower.jpeg",
+    mediaLabel: "AIR HANDLING / WORKSHOP FABRICATION",
+    mediaAlt: "Industrial ID fan and blower fabricated by S.K. Engineering Works",
+    detailHref: "/projects/id-fan-blower",
+    isFeatured: false,
+  },
+  {
+    id: beltConveyorProject?.id ?? "belt-conveyor",
+    slug: "belt-conveyor",
+    name: beltConveyorProject?.title ?? "BELT CONVEYOR",
+    category: "material-handling",
+    mediaType: "image",
+    mediaSrc: beltConveyorProject?.coverImage ?? "/images/process/belt-conveyor.png",
+    mediaLabel: "MATERIAL HANDLING / EQUIPMENT",
+    mediaAlt: "Belt conveyor manufactured for industrial material handling",
+    detailHref: "/projects/belt-conveyor",
+    isFeatured: false,
+  },
+  {
+    id: cycloneProject?.id ?? "cyclone",
+    slug: "cyclone",
+    name: cycloneProject?.title ?? "CYCLONE",
+    category: "air-dust",
+    mediaType: "image",
+    mediaSrc: cycloneProject?.coverImage ?? "/images/salt-refinery/execution/plant-structure.jpeg",
+    mediaLabel: "AIR / DUST SEPARATION",
+    mediaAlt: "Industrial cyclone system installed within a fabricated plant structure",
+    detailHref: "/projects/cyclone",
+    isFeatured: false,
   },
 ];
