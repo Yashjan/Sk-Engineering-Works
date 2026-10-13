@@ -1,0 +1,6 @@
+.enquiry-footer { margin-top: 30px; padding-top: 24px; border-top: 1px solid rgb(243 242 237 / 14%); }
+.enquiry-footer nav { display: flex; flex-wrap: wrap; gap: 18px 32px; font-size: 10px; letter-spacing: .1em; }
+.enquiry-footer a { padding-block: 6px; }
+.enquiry-footer a:hover, .enquiry-footer a[aria-current="page"] { color: #fff; }
+.site-footer a { transition: color .2s; }
+@media (max-width: 767px) { .enquiry-footer { margin-top: 28px; padding-top: 18px; }.enquiry-footer nav { gap: 12px 22px; font-size: 9px; } }

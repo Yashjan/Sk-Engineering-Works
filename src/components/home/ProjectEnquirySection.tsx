@@ -1,15 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SiteFooter from "@/components/layout/SiteFooter";
+import { companyContact, whatsappUrl } from "@/data/contact";
 import "./project-enquiry-section.css";
 
-const whatsappMessage = encodeURIComponent(
-  "Hello S.K. Engineering Works, I would like to discuss a salt refinery / machinery requirement.",
-);
+const whatsappMessage = "Hello S.K. Engineering Works, I would like to discuss a salt refinery / machinery requirement.";
 
 type ProjectEnquirySectionProps = {
   appearance?: "dark" | "light";
@@ -19,8 +17,6 @@ type ProjectEnquirySectionProps = {
 
 export default function ProjectEnquirySection({ appearance = "dark", sectionNumber = "06", showNavigation = false }: ProjectEnquirySectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const pathname = usePathname();
-  const currentPath = pathname === "/" ? pathname : pathname.replace(/\/+$/, "");
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -65,7 +61,7 @@ export default function ProjectEnquirySection({ appearance = "dark", sectionNumb
       <div className="enquiry-shell">
         <div className="enquiry-meta">
           <span>PROJECT ENQUIRY / {sectionNumber}</span>
-          <a href="tel:+919828460532">START A PROJECT <span aria-hidden="true">→</span></a>
+          <a href={companyContact.phoneHref}>START A PROJECT <span aria-hidden="true">→</span></a>
         </div>
 
         <div className="enquiry-main">
@@ -85,12 +81,12 @@ export default function ProjectEnquirySection({ appearance = "dark", sectionNumb
             </h3>
             <p className="enquiry-support">From individual machinery to complete salt refinery execution, talk to our team about your plant requirement.</p>
             <div className="enquiry-actions">
-              <a className="enquiry-primary" href="tel:+919828460532">
+              <a className="enquiry-primary" href={companyContact.phoneHref}>
                 DISCUSS YOUR PROJECT <span aria-hidden="true">→</span>
               </a>
               <a
                 className="enquiry-secondary"
-                href={`https://wa.me/919828460532?text=${whatsappMessage}`}
+                href={whatsappUrl(whatsappMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contact S.K. Engineering Works on WhatsApp"
@@ -122,32 +118,23 @@ export default function ProjectEnquirySection({ appearance = "dark", sectionNumb
           </div>
           <address className="enquiry-lower-contact">
             <strong>S.K. ENGINEERING WORKS</strong>
-            <a className="enquiry-phone" href="tel:+919828460532">+91 98284 60532</a>
+            <a className="enquiry-phone" href={companyContact.phoneHref}>{companyContact.phoneDisplay}</a>
             <a
               className="enquiry-maps"
-              href="https://www.google.com/maps/search/?api=1&query=S.K.%20Engineering%20Works%2C%20Nawa%20Road%2C%20Sambhar%20Lake%2C%20Rajasthan"
+              href={companyContact.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
               OPEN IN MAPS <span aria-hidden="true">↗</span>
             </a>
-            <p>NAWA ROAD, SAMBHAR LAKE – 303604<br />DIST. JAIPUR, RAJASTHAN</p>
+            <p>{companyContact.addressLines[0].toUpperCase()}<br />{companyContact.addressLines[1].toUpperCase()}</p>
           </address>
         </div>
 
         <div className="enquiry-region">
           <span className="enquiry-region-line" aria-hidden="true" />
         </div>
-        {showNavigation ? <footer className="enquiry-footer">
-          <nav aria-label="Footer navigation">
-            <Link href="/" aria-current={currentPath === "/" ? "page" : undefined}>HOME</Link>
-            <Link href="/salt-refinery-plants" aria-current={currentPath === "/salt-refinery-plants" ? "page" : undefined}>SALT REFINERY PLANTS</Link>
-            <Link href="/machinery" aria-current={currentPath === "/machinery" ? "page" : undefined}>MACHINERY</Link>
-            <Link href="/projects" aria-current={currentPath === "/projects" ? "page" : undefined}>PROJECTS</Link>
-            <Link href="/about" aria-current={currentPath === "/about" ? "page" : undefined}>ABOUT</Link>
-            <Link href="#contact">CONTACT</Link>
-          </nav>
-        </footer> : null}
+        {showNavigation ? <SiteFooter /> : null}
       </div>
     </section>
   );
