@@ -4,6 +4,7 @@ import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
 import ProjectsHero from "@/components/projects/ProjectsHero";
 import ProjectsFieldArchive from "@/components/projects/ProjectsFieldArchive";
+import ProjectsVisualGallery from "@/components/projects/ProjectsVisualGallery";
 
 export const metadata: Metadata = {
   title: "Projects | S.K. Engineering Works",
@@ -20,6 +21,7 @@ export default function ProjectsPage() {
       <main id="main">
         <ProjectsHero />
         <ProjectsFieldArchive />
+        <ProjectsVisualGallery />
       </main>
     </>
   );

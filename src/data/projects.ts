@@ -41,6 +41,18 @@ export type ProjectArchiveRecord = {
   supportingMediaAlt?: string;
 };
 
+export type ProjectGalleryItem = {
+  id: string;
+  type: "image" | "video";
+  src: string;
+  poster?: string;
+  alt: string;
+  label: string;
+  detail: string;
+  format: "landscape" | "portrait" | "square";
+  level: "high" | "middle" | "low";
+};
+
 export const projects: Project[] = [
   {
     id: "jagdamba-phalodi",
@@ -251,5 +263,84 @@ export const projectArchive: ProjectArchiveRecord[] = [
     mediaAlt: "Industrial cyclone system installed within a fabricated plant structure",
     detailHref: "/projects/cyclone",
     isFeatured: false,
+  },
+];
+
+// Real workshop and field media used by the scroll-driven visual archive.
+// The presentation reads directly from this list so media can be replaced
+// without changing the gallery component.
+export const projectGallery: ProjectGalleryItem[] = [
+  {
+    id: "completed-refinery",
+    type: "video",
+    src: "/images/projects/jagdamba/03_jagdamba_completed_plant.mp4",
+    poster: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg",
+    alt: "Completed Jagdamba salt refinery operating in Phalodi, Rajasthan",
+    label: "COMPLETED PLANT",
+    detail: "PHALODI / RAJASTHAN",
+    format: "landscape",
+    level: "middle",
+  },
+  {
+    id: "plant-structure",
+    type: "image",
+    src: "/images/salt-refinery/execution/plant-structure.jpeg",
+    alt: "Installed salt refinery equipment inside a fabricated plant structure",
+    label: "SITE EXECUTION",
+    detail: "INSTALLED PLANT STRUCTURE",
+    format: "portrait",
+    level: "high",
+  },
+  {
+    id: "workshop-fabrication",
+    type: "video",
+    src: "/images/projects/jagdamba/01_jagdamba_fabrication.mp4",
+    poster: "/images/salt-refinery/execution/fabricated-equipment.jpeg",
+    alt: "Salt refinery machinery being fabricated in the workshop",
+    label: "WORKSHOP RECORD",
+    detail: "MACHINE FABRICATION",
+    format: "portrait",
+    level: "low",
+  },
+  {
+    id: "air-handling",
+    type: "image",
+    src: "/images/salt-refinery/execution/fabrication-blower.jpeg",
+    alt: "Industrial ID fan and blower fabricated by S.K. Engineering Works",
+    label: "AIR HANDLING",
+    detail: "ID FAN / BLOWER",
+    format: "square",
+    level: "middle",
+  },
+  {
+    id: "site-installation",
+    type: "video",
+    src: "/images/projects/jagdamba/02_jagdamba_site_installation.mp4",
+    poster: "/images/salt-refinery/execution/plant-structure.jpeg",
+    alt: "Salt refinery equipment being installed on site",
+    label: "FIELD ASSEMBLY",
+    detail: "SITE INSTALLATION",
+    format: "portrait",
+    level: "high",
+  },
+  {
+    id: "process-equipment",
+    type: "image",
+    src: "/images/salt-refinery/execution/fabricated-equipment.jpeg",
+    alt: "Stainless-steel process equipment completed in the workshop",
+    label: "PROCESS EQUIPMENT",
+    detail: "FABRICATED IN-HOUSE",
+    format: "landscape",
+    level: "low",
+  },
+  {
+    id: "refinery-overview",
+    type: "image",
+    src: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg",
+    alt: "Wide view of a completed salt refinery project",
+    label: "PROJECT PROOF",
+    detail: "BUILT / INSTALLED / RUNNING",
+    format: "landscape",
+    level: "middle",
   },
 ];
