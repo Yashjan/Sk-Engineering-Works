@@ -222,6 +222,9 @@
 .projects-visual-gallery-mobile {
   display: none;
 }
+.projects-visual-gallery-mobile-media {
+  position: relative;
+}
 
 @media (max-width: 1099px) {
   .projects-visual-gallery-header {

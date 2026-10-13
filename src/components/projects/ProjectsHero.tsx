@@ -166,6 +166,7 @@ export default function ProjectsHero() {
                       src={assetPath(item.src)}
                       alt={item.alt}
                       fill
+                      loading={item.id === "air-handling" || item.id === "plant-structure" ? "eager" : undefined}
                       sizes="(max-width: 767px) 88vw, (max-width: 1099px) 52vw, 28vw"
                     />
                   )}

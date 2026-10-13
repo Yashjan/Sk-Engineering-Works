@@ -16,6 +16,7 @@ export default function ProjectsVisualGallery() {
   const viewport = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLOListElement>(null);
   const mobileStory = useRef<HTMLDivElement>(null);
+  const refreshFrame = useRef<number | null>(null);
 
   useLayoutEffect(() => {
     const section = root.current;
@@ -143,17 +144,21 @@ export default function ProjectsVisualGallery() {
         if (progress) progress.style.transform = `scaleX(${story.progress()})`;
       });
 
+      let resizeFrame = 0;
       const refresh = () => {
-        measure();
-        ScrollTrigger.sort();
-        ScrollTrigger.refresh();
+        cancelAnimationFrame(resizeFrame);
+        resizeFrame = requestAnimationFrame(() => {
+          measure();
+          ScrollTrigger.sort();
+          ScrollTrigger.refresh();
+        });
       };
-      const refreshFrame = requestAnimationFrame(refresh);
+      refresh();
       window.addEventListener("resize", refresh);
       render();
 
       return () => {
-        cancelAnimationFrame(refreshFrame);
+        cancelAnimationFrame(resizeFrame);
         window.removeEventListener("resize", refresh);
         section.classList.remove("is-animated");
         cards.forEach((card) => delete card.dataset.active);
@@ -291,28 +296,54 @@ export default function ProjectsVisualGallery() {
     if (!section) return;
     const videos = Array.from(section.querySelectorAll<HTMLVideoElement>("video"));
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const visibility = new Map(videos.map((video) => [video, 0]));
+    const syncPlayback = () => {
+      let active: HTMLVideoElement | null = null;
+      let highestVisibility = 0.18;
+
+      if (!reducedMotion.matches && !document.hidden) {
+        visibility.forEach((ratio, video) => {
+          if (ratio > highestVisibility) {
+            active = video;
+            highestVisibility = ratio;
+          }
+        });
+      }
+
+      videos.forEach((video) => {
+        if (video === active) void video.play().catch(() => {});
+        else video.pause();
+      });
+    };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const video = entry.target as HTMLVideoElement;
-        if (entry.isIntersecting && !reducedMotion.matches && !document.hidden) void video.play().catch(() => {});
-        else video.pause();
+        visibility.set(video, entry.isIntersecting ? entry.intersectionRatio : 0);
       });
-    }, { threshold: 0.18, rootMargin: "12%" });
+      syncPlayback();
+    }, { threshold: [0, 0.18, 0.35, 0.5, 0.75], rootMargin: "12%" });
     videos.forEach((video) => observer.observe(video));
-    const visibility = () => {
-      if (document.hidden || reducedMotion.matches) videos.forEach((video) => video.pause());
-    };
-    document.addEventListener("visibilitychange", visibility);
-    reducedMotion.addEventListener("change", visibility);
+    document.addEventListener("visibilitychange", syncPlayback);
+    reducedMotion.addEventListener("change", syncPlayback);
     return () => {
       observer.disconnect();
-      document.removeEventListener("visibilitychange", visibility);
-      reducedMotion.removeEventListener("change", visibility);
+      document.removeEventListener("visibilitychange", syncPlayback);
+      reducedMotion.removeEventListener("change", syncPlayback);
       videos.forEach((video) => video.pause());
     };
   }, []);
 
-  const refreshLayout = () => ScrollTrigger.refresh();
+  useEffect(() => () => {
+    if (refreshFrame.current !== null) cancelAnimationFrame(refreshFrame.current);
+  }, []);
+
+  const refreshLayout = () => {
+    if (refreshFrame.current !== null) cancelAnimationFrame(refreshFrame.current);
+    refreshFrame.current = requestAnimationFrame(() => {
+      refreshFrame.current = null;
+      ScrollTrigger.refresh();
+    });
+  };
 
   return (
     <section ref={root} className="projects-visual-gallery" aria-label="Visual archive">
@@ -341,7 +372,6 @@ export default function ProjectsVisualGallery() {
                           src={assetPath(item.src)}
                           poster={item.poster ? assetPath(item.poster) : undefined}
                           aria-label={item.alt}
-                          autoPlay
                           muted
                           loop
                           playsInline
@@ -393,7 +423,6 @@ export default function ProjectsVisualGallery() {
                     src={assetPath(projectGallery[0].src)}
                     poster={projectGallery[0].poster ? assetPath(projectGallery[0].poster) : undefined}
                     aria-label={projectGallery[0].alt}
-                    autoPlay
                     muted
                     loop
                     playsInline
@@ -419,7 +448,6 @@ export default function ProjectsVisualGallery() {
                       src={assetPath(item.src)}
                       poster={item.poster ? assetPath(item.poster) : undefined}
                       aria-label={item.alt}
-                      autoPlay
                       muted
                       loop
                       playsInline
