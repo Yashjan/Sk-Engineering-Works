@@ -144,7 +144,7 @@ export default function ProjectEnquirySection({ appearance = "dark", sectionNumb
             <Link href="/salt-refinery-plants" aria-current={currentPath === "/salt-refinery-plants" ? "page" : undefined}>SALT REFINERY PLANTS</Link>
             <Link href="/machinery" aria-current={currentPath === "/machinery" ? "page" : undefined}>MACHINERY</Link>
             <Link href="/projects" aria-current={currentPath === "/projects" ? "page" : undefined}>PROJECTS</Link>
-            <Link href="/#about">ABOUT</Link>
+            <Link href="/about" aria-current={currentPath === "/about" ? "page" : undefined}>ABOUT</Link>
             <Link href="#contact">CONTACT</Link>
           </nav>
         </footer> : null}

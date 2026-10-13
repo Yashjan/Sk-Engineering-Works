@@ -7,8 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import { assetPath } from "@/lib/asset-path";
 
 const links = ["Home", "Salt Refinery Plants", "Machinery", "Projects", "About", "Contact"];
-const homepageDestinations = ["/", "/salt-refinery-plants", "/machinery", "/projects", "#about", "#contact"];
-const innerPageDestinations = ["/", "/salt-refinery-plants", "/machinery", "/projects", "/#about", "/#contact"];
+const homepageDestinations = ["/", "/salt-refinery-plants", "/machinery", "/projects", "/about", "#contact"];
+const innerPageDestinations = ["/", "/salt-refinery-plants", "/machinery", "/projects", "/about", "/#contact"];
 
 export default function Navbar({ hasLogo }: { hasLogo: boolean }) {
   const pathname = usePathname();
@@ -53,11 +53,11 @@ export default function Navbar({ hasLogo }: { hasLogo: boolean }) {
       <Link href="/" className="logo-link" aria-label="S.K. Engineering Works home">
         {hasLogo ? <Image src={assetPath("/images/sk-logo.png")} alt="S.K. Engineering Works" width={160} height={64} className="logo" priority /> : <span className="logo-placeholder" aria-hidden="true" />}
       </Link>
-      <div className="desktop-links">{links.map((label, i) => <Link key={label} href={destinations[i]} aria-current={(currentPath === "/" && i === 0) || (currentPath === "/salt-refinery-plants" && i === 1) || (currentPath === "/machinery" && i === 2) || (currentPath === "/projects" && i === 3) ? "page" : undefined}>{label}</Link>)}</div>
+      <div className="desktop-links">{links.map((label, i) => <Link key={label} href={destinations[i]} aria-current={(currentPath === "/" && i === 0) || (currentPath === "/salt-refinery-plants" && i === 1) || (currentPath === "/machinery" && i === 2) || (currentPath === "/projects" && i === 3) || (currentPath === "/about" && i === 4) ? "page" : undefined}>{label}</Link>)}</div>
       <Link className="nav-quote" href={quoteDestination}>Get a Quote <span aria-hidden="true">→</span></Link>
       <button ref={toggle} className="menu-toggle" aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Close navigation menu" : "Open navigation menu"} onClick={() => setOpen(!open)}><span /><span /></button>
       <div ref={panel} id="mobile-navigation" className="mobile-panel" hidden={!open}>
-        {links.map((label, i) => <Link key={label} href={destinations[i]} aria-current={(currentPath === "/" && i === 0) || (currentPath === "/salt-refinery-plants" && i === 1) || (currentPath === "/machinery" && i === 2) || (currentPath === "/projects" && i === 3) ? "page" : undefined} onClick={() => { setOpen(false); toggle.current?.focus(); }}><span className="menu-index">0{i + 1}</span>{label}</Link>)}
+        {links.map((label, i) => <Link key={label} href={destinations[i]} aria-current={(currentPath === "/" && i === 0) || (currentPath === "/salt-refinery-plants" && i === 1) || (currentPath === "/machinery" && i === 2) || (currentPath === "/projects" && i === 3) || (currentPath === "/about" && i === 4) ? "page" : undefined} onClick={() => { setOpen(false); toggle.current?.focus(); }}><span className="menu-index">0{i + 1}</span>{label}</Link>)}
         <Link href={quoteDestination} className="mobile-quote" onClick={() => setOpen(false)}>Get a Quote →</Link>
       </div>
     </nav>
