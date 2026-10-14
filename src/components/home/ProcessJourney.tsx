@@ -12,6 +12,8 @@ const number = (value: number) => String(value).padStart(2, "0");
 const HOLD_STAGE_1 = 0.65;
 const HOLD_STAGE_2 = 0.8;
 const HOLD_STAGE_3 = 0.8;
+const HOLD_STAGE_4 = 0.8;
+const HOLD_STAGE_5 = 0.8;
 const TRANSITION = 1.2;
 
 export default function ProcessJourney({ stages }: { stages: StageWithAsset[] }) {
@@ -87,7 +89,7 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
             dominance.push(start + 0.95);
           }
           timeline.addLabel(`stage${index + 1}`);
-          timeline.to({}, { duration: [HOLD_STAGE_1, HOLD_STAGE_2, HOLD_STAGE_3][index] });
+          timeline.to({}, { duration: [HOLD_STAGE_1, HOLD_STAGE_2, HOLD_STAGE_3, HOLD_STAGE_4, HOLD_STAGE_5][index] });
         });
 
         const duration = timeline.duration();
@@ -103,7 +105,7 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
           invalidateOnRefresh: true, anticipatePin: 1,
         });
         jumpToStage.current = (index) => {
-          const stageHold = [HOLD_STAGE_1, HOLD_STAGE_2, HOLD_STAGE_3][index];
+          const stageHold = [HOLD_STAGE_1, HOLD_STAGE_2, HOLD_STAGE_3, HOLD_STAGE_4, HOLD_STAGE_5][index];
           const time = timeline.labels[`stage${index + 1}`] + stageHold / 2;
           window.scrollTo({ top: trigger.start + (time / duration) * (trigger.end - trigger.start), behavior: "smooth" });
         };

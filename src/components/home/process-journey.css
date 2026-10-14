@@ -28,6 +28,8 @@
 .process-stage-hopper .process-machine-image { object-position: 58% 52%; padding: 32px 8px 56px; }
 .process-stage-belt-conveyor .process-machine-image { object-position: 62% 50%; padding: 42px 0 62px; }
 .process-stage-wet-mill .process-machine-image { object-position: 55% 52%; padding: 14px 0 38px; }
+.process-stage-settling-tank .process-machine-image { object-position: 55% 52%; padding: 14px 0 38px; }
+.process-stage-thickener .process-machine-image { object-position: 55% 52%; padding: 14px 0 38px; }
 .process-render-placeholder { position: absolute; inset: 8% 5% 12%; display: flex; align-items: center; justify-content: center; flex-direction: column; }
 .process-render-orbit { position: absolute; width: 75%; height: 70%; border: 1px solid #465b4b; border-radius: 50%; transform: rotate(-18deg); opacity: .6; }
 .process-render-orbit::before { content: ""; position: absolute; inset: 12%; border: 1px dashed #425346; border-radius: 50%; }
@@ -60,6 +62,8 @@
 .process-scene-pinned .process-stage-hopper .process-visual { width: clamp(400px, 48vw, 850px); }
 .process-scene-pinned .process-stage-belt-conveyor .process-visual { right: 2vw; width: clamp(600px, 72vw, 1300px); }
 .process-scene-pinned .process-stage-wet-mill .process-visual { width: clamp(430px, 52vw, 900px); }
+.process-scene-pinned .process-stage-settling-tank .process-visual { width: clamp(430px, 52vw, 900px); }
+.process-scene-pinned .process-stage-thickener .process-visual { width: clamp(430px, 52vw, 900px); }
 .process-scene-pinned .process-navigation { margin-top: 18px; flex-shrink: 0; }
 .process-scene-pinned .process-detail:target { position: absolute; bottom: 0; left: 0; max-width: 34%; background: #101314; padding: 10px; z-index: 4; }
 @media (min-width: 768px) and (max-width: 1099px) {
@@ -70,6 +74,8 @@
   .process-scene-pinned .process-stage-hopper .process-visual { width: 54vw; }
   .process-scene-pinned .process-stage-belt-conveyor .process-visual { width: 72vw; }
   .process-scene-pinned .process-stage-wet-mill .process-visual { width: 58vw; }
+  .process-scene-pinned .process-stage-settling-tank .process-visual { width: 58vw; }
+  .process-scene-pinned .process-stage-thickener .process-visual { width: 58vw; }
 }
 @media (min-width: 768px) and (max-height: 700px) {
   .process-scene-pinned { padding-bottom: 24px; }
@@ -91,7 +97,7 @@
   .process-info { padding: 30px 0 10px; }.process-info h3 { font-size: 32px; max-width: 270px; }
   .process-purpose { margin: 16px 0; }
   .process-technical-labels { flex-direction: row; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
-  .process-visual { height: 350px; }.process-stage-belt-conveyor .process-visual { height: 260px; }.process-stage-wet-mill .process-visual { height: 340px; }
+  .process-visual { height: 350px; }.process-stage-belt-conveyor .process-visual { height: 260px; }.process-stage-wet-mill .process-visual, .process-stage-settling-tank .process-visual, .process-stage-thickener .process-visual { height: 340px; }
   .process-stage + .process-stage { margin-top: 35px; padding-top: 20px; }
   .process-navigation { gap: 18px; margin-top: 36px; }.process-timeline ol { gap: 6px; }
   .process-step { font-size: 7px; letter-spacing: .05em; padding-right: 6px; }
