@@ -5,7 +5,7 @@ import ContactPageExperience from "@/components/contact/ContactPageExperience";
 import Navbar from "@/components/layout/Navbar";
 
 export const metadata: Metadata = {
-  title: "Contact | S.K. Engineering Works",
+  title: "Contact S.K. Engineering Works | Industrial Machinery & Salt Refinery Plants",
   description: "Contact S.K. Engineering Works in Sambhar Lake, Rajasthan for industrial machinery, material handling systems and complete salt refinery plant requirements.",
 };
 
