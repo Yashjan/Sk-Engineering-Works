@@ -1,4 +1,5 @@
 import { existsSync } from "node:fs";
+import type { Metadata } from "next";
 import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
 import SiteIntro from "@/components/layout/SiteIntro";
@@ -12,6 +13,13 @@ import ProjectEnquirySection from "@/components/home/ProjectEnquirySection";
 import { processStages } from "@/data/process";
 import { projects } from "@/data/projects";
 import { assetPath } from "@/lib/asset-path";
+import { createPageMetadata } from "@/config/site";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "S.K. Engineering Works | Industrial Machinery & Salt Refinery Plants",
+  description: "Industrial process equipment, material handling systems and complete salt refinery plants engineered and fabricated by S.K. Engineering Works in Rajasthan.",
+  path: "/",
+});
 
 export default function Home() {
   const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));

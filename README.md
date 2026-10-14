@@ -11,6 +11,8 @@ npm run dev
 
 Open http://localhost:3000. Run `npm run lint`, `npm run typecheck`, and `npm run build` for validation.
 
+Set `NEXT_PUBLIC_SITE_URL` to the full public site root before production builds. Include the repository base path for GitHub Pages; see `.env.example`. Canonical URLs, social metadata, structured data, `robots.txt`, and `sitemap.xml` all use this central value.
+
 ## Assets
 
 - Place the real company logo at `public/images/sk-logo.png`.

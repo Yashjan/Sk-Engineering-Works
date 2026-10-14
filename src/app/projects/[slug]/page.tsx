@@ -5,11 +5,14 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
 import { projectArchive } from "@/data/projects";
+import { createPageMetadata } from "@/config/site";
 import "./project-placeholder.css";
 
 type ProjectPlaceholderPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return projectArchive.filter((project) => !project.isFeatured).map(({ slug }) => ({ slug }));
@@ -19,12 +22,14 @@ export async function generateMetadata({ params }: ProjectPlaceholderPageProps):
   const { slug } = await params;
   const project = projectArchive.find((item) => !item.isFeatured && item.slug === slug);
 
-  return {
-    title: project ? `${project.name} | Projects` : "Project | S.K. Engineering Works",
+  return createPageMetadata({
+    title: project ? `${project.name} | Projects` : "Project",
     description: project
       ? `${project.name}${project.location ? `, ${project.location}` : ""}. Project case study coming next.`
       : "S.K. Engineering Works project case study.",
-  };
+    path: `/projects/${slug}`,
+    index: false,
+  });
 }
 
 export default async function ProjectPlaceholderPage({ params }: ProjectPlaceholderPageProps) {

@@ -3,12 +3,15 @@ import Link from "next/link";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
+import { createPageMetadata } from "@/config/site";
 import "./project-detail-shell.css";
 
-export const metadata: Metadata = {
-  title: "Jagdamba Salt 15 TPH Refinery | S.K. Engineering Works",
+export const metadata: Metadata = createPageMetadata({
+  title: "Jagdamba Salt 15 TPH Refinery",
   description: "Jagdamba Salt Pvt. Ltd. 15 TPH salt refinery project in Phalodi, Rajasthan.",
-};
+  path: "/projects/jagdamba-salt-15tph",
+  index: false,
+});
 
 export default function JagdambaProjectPage() {
   const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));

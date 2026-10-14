@@ -14,17 +14,21 @@ import TrustedClientsSection from "@/components/home/TrustedClientsSection";
 import ProjectEnquirySection from "@/components/home/ProjectEnquirySection";
 import GlobalMachinerySearch from "@/components/machinery/GlobalMachinerySearch";
 import { MachineryDirectory } from "@/components/machinery/MachineryDirectory";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import { createPageMetadata } from "@/config/site";
 
-export const metadata: Metadata = {
-  title: "Industrial Machinery | S.K. Engineering Works",
-  description: "Industrial machinery and process equipment engineered by S.K. Engineering Works for material handling, processing, air movement, screening and storage applications.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "Industrial Machinery & Process Equipment",
+  description: "Explore industrial machinery for material handling, milling, air and dust handling, screening, separation and process applications from S.K. Engineering Works.",
+  path: "/machinery",
+});
 
 export default function MachineryPage() {
   const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
 
   return (
     <>
+      <BreadcrumbJsonLd currentName="Machinery" currentPath="/machinery" />
       <a className="skip-link" href="#main">Skip to content</a>
       <Navbar hasLogo={hasLogo} />
       <main id="main">

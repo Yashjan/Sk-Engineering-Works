@@ -10,17 +10,21 @@ import MachineryShowcaseSection from "@/components/salt-refinery-plants/Machiner
 import PlantConfigurationSection from "@/components/salt-refinery-plants/PlantConfigurationSection";
 import RawSaltProcessStage from "@/components/salt-refinery-plants/RawSaltProcessStage";
 import SaltRefineryHero from "@/components/salt-refinery-plants/SaltRefineryHero";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import { createPageMetadata } from "@/config/site";
 
-export const metadata: Metadata = {
-  title: "Salt Refinery Plants | S.K. Engineering Works",
-  description: "Salt refinery plant engineering, machinery fabrication and installation by S.K. Engineering Works for salt manufacturers in Rajasthan, Gujarat and beyond.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "Salt Refinery Plants & Machinery",
+  description: "Explore complete salt refinery plants, process systems and salt-processing machinery engineered for washing, centrifuging, drying, screening, grinding, storage and handling.",
+  path: "/salt-refinery-plants",
+});
 
 export default function SaltRefineryPlantsPage() {
   const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
 
   return (
     <>
+      <BreadcrumbJsonLd currentName="Salt Refinery Plants" currentPath="/salt-refinery-plants" />
       <SiteIntro force mobileOnly />
       <a className="skip-link" href="#main">Skip to content</a>
       <Navbar hasLogo={hasLogo} />
