@@ -30,6 +30,12 @@
 .process-stage-wet-mill .process-machine-image { object-position: 55% 52%; padding: 14px 0 38px; }
 .process-stage-settling-tank .process-machine-image { object-position: 55% 52%; padding: 14px 0 38px; }
 .process-stage-thickener .process-machine-image { object-position: 55% 52%; padding: 14px 0 38px; }
+.process-stage-screw-washer .process-machine-image, .process-stage-screw-conveyor .process-machine-image, .process-stage-pin-mill .process-machine-image { object-position: 55% 52%; padding: 14px 0 38px; }
+.process-stage-centrifuge .process-machine-image, .process-stage-dryer .process-machine-image, .process-stage-vibro-screen .process-machine-image { object-position: 56% 52%; padding: 28px 0 48px; }
+.process-stage-bucket-elevator .process-machine-image { object-position: 58% 50%; padding: 6px 0 30px; }
+.process-stage-cyclone .process-machine-image { object-position: 58% 50%; padding: 6px 0 30px; }
+.process-stage-id-fan-blower .process-machine-image { object-position: 56% 52%; padding: 24px 0 44px; }
+.process-stage-roller-crusher .process-machine-image { object-position: 56% 52%; padding: 28px 0 48px; }
 .process-render-placeholder { position: absolute; inset: 8% 5% 12%; display: flex; align-items: center; justify-content: center; flex-direction: column; }
 .process-render-orbit { position: absolute; width: 75%; height: 70%; border: 1px solid #465b4b; border-radius: 50%; transform: rotate(-18deg); opacity: .6; }
 .process-render-orbit::before { content: ""; position: absolute; inset: 12%; border: 1px dashed #425346; border-radius: 50%; }
@@ -64,6 +70,14 @@
 .process-scene-pinned .process-stage-wet-mill .process-visual { width: clamp(430px, 52vw, 900px); }
 .process-scene-pinned .process-stage-settling-tank .process-visual { width: clamp(430px, 52vw, 900px); }
 .process-scene-pinned .process-stage-thickener .process-visual { width: clamp(430px, 52vw, 900px); }
+.process-scene-pinned .process-stage-screw-washer .process-visual, .process-scene-pinned .process-stage-screw-conveyor .process-visual, .process-scene-pinned .process-stage-pin-mill .process-visual { width: clamp(430px, 52vw, 900px); }
+.process-scene-pinned .process-stage-centrifuge .process-visual { width: clamp(500px, 58vw, 980px); }
+.process-scene-pinned .process-stage-dryer .process-visual { width: clamp(560px, 64vw, 1120px); }
+.process-scene-pinned .process-stage-vibro-screen .process-visual { width: clamp(500px, 58vw, 980px); }
+.process-scene-pinned .process-stage-bucket-elevator .process-visual { width: clamp(380px, 44vw, 740px); }
+.process-scene-pinned .process-stage-cyclone .process-visual { width: clamp(420px, 48vw, 800px); }
+.process-scene-pinned .process-stage-id-fan-blower .process-visual { width: clamp(500px, 58vw, 980px); }
+.process-scene-pinned .process-stage-roller-crusher .process-visual { width: clamp(560px, 64vw, 1120px); }
 .process-scene-pinned .process-navigation { margin-top: 18px; flex-shrink: 0; }
 .process-scene-pinned .process-detail:target { position: absolute; bottom: 0; left: 0; max-width: 34%; background: #101314; padding: 10px; z-index: 4; }
 @media (min-width: 768px) and (max-width: 1099px) {
@@ -76,6 +90,19 @@
   .process-scene-pinned .process-stage-wet-mill .process-visual { width: 58vw; }
   .process-scene-pinned .process-stage-settling-tank .process-visual { width: 58vw; }
   .process-scene-pinned .process-stage-thickener .process-visual { width: 58vw; }
+  .process-scene-pinned .process-stage-screw-washer .process-visual, .process-scene-pinned .process-stage-screw-conveyor .process-visual, .process-scene-pinned .process-stage-pin-mill .process-visual { width: 58vw; }
+  .process-scene-pinned .process-stage-centrifuge .process-visual { width: 62vw; }
+  .process-scene-pinned .process-stage-dryer .process-visual { width: 66vw; }
+  .process-scene-pinned .process-stage-vibro-screen .process-visual { width: 62vw; }
+  .process-scene-pinned .process-stage-bucket-elevator .process-visual { width: 48vw; }
+  .process-scene-pinned .process-stage-cyclone .process-visual { width: 52vw; }
+  .process-scene-pinned .process-stage-id-fan-blower .process-visual { width: 62vw; }
+  .process-scene-pinned .process-stage-roller-crusher .process-visual { width: 66vw; }
+}
+@media (min-width: 768px) and (max-width: 1599px) {
+  .process-timeline { overflow-x: auto; scrollbar-width: none; }
+  .process-timeline::-webkit-scrollbar { display: none; }
+  .process-timeline ol, .process-progress-track { width: 1260px; }
 }
 @media (min-width: 768px) and (max-height: 700px) {
   .process-scene-pinned { padding-bottom: 24px; }
@@ -97,7 +124,14 @@
   .process-info { padding: 30px 0 10px; }.process-info h3 { font-size: 32px; max-width: 270px; }
   .process-purpose { margin: 16px 0; }
   .process-technical-labels { flex-direction: row; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
-  .process-visual { height: 350px; }.process-stage-belt-conveyor .process-visual { height: 260px; }.process-stage-wet-mill .process-visual, .process-stage-settling-tank .process-visual, .process-stage-thickener .process-visual { height: 340px; }
+  .process-visual { height: 350px; }.process-stage-belt-conveyor .process-visual { height: 260px; }.process-stage-wet-mill .process-visual, .process-stage-settling-tank .process-visual, .process-stage-thickener .process-visual, .process-stage-screw-washer .process-visual, .process-stage-screw-conveyor .process-visual, .process-stage-pin-mill .process-visual { height: 340px; }
+  .process-stage-centrifuge .process-visual, .process-stage-dryer .process-visual, .process-stage-vibro-screen .process-visual { height: 290px; }
+  .process-stage-bucket-elevator .process-visual { height: 390px; }
+  .process-stage-cyclone .process-visual { height: 390px; }
+  .process-stage-id-fan-blower .process-visual, .process-stage-roller-crusher .process-visual { height: 290px; }
+  .process-timeline { overflow-x: auto; scrollbar-width: none; }
+  .process-timeline::-webkit-scrollbar { display: none; }
+  .process-timeline ol, .process-progress-track { width: 960px; }
   .process-stage + .process-stage { margin-top: 35px; padding-top: 20px; }
   .process-navigation { gap: 18px; margin-top: 36px; }.process-timeline ol { gap: 6px; }
   .process-step { font-size: 7px; letter-spacing: .05em; padding-right: 6px; }

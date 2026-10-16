@@ -10,10 +10,7 @@ import "./process-journey.css";
 type StageWithAsset = ProcessStage & { hasImage: boolean };
 const number = (value: number) => String(value).padStart(2, "0");
 const HOLD_STAGE_1 = 0.65;
-const HOLD_STAGE_2 = 0.8;
-const HOLD_STAGE_3 = 0.8;
-const HOLD_STAGE_4 = 0.8;
-const HOLD_STAGE_5 = 0.8;
+const HOLD_LATER_STAGE = 0.8;
 const TRANSITION = 1.2;
 
 export default function ProcessJourney({ stages }: { stages: StageWithAsset[] }) {
@@ -27,6 +24,7 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
     const scene = section.querySelector<HTMLElement>(".process-scene")!;
     const panels = Array.from(section.querySelectorAll<HTMLElement>(".process-stage"));
     const buttons = Array.from(section.querySelectorAll<HTMLButtonElement>(".process-step"));
+    const stageNavigation = section.querySelector<HTMLElement>(".process-timeline");
     const counter = section.querySelector(".process-current");
     const progress = section.querySelector(".process-progress-fill");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -45,6 +43,13 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
         if (i === index) button.setAttribute("aria-current", "step");
         else button.removeAttribute("aria-current");
       });
+      const activeButton = buttons[index];
+      if (stageNavigation && activeButton && stageNavigation.scrollWidth > stageNavigation.clientWidth) {
+        stageNavigation.scrollTo({
+          left: activeButton.offsetLeft - (stageNavigation.clientWidth - activeButton.offsetWidth) / 2,
+          behavior: reducedMotion.matches ? "auto" : "smooth",
+        });
+      }
     };
 
     const media = gsap.matchMedia();
@@ -89,7 +94,7 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
             dominance.push(start + 0.95);
           }
           timeline.addLabel(`stage${index + 1}`);
-          timeline.to({}, { duration: [HOLD_STAGE_1, HOLD_STAGE_2, HOLD_STAGE_3, HOLD_STAGE_4, HOLD_STAGE_5][index] });
+          timeline.to({}, { duration: index === 0 ? HOLD_STAGE_1 : HOLD_LATER_STAGE });
         });
 
         const duration = timeline.duration();
@@ -105,7 +110,7 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
           invalidateOnRefresh: true, anticipatePin: 1,
         });
         jumpToStage.current = (index) => {
-          const stageHold = [HOLD_STAGE_1, HOLD_STAGE_2, HOLD_STAGE_3, HOLD_STAGE_4, HOLD_STAGE_5][index];
+          const stageHold = index === 0 ? HOLD_STAGE_1 : HOLD_LATER_STAGE;
           const time = timeline.labels[`stage${index + 1}`] + stageHold / 2;
           window.scrollTo({ top: trigger.start + (time / duration) * (trigger.end - trigger.start), behavior: "smooth" });
         };
@@ -165,7 +170,7 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
                 </div>
                 <div className="process-visual">
                   {stage.hasImage ? (
-                    <Image src={stage.image} alt={stage.name} fill sizes={stage.id === "belt-conveyor" ? "(min-width: 768px) 72vw, 90vw" : "(min-width: 768px) 52vw, 90vw"} className="process-machine-image" draggable={false} onLoad={() => ScrollTrigger.refresh()} />
+                    <Image src={stage.image} alt={stage.imageAlt} fill sizes={stage.id === "belt-conveyor" ? "(min-width: 768px) 72vw, 90vw" : "(min-width: 768px) 64vw, 90vw"} className="process-machine-image" draggable={false} onLoad={() => ScrollTrigger.refresh()} />
                   ) : (
                     <div className="process-render-placeholder" role="img" aria-label={`${stage.name}: machine image placeholder`}>
                       <div className="process-render-orbit" aria-hidden="true" />

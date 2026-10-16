@@ -4,6 +4,7 @@ export type ProcessStage = {
   purpose: string;
   timelineLabel: string;
   image: string;
+  imageAlt: string;
   labels: string[];
 };
 
@@ -14,6 +15,7 @@ export const processStages: ProcessStage[] = [
     purpose: "Raw salt receiving and temporary storage.",
     timelineLabel: "RAW INTAKE",
     image: "/images/process/hopper.png",
+    imageAlt: "S.K. Engineering Works raw salt hopper",
     labels: ["RAW SALT RECEIVING", "TEMPORARY STORAGE"],
   },
   {
@@ -22,6 +24,7 @@ export const processStages: ProcessStage[] = [
     purpose: "Transfers raw salt to the next processing stage.",
     timelineLabel: "CONVEYING",
     image: "/images/process/belt-conveyor.png",
+    imageAlt: "S.K. Engineering Works belt conveyor",
     labels: ["MATERIAL TRANSFER", "PROCESS CONNECTION"],
   },
   {
@@ -30,6 +33,7 @@ export const processStages: ProcessStage[] = [
     purpose: "Initial wet grinding and brine mixing.",
     timelineLabel: "WET MILLING",
     image: "/images/process/wet-mill.png",
+    imageAlt: "S.K. Engineering Works wet mill",
     labels: ["WET GRINDING", "BRINE MIXING"],
   },
   {
@@ -38,6 +42,7 @@ export const processStages: ProcessStage[] = [
     purpose: "Receives wet-milled salt slurry for controlled settling and process holding.",
     timelineLabel: "SETTLING",
     image: "images/process/tank 2.png",
+    imageAlt: "S.K. Engineering Works settling tank",
     labels: ["SLURRY SETTLING", "PROCESS HOLDING"],
   },
   {
@@ -46,6 +51,97 @@ export const processStages: ProcessStage[] = [
     purpose: "Separates and settles suspended solids from process liquid before the next washing stage.",
     timelineLabel: "THICKENING",
     image: "/images/process/thickner.png",
+    imageAlt: "S.K. Engineering Works thickener",
     labels: ["SOLIDS SETTLING", "LIQUID SEPARATION"],
+  },
+  {
+    id: "screw-washer",
+    name: "SCREW WASHER",
+    purpose: "Washes and transfers salt before the dewatering stage.",
+    timelineLabel: "WASHING",
+    image: "/images/process/Screw washer.png",
+    imageAlt: "S.K. Engineering Works screw washer",
+    labels: ["SALT WASHING", "IMPURITY REMOVAL"],
+  },
+  {
+    id: "centrifuge",
+    name: "CENTRIFUGE",
+    purpose: "Removes excess moisture from washed salt before drying.",
+    timelineLabel: "CENTRIFUGE",
+    image: "/images/process/Centrifuge.png",
+    imageAlt: "S.K. Engineering Works industrial centrifuge",
+    labels: ["MOISTURE REMOVAL", "BRINE SEPARATION"],
+  },
+  {
+    id: "screw-conveyor",
+    name: "SCREW CONVEYOR",
+    purpose: "Transfers dewatered salt toward the dryer.",
+    timelineLabel: "TRANSFER",
+    image: "/images/process/Screw conveyor.png",
+    imageAlt: "S.K. Engineering Works screw conveyor",
+    labels: ["DEWATERED SALT", "DRYER FEED"],
+  },
+  {
+    id: "dryer",
+    name: "DRYER",
+    purpose: "Reduces remaining moisture through controlled drying.",
+    timelineLabel: "DRYING",
+    image: "/images/process/dryer.png",
+    imageAlt: "S.K. Engineering Works salt dryer",
+    labels: ["HOT-AIR DRYING", "MOISTURE REDUCTION"],
+  },
+  {
+    id: "bucket-elevator",
+    name: "BUCKET ELEVATOR",
+    purpose: "Lifts dried salt to the screening level.",
+    timelineLabel: "ELEVATING",
+    image: "/images/process/Bucket elevator.png",
+    imageAlt: "S.K. Engineering Works bucket elevator",
+    labels: ["VERTICAL TRANSFER", "SCREENING FEED"],
+  },
+  {
+    id: "vibro-screen",
+    name: "VIBRO SCREEN",
+    purpose: "Screens and grades salt by particle size.",
+    timelineLabel: "SCREENING",
+    image: "/images/process/Vibro.png",
+    imageAlt: "S.K. Engineering Works vibro screen",
+    labels: ["SIZE GRADING", "PRODUCT SEPARATION"],
+  },
+  {
+    id: "pin-mill",
+    name: "PIN MILL",
+    purpose: "Fine-grinds salt to the required powder size.",
+    timelineLabel: "GRINDING",
+    image: "/images/process/Pin Mill.png",
+    imageAlt: "S.K. Engineering Works pin mill",
+    labels: ["FINE GRINDING", "POWDER SIZING"],
+  },
+  {
+    id: "cyclone",
+    name: "CYCLONE",
+    purpose: "Separates salt and dust particles from the process air stream.",
+    timelineLabel: "CYCLONE",
+    image: "/images/process/Cyclone.png",
+    imageAlt: "S.K. Engineering Works cyclone separator",
+    labels: ["AIR SEPARATION", "PARTICLE RECOVERY"],
+  },
+  {
+    id: "id-fan-blower",
+    name: "ID FAN / BLOWER",
+    purpose: "Moves process air through the drying and air-handling system.",
+    timelineLabel: "ID FAN / BLOWER",
+    image: "/images/process/Blower.png",
+    imageAlt: "S.K. Engineering Works ID fan",
+    labels: ["PROCESS AIRFLOW", "AIR HANDLING"],
+  },
+  {
+    id: "roller-crusher",
+    name: "ROLLER CRUSHER",
+    purpose: "Breaks oversized salt lumps into a controlled smaller size.",
+    timelineLabel: "ROLLER CRUSHER",
+    image: "/images/process/Roller crusher.png",
+    imageAlt: "S.K. Engineering Works roller crusher",
+    labels: ["LUMP BREAKING", "SIZE CONTROL"],
   },
 ];
