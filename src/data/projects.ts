@@ -64,12 +64,12 @@ export const projects: Project[] = [
     scope: "Process equipment supply & complete plant fitting",
     projectType: "Salt Refinery Plant",
     detailHref: "/projects/jagdamba-salt-15tph",
-    coverImage: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg",
+    coverImage: "/images/projects/jagdamba/cover Image.png",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/jagdamba/01_jagdamba_fabrication.mp4", label: "FABRICATION" },
       { id: "installation", type: "video", src: "/images/projects/jagdamba/02_jagdamba_site_installation.mp4", label: "SITE INSTALLATION" },
       { id: "completed", type: "video", src: "/images/projects/jagdamba/03_jagdamba_completed_plant.mp4", label: "COMPLETED PLANT" },
-      { id: "overview", type: "image", src: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg", label: "OVERVIEW" },
+      { id: "overview", type: "image", src: "/images/projects/jagdamba/cover Image.png", label: "OVERVIEW" },
     ],
     scopeChips: ["HOPPER", "WET MILL", "WASHING", "DRYING", "CONVEYING", "STORAGE", "INSTALLATION"],
     completeScope: [
