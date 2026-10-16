@@ -25,6 +25,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .menu-toggle, .mobile-panel { display: none; }
 .hero { position: relative; isolation: isolate; min-height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 166px 4.5vw 124px; }
 .hero-media { position: absolute; inset: -8% 0; z-index: -3; }
+.hero-picture { display: block; position: absolute; inset: 0; }
 .hero-image { object-fit: cover; object-position: center; }
 .industrial-fallback { position: absolute; inset: 0; overflow: hidden; background: linear-gradient(120deg, #343936, #575b54 65%, #282f2c); }
 .structure { position: absolute; height: 115%; width: 18%; top: -8%; border-left: 2px solid #7a8277; border-right: 12px solid #252c28; background: linear-gradient(90deg, #353d37, #757b70 48%, #363d36); transform: rotate(14deg); }

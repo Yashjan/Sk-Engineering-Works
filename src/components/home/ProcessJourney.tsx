@@ -1,13 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { ProcessStage } from "@/data/process";
 import "./process-journey.css";
 
 type StageWithAsset = ProcessStage & { hasImage: boolean };
+type SkipDirection = "down" | "up";
 const number = (value: number) => String(value).padStart(2, "0");
 const HOLD_STAGE_1 = 0.65;
 const HOLD_LATER_STAGE = 0.8;
@@ -16,6 +18,63 @@ const TRANSITION = 1.2;
 export default function ProcessJourney({ stages }: { stages: StageWithAsset[] }) {
   const root = useRef<HTMLElement>(null);
   const jumpToStage = useRef<(index: number) => void>(() => {});
+  const processTrigger = useRef<ScrollTrigger | null>(null);
+  const skipButton = useRef<HTMLButtonElement>(null);
+  const skipTween = useRef<gsap.core.Tween | null>(null);
+  const skipDirectionRef = useRef<SkipDirection>("down");
+  const skipLocked = useRef(false);
+  const [isProcessActive, setIsProcessActive] = useState(false);
+  const [isSkipExiting, setIsSkipExiting] = useState(false);
+  const [skipDirection, setSkipDirection] = useState<SkipDirection>("down");
+
+  const handleSkip = () => {
+    if (skipLocked.current) return;
+
+    const section = root.current;
+    const direction = skipDirectionRef.current;
+    const destination = direction === "down"
+      ? section?.nextElementSibling as HTMLElement | null
+      : section?.previousElementSibling as HTMLElement | null;
+    if (!section || !destination) return;
+
+    skipLocked.current = true;
+    const button = skipButton.current;
+    button?.blur();
+    button?.classList.add("process-skip-activated");
+
+    const trigger = processTrigger.current;
+    const destinationTop = destination.getBoundingClientRect().top + window.scrollY;
+    const target = direction === "down"
+      ? Math.max(destinationTop, trigger ? trigger.end + 1 : destinationTop)
+      : Math.min(destinationTop, trigger ? trigger.start - 1 : destinationTop);
+
+    const scrollTarget = Math.max(0, target);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      window.scrollTo({ top: scrollTarget, behavior: "instant" });
+      skipLocked.current = false;
+      return;
+    }
+
+    const scrollState = { y: window.scrollY };
+    const distance = Math.abs(scrollTarget - scrollState.y);
+    const duration = gsap.utils.clamp(0.75, 1.5, 0.75 + (distance / (window.innerHeight * 18)) * 0.75);
+    skipTween.current?.kill();
+    skipTween.current = gsap.to(scrollState, {
+      y: scrollTarget,
+      duration,
+      ease: "power4.out",
+      overwrite: true,
+      onUpdate: () => window.scrollTo({ top: scrollState.y, behavior: "instant" }),
+      onComplete: () => {
+        skipTween.current = null;
+        skipLocked.current = false;
+      },
+      onInterrupt: () => {
+        skipTween.current = null;
+        skipLocked.current = false;
+      },
+    });
+  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -57,6 +116,35 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
       const { desktop, reduce } = context.conditions!;
       active = -1;
       setActive(0, Boolean(desktop && !reduce));
+      let trackedDirection: SkipDirection = "down";
+      let directionAnchor = window.scrollY;
+
+      const showSkip = (direction: SkipDirection) => {
+        trackedDirection = direction;
+        directionAnchor = window.scrollY;
+        skipDirectionRef.current = direction;
+        skipLocked.current = false;
+        setIsSkipExiting(false);
+        setSkipDirection(direction);
+        setIsProcessActive(true);
+      };
+      const hideSkip = () => {
+        const button = skipButton.current;
+        if (button && document.activeElement === button) button.blur();
+        setIsProcessActive(false);
+        setIsSkipExiting(!reducedMotion.matches);
+      };
+      const trackDirection = (self: ScrollTrigger) => {
+        const currentScroll = self.scroll();
+        const delta = currentScroll - directionAnchor;
+        if (Math.abs(delta) < 6) return;
+        directionAnchor = currentScroll;
+        const nextDirection: SkipDirection = delta > 0 ? "down" : "up";
+        if (nextDirection === trackedDirection) return;
+        trackedDirection = nextDirection;
+        skipDirectionRef.current = nextDirection;
+        setSkipDirection(nextDirection);
+      };
 
       if (desktop && !reduce) {
         scene.classList.add("process-scene-pinned");
@@ -108,13 +196,30 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
           end: () => `+=${window.innerHeight * duration}`,
           pin: true, scrub: 1, animation: timeline,
           invalidateOnRefresh: true, anticipatePin: 1,
+          onEnter: () => showSkip("down"),
+          onEnterBack: () => showSkip("up"),
+          onLeave: hideSkip,
+          onLeaveBack: hideSkip,
+          onUpdate: trackDirection,
         });
+        processTrigger.current = trigger;
         jumpToStage.current = (index) => {
           const stageHold = index === 0 ? HOLD_STAGE_1 : HOLD_LATER_STAGE;
           const time = timeline.labels[`stage${index + 1}`] + stageHold / 2;
           window.scrollTo({ top: trigger.start + (time / duration) * (trigger.end - trigger.start), behavior: "smooth" });
         };
       } else {
+        const trigger = ScrollTrigger.create({
+          trigger: section,
+          start: "top top",
+          end: "bottom bottom",
+          onEnter: () => showSkip("down"),
+          onEnterBack: () => showSkip("up"),
+          onLeave: hideSkip,
+          onLeaveBack: hideSkip,
+          onUpdate: trackDirection,
+        });
+        processTrigger.current = trigger;
         jumpToStage.current = (index) => panels[index]?.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "start" });
         if (!reduce) {
           gsap.fromTo(progress, { scaleX: 0 }, {
@@ -138,15 +243,25 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
       const refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
       return () => {
         cancelAnimationFrame(refreshFrame);
+        hideSkip();
+        processTrigger.current = null;
         scene.classList.remove("process-scene-pinned");
         panels.forEach((panel) => { panel.inert = false; panel.removeAttribute("aria-hidden"); });
       };
     }, section);
-    return () => { media.revert(); jumpToStage.current = () => {}; };
+    return () => {
+      media.revert();
+      jumpToStage.current = () => {};
+      processTrigger.current = null;
+      skipLocked.current = false;
+      skipTween.current?.kill();
+      skipTween.current = null;
+    };
   }, [stages]);
 
   return (
-    <section ref={root} id="process" className="process-journey" aria-labelledby="process-heading">
+    <>
+      <section ref={root} id="process" className="process-journey" aria-labelledby="process-heading">
       <header className="process-intro">
         <p className="process-eyebrow">PROCESS 01 <span> / THE REFINERY JOURNEY</span></p>
         <div className="process-intro-row">
@@ -197,6 +312,32 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
           <p className="process-count"><span className="process-current">01</span> / {number(stages.length)}</p>
         </nav>
       </div>
-    </section>
+      </section>
+      {(isProcessActive || isSkipExiting) && typeof document !== "undefined" && createPortal(
+        <button
+          ref={skipButton}
+          type="button"
+          className={`process-skip${isSkipExiting ? " process-skip-exiting" : ""}`}
+          data-direction={skipDirection}
+          disabled={isSkipExiting}
+          aria-label={skipDirection === "down"
+            ? "Skip Process Journey and continue to next section"
+            : "Skip Process Journey and return to previous section"}
+          onClick={handleSkip}
+          onAnimationEnd={(event) => {
+            if (isSkipExiting && event.currentTarget === event.target) setIsSkipExiting(false);
+            else if (event.currentTarget === event.target) event.currentTarget.classList.remove("process-skip-activated");
+          }}
+        >
+          <span>SKIP</span>
+          <span className="process-skip-arrow-motion" aria-hidden="true">
+            <svg className="process-skip-arrow" viewBox="0 0 12 16" focusable="false">
+              <path d="M6 1v12M2 9l4 4 4-4" />
+            </svg>
+          </span>
+        </button>,
+        document.body,
+      )}
+    </>
   );
 }

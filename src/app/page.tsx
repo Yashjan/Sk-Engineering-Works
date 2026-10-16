@@ -23,7 +23,7 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function Home() {
   const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
-  const hasHeroImage = existsSync(path.join(process.cwd(), "public/images/Golden Hour Salt Processing Plant.png"));
+  const hasHeroImage = existsSync(path.join(process.cwd(), "public/images/hero/salt-processing-plant.webp"));
   const stages = processStages.map((stage) => ({
     ...stage,
     hasImage: existsSync(path.join(process.cwd(), "public", stage.image)),

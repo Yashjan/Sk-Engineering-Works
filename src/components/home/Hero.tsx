@@ -35,7 +35,12 @@ export default function Hero({ hasImage }: { hasImage: boolean }) {
   return <section ref={root} className="hero" aria-labelledby="hero-heading">
     {/* Replace this media layer with a muted, playsInline factory video later. */}
     <div className={`hero-media ${hasImage ? "has-image" : ""}`} aria-hidden="true">
-      {hasImage ? <Image src={assetPath("/images/Golden Hour Salt Processing Plant.png")} alt="" fill sizes="100vw" priority className="hero-image" /> : <div className="industrial-fallback"><div className="structure structure-one" /><div className="structure structure-two" /><div className="structure structure-three" /><div className="structure-crossbeam" /><div className="technical-grid" /></div>}
+      {hasImage ? (
+        <picture className="hero-picture">
+          <source media="(max-width: 767px)" srcSet={assetPath("/images/hero/salt-processing-plant-mobile.webp")} type="image/webp" />
+          <Image src={assetPath("/images/hero/salt-processing-plant.webp")} alt="" fill sizes="100vw" fetchPriority="high" className="hero-image" />
+        </picture>
+      ) : <div className="industrial-fallback"><div className="structure structure-one" /><div className="structure structure-two" /><div className="structure structure-three" /><div className="structure-crossbeam" /><div className="technical-grid" /></div>}
     </div>
     <div className="hero-overlay" aria-hidden="true" />
     <div className="hero-copy">

@@ -57,6 +57,26 @@
 .process-progress-track { position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: #3d4c41; }
 .process-progress-fill { display: block; height: 1px; background: #b3c9bd; transform: scaleX(0); transform-origin: left; }
 .process-count { margin: 0; color: #7b8e80; font-size: 11px; letter-spacing: .15em; white-space: nowrap; }.process-current { color: #e2e9df; }
+.process-skip { position: fixed; right: clamp(24px, 2vw, 32px); bottom: clamp(88px, 10vh, 112px); z-index: 100; display: inline-flex; min-width: 104px; height: 44px; align-items: center; justify-content: space-between; gap: 18px; padding: 0 16px; border: 1px solid #65736b; border-radius: 2px; background: rgb(16 19 20 / 96%); color: #d7ddd8; font: inherit; font-size: 10px; font-weight: 500; letter-spacing: .13em; cursor: pointer; animation: process-skip-enter .36s cubic-bezier(.22, 1, .36, 1) both; }
+.process-skip:hover { border-color: #a8b7ae; color: #f1f3ef; }
+.process-skip:focus-visible { outline: 2px solid #eef0e9; outline-offset: 3px; }
+.process-skip:disabled { pointer-events: none; }
+.process-skip-arrow-motion { display: inline-flex; width: 12px; height: 16px; align-items: center; justify-content: center; animation: process-skip-hint-down 1.65s ease-in-out infinite; }
+.process-skip-arrow { display: block; width: 12px; height: 16px; overflow: visible; fill: none; stroke: currentcolor; stroke-width: 1.35; stroke-linecap: square; stroke-linejoin: miter; transform-origin: 50% 50%; transition: transform .34s cubic-bezier(.22, 1, .36, 1), opacity .22s ease; }
+.process-skip[data-direction="up"] .process-skip-arrow-motion { animation-name: process-skip-hint-up; }
+.process-skip[data-direction="up"] .process-skip-arrow { transform: rotate(180deg); }
+.process-skip:hover .process-skip-arrow-motion { animation: none; }
+.process-skip[data-direction="down"]:hover .process-skip-arrow-motion { transform: translateY(3px); }
+.process-skip[data-direction="up"]:hover .process-skip-arrow-motion { transform: translateY(-3px); }
+.process-skip-activated[data-direction="down"] { animation: process-skip-click-down .15s ease-out both; }
+.process-skip-activated[data-direction="up"] { animation: process-skip-click-up .15s ease-out both; }
+.process-skip-exiting { animation: process-skip-exit .24s ease both; }
+@keyframes process-skip-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes process-skip-exit { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(6px); } }
+@keyframes process-skip-click-down { 0%, 100% { opacity: 1; transform: translateY(0); } 50% { opacity: .76; transform: translateY(2px); } }
+@keyframes process-skip-click-up { 0%, 100% { opacity: 1; transform: translateY(0); } 50% { opacity: .76; transform: translateY(-2px); } }
+@keyframes process-skip-hint-down { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(2px); } }
+@keyframes process-skip-hint-up { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
 
 /* Pin ancestors stay unclipped; the inner visual wrapper contains motion. */
 .process-scene-pinned { box-sizing: border-box; height: 100svh; min-height: min(620px, 100svh); padding-top: 112px; display: flex; flex-direction: column; margin-bottom: 20vh; }
@@ -157,5 +177,10 @@
   .process-navigation { gap: 18px; margin-top: 36px; }.process-timeline ol { gap: 6px; }
   .process-step { font-size: 7px; letter-spacing: .05em; padding-right: 6px; }
   .process-step span { font-size: 10px; }.process-count { font-size: 9px; letter-spacing: .05em; }
+  .process-skip { right: 16px; bottom: calc(env(safe-area-inset-bottom) + 16px); min-width: 92px; height: 44px; padding: 0 14px; }
 }
-@media (prefers-reduced-motion: reduce) { .process-progress-fill { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .process-progress-fill { transform: scaleX(1); }
+  .process-skip, .process-skip-arrow-motion { animation: none; }
+  .process-skip-arrow { transition: none; }
+}
