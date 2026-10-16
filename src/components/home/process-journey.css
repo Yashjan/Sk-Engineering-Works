@@ -49,10 +49,10 @@
 .process-detail:target { display: block; grid-column: 1 / -1; padding: 16px 0; border-top: 1px solid #435449; font-size: 12px; color: #b5c5b9; }
 .process-detail p { margin: 0 0 12px; }.process-detail p span { color: #85958a; }
 .process-detail a { text-decoration: underline; text-underline-offset: 4px; }
-.process-navigation { position: relative; z-index: 4; display: flex; align-items: center; gap: 7vw; padding-top: 28px; border-top: 1px solid #334037; }
+.process-navigation { position: relative; z-index: 4; display: flex; align-items: center; gap: 2.8vw; padding-top: 28px; border-top: 1px solid #334037; }
 .process-timeline { flex: 1; position: relative; }
-.process-timeline ol { list-style: none; padding: 0; margin: 0; display: flex; justify-content: space-between; gap: 20px; }
-.process-step { position: relative; text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 9px; letter-spacing: .12em; border: 0; background: #101314; color: #7f9184; padding: 0 16px 0 0; cursor: pointer; }
+.process-timeline ol { list-style: none; padding: 0; margin: 0; display: flex; justify-content: space-between; }
+.process-step { position: relative; text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 10px; letter-spacing: .12em; border: 0; background: #101314; color: #7f9184; padding: 0 16px 0 0; cursor: pointer; }
 .process-step span { font-size: 12px; }.process-step[aria-current], .process-step:hover { color: #eef0e9; }
 .process-progress-track { position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: #3d4c41; }
 .process-progress-fill { display: block; height: 1px; background: #b3c9bd; transform: scaleX(0); transform-origin: left; }
@@ -99,6 +99,19 @@
   .process-scene-pinned .process-stage-id-fan-blower .process-visual { width: 62vw; }
   .process-scene-pinned .process-stage-roller-crusher .process-visual { width: 66vw; }
 }
+@media (min-width: 1024px) {
+  .process-stage { grid-template-columns: 42% 58%; }
+  .process-stage-number { font-size: clamp(15rem, 30vw, 36rem); }
+  .process-visual-baseline { font-size: 10px; }
+  .process-scene-pinned .process-info { width: min(34vw, 600px); padding: 24px 0; }
+  .process-stage-kicker { margin-bottom: 24px; font-size: 12px; }
+  .process-info h3 { max-width: 100%; font-size: clamp(4rem, 5vw, 6rem); line-height: .92; text-wrap: balance; }
+  .process-purpose { max-width: 470px; margin: 28px 0; font-size: clamp(16px, .9vw, 18px); line-height: 1.65; }
+  .process-technical-labels { gap: 10px; margin-bottom: 32px; font-size: 11px; }
+  .process-technical-labels li::before { margin-right: 12px; }
+  .process-explore { min-width: 230px; gap: 52px; padding: 12px 0; font-size: 14px; }
+  .process-explore span { margin-left: auto; font-size: 20px; }
+}
 @media (min-width: 768px) and (max-width: 1599px) {
   .process-timeline { overflow-x: auto; scrollbar-width: none; }
   .process-timeline::-webkit-scrollbar { display: none; }
@@ -111,6 +124,14 @@
   .process-scene-pinned .process-purpose { margin: 14px 0; font-size: 12px; }
   .process-scene-pinned .process-technical-labels { margin-bottom: 12px; gap: 6px; }
   .process-scene-pinned .process-navigation { margin-top: 12px; padding-top: 18px; }
+}
+@media (min-width: 1024px) and (max-height: 700px) {
+  .process-scene-pinned .process-info { padding: 12px 0; }
+  .process-scene-pinned .process-info h3 { font-size: clamp(3.25rem, 5vw, 4.25rem); line-height: .92; }
+  .process-scene-pinned .process-stage-kicker { margin-bottom: 14px; font-size: 11px; }
+  .process-scene-pinned .process-purpose { max-width: 430px; margin: 16px 0; font-size: 14px; line-height: 1.55; }
+  .process-scene-pinned .process-technical-labels { margin-bottom: 16px; gap: 7px; font-size: 10px; }
+  .process-scene-pinned .process-explore { min-width: 210px; padding: 9px 0; font-size: 13px; }
 }
 @media (max-width: 767px) {
   .process-intro { padding: 65px 6vw 30px; }.process-scene { padding: 0 6vw 30px; }
