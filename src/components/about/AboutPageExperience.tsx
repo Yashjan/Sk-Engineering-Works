@@ -55,7 +55,7 @@ const journey: JourneyPhase[] = [
       "Growing experience in salt machinery and complete refinery systems took the company beyond Rajasthan and into Gujarat.",
       "S.K. Engineering Works now executes work across both states, carrying workshop capability through to site installation.",
     ],
-    media: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg",
+    media: "/images/projects/jagdamba/cover Image.png",
     mediaAlt: "Completed salt refinery plant representing S.K. Engineering Works execution across Rajasthan and Gujarat",
     mediaCaption: "COMPLETE REFINERY / FIELD EXECUTION",
   },
@@ -188,7 +188,7 @@ export default function AboutPageExperience() {
 
     <section className="about-page-footprint about-page-reveal" aria-labelledby="about-footprint-title">
       <div className="about-page-section-meta" data-reveal><span>EXECUTION FOOTPRINT / 07</span><span>RAJASTHAN + GUJARAT</span></div>
-      <div className="about-page-footprint-grid"><div className="about-page-footprint-copy"><h2 id="about-footprint-title" data-reveal>ROOTED IN SAMBHAR.<br /><span>WORKING ACROSS REGIONS.</span></h2><p data-reveal>Mechanical roots in Sambhar Lake have grown into machinery and salt refinery execution across Rajasthan and Gujarat.</p><div className="about-page-regions" aria-hidden="true" data-reveal><span>RAJASTHAN</span><span>GUJARAT</span></div></div><div className="about-page-footprint-proof"><figure data-reveal><Image src={assetPath("/images/projects/jagdamba/04_jagdamba_project_cover.jpg")} alt="Completed S.K. Engineering Works salt refinery installation in Phalodi, Rajasthan" fill sizes="(max-width: 767px) 88vw, 43vw" /><figcaption>COMPLETE PLANT / FIELD EXECUTION</figcaption></figure><ul aria-label="Verified project locations">{locations.map(([city, region], index) => <li key={city} data-reveal><span>0{index + 1}</span><strong>{city}</strong><small>{region}</small></li>)}</ul></div></div>
+      <div className="about-page-footprint-grid"><div className="about-page-footprint-copy"><h2 id="about-footprint-title" data-reveal>ROOTED IN SAMBHAR.<br /><span>WORKING ACROSS REGIONS.</span></h2><p data-reveal>Mechanical roots in Sambhar Lake have grown into machinery and salt refinery execution across Rajasthan and Gujarat.</p><div className="about-page-regions" aria-hidden="true" data-reveal><span>RAJASTHAN</span><span>GUJARAT</span></div></div><div className="about-page-footprint-proof"><figure data-reveal><Image src={assetPath("/images/projects/jagdamba/cover Image.png")} alt="Completed S.K. Engineering Works salt refinery installation in Phalodi, Rajasthan" fill sizes="(max-width: 767px) 88vw, 43vw" /><figcaption>COMPLETE PLANT / FIELD EXECUTION</figcaption></figure><ul aria-label="Verified project locations">{locations.map(([city, region], index) => <li key={city} data-reveal><span>0{index + 1}</span><strong>{city}</strong><small>{region}</small></li>)}</ul></div></div>
     </section>
   </div>;
 }

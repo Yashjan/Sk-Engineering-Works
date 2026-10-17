@@ -13,7 +13,7 @@ const evidence = [
     className: "projects-hero-evidence-primary",
     type: "video" as const,
     src: "/images/projects/jagdamba/03_jagdamba_completed_plant.mp4",
-    poster: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg",
+    poster: "/images/projects/jagdamba/cover Image.png",
     alt: "Completed 15 TPH salt refinery plant in Phalodi, Rajasthan",
     label: "15 TPH / SALT REFINERY",
     detail: "PHALODI / RAJASTHAN",

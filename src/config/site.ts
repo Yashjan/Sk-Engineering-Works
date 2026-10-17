@@ -26,7 +26,7 @@ export const siteConfig = {
     addressCountry: "IN",
   },
   logo: "/images/sk-logo.png",
-  socialImage: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg",
+  socialImage: "/images/projects/jagdamba/cover Image.png",
 } as const;
 
 export function absoluteUrl(pathname = "/") {

@@ -48,7 +48,7 @@ export default function CompletePlantBridge() {
 
       <figure className="plant-bridge-media">
         <div className="plant-bridge-image-frame">
-          <Image src={assetPath("/images/projects/jagdamba/04_jagdamba_project_cover.jpg")}
+          <Image src={assetPath("/images/projects/jagdamba/cover Image.png")}
             alt="Installed S.K. Engineering Works salt refinery equipment at Jagdamba Salt, Phalodi, Rajasthan"
             fill sizes="(max-width: 767px) 88vw, (max-width: 1199px) 40vw, 600px" />
         </div>
