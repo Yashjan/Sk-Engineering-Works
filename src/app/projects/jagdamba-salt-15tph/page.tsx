@@ -5,6 +5,10 @@ import Navbar from "@/components/layout/Navbar";
 import JagdambaProjectHero from "@/components/projects/JagdambaProjectHero";
 import ProjectMediaStory from "@/components/projects/ProjectMediaStory";
 import ProjectOverview from "@/components/projects/ProjectOverview";
+import ProjectChallenges from "@/components/projects/ProjectChallenges";
+import ProjectEngineeringApproach from "@/components/projects/ProjectEngineeringApproach";
+import { jagdambaProjectChallenges } from "@/data/project-challenges";
+import { engineeringExecutionStages } from "@/data/engineering-approach";
 import { createPageMetadata } from "@/config/site";
 import "./project-detail-shell.css";
 
@@ -35,6 +39,18 @@ export default function JagdambaProjectPage() {
           summary="A 15 TPH salt refinery project for Jagdamba Salt Pvt. Ltd. in Phalodi, Rajasthan, forming part of S.K. Engineering Works' salt refinery project portfolio."
         />
         <ProjectMediaStory />
+        <ProjectChallenges
+          sectionNumber="04"
+          heading={["EVERY SITE", "SETS ITS OWN", "CONSTRAINTS."]}
+          intro="Industrial plant projects often require engineering decisions to respond to real site conditions, equipment integration and execution constraints."
+          items={jagdambaProjectChallenges}
+        />
+        <ProjectEngineeringApproach
+          sectionNumber="05"
+          heading={["FROM PLAN", "TO PLANT."]}
+          intro="A general execution framework for salt refinery projects, from equipment planning to coordinated installation."
+          stages={engineeringExecutionStages}
+        />
       </main>
     </>
   );

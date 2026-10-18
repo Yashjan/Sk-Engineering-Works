@@ -1,0 +1,203 @@
+.project-approach {
+  --approach-rule: rgb(243 242 237 / 23%);
+  background: #0b0d0e;
+  color: #f3f2ed;
+  scroll-margin-top: 112px;
+}
+
+.project-approach-shell {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 34px);
+  width: min(100%, 1760px);
+  margin-inline: auto;
+  padding: clamp(100px, 9vw, 168px) clamp(38px, 5.8vw, 108px) clamp(100px, 10vw, 180px);
+}
+
+.project-approach-intro {
+  grid-column: 1 / 6;
+  position: sticky;
+  top: 144px;
+  align-self: start;
+  min-width: 0;
+}
+
+.project-approach-eyebrow,
+.project-approach-flow-label {
+  margin: 0;
+  color: #a9afa9;
+  font-size: 11px;
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: .12em;
+}
+
+.project-approach-heading {
+  margin: clamp(40px, 4.6vw, 72px) 0 0;
+  font-size: clamp(52px, 5.6vw, 100px);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: -.065em;
+  overflow-wrap: anywhere;
+}
+
+.project-approach-heading > span { display: block; }
+.project-approach-heading > span:last-child { color: #a1aaa3; }
+
+.project-approach-description {
+  max-width: 32ch;
+  margin: clamp(28px, 3vw, 46px) 0 0;
+  color: #b1b8b1;
+  font-size: clamp(16px, 1.1vw, 18px);
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.project-approach-flow {
+  grid-column: 7 / 13;
+  min-width: 0;
+}
+
+.project-approach-flow-label {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-bottom: 36px;
+  font-size: 10px;
+  letter-spacing: .1em;
+}
+
+.project-approach-flow-label > span { color: #8e9891; }
+
+.project-approach-stages {
+  position: relative;
+  padding-left: 28px;
+  border-left: 1px solid var(--approach-rule);
+}
+
+.project-approach-progress {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 1px;
+  background: #b3c4bc;
+  transform-origin: top;
+}
+
+.project-approach-stages[data-tracking] .project-approach-progress { display: block; }
+
+.project-approach-stage {
+  position: relative;
+  min-width: 0;
+  padding: clamp(32px, 3.1vw, 48px) 0 clamp(36px, 3.6vw, 56px);
+}
+
+.project-approach-stage:last-child { border-bottom: 1px solid var(--approach-rule); }
+
+.project-approach-stage-rule {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--approach-rule);
+  transform-origin: left;
+}
+
+.project-approach-stage-node {
+  position: absolute;
+  top: clamp(36px, 3.5vw, 54px);
+  left: -31px;
+  width: 5px;
+  height: 5px;
+  background: #748079;
+  transition: background 280ms ease;
+}
+
+.project-approach-stage-content {
+  display: grid;
+  grid-template-columns: clamp(38px, 4vw, 62px) minmax(0, 1fr);
+  gap: clamp(16px, 1.7vw, 26px);
+  align-items: start;
+}
+
+.project-approach-stage-number {
+  color: #96a59c;
+  font-size: clamp(30px, 3.2vw, 50px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -.06em;
+  font-variant-numeric: tabular-nums;
+  transition: color 280ms ease;
+}
+
+.project-approach-stage-copy { min-width: 0; }
+
+.project-approach-stage-copy h3 {
+  margin: 0;
+  font-size: clamp(27px, 2.65vw, 46px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -.045em;
+  overflow-wrap: anywhere;
+  transition: color 280ms ease;
+}
+
+.project-approach-stage-copy p {
+  max-width: 33ch;
+  margin: 18px 0 0;
+  color: #b4bab4;
+  font-size: clamp(16px, 1.05vw, 18px);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+/* Keep descriptions readable while the current stage gains emphasis. */
+.project-approach-stages[data-tracking] .project-approach-stage:not([data-active]) h3 { color: #88918a; }
+.project-approach-stages[data-tracking] .project-approach-stage:not([data-active]) .project-approach-stage-number { color: #78837c; }
+.project-approach-stage[data-active] .project-approach-stage-number { color: #e4e8df; }
+.project-approach-stage[data-active] .project-approach-stage-node { background: #e4e8df; }
+
+@media (min-width: 1024px) and (max-height: 700px) {
+  .project-approach-intro { position: static; }
+}
+
+@media (max-width: 1099px) {
+  .project-approach-shell { padding-inline: 5vw; }
+}
+
+@media (max-width: 1023px) {
+  .project-approach-shell { display: block; }
+  .project-approach-intro { position: static; }
+  .project-approach-heading { font-size: clamp(48px, 8.8vw, 80px); }
+  .project-approach-description { max-width: 38ch; }
+  .project-approach-flow { margin: 72px 0 0 16%; }
+}
+
+@media (max-width: 767px) {
+  .project-approach { scroll-margin-top: 82px; }
+  .project-approach-shell { padding: 88px 6vw; }
+  .project-approach-eyebrow { font-size: 10px; }
+  .project-approach-heading { margin-top: 38px; font-size: clamp(44px, 11.8vw, 72px); }
+  .project-approach-description { margin-top: 28px; font-size: 16px; }
+  .project-approach-flow { margin: 56px 0 0; }
+  .project-approach-flow-label { margin-bottom: 26px; font-size: 9px; }
+  .project-approach-stages { padding-left: 20px; }
+  .project-approach-stage { padding: 30px 0 34px; }
+  .project-approach-stage-node { left: -23px; top: 36px; }
+  .project-approach-stage-content { grid-template-columns: 34px minmax(0, 1fr); gap: 14px; }
+  .project-approach-stage-number { font-size: 28px; }
+  .project-approach-stage-copy h3 { font-size: clamp(24px, 6.1vw, 34px); }
+  .project-approach-stage-copy p { margin-top: 14px; font-size: 16px; line-height: 1.6; }
+}
+
+@media (max-width: 359px) {
+  .project-approach-shell { padding-inline: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-approach-intro { position: static; }
+  .project-approach-stage-number,
+  .project-approach-stage-copy h3,
+  .project-approach-stage-node { transition: none; }
+}
