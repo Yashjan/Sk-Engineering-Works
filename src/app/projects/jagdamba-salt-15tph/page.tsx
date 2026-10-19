@@ -7,8 +7,12 @@ import ProjectMediaStory from "@/components/projects/ProjectMediaStory";
 import ProjectOverview from "@/components/projects/ProjectOverview";
 import ProjectChallenges from "@/components/projects/ProjectChallenges";
 import ProjectEngineeringApproach from "@/components/projects/ProjectEngineeringApproach";
+import ProjectPlantSystem from "@/components/projects/ProjectPlantSystem";
+import ProjectExecutionJourney from "@/components/projects/ProjectExecutionJourney";
 import { jagdambaProjectChallenges } from "@/data/project-challenges";
 import { engineeringExecutionStages } from "@/data/engineering-approach";
+import { jagdambaPlantLayout, jagdambaPlantSystem } from "@/data/project-plant-system";
+import { jagdambaExecutionStages } from "@/data/project-execution";
 import { createPageMetadata } from "@/config/site";
 import "./project-detail-shell.css";
 
@@ -50,6 +54,19 @@ export default function JagdambaProjectPage() {
           heading={["FROM PLAN", "TO PLANT."]}
           intro="A general execution framework for salt refinery projects, from equipment planning to coordinated installation."
           stages={engineeringExecutionStages}
+        />
+        <ProjectPlantSystem
+          sectionNumber="06"
+          heading={["ONE PROCESS.", "MULTIPLE CONNECTED", "MACHINES."]}
+          intro="Each stage performs a specific role in refining raw salt into a finished product. Material handling, wet processing, drying, screening, grinding and air management are integrated into one continuous system."
+          system={jagdambaPlantSystem}
+          layout={jagdambaPlantLayout}
+        />
+        <ProjectExecutionJourney
+          sectionNumber="07"
+          heading={["FROM", "FABRICATION", "TO INSTALLATION."]}
+          intro="A field record of fabrication and site execution using verified media from the Jagdamba Salt refinery project."
+          stages={jagdambaExecutionStages}
         />
       </main>
     </>
