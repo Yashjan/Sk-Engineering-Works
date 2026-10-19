@@ -53,7 +53,11 @@ export default function ProjectEngineeringApproach({ sectionNumber, heading, int
 
       if (context.conditions.desktop) {
         // Highlighting stays local to this sequence and causes no React renders on scroll.
+        const progress = sequence.querySelector<HTMLElement>(".project-approach-progress");
+        if (!progress) return;
+
         let activeIndex = -1;
+        let updateFrame = 0;
         const updateStage = (progress: number) => {
           const nextIndex = Math.min(rows.length - 1, Math.floor(progress * rows.length));
           if (nextIndex === activeIndex) return;
@@ -62,21 +66,37 @@ export default function ProjectEngineeringApproach({ sectionNumber, heading, int
         };
 
         sequence.setAttribute("data-tracking", "");
-        updateStage(0);
-        gsap.fromTo(sequence.querySelector(".project-approach-progress"), { scaleY: 0 }, {
-          scaleY: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sequence,
-            start: "top 58%",
-            // Also reach Installation when this is the final section on the page.
-            end: "clamp(bottom 76%)",
-            scrub: true,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => updateStage(self.progress),
-            onRefresh: (self) => updateStage(self.progress),
-          },
-        });
+        progress.style.transform = "scaleY(0)";
+
+        const updateTracking = () => {
+          updateFrame = 0;
+          const bounds = sequence.getBoundingClientRect();
+          const startPosition = window.innerHeight * 0.58;
+          const endPosition = window.innerHeight * 0.76 - bounds.height;
+          const travel = Math.max(1, startPosition - endPosition);
+          const value = Math.min(1, Math.max(0, (startPosition - bounds.top) / travel));
+
+          progress.style.transform = `scaleY(${value})`;
+          updateStage(value);
+        };
+
+        const scheduleTrackingUpdate = () => {
+          if (updateFrame) return;
+          updateFrame = requestAnimationFrame(updateTracking);
+        };
+
+        updateTracking();
+        window.addEventListener("scroll", scheduleTrackingUpdate, { passive: true });
+        window.addEventListener("resize", scheduleTrackingUpdate);
+
+        return () => {
+          window.removeEventListener("scroll", scheduleTrackingUpdate);
+          window.removeEventListener("resize", scheduleTrackingUpdate);
+          if (updateFrame) cancelAnimationFrame(updateFrame);
+          progress.style.removeProperty("transform");
+          sequence.removeAttribute("data-tracking");
+          rows.forEach((row) => row.removeAttribute("data-active"));
+        };
       }
 
       return () => {

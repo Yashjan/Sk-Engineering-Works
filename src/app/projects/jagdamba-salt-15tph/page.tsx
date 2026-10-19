@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
+import ProjectEnquirySection from "@/components/home/ProjectEnquirySection";
+import TrustedClientsSection from "@/components/home/TrustedClientsSection";
 import JagdambaProjectHero from "@/components/projects/JagdambaProjectHero";
 import ProjectMediaStory from "@/components/projects/ProjectMediaStory";
 import ProjectOverview from "@/components/projects/ProjectOverview";
@@ -9,10 +11,13 @@ import ProjectChallenges from "@/components/projects/ProjectChallenges";
 import ProjectEngineeringApproach from "@/components/projects/ProjectEngineeringApproach";
 import ProjectPlantSystem from "@/components/projects/ProjectPlantSystem";
 import ProjectExecutionJourney from "@/components/projects/ProjectExecutionJourney";
+import ProjectFinalResult from "@/components/projects/ProjectFinalResult";
+import ProjectEngineeringNotes from "@/components/projects/ProjectEngineeringNotes";
 import { jagdambaProjectChallenges } from "@/data/project-challenges";
 import { engineeringExecutionStages } from "@/data/engineering-approach";
 import { jagdambaPlantLayout, jagdambaPlantSystem } from "@/data/project-plant-system";
 import { jagdambaExecutionStages } from "@/data/project-execution";
+import { engineeringNotes } from "@/data/engineering-notes";
 import { createPageMetadata } from "@/config/site";
 import "./project-detail-shell.css";
 
@@ -26,6 +31,9 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function JagdambaProjectPage() {
   const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
+  const closingSectionStart = 10;
+  const trustedClientsSection = String(closingSectionStart).padStart(2, "0");
+  const projectEnquirySection = String(closingSectionStart + 1).padStart(2, "0");
 
   return (
     <>
@@ -68,6 +76,25 @@ export default function JagdambaProjectPage() {
           intro="A field record of fabrication and site execution using verified media from the Jagdamba Salt refinery project."
           stages={jagdambaExecutionStages}
         />
+        <ProjectFinalResult
+          sectionNumber="08"
+          heading={["BUILT.", "INSTALLED.", "COMPLETE."]}
+          client="JAGDAMBA SALT PVT. LTD."
+          capacity="15 TPH"
+          projectType="SALT REFINERY"
+          location="PHALODI, RAJASTHAN"
+          statement="15 TPH salt refinery project for Jagdamba Salt Pvt. Ltd., Phalodi, Rajasthan."
+          mediaSrc="/images/projects/jagdamba/03_jagdamba_completed_plant.mp4"
+          poster="/images/projects/jagdamba/cover Image.png"
+        />
+        <ProjectEngineeringNotes
+          sectionNumber="09"
+          heading={["ENGINEERING", "TAKEAWAYS."]}
+          intro="General observations from S.K. Engineering Works' approach to planning and executing connected salt refinery systems."
+          notes={engineeringNotes}
+        />
+        <TrustedClientsSection standalone sectionNumber={trustedClientsSection} />
+        <ProjectEnquirySection sectionNumber={projectEnquirySection} showNavigation />
       </main>
     </>
   );
