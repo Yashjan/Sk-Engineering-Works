@@ -5,7 +5,7 @@ html { scrollbar-gutter: stable; }
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 2147483647;
   overflow: hidden;
   contain: strict;
   pointer-events: none;

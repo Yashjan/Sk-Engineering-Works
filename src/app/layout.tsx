@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import SiteIntro from "@/components/layout/SiteIntro";
 import JsonLd from "@/components/seo/JsonLd";
 import { absoluteAssetUrl, absoluteUrl, siteConfig } from "@/config/site";
 import { siteStructuredData } from "@/lib/structured-data";
@@ -37,11 +38,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#0B0D0E" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-  const introScript = `(function(){try{var base=${JSON.stringify(basePath)};var path=location.pathname.replace(/\\/+$/,'')||'/';var home=path===(base||'/');var mobilePlants=path===base+'/salt-refinery-plants'&&window.matchMedia('(max-width: 767px)').matches;if((home||mobilePlants)&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.dataset.skIntro='active';}}catch(e){}})();`;
+  const introScript = `(function(){try{document.documentElement.dataset.skIntro='active';}catch(e){}})();`;
   return <html lang="en-IN" data-scroll-behavior="smooth" suppressHydrationWarning><head>
-    {/* Parser-blocking session decision: runs before the body can paint. */}
+    {/* Activate the global hard-load intro before route content can paint. */}
     <script dangerouslySetInnerHTML={{ __html: introScript }} />
     <JsonLd data={siteStructuredData} />
-  </head><body>{children}</body></html>;
+  </head><body><SiteIntro />{children}</body></html>;
 }

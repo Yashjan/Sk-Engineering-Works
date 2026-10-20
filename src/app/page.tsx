@@ -2,7 +2,6 @@ import { existsSync } from "node:fs";
 import type { Metadata } from "next";
 import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
-import SiteIntro from "@/components/layout/SiteIntro";
 import Hero from "@/components/home/Hero";
 import ProcessJourney from "@/components/home/ProcessJourney";
 import MachineryGateway from "@/components/home/MachineryGateway";
@@ -35,5 +34,5 @@ export default function Home() {
     coverImage: assetPath(project.coverImage),
     media: project.media.map((item) => ({ ...item, src: assetPath(item.src) })),
   }));
-  return <><SiteIntro /><a className="skip-link" href="#main">Skip to content</a><Navbar hasLogo={hasLogo} /><main id="main"><Hero hasImage={hasHeroImage} /><ProcessJourney stages={stages} /><MachineryGateway /><ProjectsSection projects={projectRecords} /><ManufacturingSection /><AboutCredibilitySection /><ProjectEnquirySection /></main></>;
+  return <><a className="skip-link" href="#main">Skip to content</a><Navbar hasLogo={hasLogo} /><main id="main"><Hero hasImage={hasHeroImage} /><ProcessJourney stages={stages} /><MachineryGateway /><ProjectsSection projects={projectRecords} /><ManufacturingSection /><AboutCredibilitySection /><ProjectEnquirySection /></main></>;
 }
