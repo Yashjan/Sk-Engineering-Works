@@ -1,0 +1,14 @@
+[data-motion="line-reveal"] {
+  transform-origin: left center;
+}
+
+html.lenis {
+  scroll-behavior: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

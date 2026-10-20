@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import SiteIntro from "@/components/layout/SiteIntro";
 import JsonLd from "@/components/seo/JsonLd";
+import GlobalMotionSystem from "@/components/motion/GlobalMotionSystem";
+import RouteTransitionProvider from "@/components/transitions/RouteTransitionProvider";
 import { absoluteAssetUrl, absoluteUrl, siteConfig } from "@/config/site";
 import { siteStructuredData } from "@/lib/structured-data";
 import "./globals.css";
@@ -43,5 +45,5 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     {/* Activate the global hard-load intro before route content can paint. */}
     <script dangerouslySetInnerHTML={{ __html: introScript }} />
     <JsonLd data={siteStructuredData} />
-  </head><body><SiteIntro />{children}</body></html>;
+  </head><body><SiteIntro /><GlobalMotionSystem /><RouteTransitionProvider>{children}</RouteTransitionProvider></body></html>;
 }

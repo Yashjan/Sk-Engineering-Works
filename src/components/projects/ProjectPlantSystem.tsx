@@ -260,8 +260,7 @@ export default function ProjectPlantSystem({ sectionNumber, heading, intro, syst
       if (panelRect.bottom > safeTop) return;
 
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const scrollWindow = window as Window & { lenis?: LenisController; __lenis?: LenisController };
-      const lenis = scrollWindow.lenis ?? scrollWindow.__lenis;
+      const lenis = (window as Window & { __lenis?: LenisController }).__lenis;
       if (lenis) {
         lenis.scrollTo(panel, {
           offset: -safeTop,

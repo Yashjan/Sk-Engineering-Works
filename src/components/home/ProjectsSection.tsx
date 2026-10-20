@@ -98,10 +98,10 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
     <section id="projects" className="projects-section" aria-labelledby="projects-heading">
       <div className="projects-shell">
         <header className="projects-intro">
-          <p className="projects-eyebrow">PROJECTS <span>/ 02</span></p>
+          <p className="projects-eyebrow" data-motion="section-label">PROJECTS <span>/ 02</span></p>
           <div className="projects-intro-row">
-            <h2 id="projects-heading">BUILT FOR<br /><em>REAL PRODUCTION.</em></h2>
-            <p>Installed salt plants and process equipment that demonstrate our fabrication, integration and site-execution capability.</p>
+            <h2 id="projects-heading" data-motion="reveal-up">BUILT FOR<br /><em>REAL PRODUCTION.</em></h2>
+            <p data-motion="reveal-up">Installed salt plants and process equipment that demonstrate our fabrication, integration and site-execution capability.</p>
           </div>
         </header>
 

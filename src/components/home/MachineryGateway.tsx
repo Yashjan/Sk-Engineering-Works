@@ -13,10 +13,10 @@ export default function MachineryGateway() {
   return (
     <section className="machinery-gateway" aria-labelledby="machinery-gateway-heading">
       <div className="machinery-gateway-shell">
-        <p className="machinery-gateway-eyebrow">MACHINERY / SYSTEMS</p>
+        <p className="machinery-gateway-eyebrow" data-motion="section-label">MACHINERY / SYSTEMS</p>
         <div className="machinery-gateway-layout">
-          <h2 id="machinery-gateway-heading">BUILT FOR<br /><span>INDUSTRIAL PROCESSING.</span></h2>
-          <div className="machinery-gateway-index">
+          <h2 id="machinery-gateway-heading" data-motion="reveal-up">BUILT FOR<br /><span>INDUSTRIAL PROCESSING.</span></h2>
+          <div className="machinery-gateway-index" data-motion="reveal-up">
             <ol aria-label="Machinery categories">
               {categories.map((category, index) => (
                 <li key={category}><span>{String(index + 1).padStart(2, "0")}</span><strong>{category}</strong></li>

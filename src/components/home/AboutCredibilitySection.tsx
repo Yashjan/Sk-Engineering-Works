@@ -66,7 +66,7 @@ export default function AboutCredibilitySection() {
                 <p>From Rajasthan to Gujarat, our experience has been shaped on real workshop and plant floors through fabrication, integration, installation and long-term engineering support.</p>
               </div>
             </div>
-            <figure className="about-factory-media">
+            <figure className="about-factory-media" data-motion="media-parallax">
               <Image
                 src={assetPath("/images/projects/jagdamba/cover Image.png")}
                 alt="S.K. Engineering Works salt refinery installation"
