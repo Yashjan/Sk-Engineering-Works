@@ -43,6 +43,7 @@ body:has(.screw-conveyor-experience) [data-navbar] { opacity: 0; visibility: hid
 }
 
 @media (max-width: 767px) {
+  .screw-conveyor-inspection-hint::after { content: "  ·  PINCH TO ZOOM"; }
   .screw-conveyor-experience { height: 315svh; }
   .screw-conveyor-viewport { min-height: 568px; }
   .screw-conveyor-scene-two-target { top: 44%; right: 6vw; left: 6vw; width: auto; height: 44svh; }
@@ -51,9 +52,15 @@ body:has(.screw-conveyor-experience) [data-navbar] { opacity: 0; visibility: hid
   .screw-conveyor-identity h1 { font-size: clamp(48px, 15vw, 68px); line-height: .86; }
   .screw-conveyor-function { margin-top: 20px; font-size: 11px; }
   .screw-conveyor-summary { max-width: 330px; margin-top: 11px; font-size: 11px; line-height: 1.55; }
-  .screw-conveyor-scroll-cue { right: 6vw; bottom: max(24px, env(safe-area-inset-bottom)); }
-  .screw-conveyor-inspection-hint { left: 6vw; bottom: max(24px, env(safe-area-inset-bottom)); font-size: 8px; }
+  .screw-conveyor-scroll-cue { right: auto; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); transform: translateX(-50%); justify-content: center; gap: 12px; width: calc(100% - 40px); font-size: 9px; letter-spacing: .14em; white-space: nowrap; }
+  .screw-conveyor-scroll-cue b { font-size: 16px; }
+  .screw-conveyor-inspection-hint { left: 50%; bottom: calc(58px + env(safe-area-inset-bottom)); transform: translateX(-50%); justify-content: center; width: calc(100% - 40px); font-size: 9px; letter-spacing: .13em; white-space: nowrap; }
   .screw-conveyor-loading { left: 6vw; bottom: max(48px, calc(env(safe-area-inset-bottom) + 48px)); }
+}
+
+@media (max-width: 369px) {
+  .screw-conveyor-inspection-hint { white-space: normal; flex-wrap: wrap; gap: 2px 8px; line-height: 1.35; }
+  .screw-conveyor-inspection-hint::after { content: "PINCH TO ZOOM"; display: block; width: 100%; }
 }
 
 @media (max-width: 767px) and (max-height: 700px) {

@@ -52,6 +52,8 @@ export type ScrewConveyorInspection = {
   keyHorizontal: -1 | 0 | 1;
   keyVertical: -1 | 0 | 1;
   resetVersion: number;
+  zoomTarget: number;
+  panTarget: number;
 };
 
 export type ModelReport = {
@@ -73,6 +75,8 @@ function MachineModel({ motion, inspection, onReady }: MachineModelProps) {
   const cinematicGroup = useRef<Group>(null);
   const interactionGroup = useRef<Group>(null);
   const floatGroup = useRef<Group>(null);
+  const zoomGroup = useRef<Group>(null);
+  const panGroup = useRef<Group>(null);
   const shadowGroup = useRef<Group>(null);
   const interactionRuntime = useRef({
     targetQuaternion: new Quaternion(),
@@ -135,8 +139,10 @@ function MachineModel({ motion, inspection, onReady }: MachineModelProps) {
     const cinematic = cinematicGroup.current;
     const interaction = interactionGroup.current;
     const floating = floatGroup.current;
+    const zoom = zoomGroup.current;
+    const pan = panGroup.current;
     const shadow = shadowGroup.current;
-    if (!position || !scrollInertia || !cinematic || !interaction || !floating || !shadow) return;
+    if (!position || !scrollInertia || !cinematic || !interaction || !floating || !zoom || !pan || !shadow) return;
 
     const state = motion.current;
     const controls = inspection.current;
@@ -191,6 +197,8 @@ function MachineModel({ motion, inspection, onReady }: MachineModelProps) {
     }
 
     const scale = viewport.width * state.width / presentation.length;
+    zoom.scale.setScalar(MathUtils.damp(zoom.scale.x, MathUtils.clamp(controls.zoomTarget, 1, 3.2), 10, frameDelta));
+    pan.position.x = MathUtils.damp(pan.position.x, MathUtils.clamp(controls.panTarget, -viewport.width * 0.9, viewport.width * 0.9), 9, frameDelta);
     // Sine-based drift with a three-second full cycle.
     const float = Math.sin(clock.elapsedTime * (Math.PI * 2 / 3)) * viewport.height * 0.005 * state.floatStrength;
     const depthFloat = Math.cos(clock.elapsedTime * (Math.PI * 2 / 12)) * 0.018 * state.floatStrength;
@@ -217,12 +225,16 @@ function MachineModel({ motion, inspection, onReady }: MachineModelProps) {
     <group ref={positionGroup}>
       <group ref={scrollInertiaGroup}>
         <group ref={cinematicGroup}>
+        <group ref={panGroup}>
+        <group ref={zoomGroup}>
         <group ref={interactionGroup}>
           <group ref={floatGroup}>
             <group rotation={[0, -Math.PI / 2, 0]}>
               <primitive object={model} position={[-presentation.center.x, -presentation.center.y, -presentation.center.z]} />
             </group>
           </group>
+        </group>
+        </group>
         </group>
         </group>
       </group>

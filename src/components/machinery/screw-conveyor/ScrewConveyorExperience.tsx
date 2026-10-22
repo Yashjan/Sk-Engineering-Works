@@ -76,8 +76,13 @@ export default function ScrewConveyorExperience() {
     keyHorizontal: 0,
     keyVertical: 0,
     resetVersion: 0,
+    zoomTarget: 1,
+    panTarget: 0,
   });
   const lastTapTime = useRef(0);
+  const touchPoints = useRef(new Map<number, { x: number; y: number }>());
+  const pinchStartDistance = useRef<number | null>(null);
+  const pinchStartZoom = useRef(1);
   const [modelReady, setModelReady] = useState(false);
 
   const handleModelReady = useCallback(() => {
@@ -95,6 +100,8 @@ export default function ScrewConveyorExperience() {
     controls.targetPitch = 0;
     controls.velocityYaw = 0;
     controls.velocityPitch = 0;
+    controls.zoomTarget = 1;
+    controls.panTarget = 0;
     controls.resetVersion += 1;
     inspectionHint.current?.classList.add("is-dismissed");
   }, []);
@@ -111,12 +118,25 @@ export default function ScrewConveyorExperience() {
     controls.dragging = false;
     controls.pointerId = null;
     controls.intent = "pending";
+    touchPoints.current.delete(event.pointerId);
+    if (touchPoints.current.size < 2) pinchStartDistance.current = null;
     event.currentTarget.dataset.inspection = controls.enabled ? "enabled" : "disabled";
   }, [resetInspection]);
 
   const handlePointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     const controls = inspection.current;
     if (!controls.enabled || (event.pointerType === "mouse" && event.button !== 0)) return;
+    if (event.pointerType === "touch") {
+      touchPoints.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (touchPoints.current.size === 2) {
+        const points = [...touchPoints.current.values()];
+        pinchStartDistance.current = Math.hypot(points[1].x - points[0].x, points[1].y - points[0].y);
+        pinchStartZoom.current = controls.zoomTarget;
+        controls.intent = "rotate";
+        controls.dragging = false;
+        dismissInspectionHint();
+      }
+    }
     controls.pointerId = event.pointerId;
     controls.startX = event.clientX;
     controls.startY = event.clientY;
@@ -137,7 +157,24 @@ export default function ScrewConveyorExperience() {
 
   const handlePointerMove = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     const controls = inspection.current;
-    if (!controls.enabled || controls.pointerId !== event.pointerId || controls.intent === "scroll") return;
+    if (!controls.enabled || (controls.pointerId !== event.pointerId && !touchPoints.current.has(event.pointerId)) || controls.intent === "scroll") return;
+    if (event.pointerType === "touch" && touchPoints.current.has(event.pointerId)) {
+      touchPoints.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (touchPoints.current.size === 2 && pinchStartDistance.current) {
+        const points = [...touchPoints.current.values()];
+        const distance = Math.hypot(points[1].x - points[0].x, points[1].y - points[0].y);
+        controls.zoomTarget = clamp(pinchStartZoom.current * distance / pinchStartDistance.current, 1, 3.2);
+        event.preventDefault();
+        return;
+      }
+    }
+    if (event.pointerType === "touch" && touchPoints.current.size === 1 && controls.zoomTarget > 1.15) {
+      controls.panTarget = clamp(controls.panTarget + (event.clientX - controls.lastX) * 0.012, -1.2, 1.2);
+      controls.lastX = event.clientX;
+      controls.lastY = event.clientY;
+      event.preventDefault();
+      return;
+    }
 
     if (controls.intent === "pending") {
       const totalX = event.clientX - controls.startX;
@@ -247,6 +284,7 @@ export default function ScrewConveyorExperience() {
         controls.keyVertical = 0;
         controls.velocityYaw = 0;
         controls.velocityPitch = 0;
+        controls.zoomTarget = 1;
         if (controls.pointerId !== null && interactionSurface.hasPointerCapture(controls.pointerId)) {
           interactionSurface.releasePointerCapture(controls.pointerId);
         }
