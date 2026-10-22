@@ -179,15 +179,17 @@ export default function ScrewConveyorExperience() {
         controls.zoomTarget = nextZoom;
         // Keep the content beneath the pinch midpoint stationary as scale changes.
         // Pan is expressed in the model's normalized viewport space.
-        controls.panTarget = clamp(pinchStartPan.current + focalOffset * (1 - nextZoom / pinchStartZoom.current) * 1.35, -1.2, 1.2);
-        controls.panTarget = clamp(controls.panTarget + (midpoint.x - pinchMidpoint.current.x) * 0.012, -1.2, 1.2);
+        const panLimit = Math.max(0.08, (nextZoom - 1) * 1.35);
+        controls.panTarget = clamp(pinchStartPan.current + focalOffset * (1 - nextZoom / pinchStartZoom.current) * 1.35, -panLimit, panLimit);
+        controls.panTarget = clamp(controls.panTarget + (midpoint.x - pinchMidpoint.current.x) * 0.012, -panLimit, panLimit);
         pinchMidpoint.current = midpoint;
         event.preventDefault();
         return;
       }
     }
     if (event.pointerType === "touch" && touchPoints.current.size === 1 && controls.zoomTarget > 1.15) {
-      controls.panTarget = clamp(controls.panTarget + (event.clientX - controls.lastX) * 0.012, -1.2, 1.2);
+      const panLimit = Math.max(0.08, (controls.zoomTarget - 1) * 1.35);
+      controls.panTarget = clamp(controls.panTarget + (event.clientX - controls.lastX) * 0.012, -panLimit, panLimit);
       controls.lastX = event.clientX;
       controls.lastY = event.clientY;
       event.preventDefault();

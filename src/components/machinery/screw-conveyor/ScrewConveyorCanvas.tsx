@@ -198,7 +198,8 @@ function MachineModel({ motion, inspection, onReady }: MachineModelProps) {
 
     const scale = viewport.width * state.width / presentation.length;
     zoom.scale.setScalar(MathUtils.damp(zoom.scale.x, MathUtils.clamp(controls.zoomTarget, 1, 3.2), 10, frameDelta));
-    pan.position.x = MathUtils.damp(pan.position.x, MathUtils.clamp(controls.panTarget, -viewport.width * 0.9, viewport.width * 0.9), 9, frameDelta);
+    const panLimit = Math.max(0.08, (MathUtils.clamp(controls.zoomTarget, 1, 3.2) - 1) * viewport.width * 1.35);
+    pan.position.x = MathUtils.damp(pan.position.x, MathUtils.clamp(controls.panTarget, -panLimit, panLimit), 9, frameDelta);
     // Sine-based drift with a three-second full cycle.
     const float = Math.sin(clock.elapsedTime * (Math.PI * 2 / 3)) * viewport.height * 0.005 * state.floatStrength;
     const depthFloat = Math.cos(clock.elapsedTime * (Math.PI * 2 / 12)) * 0.018 * state.floatStrength;
