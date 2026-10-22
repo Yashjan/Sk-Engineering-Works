@@ -21,6 +21,7 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
   const processTrigger = useRef<ScrollTrigger | null>(null);
   const skipButton = useRef<HTMLButtonElement>(null);
   const skipTween = useRef<gsap.core.Tween | null>(null);
+  const imageRefreshFrame = useRef<number | null>(null);
   const skipDirectionRef = useRef<SkipDirection>("down");
   const skipLocked = useRef(false);
   const [isProcessActive, setIsProcessActive] = useState(false);
@@ -49,8 +50,10 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
       : Math.min(destinationTop, trigger ? trigger.start - 1 : destinationTop);
 
     const scrollTarget = Math.max(0, target);
+    const lenis = window.__lenis;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      window.scrollTo({ top: scrollTarget, behavior: "instant" });
+      if (lenis) lenis.scrollTo(scrollTarget, { immediate: true, force: true });
+      else window.scrollTo({ top: scrollTarget, behavior: "instant" });
       skipLocked.current = false;
       return;
     }
@@ -59,6 +62,16 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
     const distance = Math.abs(scrollTarget - scrollState.y);
     const duration = gsap.utils.clamp(0.75, 1.5, 0.75 + (distance / (window.innerHeight * 18)) * 0.75);
     skipTween.current?.kill();
+    if (lenis) {
+      lenis.scrollTo(scrollTarget, {
+        duration,
+        easing: (progress) => 1 - Math.pow(1 - progress, 4),
+        force: true,
+        lock: true,
+        onComplete: () => { skipLocked.current = false; },
+      });
+      return;
+    }
     skipTween.current = gsap.to(scrollState, {
       y: scrollTarget,
       duration,
@@ -206,7 +219,9 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
         jumpToStage.current = (index) => {
           const stageHold = index === 0 ? HOLD_STAGE_1 : HOLD_LATER_STAGE;
           const time = timeline.labels[`stage${index + 1}`] + stageHold / 2;
-          window.scrollTo({ top: trigger.start + (time / duration) * (trigger.end - trigger.start), behavior: "smooth" });
+          const target = trigger.start + (time / duration) * (trigger.end - trigger.start);
+          if (window.__lenis) window.__lenis.scrollTo(target, { duration: 0.85, force: true });
+          else window.scrollTo({ top: target, behavior: "smooth" });
         };
       } else {
         const trigger = ScrollTrigger.create({
@@ -220,7 +235,19 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
           onUpdate: trackDirection,
         });
         processTrigger.current = trigger;
-        jumpToStage.current = (index) => panels[index]?.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "start" });
+        jumpToStage.current = (index) => {
+          const panel = panels[index];
+          if (!panel) return;
+          if (window.__lenis) {
+            window.__lenis.scrollTo(panel, {
+              immediate: reducedMotion.matches,
+              duration: reducedMotion.matches ? undefined : 0.85,
+              force: true,
+            });
+          } else {
+            panel.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "start" });
+          }
+        };
         if (!reduce) {
           gsap.fromTo(progress, { scaleX: 0 }, {
             scaleX: 1, ease: "none",
@@ -256,8 +283,18 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
       skipLocked.current = false;
       skipTween.current?.kill();
       skipTween.current = null;
+      if (imageRefreshFrame.current !== null) cancelAnimationFrame(imageRefreshFrame.current);
+      imageRefreshFrame.current = null;
     };
   }, [stages]);
+
+  const refreshProcessLayout = () => {
+    if (imageRefreshFrame.current !== null) cancelAnimationFrame(imageRefreshFrame.current);
+    imageRefreshFrame.current = requestAnimationFrame(() => {
+      imageRefreshFrame.current = null;
+      ScrollTrigger.refresh();
+    });
+  };
 
   return (
     <>
@@ -285,7 +322,7 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
                 </div>
                 <div className="process-visual">
                   {stage.hasImage ? (
-                    <Image src={stage.image} alt={stage.imageAlt} fill sizes={stage.id === "belt-conveyor" ? "(min-width: 768px) 72vw, 90vw" : "(min-width: 768px) 64vw, 90vw"} className="process-machine-image" draggable={false} onLoad={() => ScrollTrigger.refresh()} />
+                    <Image src={stage.image} alt={stage.imageAlt} fill sizes={stage.id === "belt-conveyor" ? "(min-width: 768px) 72vw, 90vw" : "(min-width: 768px) 64vw, 90vw"} className="process-machine-image" draggable={false} onLoad={refreshProcessLayout} />
                   ) : (
                     <div className="process-render-placeholder" role="img" aria-label={`${stage.name}: machine image placeholder`}>
                       <div className="process-render-orbit" aria-hidden="true" />

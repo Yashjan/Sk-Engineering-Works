@@ -21,23 +21,19 @@ const CLEANUP_DURATION = 0.08;
 const REVEAL_OVERSCAN = 4;
 const REVEAL_START_WIDTH_RATIO = 0.66;
 
-export default function SiteIntro({ force = false, mobileOnly = false }: { force?: boolean; mobileOnly?: boolean }) {
+export default function SiteIntro() {
   const root = useRef<HTMLDivElement>(null);
   const text = useRef<SVGTextElement>(null);
   const zoom = useRef<SVGGElement>(null);
   const revealShape = useRef<SVGRectElement>(null);
-  const eligible = useRef<boolean | null>(null);
   const [mounted, setMounted] = useState(true);
   const maskId = `intro-${useId().replace(/:/g, "")}`;
 
   useLayoutEffect(() => {
     const html = document.documentElement;
-    const allowedViewport = !mobileOnly || window.matchMedia("(max-width: 767px)").matches;
-    if (force && allowedViewport) html.dataset.skIntro = "active";
-    eligible.current ??= (force && allowedViewport) || html.dataset.skIntro === "active";
-    if (!eligible.current || !root.current || !text.current || !zoom.current || !revealShape.current) return;
+    if (!root.current || !text.current || !zoom.current || !revealShape.current) return;
 
-    // Keep the pre-paint decision through React's development effect replay.
+    // RootLayout sets this before paint; repeat it here for development effect replay.
     html.dataset.skIntro = "active";
     delete html.dataset.skIntroRevealing;
 
@@ -217,7 +213,7 @@ export default function SiteIntro({ force = false, mobileOnly = false }: { force
       html.dataset.skIntro = "done";
       restoreInteraction();
     };
-  }, [force, mobileOnly]);
+  }, []);
 
   if (!mounted) return null;
 

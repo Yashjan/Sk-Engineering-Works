@@ -274,7 +274,7 @@ export const projectGallery: ProjectGalleryItem[] = [
     id: "completed-refinery",
     type: "video",
     src: "/images/projects/jagdamba/03_jagdamba_completed_plant.mp4",
-    poster: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg",
+    poster: "/images/projects/jagdamba/cover Image.png",
     alt: "Completed Jagdamba salt refinery operating in Phalodi, Rajasthan",
     label: "COMPLETED PLANT",
     detail: "PHALODI / RAJASTHAN",
@@ -336,7 +336,7 @@ export const projectGallery: ProjectGalleryItem[] = [
   {
     id: "refinery-overview",
     type: "image",
-    src: "/images/projects/jagdamba/04_jagdamba_project_cover.jpg",
+    src: "/images/projects/jagdamba/cover Image.png",
     alt: "Wide view of a completed salt refinery project",
     label: "PROJECT PROOF",
     detail: "BUILT / INSTALLED / RUNNING",

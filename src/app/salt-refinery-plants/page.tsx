@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import Navbar from "@/components/layout/Navbar";
-import SiteIntro from "@/components/layout/SiteIntro";
 import ProjectEnquirySection from "@/components/home/ProjectEnquirySection";
 import TrustedClientsSection from "@/components/home/TrustedClientsSection";
 import CompleteExecutionSection from "@/components/salt-refinery-plants/CompleteExecutionSection";
@@ -25,7 +24,6 @@ export default function SaltRefineryPlantsPage() {
   return (
     <>
       <BreadcrumbJsonLd currentName="Salt Refinery Plants" currentPath="/salt-refinery-plants" />
-      <SiteIntro force mobileOnly />
       <a className="skip-link" href="#main">Skip to content</a>
       <Navbar hasLogo={hasLogo} />
       <main id="main">
