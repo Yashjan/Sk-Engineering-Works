@@ -1,9 +1,9 @@
 .screw-machine-detail { background: #0b0d0e; }
 .screw-conveyor-experience { position: relative; height: 370svh; background: #0b0d0e; color: #f3f2ed; }
 .screw-conveyor-viewport { position: sticky; top: 0; height: 100svh; min-height: 620px; overflow: clip; isolation: isolate; background: #0b0d0e; }
-.screw-conveyor-white-stage { position: absolute; inset: 0; z-index: 1; background: #f3f1eb; transform-origin: center; will-change: transform, border-radius; }
+.screw-conveyor-white-stage { position: absolute; inset: 0; z-index: 1; background: radial-gradient(circle at 50% 58%, #ffffff 0%, #f4f2ec 48%, #ebe8df 100%); transform-origin: center; will-change: transform, border-radius; }
 .screw-conveyor-scene-two-target { position: absolute; top: 16svh; right: 4.5vw; z-index: -1; width: min(52vw, 980px); height: 68svh; pointer-events: none; visibility: hidden; }
-.screw-conveyor-scene-three { position: absolute; inset: 0; z-index: 2; background: #f3f1eb; will-change: transform; }
+.screw-conveyor-scene-three { position: absolute; inset: 0; z-index: 2; background: radial-gradient(circle at 50% 58%, #ffffff 0%, #f4f2ec 48%, #ebe8df 100%); will-change: transform; }
 .screw-conveyor-canvas-shell { position: absolute; inset: 0; z-index: 3; outline: none; touch-action: pan-y; }
 .screw-conveyor-canvas-shell[data-inspection="enabled"] { cursor: grab; }
 .screw-conveyor-canvas-shell[data-inspection="dragging"] { cursor: grabbing; }
@@ -61,7 +61,7 @@ body:has(.screw-conveyor-experience) [data-navbar] { opacity: 0; visibility: hid
 @media (prefers-reduced-motion: reduce) {
   body:has(.screw-conveyor-experience) [data-navbar] { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
   .screw-conveyor-experience { height: auto; background: #f3f1eb; color: #111415; }
-  .screw-conveyor-viewport { position: relative; height: 100svh; min-height: 680px; background: #f3f1eb; }
+  .screw-conveyor-viewport { position: relative; height: 100svh; min-height: 680px; background: radial-gradient(circle at 50% 58%, #ffffff 0%, #f4f2ec 48%, #ebe8df 100%); }
   .screw-conveyor-white-stage { transform: none; }
   .screw-conveyor-scene-two-target, .screw-conveyor-scene-three, .screw-conveyor-scroll-cue, .screw-conveyor-inspection-hint { display: none; }
   .screw-conveyor-canvas-shell { pointer-events: none; }

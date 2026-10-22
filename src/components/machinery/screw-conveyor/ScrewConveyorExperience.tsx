@@ -55,6 +55,8 @@ export default function ScrewConveyorExperience() {
     cameraZ: 6,
     floatStrength: 0,
     shadowStrength: 1,
+    scrollVelocity: 0,
+    inertiaStrength: 1,
   });
   const inspection = useRef<ScrewConveyorInspection>({
     enabled: true,
@@ -69,8 +71,12 @@ export default function ScrewConveyorExperience() {
     targetYaw: 0,
     targetPitch: 0,
     velocityYaw: 0,
-    keyDirection: 0,
+    velocityPitch: 0,
+    keyHorizontal: 0,
+    keyVertical: 0,
+    resetVersion: 0,
   });
+  const lastTapTime = useRef(0);
   const [modelReady, setModelReady] = useState(false);
 
   const handleModelReady = useCallback(() => {
@@ -82,9 +88,22 @@ export default function ScrewConveyorExperience() {
     inspectionHint.current?.classList.add("is-dismissed");
   }, []);
 
+  const resetInspection = useCallback(() => {
+    const controls = inspection.current;
+    controls.targetYaw = 0;
+    controls.targetPitch = 0;
+    controls.velocityYaw = 0;
+    controls.velocityPitch = 0;
+    controls.resetVersion += 1;
+    inspectionHint.current?.classList.add("is-dismissed");
+  }, []);
+
   const endPointerInspection = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     const controls = inspection.current;
     if (controls.pointerId !== event.pointerId) return;
+    const wasTap = event.pointerType === "touch" && controls.intent === "pending";
+    if (wasTap && event.timeStamp - lastTapTime.current < 360) resetInspection();
+    if (wasTap) lastTapTime.current = event.timeStamp;
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
@@ -92,7 +111,7 @@ export default function ScrewConveyorExperience() {
     controls.pointerId = null;
     controls.intent = "pending";
     event.currentTarget.dataset.inspection = controls.enabled ? "enabled" : "disabled";
-  }, []);
+  }, [resetInspection]);
 
   const handlePointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     const controls = inspection.current;
@@ -106,6 +125,7 @@ export default function ScrewConveyorExperience() {
     controls.intent = event.pointerType === "mouse" ? "rotate" : "pending";
     controls.dragging = event.pointerType === "mouse";
     controls.velocityYaw = 0;
+    controls.velocityPitch = 0;
     event.currentTarget.focus({ preventScroll: true });
     if (controls.dragging) {
       event.currentTarget.setPointerCapture(event.pointerId);
@@ -142,6 +162,7 @@ export default function ScrewConveyorExperience() {
     controls.targetYaw += yawDelta;
     controls.targetPitch += deltaY * 0.0022;
     controls.velocityYaw = clamp(yawDelta / elapsed, -0.65, 0.65);
+    controls.velocityPitch = clamp((deltaY * 0.0022) / elapsed, -0.55, 0.55);
     controls.lastX = event.clientX;
     controls.lastY = event.clientY;
     controls.lastTime = event.timeStamp;
@@ -149,17 +170,19 @@ export default function ScrewConveyorExperience() {
   }, [dismissInspectionHint]);
 
   const handleKeyDown = useCallback((event: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (!inspection.current.enabled || (event.key !== "ArrowLeft" && event.key !== "ArrowRight")) return;
+    if (!inspection.current.enabled || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
     const target = event.target as HTMLElement;
     if (target.matches("input, textarea, select, [contenteditable='true']")) return;
     event.preventDefault();
-    inspection.current.keyDirection = event.key === "ArrowLeft" ? -1 : 1;
+    inspection.current.keyHorizontal = event.key === "ArrowLeft" ? -1 : event.key === "ArrowRight" ? 1 : 0;
+    inspection.current.keyVertical = event.key === "ArrowUp" ? -1 : event.key === "ArrowDown" ? 1 : 0;
     dismissInspectionHint();
   }, [dismissInspectionHint]);
 
   const handleKeyUp = useCallback((event: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-    inspection.current.keyDirection = 0;
+    if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") inspection.current.keyHorizontal = 0;
+    if (event.key === "ArrowUp" || event.key === "ArrowDown") inspection.current.keyVertical = 0;
   }, []);
 
   useLayoutEffect(() => {
@@ -192,8 +215,12 @@ export default function ScrewConveyorExperience() {
           cameraZ: 6,
           floatStrength: 0,
           shadowStrength: 1,
+          scrollVelocity: 0,
+          inertiaStrength: 0,
         });
         inspection.current.enabled = false;
+        inspection.current.keyHorizontal = 0;
+        inspection.current.keyVertical = 0;
         interactionSurface.dataset.inspection = "disabled";
         interactionSurface.tabIndex = -1;
         return;
@@ -214,8 +241,10 @@ export default function ScrewConveyorExperience() {
         const controls = inspection.current;
         if (controls.enabled === enabled) return;
         controls.enabled = enabled;
-        controls.keyDirection = 0;
+        controls.keyHorizontal = 0;
+        controls.keyVertical = 0;
         controls.velocityYaw = 0;
+        controls.velocityPitch = 0;
         if (controls.pointerId !== null && interactionSurface.hasPointerCapture(controls.pointerId)) {
           interactionSurface.releasePointerCapture(controls.pointerId);
         }
@@ -266,6 +295,8 @@ export default function ScrewConveyorExperience() {
           cameraZ: 6,
           floatStrength: 1,
           shadowStrength: 1,
+          scrollVelocity: 0,
+          inertiaStrength: mobile ? 0.5 : 1,
         });
         setInspectionEnabled(true);
         if (navbar) gsap.set(navbar, { autoAlpha: 0, y: -8, pointerEvents: "none" });
@@ -281,6 +312,7 @@ export default function ScrewConveyorExperience() {
             invalidateOnRefresh: true,
             onRefreshInit: measureTargets,
             onUpdate: (self) => {
+              motion.current.scrollVelocity = clamp(self.getVelocity() / 1400, -1, 1);
               const inInspectionScene = self.progress <= 0.012;
               setInspectionEnabled(inInspectionScene);
               if (!inInspectionScene) hint.classList.add("is-dismissed");
@@ -412,9 +444,10 @@ export default function ScrewConveyorExperience() {
           onPointerMove={handlePointerMove}
           onPointerUp={endPointerInspection}
           onPointerCancel={endPointerInspection}
+          onDoubleClick={resetInspection}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
-          onBlur={() => { inspection.current.keyDirection = 0; }}
+          onBlur={() => { inspection.current.keyHorizontal = 0; inspection.current.keyVertical = 0; }}
         >
           <ScrewConveyorCanvas motion={motion} inspection={inspection} onReady={handleModelReady} />
         </div>

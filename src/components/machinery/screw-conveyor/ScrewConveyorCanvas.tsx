@@ -3,10 +3,10 @@
 import { Suspense, useEffect, useMemo, useRef, type MutableRefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Lightformer, useGLTF } from "@react-three/drei";
-import { Box3, Group, Material, MathUtils, Mesh, PerspectiveCamera, Vector3 } from "three";
+import { Box3, Group, Material, MathUtils, Mesh, PerspectiveCamera, Quaternion, Vector3 } from "three";
 import { assetPath } from "@/lib/asset-path";
 
-const modelUrl = assetPath("/models/screw-conveyor/SK_Screw_Conveyor_Web_Final.glb");
+const modelUrl = assetPath("/models/screw-conveyor/SK_Screw_Conveyor_Web_Final_Branding_Approved.glb");
 const verifiedGroups = [
   "ScrewConveyor_ROOT",
   "BODY",
@@ -31,6 +31,8 @@ export type ScrewConveyorMotion = {
   cameraZ: number;
   floatStrength: number;
   shadowStrength: number;
+  scrollVelocity: number;
+  inertiaStrength: number;
 };
 
 export type ScrewConveyorInspection = {
@@ -46,7 +48,10 @@ export type ScrewConveyorInspection = {
   targetYaw: number;
   targetPitch: number;
   velocityYaw: number;
-  keyDirection: -1 | 0 | 1;
+  velocityPitch: number;
+  keyHorizontal: -1 | 0 | 1;
+  keyVertical: -1 | 0 | 1;
+  resetVersion: number;
 };
 
 export type ModelReport = {
@@ -64,19 +69,24 @@ type MachineModelProps = {
 
 function MachineModel({ motion, inspection, onReady }: MachineModelProps) {
   const positionGroup = useRef<Group>(null);
+  const scrollInertiaGroup = useRef<Group>(null);
   const cinematicGroup = useRef<Group>(null);
   const interactionGroup = useRef<Group>(null);
   const floatGroup = useRef<Group>(null);
   const shadowGroup = useRef<Group>(null);
   const interactionRuntime = useRef({
-    targetYaw: 0,
-    targetPitch: 0,
-    currentYaw: 0,
-    currentPitch: 0,
+    targetQuaternion: new Quaternion(),
+    neutralQuaternion: new Quaternion(),
     velocityYaw: 0,
+    velocityPitch: 0,
     lastYawInput: 0,
     lastPitchInput: 0,
+    lastResetVersion: 0,
+    scrollVelocity: 0,
   });
+  const worldYAxis = useMemo(() => new Vector3(0, 1, 0), []);
+  const localXAxis = useMemo(() => new Vector3(1, 0, 0), []);
+  const deltaQuaternion = useMemo(() => new Quaternion(), []);
   const { scene } = useGLTF(modelUrl);
   const model = useMemo(() => scene.clone(true), [scene]);
   const presentation = useMemo(() => {
@@ -121,68 +131,79 @@ function MachineModel({ motion, inspection, onReady }: MachineModelProps) {
   const viewport = useThree((state) => state.viewport);
   useFrame(({ camera, clock }, delta) => {
     const position = positionGroup.current;
+    const scrollInertia = scrollInertiaGroup.current;
     const cinematic = cinematicGroup.current;
     const interaction = interactionGroup.current;
     const floating = floatGroup.current;
     const shadow = shadowGroup.current;
-    if (!position || !cinematic || !interaction || !floating || !shadow) return;
+    if (!position || !scrollInertia || !cinematic || !interaction || !floating || !shadow) return;
 
     const state = motion.current;
     const controls = inspection.current;
     const runtime = interactionRuntime.current;
     const frameDelta = Math.min(delta, 0.05);
 
+    if (controls.resetVersion !== runtime.lastResetVersion) {
+      runtime.lastResetVersion = controls.resetVersion;
+      runtime.targetQuaternion.identity();
+      runtime.velocityYaw = 0;
+      runtime.velocityPitch = 0;
+      runtime.lastYawInput = controls.targetYaw;
+      runtime.lastPitchInput = controls.targetPitch;
+    }
+
     if (controls.enabled) {
       const yawInput = controls.targetYaw - runtime.lastYawInput;
       const pitchInput = controls.targetPitch - runtime.lastPitchInput;
       runtime.lastYawInput = controls.targetYaw;
       runtime.lastPitchInput = controls.targetPitch;
-      runtime.targetYaw = MathUtils.clamp(
-        runtime.targetYaw + yawInput,
-        -MathUtils.degToRad(22),
-        MathUtils.degToRad(22),
-      );
-      runtime.targetPitch = MathUtils.clamp(
-        runtime.targetPitch + pitchInput,
-        -MathUtils.degToRad(5),
-        MathUtils.degToRad(7),
-      );
+      deltaQuaternion.setFromAxisAngle(worldYAxis, yawInput);
+      runtime.targetQuaternion.premultiply(deltaQuaternion);
+      deltaQuaternion.setFromAxisAngle(localXAxis, pitchInput);
+      runtime.targetQuaternion.multiply(deltaQuaternion);
 
       if (controls.dragging) {
         runtime.velocityYaw = controls.velocityYaw;
-      } else if (controls.keyDirection !== 0) {
-        runtime.targetYaw = MathUtils.clamp(
-          runtime.targetYaw + controls.keyDirection * frameDelta * 0.62,
-          -MathUtils.degToRad(22),
-          MathUtils.degToRad(22),
-        );
-        runtime.velocityYaw = controls.keyDirection * 0.2;
-      } else if (Math.abs(runtime.velocityYaw) > 0.0001) {
-        runtime.targetYaw = MathUtils.clamp(
-          runtime.targetYaw + runtime.velocityYaw * frameDelta,
-          -MathUtils.degToRad(22),
-          MathUtils.degToRad(22),
-        );
+        runtime.velocityPitch = controls.velocityPitch;
+      } else if (controls.keyHorizontal !== 0 || controls.keyVertical !== 0) {
+        const keyYaw = controls.keyHorizontal * frameDelta * 0.62;
+        const keyPitch = controls.keyVertical * frameDelta * 0.52;
+        deltaQuaternion.setFromAxisAngle(worldYAxis, keyYaw);
+        runtime.targetQuaternion.premultiply(deltaQuaternion);
+        deltaQuaternion.setFromAxisAngle(localXAxis, keyPitch);
+        runtime.targetQuaternion.multiply(deltaQuaternion);
+        runtime.velocityYaw = controls.keyHorizontal * 0.2;
+        runtime.velocityPitch = controls.keyVertical * 0.16;
+      } else if (Math.abs(runtime.velocityYaw) > 0.0001 || Math.abs(runtime.velocityPitch) > 0.0001) {
+        deltaQuaternion.setFromAxisAngle(worldYAxis, runtime.velocityYaw * frameDelta);
+        runtime.targetQuaternion.premultiply(deltaQuaternion);
+        deltaQuaternion.setFromAxisAngle(localXAxis, runtime.velocityPitch * frameDelta);
+        runtime.targetQuaternion.multiply(deltaQuaternion);
         runtime.velocityYaw = MathUtils.damp(runtime.velocityYaw, 0, 7.5, frameDelta);
+        runtime.velocityPitch = MathUtils.damp(runtime.velocityPitch, 0, 7.5, frameDelta);
       }
     } else {
       runtime.lastYawInput = controls.targetYaw;
       runtime.lastPitchInput = controls.targetPitch;
-      runtime.targetYaw = MathUtils.damp(runtime.targetYaw, 0, 7, frameDelta);
-      runtime.targetPitch = MathUtils.damp(runtime.targetPitch, 0, 7, frameDelta);
+      runtime.targetQuaternion.slerp(runtime.neutralQuaternion, 1 - Math.exp(-7 * frameDelta));
       runtime.velocityYaw = 0;
+      runtime.velocityPitch = 0;
     }
-
-    runtime.currentYaw = MathUtils.damp(runtime.currentYaw, runtime.targetYaw, 11, frameDelta);
-    runtime.currentPitch = MathUtils.damp(runtime.currentPitch, runtime.targetPitch, 11, frameDelta);
 
     const scale = viewport.width * state.width / presentation.length;
     const float = Math.sin(clock.elapsedTime * 0.72) * viewport.height * 0.005 * state.floatStrength;
     const depthFloat = Math.cos(clock.elapsedTime * 0.56) * 0.018 * state.floatStrength;
     position.position.set(viewport.width * state.x, viewport.height * state.y, state.z);
     position.scale.setScalar(scale);
+    runtime.scrollVelocity = MathUtils.damp(runtime.scrollVelocity, MathUtils.clamp(state.scrollVelocity, -1, 1), 10, frameDelta);
+    const velocity = runtime.scrollVelocity * state.inertiaStrength;
+    const inertiaY = MathUtils.damp(scrollInertia.position.y, -velocity * viewport.height * 0.012, 8, frameDelta);
+    const inertiaZ = MathUtils.damp(scrollInertia.position.z, velocity * 0.035, 8, frameDelta);
+    scrollInertia.position.set(0, inertiaY, inertiaZ);
+    scrollInertia.rotation.x = MathUtils.damp(scrollInertia.rotation.x, velocity * MathUtils.degToRad(1.15), 8, frameDelta);
+    scrollInertia.rotation.z = MathUtils.damp(scrollInertia.rotation.z, -velocity * MathUtils.degToRad(0.38), 8, frameDelta);
     cinematic.rotation.set(state.pitch, state.yaw, state.roll);
-    interaction.rotation.set(runtime.currentPitch, runtime.currentYaw, 0);
+    interaction.quaternion.slerp(runtime.targetQuaternion, 1 - Math.exp(-12 * frameDelta));
     floating.position.set(0, float, depthFloat);
     floating.rotation.z = Math.sin(clock.elapsedTime * 0.48) * 0.006 * state.floatStrength;
     shadow.scale.setScalar(Math.max(0.08, state.shadowStrength));
@@ -192,13 +213,15 @@ function MachineModel({ motion, inspection, onReady }: MachineModelProps) {
 
   return (
     <group ref={positionGroup}>
-      <group ref={cinematicGroup}>
+      <group ref={scrollInertiaGroup}>
+        <group ref={cinematicGroup}>
         <group ref={interactionGroup}>
           <group ref={floatGroup}>
             <group rotation={[0, -Math.PI / 2, 0]}>
               <primitive object={model} position={[-presentation.center.x, -presentation.center.y, -presentation.center.z]} />
             </group>
           </group>
+        </group>
         </group>
       </group>
       <group ref={shadowGroup}>
