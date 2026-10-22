@@ -384,7 +384,8 @@ export default function ScrewConveyorExperience() {
             onUpdate: (self) => {
               motion.current.scrollVelocity = clamp(self.getVelocity() / 1400, -1, 1);
               const inInspectionScene = self.progress <= 0.012;
-              setInspectionEnabled(inInspectionScene);
+              // Mobile inspection remains available anywhere the pinned machine is visible.
+              setInspectionEnabled(mobile || inInspectionScene);
               if (!inInspectionScene) hint.classList.add("is-dismissed");
             },
           },
