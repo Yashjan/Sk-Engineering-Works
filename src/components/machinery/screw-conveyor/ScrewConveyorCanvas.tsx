@@ -191,8 +191,9 @@ function MachineModel({ motion, inspection, onReady }: MachineModelProps) {
     }
 
     const scale = viewport.width * state.width / presentation.length;
-    const float = Math.sin(clock.elapsedTime * 0.72) * viewport.height * 0.005 * state.floatStrength;
-    const depthFloat = Math.cos(clock.elapsedTime * 0.56) * 0.018 * state.floatStrength;
+    // Sine-based drift with a three-second full cycle.
+    const float = Math.sin(clock.elapsedTime * (Math.PI * 2 / 3)) * viewport.height * 0.005 * state.floatStrength;
+    const depthFloat = Math.cos(clock.elapsedTime * (Math.PI * 2 / 12)) * 0.018 * state.floatStrength;
     position.position.set(viewport.width * state.x, viewport.height * state.y, state.z);
     position.scale.setScalar(scale);
     runtime.scrollVelocity = MathUtils.damp(runtime.scrollVelocity, MathUtils.clamp(state.scrollVelocity, -1, 1), 10, frameDelta);
@@ -205,7 +206,8 @@ function MachineModel({ motion, inspection, onReady }: MachineModelProps) {
     cinematic.rotation.set(state.pitch, state.yaw, state.roll);
     interaction.quaternion.slerp(runtime.targetQuaternion, 1 - Math.exp(-12 * frameDelta));
     floating.position.set(0, float, depthFloat);
-    floating.rotation.z = Math.sin(clock.elapsedTime * 0.48) * 0.006 * state.floatStrength;
+    // A slower six-second-per-direction rotational drift keeps the machine feeling heavy.
+    floating.rotation.z = Math.sin(clock.elapsedTime * (Math.PI * 2 / 12)) * 0.006 * state.floatStrength;
     shadow.scale.setScalar(Math.max(0.08, state.shadowStrength));
     shadow.visible = state.shadowStrength > 0.03;
     (camera as PerspectiveCamera).position.z = state.cameraZ;
