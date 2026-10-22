@@ -1,0 +1,75 @@
+.screw-machine-detail { background: #0b0d0e; }
+.screw-conveyor-experience { position: relative; height: 370svh; background: #0b0d0e; color: #f3f2ed; }
+.screw-conveyor-viewport { position: sticky; top: 0; height: 100svh; min-height: 620px; overflow: clip; isolation: isolate; background: #0b0d0e; }
+.screw-conveyor-white-stage { position: absolute; inset: 0; z-index: 1; background: #f3f1eb; transform-origin: center; will-change: transform, border-radius; }
+.screw-conveyor-scene-two-target { position: absolute; top: 16svh; right: 4.5vw; z-index: -1; width: min(52vw, 980px); height: 68svh; pointer-events: none; visibility: hidden; }
+.screw-conveyor-scene-three { position: absolute; inset: 0; z-index: 2; background: #f3f1eb; will-change: transform; }
+.screw-conveyor-canvas-shell { position: absolute; inset: 0; z-index: 3; outline: none; touch-action: pan-y; }
+.screw-conveyor-canvas-shell[data-inspection="enabled"] { cursor: grab; }
+.screw-conveyor-canvas-shell[data-inspection="dragging"] { cursor: grabbing; }
+.screw-conveyor-canvas-shell[data-inspection="disabled"] { pointer-events: none; }
+.screw-conveyor-canvas-shell[data-inspection="enabled"]:focus-visible::after { content: ""; position: absolute; inset: 12px; border: 1px solid rgb(17 20 21 / 45%); pointer-events: none; }
+.screw-conveyor-canvas-shell canvas { display: block; width: 100% !important; height: 100% !important; touch-action: pan-y; }
+.screw-conveyor-identity { position: absolute; top: 29%; left: 5vw; z-index: 4; width: min(39vw, 650px); opacity: 0; visibility: hidden; }
+.screw-conveyor-kicker { margin: 0 0 24px; color: #9ba3a1; font-size: 10px; font-weight: 600; line-height: 1.4; letter-spacing: .17em; }
+.screw-conveyor-kicker span { margin-inline: 9px; color: #697170; }
+.screw-conveyor-identity h1 { margin: 0; color: #f3f2ed; font-size: clamp(64px, 6.6vw, 132px); font-weight: 500; line-height: .82; letter-spacing: -.066em; }
+.screw-conveyor-heading-line { display: block; overflow: hidden; padding-block: .04em; margin-block: -.04em; }
+.screw-conveyor-heading-line > span { display: block; }
+.screw-conveyor-function { margin: 34px 0 0; color: #d5d8d4; font-size: clamp(13px, 1.12vw, 18px); font-weight: 500; line-height: 1.35; letter-spacing: .08em; }
+.screw-conveyor-summary { max-width: 390px; margin: 16px 0 0; color: #a8afac; font-size: 13px; line-height: 1.7; }
+.screw-conveyor-scroll-cue { position: absolute; right: 5vw; bottom: 32px; z-index: 4; display: flex; align-items: center; gap: 24px; margin: 0; color: #222728; font-size: 9px; letter-spacing: .16em; }
+.screw-conveyor-scroll-cue b { font-size: 19px; font-weight: 400; }
+.screw-conveyor-inspection-hint { position: absolute; bottom: 32px; left: 5vw; z-index: 4; display: flex; align-items: center; gap: 14px; margin: 0; color: #343a3a; font-size: 9px; line-height: 1.4; letter-spacing: .16em; transition: opacity .25s ease, transform .25s ease; pointer-events: none; }
+.screw-conveyor-inspection-hint span { font-size: 13px; letter-spacing: 0; }
+.screw-conveyor-inspection-hint.is-dismissed { opacity: 0 !important; visibility: hidden !important; transform: translateY(-8px); }
+.screw-conveyor-loading { position: absolute; left: 5vw; bottom: 56px; z-index: 4; margin: 0; color: #747b7a; font-size: 8px; line-height: 1.4; letter-spacing: .17em; transition: opacity .3s ease; }
+.screw-conveyor-loading.is-ready { opacity: 0; }
+body:has(.screw-conveyor-experience) [data-navbar] { opacity: 0; visibility: hidden; transform: translateY(-8px); pointer-events: none; }
+
+@media (min-width: 768px) and (max-width: 1099px) {
+  .screw-conveyor-scene-two-target { top: 18svh; right: 4vw; width: 54vw; height: 64svh; }
+  .screw-conveyor-identity { top: 31%; left: 4vw; width: 39vw; }
+  .screw-conveyor-identity h1 { font-size: clamp(56px, 7vw, 76px); }
+  .screw-conveyor-function { margin-top: 27px; font-size: 13px; }
+  .screw-conveyor-summary { max-width: 330px; font-size: 12px; }
+}
+
+@media (max-width: 767px) {
+  .screw-conveyor-experience { height: 315svh; }
+  .screw-conveyor-viewport { min-height: 568px; }
+  .screw-conveyor-scene-two-target { top: 44%; right: 6vw; left: 6vw; width: auto; height: 44svh; }
+  .screw-conveyor-identity { top: 15%; left: 6vw; width: 88vw; }
+  .screw-conveyor-kicker { margin-bottom: 16px; font-size: 8px; }
+  .screw-conveyor-identity h1 { font-size: clamp(48px, 15vw, 68px); line-height: .86; }
+  .screw-conveyor-function { margin-top: 20px; font-size: 11px; }
+  .screw-conveyor-summary { max-width: 330px; margin-top: 11px; font-size: 11px; line-height: 1.55; }
+  .screw-conveyor-scroll-cue { right: 6vw; bottom: max(24px, env(safe-area-inset-bottom)); }
+  .screw-conveyor-inspection-hint { left: 6vw; bottom: max(24px, env(safe-area-inset-bottom)); font-size: 8px; }
+  .screw-conveyor-loading { left: 6vw; bottom: max(48px, calc(env(safe-area-inset-bottom) + 48px)); }
+}
+
+@media (max-width: 767px) and (max-height: 700px) {
+  .screw-conveyor-scene-two-target { top: 54%; height: 36svh; }
+  .screw-conveyor-identity { top: 17%; }
+  .screw-conveyor-kicker { margin-bottom: 12px; }
+  .screw-conveyor-identity h1 { font-size: clamp(42px, 13.5vw, 50px); }
+  .screw-conveyor-function { margin-top: 14px; font-size: 10px; }
+  .screw-conveyor-summary { margin-top: 8px; font-size: 10px; line-height: 1.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:has(.screw-conveyor-experience) [data-navbar] { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
+  .screw-conveyor-experience { height: auto; background: #f3f1eb; color: #111415; }
+  .screw-conveyor-viewport { position: relative; height: 100svh; min-height: 680px; background: #f3f1eb; }
+  .screw-conveyor-white-stage { transform: none; }
+  .screw-conveyor-scene-two-target, .screw-conveyor-scene-three, .screw-conveyor-scroll-cue, .screw-conveyor-inspection-hint { display: none; }
+  .screw-conveyor-canvas-shell { pointer-events: none; }
+  .screw-conveyor-identity { top: auto; bottom: 5vw; left: 5vw; width: 50vw; color: #111415; opacity: 1; visibility: visible; transform: none; }
+  .screw-conveyor-identity h1, .screw-conveyor-function { color: #111415; }
+  .screw-conveyor-summary, .screw-conveyor-kicker { color: #525958; }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 767px) {
+  .screw-conveyor-identity { bottom: 32px; left: 6vw; width: 88vw; }
+}

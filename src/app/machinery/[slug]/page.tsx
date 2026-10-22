@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import { existsSync } from "node:fs";
+import path from "node:path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Navbar from "@/components/layout/Navbar";
+import ScrewConveyorExperience from "@/components/machinery/screw-conveyor/ScrewConveyorExperience";
 import { getMachineBySlug, machineryCatalog } from "@/data/machinery";
 import { createPageMetadata } from "@/config/site";
 import "./machine-detail-shell.css";
@@ -18,6 +22,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: MachinePageProps): Promise<Metadata> {
   const { slug } = await params;
   const machine = getMachineBySlug(slug);
+  if (slug === "screw-conveyor") {
+    return createPageMetadata({
+      title: "Screw Conveyor",
+      description: "Industrial screw conveyor for controlled material transfer, manufactured by S.K. Engineering Works.",
+      path: "/machinery/screw-conveyor",
+    });
+  }
   return createPageMetadata({
     title: machine ? machine.name : "Machinery",
     description: machine
@@ -31,6 +42,19 @@ export async function generateMetadata({ params }: MachinePageProps): Promise<Me
 export default async function MachinePage({ params }: MachinePageProps) {
   const machine = getMachineBySlug((await params).slug);
   if (!machine) notFound();
+
+  if (machine.slug === "screw-conveyor") {
+    const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
+    return (
+      <>
+        <a className="skip-link" href="#main">Skip to content</a>
+        <Navbar hasLogo={hasLogo} />
+        <main id="main" className="screw-machine-detail">
+          <ScrewConveyorExperience />
+        </main>
+      </>
+    );
+  }
 
   return (
     <main className="machine-detail-shell">
