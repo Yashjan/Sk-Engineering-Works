@@ -5,6 +5,13 @@
 .screw-conveyor-scene-two-target { position: absolute; top: 16svh; right: 4.5vw; z-index: -1; width: min(52vw, 980px); height: 68svh; pointer-events: none; visibility: hidden; }
 .screw-conveyor-scene-three { position: absolute; inset: 0; z-index: 2; background: radial-gradient(circle at 50% 58%, #ffffff 0%, #f4f2ec 48%, #ebe8df 100%); will-change: transform; }
 .screw-conveyor-canvas-shell { position: absolute; inset: 0; z-index: 3; outline: none; touch-action: pan-y; }
+.screw-conveyor-canvas-shell { opacity: 0; transition: opacity .32s ease; }
+.screw-conveyor-canvas-shell.is-model-ready { opacity: 1; }
+.screw-conveyor-model-loader { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; background: radial-gradient(circle at 50% 58%, #ffffff 0%, #f4f2ec 48%, #ebe8df 100%); color: #111415; transition: opacity .32s ease, visibility .32s ease; }
+.screw-conveyor-model-loader.is-ready { opacity: 0; visibility: hidden; pointer-events: none; }
+.screw-conveyor-model-loader img { width: min(150px, 32vw); height: auto; object-fit: contain; }
+.screw-conveyor-model-loader strong { margin-top: 10px; font-size: 10px; letter-spacing: .16em; font-weight: 600; }
+.screw-conveyor-model-loader span { color: #697170; font-size: 12px; }
 .screw-conveyor-canvas-shell[data-inspection="enabled"] { cursor: grab; }
 .screw-conveyor-canvas-shell[data-inspection="dragging"] { cursor: grabbing; }
 .screw-conveyor-canvas-shell[data-inspection="disabled"] { pointer-events: none; }

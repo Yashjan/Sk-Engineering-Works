@@ -13,6 +13,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { ScrewConveyorInspection, ScrewConveyorMotion } from "./ScrewConveyorCanvas";
 import "./screw-conveyor-experience.css";
+import { assetPath } from "@/lib/asset-path";
 
 const ScrewConveyorCanvas = dynamic(() => import("./ScrewConveyorCanvas"), {
   ssr: false,
@@ -226,6 +227,7 @@ export default function ScrewConveyorExperience() {
         return;
       }
       const mobile = Boolean(context.conditions.mobile);
+      if (mobile) ScrollTrigger.config({ ignoreMobileResize: true });
       const navbar = document.querySelector<HTMLElement>("[data-navbar]");
       const metrics: SceneMetrics = {
         panelX: 0,
@@ -432,9 +434,16 @@ export default function ScrewConveyorExperience() {
         <div ref={sceneTwoTarget} className="screw-conveyor-scene-two-target" aria-hidden="true" />
         <div ref={sceneThree} className="screw-conveyor-scene-three" aria-hidden="true" />
 
+        <div className={`screw-conveyor-model-loader${modelReady ? " is-ready" : ""}`} aria-hidden={modelReady}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={assetPath("/images/sk-logo.png")} alt="" />
+          <strong>3D MODEL IS LOADING</strong>
+          <span>Please wait…</span>
+        </div>
+
         <div
           ref={canvasShell}
-          className="screw-conveyor-canvas-shell"
+          className={`screw-conveyor-canvas-shell${modelReady ? " is-model-ready" : ""}`}
           data-inspection="enabled"
           role="group"
           tabIndex={0}
