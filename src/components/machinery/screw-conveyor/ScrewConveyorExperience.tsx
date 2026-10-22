@@ -83,6 +83,7 @@ export default function ScrewConveyorExperience() {
   const touchPoints = useRef(new Map<number, { x: number; y: number }>());
   const pinchStartDistance = useRef<number | null>(null);
   const pinchStartZoom = useRef(1);
+  const pinchMidpoint = useRef({ x: 0, y: 0 });
   const [modelReady, setModelReady] = useState(false);
 
   const handleModelReady = useCallback(() => {
@@ -108,7 +109,8 @@ export default function ScrewConveyorExperience() {
 
   const endPointerInspection = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     const controls = inspection.current;
-    if (controls.pointerId !== event.pointerId) return;
+    if (event.pointerType === "touch") touchPoints.current.delete(event.pointerId);
+    if (controls.pointerId !== event.pointerId && touchPoints.current.size > 0) return;
     const wasTap = event.pointerType === "touch" && controls.intent === "pending";
     if (wasTap && event.timeStamp - lastTapTime.current < 360) resetInspection();
     if (wasTap) lastTapTime.current = event.timeStamp;
@@ -118,8 +120,10 @@ export default function ScrewConveyorExperience() {
     controls.dragging = false;
     controls.pointerId = null;
     controls.intent = "pending";
-    touchPoints.current.delete(event.pointerId);
-    if (touchPoints.current.size < 2) pinchStartDistance.current = null;
+    if (touchPoints.current.size < 2) {
+      pinchStartDistance.current = null;
+      pinchMidpoint.current = { x: 0, y: 0 };
+    }
     event.currentTarget.dataset.inspection = controls.enabled ? "enabled" : "disabled";
   }, [resetInspection]);
 
@@ -131,6 +135,7 @@ export default function ScrewConveyorExperience() {
       if (touchPoints.current.size === 2) {
         const points = [...touchPoints.current.values()];
         pinchStartDistance.current = Math.hypot(points[1].x - points[0].x, points[1].y - points[0].y);
+        pinchMidpoint.current = { x: (points[0].x + points[1].x) / 2, y: (points[0].y + points[1].y) / 2 };
         pinchStartZoom.current = controls.zoomTarget;
         controls.intent = "rotate";
         controls.dragging = false;
@@ -163,7 +168,10 @@ export default function ScrewConveyorExperience() {
       if (touchPoints.current.size === 2 && pinchStartDistance.current) {
         const points = [...touchPoints.current.values()];
         const distance = Math.hypot(points[1].x - points[0].x, points[1].y - points[0].y);
+        const midpoint = { x: (points[0].x + points[1].x) / 2, y: (points[0].y + points[1].y) / 2 };
         controls.zoomTarget = clamp(pinchStartZoom.current * distance / pinchStartDistance.current, 1, 3.2);
+        controls.panTarget = clamp(controls.panTarget + (midpoint.x - pinchMidpoint.current.x) * 0.012, -1.2, 1.2);
+        pinchMidpoint.current = midpoint;
         event.preventDefault();
         return;
       }
@@ -285,6 +293,15 @@ export default function ScrewConveyorExperience() {
         controls.velocityYaw = 0;
         controls.velocityPitch = 0;
         controls.zoomTarget = 1;
+        controls.panTarget = 0;
+        touchPoints.current.clear();
+        pinchStartDistance.current = null;
+        pinchMidpoint.current = { x: 0, y: 0 };
+        if (enabled) {
+          controls.targetYaw = 0;
+          controls.targetPitch = 0;
+          controls.resetVersion += 1;
+        }
         if (controls.pointerId !== null && interactionSurface.hasPointerCapture(controls.pointerId)) {
           interactionSurface.releasePointerCapture(controls.pointerId);
         }
