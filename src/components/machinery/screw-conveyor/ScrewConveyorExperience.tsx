@@ -83,6 +83,7 @@ export default function ScrewConveyorExperience() {
   const touchPoints = useRef(new Map<number, { x: number; y: number }>());
   const pinchStartDistance = useRef<number | null>(null);
   const pinchStartZoom = useRef(1);
+  const pinchStartPan = useRef(0);
   const pinchMidpoint = useRef({ x: 0, y: 0 });
   const [modelReady, setModelReady] = useState(false);
 
@@ -122,6 +123,7 @@ export default function ScrewConveyorExperience() {
     controls.intent = "pending";
     if (touchPoints.current.size < 2) {
       pinchStartDistance.current = null;
+        pinchStartPan.current = 0;
       pinchMidpoint.current = { x: 0, y: 0 };
     }
     event.currentTarget.dataset.inspection = controls.enabled ? "enabled" : "disabled";
@@ -137,6 +139,7 @@ export default function ScrewConveyorExperience() {
         pinchStartDistance.current = Math.hypot(points[1].x - points[0].x, points[1].y - points[0].y);
         pinchMidpoint.current = { x: (points[0].x + points[1].x) / 2, y: (points[0].y + points[1].y) / 2 };
         pinchStartZoom.current = controls.zoomTarget;
+        pinchStartPan.current = controls.panTarget;
         controls.intent = "rotate";
         controls.dragging = false;
         dismissInspectionHint();
@@ -169,7 +172,14 @@ export default function ScrewConveyorExperience() {
         const points = [...touchPoints.current.values()];
         const distance = Math.hypot(points[1].x - points[0].x, points[1].y - points[0].y);
         const midpoint = { x: (points[0].x + points[1].x) / 2, y: (points[0].y + points[1].y) / 2 };
-        controls.zoomTarget = clamp(pinchStartZoom.current * distance / pinchStartDistance.current, 1, 3.2);
+        const nextZoom = clamp(pinchStartZoom.current * distance / pinchStartDistance.current, 1, 3.2);
+        const rect = event.currentTarget.getBoundingClientRect();
+        const localMidpointX = pinchMidpoint.current.x - rect.left;
+        const focalOffset = (localMidpointX / Math.max(rect.width, 1)) * 2 - 1;
+        controls.zoomTarget = nextZoom;
+        // Keep the content beneath the pinch midpoint stationary as scale changes.
+        // Pan is expressed in the model's normalized viewport space.
+        controls.panTarget = clamp(pinchStartPan.current + focalOffset * (1 - nextZoom / pinchStartZoom.current) * 1.35, -1.2, 1.2);
         controls.panTarget = clamp(controls.panTarget + (midpoint.x - pinchMidpoint.current.x) * 0.012, -1.2, 1.2);
         pinchMidpoint.current = midpoint;
         event.preventDefault();
@@ -296,6 +306,7 @@ export default function ScrewConveyorExperience() {
         controls.panTarget = 0;
         touchPoints.current.clear();
         pinchStartDistance.current = null;
+      pinchStartPan.current = 0;
         pinchMidpoint.current = { x: 0, y: 0 };
         if (enabled) {
           controls.targetYaw = 0;
