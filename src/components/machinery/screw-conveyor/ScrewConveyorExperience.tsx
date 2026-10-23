@@ -42,6 +42,9 @@ export default function ScrewConveyorExperience() {
   const sceneTwoTarget = useRef<HTMLDivElement>(null);
   const sceneTwoCopy = useRef<HTMLDivElement>(null);
   const sceneThree = useRef<HTMLDivElement>(null);
+  const sceneFourCopy = useRef<HTMLDivElement>(null);
+  const technicalEnvironment = useRef<HTMLDivElement>(null);
+  const componentLabels = useRef<HTMLDivElement>(null);
   const scrollCue = useRef<HTMLParagraphElement>(null);
   const inspectionHint = useRef<HTMLParagraphElement>(null);
   const canvasShell = useRef<HTMLDivElement>(null);
@@ -58,6 +61,9 @@ export default function ScrewConveyorExperience() {
     shadowStrength: 1,
     scrollVelocity: 0,
     inertiaStrength: 1,
+    travelTurn: 0,
+    portraitExplode: 0,
+    explode: 0,
   });
   const inspection = useRef<ScrewConveyorInspection>({
     enabled: true,
@@ -250,10 +256,11 @@ export default function ScrewConveyorExperience() {
     const target = sceneTwoTarget.current;
     const copy = sceneTwoCopy.current;
     const finalScene = sceneThree.current;
+    const technicalCopy = sceneFourCopy.current;
     const cue = scrollCue.current;
     const hint = inspectionHint.current;
     const interactionSurface = canvasShell.current;
-    if (!section || !stickyViewport || !panel || !target || !copy || !finalScene || !cue || !hint || !interactionSurface) return;
+    if (!section || !stickyViewport || !panel || !target || !copy || !finalScene || !technicalCopy || !cue || !hint || !interactionSurface) return;
 
     gsap.registerPlugin(ScrollTrigger);
     const media = gsap.matchMedia();
@@ -275,6 +282,9 @@ export default function ScrewConveyorExperience() {
           shadowStrength: 1,
           scrollVelocity: 0,
           inertiaStrength: 0,
+          travelTurn: 0,
+    portraitExplode: 0,
+    explode: 0,
         });
         inspection.current.enabled = false;
         inspection.current.keyHorizontal = 0;
@@ -352,6 +362,11 @@ export default function ScrewConveyorExperience() {
         gsap.set(headingLines, { yPercent: 108 });
         gsap.set(supportingCopy, { autoAlpha: 0, y: 14 });
         gsap.set(finalScene, { yPercent: 100 });
+        gsap.set(technicalCopy, { autoAlpha: 0, y: 18 });
+        gsap.set(technicalEnvironment.current, { opacity: 0 });
+        const labels = componentLabels.current?.querySelectorAll("[data-component-callout]") ?? [];
+        gsap.set(labels, { autoAlpha: 0 });
+        const labelSequence = mobile ? [3, 4, 0, 1, 2, 5].map((index) => labels[index]) : labels;
         gsap.set(cue, { autoAlpha: 1 });
         gsap.set(hint, { autoAlpha: 1 });
         gsap.set(motion.current, {
@@ -367,6 +382,9 @@ export default function ScrewConveyorExperience() {
           shadowStrength: 1,
           scrollVelocity: 0,
           inertiaStrength: mobile ? 0.5 : 1,
+          travelTurn: 0,
+    portraitExplode: 0,
+    explode: 0,
         });
         setInspectionEnabled(true);
         if (navbar) gsap.set(navbar, { autoAlpha: 0, y: -8, pointerEvents: "none" });
@@ -377,7 +395,7 @@ export default function ScrewConveyorExperience() {
             id: "screw-conveyor-scenes-01-03",
             trigger: section,
             start: "top top",
-            end: "bottom bottom",
+            end: () => `+=${stickyViewport.offsetHeight * (mobile ? 2.15 : 2.7) * (8.3 / 2.58)}`,
             scrub: mobile ? 0.36 : 0.48,
             invalidateOnRefresh: true,
             onRefreshInit: measureTargets,
@@ -385,7 +403,9 @@ export default function ScrewConveyorExperience() {
               motion.current.scrollVelocity = clamp(self.getVelocity() / 1400, -1, 1);
               const inInspectionScene = self.progress <= 0.012;
               // Mobile inspection remains available anywhere the pinned machine is visible.
-              setInspectionEnabled(mobile || inInspectionScene);
+              const chapterTime = self.progress * 8.3;
+              const chapterHold = (chapterTime >= 3.65 && chapterTime <= 4.05) || chapterTime >= 7.7;
+              setInspectionEnabled(((mobile || inInspectionScene) && chapterTime < 2.58) || chapterHold);
               if (mobile && !inInspectionScene) {
                 const controls = inspection.current;
                 const needsAlignment = Math.abs(controls.targetYaw) > 0.01
@@ -498,7 +518,24 @@ export default function ScrewConveyorExperience() {
             shadowStrength: 1,
             duration: 0.72,
             ease: "power3.out",
-          }, 1.86);
+          }, 1.86)
+          // Scene 04: assembled machine contracts into a centered light window.
+          .to(finalScene, { scaleX: mobile ? 0.88 : 0.64, scaleY: mobile ? 0.3 : 0.34, yPercent: 22, duration: 0.85, ease: "power2.inOut" }, 2.78)
+          .to(motion.current, { width: mobile ? 0.73 : 0.54, y: -0.22, z: 0, yaw: HERO_YAW, pitch: HERO_PITCH, roll: 0, floatStrength: 0, inertiaStrength: 0, duration: 0.85, ease: "power2.inOut" }, 2.78)
+          .to(technicalCopy, { autoAlpha: 1, y: 0, duration: 0.45 }, 3.12)
+          // Readable teaser hold, then Scene 05 travel while fully assembled.
+          .to(technicalCopy, { autoAlpha: 0, y: -24, duration: 0.55 }, 4.28)
+          .to(technicalEnvironment.current, { opacity: 1, duration: 1.1, ease: "sine.inOut" }, 4.35)
+          .to(finalScene, { opacity: 0, duration: 0.75 }, 4.3)
+          // Continuous unwrapped Y angle preserves a full turn in both scroll directions.
+          .to(motion.current, { travelTurn: Math.PI * 2, duration: 1.42, ease: "power2.inOut" }, 4.18)
+          .to(motion.current, { x: mobile ? -0.025 : -0.07, y: -0.16, z: mobile ? 0.08 : 0.18, width: mobile ? 0.75 : 0.61, pitch: degrees(-2), roll: 0, floatStrength: 0, duration: 0.28, ease: "power2.in" }, 4.1)
+          .to(motion.current, { x: mobile ? 0.025 : 0.07, y: -0.035, z: mobile ? 0.22 : 0.48, width: mobile ? 0.75 : 0.72, yaw: 0, pitch: 0, duration: 0.68, ease: "sine.inOut" }, 4.38)
+          .to(motion.current, { x: 0, y: 0, width: mobile ? 0.76 : 0.75, yaw: 0, pitch: 0, roll: 0, z: 0, cameraZ: 6, shadowStrength: 0, duration: 0.54, ease: "power2.out" }, 5.06)
+          // Arrival and settle precede all component separation.
+          .to(motion.current, { portraitExplode: 1, explode: 1, duration: 1.15, ease: "power1.inOut" }, 5.85)
+          .to(labelSequence, { autoAlpha: 1, duration: 0.25, stagger: 0.12 }, 6.82)
+          .to({}, { duration: 0.63 }, 7.67);
       }, section);
 
       const refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
@@ -518,6 +555,20 @@ export default function ScrewConveyorExperience() {
         <div ref={whiteStage} className="screw-conveyor-white-stage" aria-hidden="true" />
         <div ref={sceneTwoTarget} className="screw-conveyor-scene-two-target" aria-hidden="true" />
         <div ref={sceneThree} className="screw-conveyor-scene-three" aria-hidden="true" />
+        <div ref={technicalEnvironment} className="screw-conveyor-technical-environment" aria-hidden="true" />
+        <div ref={componentLabels} className="screw-conveyor-component-labels" aria-label="Machine components">
+          {["MOTOR & GEARBOX", "FLEXIBLE COUPLING", "INLET BEARING & SHAFT SUPPORT", "CONVEYOR BODY / CASING", "SCREW FLIGHT & SHAFT", "OUTLET BEARING & SHAFT SUPPORT"].map((name) => (
+            <div key={name} data-component-callout>
+              <svg aria-hidden="true"><line /><circle r="2.5" /></svg>
+              <span data-desktop-name={name}>{name}</span>
+            </div>
+          ))}
+        </div>
+        <div ref={sceneFourCopy} className="screw-conveyor-scene-four-copy">
+          <p>04 <span>/</span> ENGINEERING</p>
+          <h2>ARE YOU READY<br />TO SEE WHAT&apos;S INSIDE?</h2>
+          <span>Explore the engineering inside the Screw Conveyor.</span>
+        </div>
 
         <div className={`screw-conveyor-model-loader${modelReady ? " is-ready" : ""}`} aria-hidden={modelReady}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -543,7 +594,7 @@ export default function ScrewConveyorExperience() {
           onKeyUp={handleKeyUp}
           onBlur={() => { inspection.current.keyHorizontal = 0; inspection.current.keyVertical = 0; }}
         >
-          <ScrewConveyorCanvas motion={motion} inspection={inspection} onReady={handleModelReady} />
+          <ScrewConveyorCanvas motion={motion} inspection={inspection} onReady={handleModelReady} calloutsRef={componentLabels} />
         </div>
 
         <div ref={sceneTwoCopy} className="screw-conveyor-identity">

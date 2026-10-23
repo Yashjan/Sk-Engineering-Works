@@ -1,9 +1,14 @@
 .screw-machine-detail { background: #0b0d0e; }
-.screw-conveyor-experience { position: relative; height: 370svh; background: #0b0d0e; color: #f3f2ed; }
+.screw-conveyor-experience { position: relative; height: 969svh; background: #0b0d0e; color: #f3f2ed; }
 .screw-conveyor-viewport { position: sticky; top: 0; height: 100svh; min-height: 620px; overflow: clip; isolation: isolate; background: #0b0d0e; }
 .screw-conveyor-white-stage { position: absolute; inset: 0; z-index: 1; background: radial-gradient(circle at 50% 58%, #ffffff 0%, #f4f2ec 48%, #ebe8df 100%); transform-origin: center; will-change: transform, border-radius; }
 .screw-conveyor-scene-two-target { position: absolute; top: 16svh; right: 4.5vw; z-index: -1; width: min(52vw, 980px); height: 68svh; pointer-events: none; visibility: hidden; }
 .screw-conveyor-scene-three { position: absolute; inset: 0; z-index: 2; background: radial-gradient(circle at 50% 58%, #ffffff 0%, #f4f2ec 48%, #ebe8df 100%); will-change: transform; }
+.screw-conveyor-scene-four-copy { position: absolute; top: 13%; left: 50%; z-index: 4; width: min(90vw, 900px); color: #111415; text-align: center; pointer-events: none; transform: translateX(-50%); }
+.screw-conveyor-scene-four-copy p { margin: 0 0 18px; font-size: 10px; letter-spacing: .16em; }
+.screw-conveyor-scene-four-copy p span { margin-inline: 8px; color: #7d8582; }
+.screw-conveyor-scene-four-copy h2 { margin: 0; font-size: clamp(48px, 7vw, 112px); line-height: .88; letter-spacing: -.06em; font-weight: 600; }
+.screw-conveyor-scene-four-copy > span { display: block; margin-top: 20px; color: #68716e; font-size: 12px; letter-spacing: .1em; }
 .screw-conveyor-canvas-shell { position: absolute; inset: 0; z-index: 3; outline: none; touch-action: pan-y; }
 .screw-conveyor-canvas-shell { opacity: 0; transition: opacity .32s ease; }
 .screw-conveyor-canvas-shell.is-model-ready { opacity: 1; }
@@ -44,7 +49,9 @@ body:has(.screw-conveyor-experience) [data-navbar] { opacity: 0; visibility: hid
 
 @media (max-width: 767px) {
   .screw-conveyor-inspection-hint::after { content: "  ·  PINCH TO ZOOM"; }
-  .screw-conveyor-experience { height: 315svh; }
+  .screw-conveyor-experience { height: 792svh; }
+  .screw-conveyor-scene-four-copy { top: 9%; left: 50%; width: 92vw; }
+  .screw-conveyor-scene-four-copy h2 { font-size: clamp(34px, 11vw, 54px); }
   .screw-conveyor-viewport { min-height: 568px; }
   .screw-conveyor-scene-two-target { top: 44%; right: 6vw; left: 6vw; width: auto; height: 44svh; }
   .screw-conveyor-identity { top: 15%; left: 6vw; width: 88vw; }
@@ -87,3 +94,25 @@ body:has(.screw-conveyor-experience) [data-navbar] { opacity: 0; visibility: hid
 @media (prefers-reduced-motion: reduce) and (max-width: 767px) {
   .screw-conveyor-identity { bottom: 32px; left: 6vw; width: 88vw; }
 }
+
+/* Guided chapters after the original presentation. */
+.screw-conveyor-teaser-block { position: absolute; inset: 0; z-index: 2; background: #f3f2ed; opacity: 0; transform-origin: center; pointer-events: none; }
+.screw-conveyor-technical-environment { position: absolute; inset: 0; z-index: 2; background: #f3f2ed; opacity: 0; pointer-events: none; }
+.screw-conveyor-scene-four-copy { color: #f3f2ed; top: 14%; }
+.screw-conveyor-scene-four-copy > span { color: #aeb4b1; }
+@media (max-width: 767px) {
+  .screw-conveyor-scene-four-copy { top: 16%; }
+  .screw-conveyor-scene-four-copy h2 { font-size: clamp(34px, 10vw, 54px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .screw-conveyor-teaser-block, .screw-conveyor-technical-environment, .screw-conveyor-component-labels, .screw-conveyor-scene-four-copy { display: none; }
+}
+
+.screw-conveyor-component-labels { position: absolute; inset: 0; z-index: 4; pointer-events: none; color: #242b28; }
+.screw-conveyor-component-labels [data-component-callout] { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.screw-conveyor-component-labels svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; fill: #69766d; stroke: #69766d; stroke-width: 1; }
+.screw-conveyor-component-labels span { position: absolute; display: block; font-size: 12px; font-weight: 500; line-height: 1.45; letter-spacing: .08em; }
+@media (max-width: 767px) {
+  .screw-conveyor-component-labels span { font-size: 10px; line-height: 1.5; letter-spacing: .06em; }
+}
+@media (prefers-reduced-motion: reduce) { .screw-conveyor-component-labels { display: none; } }
