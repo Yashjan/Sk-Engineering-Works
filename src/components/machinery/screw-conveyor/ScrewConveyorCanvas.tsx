@@ -201,8 +201,10 @@ function MachineModel({ motion, inspection, onReady }: MachineModelProps) {
     zoom.scale.setScalar(MathUtils.damp(zoom.scale.x, mobileInspection ? MathUtils.clamp(controls.zoomTarget, 1, 3.2) : 1, 10, frameDelta));
     const panLimit = Math.max(0.08, (MathUtils.clamp(controls.zoomTarget, 1, 3.2) - 1) * viewport.width * 1.35);
     pan.position.x = MathUtils.damp(pan.position.x, mobileInspection ? MathUtils.clamp(controls.panTarget, -panLimit, panLimit) : 0, 9, frameDelta);
-    // Sine-based drift with a three-second full cycle.
-    const float = Math.sin(clock.elapsedTime * (Math.PI * 2 / 3)) * viewport.height * 0.005 * state.floatStrength;
+    // Mobile landing uses a shorter 1.5-second full cycle; desktop keeps 3 seconds.
+    const mobileFloat = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
+    const floatPeriod = mobileFloat ? 2 : 3;
+    const float = Math.sin(clock.elapsedTime * (Math.PI * 2 / floatPeriod)) * viewport.height * 0.005 * state.floatStrength;
     const depthFloat = Math.cos(clock.elapsedTime * (Math.PI * 2 / 12)) * 0.018 * state.floatStrength;
     position.position.set(viewport.width * state.x, viewport.height * state.y, state.z);
     position.scale.setScalar(scale);

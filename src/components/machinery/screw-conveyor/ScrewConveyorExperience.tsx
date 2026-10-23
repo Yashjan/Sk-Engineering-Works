@@ -386,6 +386,22 @@ export default function ScrewConveyorExperience() {
               const inInspectionScene = self.progress <= 0.012;
               // Mobile inspection remains available anywhere the pinned machine is visible.
               setInspectionEnabled(mobile || inInspectionScene);
+              if (mobile && !inInspectionScene) {
+                const controls = inspection.current;
+                const needsAlignment = Math.abs(controls.targetYaw) > 0.01
+                  || Math.abs(controls.targetPitch) > 0.01
+                  || Math.abs(controls.zoomTarget - 1) > 0.01
+                  || Math.abs(controls.panTarget) > 0.01;
+                if (needsAlignment) {
+                  controls.targetYaw = 0;
+                  controls.targetPitch = 0;
+                  controls.zoomTarget = 1;
+                  controls.panTarget = 0;
+                  controls.velocityYaw = 0;
+                  controls.velocityPitch = 0;
+                  controls.resetVersion += 1;
+                }
+              }
               if (!inInspectionScene) hint.classList.add("is-dismissed");
             },
           },
