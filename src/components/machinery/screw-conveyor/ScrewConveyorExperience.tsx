@@ -13,6 +13,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { ScrewConveyorInspection, ScrewConveyorMotion } from "./ScrewConveyorCanvas";
 import "./screw-conveyor-experience.css";
+import { componentChapters, createComponentDetail, storyDuration } from "./component-inspection";
 import { assetPath } from "@/lib/asset-path";
 
 const ScrewConveyorCanvas = dynamic(() => import("./ScrewConveyorCanvas"), {
@@ -37,6 +38,8 @@ const HERO_PITCH = degrees(-4);
 
 export default function ScrewConveyorExperience() {
   const root = useRef<HTMLElement>(null);
+  const detail = useRef(createComponentDetail());
+  const detailCopy = useRef<HTMLDivElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
   const whiteStage = useRef<HTMLDivElement>(null);
   const sceneTwoTarget = useRef<HTMLDivElement>(null);
@@ -356,6 +359,9 @@ export default function ScrewConveyorExperience() {
         const headingLines = copy.querySelectorAll<HTMLElement>(".screw-conveyor-heading-line > span");
         const supportingCopy = copy.querySelectorAll<HTMLElement>(".screw-conveyor-function, .screw-conveyor-summary");
         const heroWidth = mobile ? 0.9 : 0.84;
+        const detailTexts = detailCopy.current?.querySelectorAll<HTMLElement>("article") ?? [];
+        gsap.set(detailTexts, { autoAlpha: 0, y: 12 });
+        componentChapters.forEach(({ id }) => gsap.set(detail.current[id], { weight: 0, progress: 0 }));
         gsap.set(panel, { x: 0, y: 0, scaleX: 1, scaleY: 1, borderRadius: 0 });
         gsap.set(copy, { autoAlpha: 0 });
         gsap.set(kicker, { autoAlpha: 0, y: 12 });
@@ -395,16 +401,16 @@ export default function ScrewConveyorExperience() {
             id: "screw-conveyor-scenes-01-03",
             trigger: section,
             start: "top top",
-            end: () => `+=${stickyViewport.offsetHeight * (mobile ? 2.15 : 2.7) * (8.3 / 2.58)}`,
+            end: () => `+=${stickyViewport.offsetHeight * (mobile ? 2.15 : 2.7) * (storyDuration / 2.58)}`,
             scrub: mobile ? 0.36 : 0.48,
             invalidateOnRefresh: true,
             onRefreshInit: measureTargets,
             onUpdate: (self) => {
               motion.current.scrollVelocity = clamp(self.getVelocity() / 1400, -1, 1);
-              const inInspectionScene = self.progress <= 0.012;
+              const inInspectionScene = self.progress * storyDuration <= 0.012 * 8.3;
               // Mobile inspection remains available anywhere the pinned machine is visible.
-              const chapterTime = self.progress * 8.3;
-              const chapterHold = (chapterTime >= 3.65 && chapterTime <= 4.05) || chapterTime >= 7.7;
+              const chapterTime = self.progress * storyDuration;
+              const chapterHold = (chapterTime >= 3.65 && chapterTime <= 4.05) || (chapterTime >= 7.7 && chapterTime < 8.3);
               setInspectionEnabled(((mobile || inInspectionScene) && chapterTime < 2.58) || chapterHold);
               if (mobile && !inInspectionScene) {
                 const controls = inspection.current;
@@ -520,8 +526,8 @@ export default function ScrewConveyorExperience() {
             ease: "power3.out",
           }, 1.86)
           // Scene 04: assembled machine contracts into a centered light window.
-          .to(finalScene, { scaleX: mobile ? 0.88 : 0.64, scaleY: mobile ? 0.3 : 0.34, yPercent: 22, duration: 0.85, ease: "power2.inOut" }, 2.78)
-          .to(motion.current, { width: mobile ? 0.73 : 0.54, y: -0.22, z: 0, yaw: HERO_YAW, pitch: HERO_PITCH, roll: 0, floatStrength: 0, inertiaStrength: 0, duration: 0.85, ease: "power2.inOut" }, 2.78)
+          .to(finalScene, { scaleX: mobile ? 1 : 0.64, scaleY: mobile ? 1 : 0.34, xPercent: 0, yPercent: mobile ? 0 : 22, opacity: mobile ? 0 : 1, duration: 0.85, ease: "power2.inOut" }, 2.78)
+          .to(motion.current, { width: mobile ? 0.8 : 0.54, x: 0, y: -0.22, z: 0, yaw: HERO_YAW, pitch: HERO_PITCH, roll: 0, floatStrength: 0, inertiaStrength: 0, duration: 0.85, ease: "power2.inOut" }, 2.78)
           .to(technicalCopy, { autoAlpha: 1, y: 0, duration: 0.45 }, 3.12)
           // Readable teaser hold, then Scene 05 travel while fully assembled.
           .to(technicalCopy, { autoAlpha: 0, y: -24, duration: 0.55 }, 4.28)
@@ -536,6 +542,22 @@ export default function ScrewConveyorExperience() {
           .to(motion.current, { portraitExplode: 1, explode: 1, duration: 1.15, ease: "power1.inOut" }, 5.85)
           .to(labelSequence, { autoAlpha: 1, duration: 0.25, stagger: 0.12 }, 6.82)
           .to({}, { duration: 0.63 }, 7.67);
+
+        // Scene 06 begins only after the complete exploded hold.
+        timeline.to(componentLabels.current, { autoAlpha: 0, duration: 0.28 }, 8.3);
+        let chapterStart = 8.3;
+        componentChapters.forEach((chapter, index) => {
+          const state = detail.current[chapter.id];
+          timeline.to(state, { weight: 1, duration: 0.38, ease: "sine.inOut" }, chapterStart);
+          timeline.to(state, { progress: 1, duration: chapter.duration - 0.38, ease: "none" }, chapterStart + 0.38);
+          timeline.to(detailTexts[index], { autoAlpha: 1, y: 0, duration: 0.3 }, chapterStart + 0.3);
+          if (index > 0) {
+            timeline.to(detail.current[componentChapters[index - 1].id], { weight: 0, duration: 0.38, ease: "sine.inOut" }, chapterStart);
+            timeline.to(detailTexts[index - 1], { autoAlpha: 0, y: -10, duration: 0.2 }, chapterStart);
+          }
+          chapterStart += chapter.duration;
+        });
+        timeline.to({}, { duration: storyDuration - chapterStart }, chapterStart);
       }, section);
 
       const refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
@@ -562,6 +584,15 @@ export default function ScrewConveyorExperience() {
               <svg aria-hidden="true"><line /><circle r="2.5" /></svg>
               <span data-desktop-name={name}>{name}</span>
             </div>
+          ))}
+        </div>
+        <div ref={detailCopy} className="screw-conveyor-detail-copy" aria-label="Part-by-part inspection">
+          {componentChapters.map((chapter, index) => (
+            <article key={chapter.id}>
+              <p>{String(index + 1).padStart(2, "0")} / 06 <span>COMPONENT INSPECTION</span></p>
+              <h2>{chapter.title}</h2>
+              <p>{chapter.copy}</p>
+            </article>
           ))}
         </div>
         <div ref={sceneFourCopy} className="screw-conveyor-scene-four-copy">
@@ -594,7 +625,7 @@ export default function ScrewConveyorExperience() {
           onKeyUp={handleKeyUp}
           onBlur={() => { inspection.current.keyHorizontal = 0; inspection.current.keyVertical = 0; }}
         >
-          <ScrewConveyorCanvas motion={motion} inspection={inspection} onReady={handleModelReady} calloutsRef={componentLabels} />
+          <ScrewConveyorCanvas motion={motion} inspection={inspection} onReady={handleModelReady} calloutsRef={componentLabels} detail={detail} />
         </div>
 
         <div ref={sceneTwoCopy} className="screw-conveyor-identity">

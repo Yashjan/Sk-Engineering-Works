@@ -116,3 +116,38 @@ body:has(.screw-conveyor-experience) [data-navbar] { opacity: 0; visibility: hid
   .screw-conveyor-component-labels span { font-size: 10px; line-height: 1.5; letter-spacing: .06em; }
 }
 @media (prefers-reduced-motion: reduce) { .screw-conveyor-component-labels { display: none; } }
+
+/* Scene 06 shares the persistent sticky viewport and master scroll story. */
+.screw-conveyor-experience { height: 1859svh; }
+.screw-conveyor-detail-copy { position: absolute; inset: auto 7vw 9%; height: 150px; z-index: 4; color: #18201c; pointer-events: none; }
+.screw-conveyor-detail-copy article { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.screw-conveyor-detail-copy article > p:first-child { font-size: 10px; letter-spacing: .15em; color: #69766d; margin: 0 0 16px; }
+.screw-conveyor-detail-copy article > p:first-child span { margin-left: 18px; }
+.screw-conveyor-detail-copy h2 { margin: 0; font-size: clamp(30px, 3.6vw, 64px); line-height: 1; font-weight: 500; letter-spacing: -.04em; }
+.screw-conveyor-detail-copy article > p:last-child { max-width: 640px; font-size: 15px; line-height: 1.6; margin: 18px 0 0; color: #5a675e; }
+@media (max-width: 767px) {
+  .screw-conveyor-experience { height: 1501svh; }
+  .screw-conveyor-detail-copy { inset: auto 6vw 10%; height: 144px; }
+  .screw-conveyor-detail-copy h2 { font-size: clamp(24px, 7.5vw, 34px); }
+  .screw-conveyor-detail-copy article > p:last-child { font-size: 13px; line-height: 1.5; margin-top: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .screw-conveyor-experience { height: auto; }
+  .screw-conveyor-viewport { height: auto; min-height: 0; }
+  .screw-conveyor-canvas-shell { top: 90px; height: 390px; }
+  .screw-conveyor-identity { position: relative; inset: auto; padding-top: 500px; margin: 0 6vw; width: auto; }
+  .screw-conveyor-detail-copy { position: relative; inset: auto; height: auto; margin: 60px 6vw 40px; }
+  .screw-conveyor-detail-copy article { position: relative; opacity: 1; visibility: visible; margin-bottom: 36px; }
+}
+.screw-conveyor-detail-copy article { isolation: isolate; }
+.screw-conveyor-detail-copy article::before { content: ""; position: absolute; z-index: -1; inset: -28px -7vw -10vh; background: linear-gradient(transparent, #f3f2ed 30%); }
+@media (prefers-reduced-motion: reduce) { .screw-conveyor-detail-copy article::before { display: none; } }
+
+/* Mobile teaser: unboxed machine below centered copy. */
+@media (max-width: 767px) {
+  .screw-conveyor-scene-four-copy { left: 6vw; top: 22%; width: 88vw; text-align: center; transform: none; }
+  .screw-conveyor-scene-four-copy h2 { font-size: clamp(32px, 9.2vw, 44px); line-height: .95; letter-spacing: -.045em; }
+  .screw-conveyor-scene-four-copy p { font-size: 10px; letter-spacing: .12em; margin-bottom: 18px; }
+  .screw-conveyor-scene-four-copy p span { margin-inline: 6px; }
+  .screw-conveyor-scene-four-copy > span { margin-top: 20px; font-size: 12px; line-height: 1.6; letter-spacing: .04em; }
+}

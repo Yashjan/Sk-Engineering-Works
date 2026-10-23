@@ -4,6 +4,7 @@ import { Suspense, useEffect, useMemo, useRef, type MutableRefObject, type RefOb
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Lightformer, useGLTF } from "@react-three/drei";
 import { Box3, Matrix4, Group, Material, MathUtils, Mesh, PerspectiveCamera, Quaternion, Vector3 } from "three";
+import { componentChapters, type ComponentDetail } from "./component-inspection";
 import { assetPath } from "@/lib/asset-path";
 
 const modelUrl = assetPath("/models/screw-conveyor/SK_Screw_Conveyor_Web_Final_Branding_Approved.glb");
@@ -71,9 +72,10 @@ type MachineModelProps = {
   inspection: MutableRefObject<ScrewConveyorInspection>;
   onReady: (report: ModelReport) => void;
   calloutsRef: RefObject<HTMLDivElement | null>;
+  detail: MutableRefObject<ComponentDetail>;
 };
 
-function MachineModel({ motion, inspection, onReady, calloutsRef }: MachineModelProps) {
+function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: MachineModelProps) {
   const positionGroup = useRef<Group>(null);
   const scrollInertiaGroup = useRef<Group>(null);
   const cinematicGroup = useRef<Group>(null);
@@ -81,6 +83,7 @@ function MachineModel({ motion, inspection, onReady, calloutsRef }: MachineModel
   const floatGroup = useRef<Group>(null);
   const zoomGroup = useRef<Group>(null);
   const panGroup = useRef<Group>(null);
+  const guidedGroup = useRef<Group>(null);
   const shadowGroup = useRef<Group>(null);
   const interactionRuntime = useRef({
     targetQuaternion: new Quaternion(),
@@ -150,6 +153,38 @@ function MachineModel({ motion, inspection, onReady, calloutsRef }: MachineModel
       return { object, local: object.worldToLocal(center), point: new Vector3() };
     });
   }, [model]);
+  const detailComponents = useMemo(() => {
+    model.updateWorldMatrix(true, true);
+    return componentChapters.map((chapter) => {
+      const objects = chapter.nodes.map((name) => {
+        const object = model.getObjectByName(name);
+        if (!object) throw new Error(`Missing component inspection node: ${name}`);
+        return object;
+      });
+      const bounds = new Box3();
+      objects.forEach((object) => bounds.union(new Box3().setFromObject(object)));
+      const center = bounds.getCenter(new Vector3());
+      const anchor = objects[0].worldToLocal(center.clone());
+      const pivots = new Map(objects.map((object) => [object.name, object.parent!.worldToLocal(center.clone())]));
+      const materials: Array<{ material: Material; opacity: number; transparent: boolean; depthWrite: boolean }> = [];
+      objects.forEach((object) => object.traverse((child) => {
+        if (!(child as Mesh).isMesh) return;
+        const mesh = child as Mesh;
+        const clone = (original: Material) => {
+          const material = original.clone();
+          materials.push({ material, opacity: original.opacity, transparent: original.transparent, depthWrite: original.depthWrite });
+          return material;
+        };
+        mesh.material = Array.isArray(mesh.material) ? mesh.material.map(clone) : clone(mesh.material);
+      }));
+      return { chapter, objects, anchor, pivots, materials, point: new Vector3() };
+    });
+  }, [model]);
+  const guidedCenter = useMemo(() => new Vector3(), []);
+  const detailTurn = useMemo(() => new Quaternion(), []);
+  const longAxis = useMemo(() => new Vector3(0, 0, 1), []);
+  const pivotDelta = useMemo(() => new Vector3(), []);
+
   const calloutElements = useRef<Array<{ label: HTMLElement; line: SVGLineElement; dot: SVGCircleElement; svg: SVGSVGElement }>>([]);
 
   useEffect(() => {
@@ -169,8 +204,9 @@ function MachineModel({ motion, inspection, onReady, calloutsRef }: MachineModel
     const floating = floatGroup.current;
     const zoom = zoomGroup.current;
     const pan = panGroup.current;
+    const guided = guidedGroup.current;
     const shadow = shadowGroup.current;
-    if (!position || !scrollInertia || !cinematic || !interaction || !floating || !zoom || !pan || !shadow) return;
+    if (!position || !scrollInertia || !cinematic || !interaction || !floating || !zoom || !pan || !guided || !shadow) return;
 
     const state = motion.current;
     const controls = inspection.current;
@@ -186,6 +222,33 @@ function MachineModel({ motion, inspection, onReady, calloutsRef }: MachineModel
         : name === "COUPLING" ? [0.02, -0.08, 0.12]
         : name.includes("INLET") ? [0.02, mobile ? -0.29 : -0.25, mobile ? 0.26 : 0.34] : [0.02, mobile ? -0.29 : -0.25, mobile ? -0.26 : -0.34];
       object.position.set(origin.x + offset[0] * explode, origin.y + offset[1] * explode, origin.z + offset[2] * explode);
+    });
+
+    const focusWeight = Math.min(1, componentChapters.reduce((sum, { id }) => sum + detail.current[id].weight, 0));
+    detailComponents.forEach(({ chapter, objects, pivots, materials }, index) => {
+      const { weight, progress } = detail.current[chapter.id];
+      objects.forEach((object) => {
+        const baseline = explodeParts.find((part) => part.name === object.name)!;
+        const angle = (index < 2 ? Math.PI : MathUtils.degToRad(42)) * progress * weight;
+        detailTurn.setFromAxisAngle(index < 2 ? longAxis : worldYAxis, angle);
+        object.quaternion.copy(baseline.quaternion).premultiply(detailTurn);
+        const pivot = pivots.get(object.name)!;
+        pivotDelta.copy(baseline.origin).sub(pivot).applyQuaternion(detailTurn).add(pivot).sub(baseline.origin);
+        object.position.add(pivotDelta);
+        object.position.x += weight * 0.12 - (focusWeight - weight) * 0.035;
+      });
+      materials.forEach(({ material, opacity, transparent, depthWrite }) => {
+        // Only the described component remains visible at each chapter hold.
+        // Weight crossfades preserve smooth forward/reverse transitions.
+        const emphasis = MathUtils.clamp(1 - focusWeight + weight, 0, 1);
+        material.opacity = opacity * emphasis;
+        const fading = emphasis < 0.999;
+        if (material.transparent !== (transparent || fading)) {
+          material.transparent = transparent || fading;
+          material.needsUpdate = true;
+        }
+        material.depthWrite = fading ? false : depthWrite;
+      });
     });
 
     if (controls.resetVersion !== runtime.lastResetVersion) {
@@ -282,6 +345,24 @@ function MachineModel({ motion, inspection, onReady, calloutsRef }: MachineModel
     shadow.scale.setScalar(Math.max(0.08, state.shadowStrength));
     shadow.visible = state.shadowStrength > 0.03;
     (camera as PerspectiveCamera).position.z = state.cameraZ;
+    position.updateWorldMatrix(true, true);
+    guidedCenter.set(0, 0, 0);
+    let guidedScale = 1;
+    detailComponents.forEach(({ chapter, objects, anchor, point }, index) => {
+      const { weight, progress } = detail.current[chapter.id];
+      if (weight === 0) return;
+      guided.worldToLocal(objects[0].localToWorld(point.copy(anchor)));
+      if (index < 2) point.x += (progress - 0.5) * presentation.length * (portrait ? 0.65 : 0.4);
+      guidedCenter.addScaledVector(point, weight);
+      const magnification = index < 2 ? (portrait ? 2.1 : 1.55)
+        : index === 2 ? (portrait ? 5.2 : 2.8)
+        : index === 3 ? (portrait ? 12 : 7) : (portrait ? 8.5 : 5.5);
+      guidedScale += (magnification - 1) * weight;
+    });
+    guided.scale.setScalar(guidedScale);
+    guided.position.copy(guidedCenter).multiplyScalar(-guidedScale);
+    guided.position.y += focusWeight * viewport.height * (portrait ? 0.04 : 0.07) / scale;
+
     // Update after every owner has written its transform, so callouts never lag a frame.
     if (calloutsRef.current && !calloutElements.current.length) {
       calloutElements.current = Array.from(calloutsRef.current.querySelectorAll<HTMLElement>("[data-component-callout]")).map((element) => ({
@@ -358,6 +439,7 @@ function MachineModel({ motion, inspection, onReady, calloutsRef }: MachineModel
     <group ref={positionGroup}>
       <group ref={scrollInertiaGroup}>
         <group ref={cinematicGroup}>
+        <group ref={guidedGroup}>
         <group ref={panGroup}>
         <group ref={zoomGroup}>
         <group ref={interactionGroup}>
@@ -370,6 +452,7 @@ function MachineModel({ motion, inspection, onReady, calloutsRef }: MachineModel
         </group>
         </group>
         </group>
+      </group>
       </group>
       <group ref={shadowGroup}>
         <ContactShadows
@@ -386,7 +469,7 @@ function MachineModel({ motion, inspection, onReady, calloutsRef }: MachineModel
   );
 }
 
-export default function ScrewConveyorCanvas({ motion, inspection, onReady, calloutsRef }: MachineModelProps) {
+export default function ScrewConveyorCanvas({ motion, inspection, onReady, calloutsRef, detail }: MachineModelProps) {
   return (
     <Canvas
       className="screw-conveyor-canvas"
@@ -405,7 +488,7 @@ export default function ScrewConveyorCanvas({ motion, inspection, onReady, callo
         <Lightformer form="ring" intensity={0.7} position={[4, -1, -4]} scale={3} />
       </Environment>
       <Suspense fallback={null}>
-        <MachineModel motion={motion} inspection={inspection} onReady={onReady} calloutsRef={calloutsRef} />
+        <MachineModel motion={motion} inspection={inspection} onReady={onReady} calloutsRef={calloutsRef} detail={detail} />
       </Suspense>
     </Canvas>
   );
