@@ -5,9 +5,23 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Lightformer, useGLTF } from "@react-three/drei";
 import { Box3, Matrix4, Group, Material, MathUtils, Mesh, PerspectiveCamera, Quaternion, Vector3 } from "three";
 import { componentChapters, type ComponentDetail } from "./component-inspection";
+import { applyComponentVisibility, captureComponentMaterial } from "./component-materials";
 import { assetPath } from "@/lib/asset-path";
 
 const modelUrl = assetPath("/models/screw-conveyor/SK_Screw_Conveyor_Web_Final_Branding_Approved.glb");
+const explodePartNames = ["DRIVE_ASSEMBLY", "COUPLING", "BODY", "SCREW", "BEARING_SHAFT_INLET", "BEARING_BLOCK_INLET", "BEARING_SHAFT_OUTLET", "BEARING_BLOCK_OUTLET"] as const;
+type ExplodePartName = (typeof explodePartNames)[number];
+type ExplodeOffset = readonly [number, number, number];
+const explodeOffsets: Record<ExplodePartName, { desktop: ExplodeOffset; mobile: ExplodeOffset }> = {
+  DRIVE_ASSEMBLY: { desktop: [0.02, -0.08, 0.27], mobile: [0.02, -0.08, 0.18] },
+  COUPLING: { desktop: [0.02, -0.08, 0.12], mobile: [0.02, -0.08, 0.12] },
+  BODY: { desktop: [0, 0.32, 0], mobile: [0, 0.25, 0] },
+  SCREW: { desktop: [0.05, -0.32, 0], mobile: [0.05, -0.25, 0] },
+  BEARING_SHAFT_INLET: { desktop: [0.02, -0.09, 0.09], mobile: [0.02, -0.09, 0.09] },
+  BEARING_BLOCK_INLET: { desktop: [0.02, -0.1, -0.13], mobile: [0.02, -0.1, -0.13] },
+  BEARING_SHAFT_OUTLET: { desktop: [0.02, -0.09, -0.11], mobile: [0.02, -0.09, -0.11] },
+  BEARING_BLOCK_OUTLET: { desktop: [0.02, -0.1, -0.22], mobile: [0.02, -0.1, -0.22] },
+};
 const verifiedGroups = [
   "ScrewConveyor_ROOT",
   "BODY",
@@ -136,15 +150,14 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
     };
   }, [model]);
   const explodeParts = useMemo(() => {
-    const names = [ "DRIVE_ASSEMBLY", "COUPLING", "BODY", "SCREW", "BEARING_SHAFT_INLET", "BEARING_BLOCK_INLET", "BEARING_SHAFT_OUTLET", "BEARING_BLOCK_OUTLET"];
-    return names.map((name) => {
+    return explodePartNames.map((name) => {
       const object = model.getObjectByName(name);
       return object ? { object, origin: object.position.clone(), quaternion: object.quaternion.clone(), scale: object.scale.clone(), name } : null;
-    }).filter(Boolean) as Array<{ object: Group; origin: Vector3; quaternion: Quaternion; scale: Vector3; name: string }>;
+    }).filter(Boolean) as Array<{ object: Group; origin: Vector3; quaternion: Quaternion; scale: Vector3; name: ExplodePartName }>;
   }, [model]);
 
   const calloutAnchors = useMemo(() => {
-    const names = ["DRIVE_ASSEMBLY", "COUPLING", "BEARING_BLOCK_INLET", "BODY", "SCREW", "BEARING_BLOCK_OUTLET"];
+    const names: ExplodePartName[] = ["DRIVE_ASSEMBLY", "COUPLING", "BEARING_SHAFT_INLET", "BEARING_BLOCK_INLET", "BODY", "SCREW", "BEARING_SHAFT_OUTLET", "BEARING_BLOCK_OUTLET"];
     model.updateWorldMatrix(true, true);
     return names.map((name) => {
       const object = model.getObjectByName(name);
@@ -166,13 +179,17 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
       const center = bounds.getCenter(new Vector3());
       const anchor = objects[0].worldToLocal(center.clone());
       const pivots = new Map(objects.map((object) => [object.name, object.parent!.worldToLocal(center.clone())]));
-      const materials: Array<{ material: Material; opacity: number; transparent: boolean; depthWrite: boolean }> = [];
+      const materials: ReturnType<typeof captureComponentMaterial>[] = [];
+      const clones = new Map<Material, Material>();
       objects.forEach((object) => object.traverse((child) => {
         if (!(child as Mesh).isMesh) return;
         const mesh = child as Mesh;
         const clone = (original: Material) => {
+          const existing = clones.get(original);
+          if (existing) return existing;
           const material = original.clone();
-          materials.push({ material, opacity: original.opacity, transparent: original.transparent, depthWrite: original.depthWrite });
+          clones.set(original, material);
+          materials.push(captureComponentMaterial(material));
           return material;
         };
         mesh.material = Array.isArray(mesh.material) ? mesh.material.map(clone) : clone(mesh.material);
@@ -180,12 +197,43 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
       return { chapter, objects, anchor, pivots, materials, point: new Vector3() };
     });
   }, [model]);
+  const passiveDetailMaterials = useMemo(() => {
+    const chapterNodes = new Set<string>(componentChapters.flatMap((chapter) => [...chapter.nodes]));
+    const materials: ReturnType<typeof captureComponentMaterial>[] = [];
+    const clones = new Map<Material, Material>();
+    explodePartNames.filter((name) => !chapterNodes.has(name)).forEach((name) => {
+      model.getObjectByName(name)?.traverse((child) => {
+        if (!(child as Mesh).isMesh) return;
+        const mesh = child as Mesh;
+        const clone = (original: Material) => {
+          const existing = clones.get(original);
+          if (existing) return existing;
+          const material = original.clone();
+          clones.set(original, material);
+          materials.push(captureComponentMaterial(material));
+          return material;
+        };
+        mesh.material = Array.isArray(mesh.material) ? mesh.material.map(clone) : clone(mesh.material);
+      });
+    });
+    return materials;
+  }, [model]);
   const guidedCenter = useMemo(() => new Vector3(), []);
   const detailTurn = useMemo(() => new Quaternion(), []);
   const longAxis = useMemo(() => new Vector3(0, 0, 1), []);
   const pivotDelta = useMemo(() => new Vector3(), []);
 
+  useEffect(() => () => {
+    explodeParts.forEach(({ object }) => { object.visible = true; });
+    [...detailComponents.flatMap(({ materials }) => materials), ...passiveDetailMaterials].forEach((snapshot) => {
+      applyComponentVisibility(snapshot, 1);
+      snapshot.material.dispose();
+    });
+  }, [detailComponents, explodeParts, passiveDetailMaterials]);
+
   const calloutElements = useRef<Array<{ label: HTMLElement; line: SVGLineElement; dot: SVGCircleElement; svg: SVGSVGElement }>>([]);
+  const calloutMeasurements = useRef<Array<{ key: string; height: number }>>([]);
+  const calloutSafeTop = useRef(24);
 
   useEffect(() => {
     onReady(presentation.report);
@@ -193,6 +241,21 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
       console.info("[ScrewConveyor3D] model ready", presentation.report);
     }
   }, [onReady, presentation]);
+
+  useEffect(() => {
+    const navbar = document.querySelector<HTMLElement>("[data-navbar]");
+    const updateSafeTop = () => {
+      calloutSafeTop.current = Math.max(24, (navbar?.offsetHeight ?? 0) + 18);
+    };
+    updateSafeTop();
+    const observer = navbar && typeof ResizeObserver !== "undefined" ? new ResizeObserver(updateSafeTop) : null;
+    if (navbar) observer?.observe(navbar);
+    window.addEventListener("resize", updateSafeTop);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", updateSafeTop);
+    };
+  }, []);
 
   const viewport = useThree((state) => state.viewport);
   const canvasSize = useThree((state) => state.size);
@@ -212,44 +275,43 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
     const controls = inspection.current;
     const runtime = interactionRuntime.current;
     const frameDelta = Math.min(delta, 0.05);
+    const portrait = canvasSize.width < 768 && canvasSize.height > canvasSize.width;
     const explode = MathUtils.clamp(state.explode, 0, 1);
     explodeParts.forEach(({ object, origin, name }) => {
       // GLB long axis is Z; the presentation wrapper turns +Z toward screen-left.
       const mobile = canvasSize.width < 768 && canvasSize.height > canvasSize.width;
-      const offset = name === "BODY" ? [0, mobile ? 0.25 : 0.32, 0]
-        : name === "SCREW" ? [0.05, mobile ? -0.25 : -0.32, 0]
-        : name === "DRIVE_ASSEMBLY" ? [0.02, -0.08, mobile ? 0.18 : 0.27]
-        : name === "COUPLING" ? [0.02, -0.08, 0.12]
-        : name.includes("INLET") ? [0.02, mobile ? -0.29 : -0.25, mobile ? 0.26 : 0.34] : [0.02, mobile ? -0.29 : -0.25, mobile ? -0.26 : -0.34];
+      const offset = explodeOffsets[name][mobile ? "mobile" : "desktop"];
       object.position.set(origin.x + offset[0] * explode, origin.y + offset[1] * explode, origin.z + offset[2] * explode);
     });
 
     const focusWeight = Math.min(1, componentChapters.reduce((sum, { id }) => sum + detail.current[id].weight, 0));
+    // At a chapter hold, remove every unrelated GLB group from rendering entirely.
+    // During entry, exit, and chapter crossfades, material opacity handles the transition.
+    explodeParts.forEach(({ object, name }) => {
+      const partWeight = componentChapters.reduce(
+        (highest, chapter) => chapter.nodes.some((node: string) => node === name)
+          ? Math.max(highest, detail.current[chapter.id].weight)
+          : highest,
+        0,
+      );
+      object.visible = focusWeight < 0.999 || partWeight > 0.001;
+    });
     detailComponents.forEach(({ chapter, objects, pivots, materials }, index) => {
       const { weight, progress } = detail.current[chapter.id];
       objects.forEach((object) => {
         const baseline = explodeParts.find((part) => part.name === object.name)!;
-        const angle = (index < 2 ? Math.PI : MathUtils.degToRad(42)) * progress * weight;
-        detailTurn.setFromAxisAngle(index < 2 ? longAxis : worldYAxis, angle);
+        const axial = index < 2 || chapter.id === "shaft";
+        const angle = (index < 2 ? Math.PI : MathUtils.degToRad(chapter.id === "shaft" ? 75 : 42)) * progress * weight;
+        detailTurn.setFromAxisAngle(axial ? longAxis : worldYAxis, angle);
         object.quaternion.copy(baseline.quaternion).premultiply(detailTurn);
         const pivot = pivots.get(object.name)!;
         pivotDelta.copy(baseline.origin).sub(pivot).applyQuaternion(detailTurn).add(pivot).sub(baseline.origin);
         object.position.add(pivotDelta);
         object.position.x += weight * 0.12 - (focusWeight - weight) * 0.035;
       });
-      materials.forEach(({ material, opacity, transparent, depthWrite }) => {
-        // Only the described component remains visible at each chapter hold.
-        // Weight crossfades preserve smooth forward/reverse transitions.
-        const emphasis = MathUtils.clamp(1 - focusWeight + weight, 0, 1);
-        material.opacity = opacity * emphasis;
-        const fading = emphasis < 0.999;
-        if (material.transparent !== (transparent || fading)) {
-          material.transparent = transparent || fading;
-          material.needsUpdate = true;
-        }
-        material.depthWrite = fading ? false : depthWrite;
-      });
+      materials.forEach((snapshot) => applyComponentVisibility(snapshot, 1 - focusWeight + weight));
     });
+    passiveDetailMaterials.forEach((snapshot) => applyComponentVisibility(snapshot, 1 - focusWeight));
 
     if (controls.resetVersion !== runtime.lastResetVersion) {
       runtime.lastResetVersion = controls.resetVersion;
@@ -298,7 +360,6 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
       runtime.velocityPitch = 0;
     }
 
-    const portrait = canvasSize.width < 768 && canvasSize.height > canvasSize.width;
     // Fit the physical exploded bounds, including both bearing/shaft pairs.
     const explodedBounds = new Box3();
     if (portrait && explode > 0) {
@@ -356,7 +417,8 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
       guidedCenter.addScaledVector(point, weight);
       const magnification = index < 2 ? (portrait ? 2.1 : 1.55)
         : index === 2 ? (portrait ? 5.2 : 2.8)
-        : index === 3 ? (portrait ? 12 : 7) : (portrait ? 8.5 : 5.5);
+        : index === 3 ? (portrait ? 12 : 7)
+        : chapter.id === "shaft" ? (portrait ? 11 : 7.5) : (portrait ? 12 : 8);
       guidedScale += (magnification - 1) * weight;
     });
     guided.scale.setScalar(guidedScale);
@@ -370,13 +432,14 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
         dot: element.querySelector("circle")!, svg: element.querySelector("svg")!,
       }));
     }
-    if (explode > 0.01) {
+    if (explode > 0.01 && focusWeight < 0.01) {
       position.updateWorldMatrix(true, true);
       const { width, height } = canvasSize;
-      const mobile = width < 768 && height > width;
-      const compact = width < 768;
+      const compact = width < 1024 || height < 620;
+      const safeTop = Math.min(calloutSafeTop.current, height - 96);
+      const safeBottom = compact ? 88 : 42;
       const occupied: Array<{ x: number; y: number; width: number; height: number }> = [];
-      const mobileNames = ["MOTOR & GEARBOX", "COUPLING", "INLET BEARING", "BODY / CASING", "SCREW & SHAFT", "OUTLET BEARING"];
+      const compactNames = ["MOTOR & GEARBOX", "FLEXIBLE COUPLING", "INLET SHAFT", "INLET BEARING", "BODY / CASING", "SCREW & SHAFT", "OUTLET SHAFT", "OUTLET BEARING"];
       const partRects = calloutAnchors.map(({ object }) => {
         const bounds = new Box3().setFromObject(object);
         let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
@@ -387,46 +450,54 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
         }
         return { left, right, top, bottom };
       });
-      calloutAnchors.forEach(({ object, local, point }, index) => {
+      // Place the small shaft/bearing labels first; resolve collisions locally on every screen size.
+      [2, 3, 6, 7, 0, 1, 4, 5].forEach((index) => {
+        const { object, local, point } = calloutAnchors[index];
         const elements = calloutElements.current[index];
         if (!elements) return;
         object.localToWorld(point.copy(local)).project(camera);
         const x = (point.x + 1) * width / 2;
         const y = (1 - point.y) * height / 2;
-        const labelWidth = mobile ? Math.min(126, mobileNames[index].length * 5.8 + 2) : 210;
-        const lanes = [0.28, 0.16, 0.76, 0.12, 0.86, 0.68];
-        const leftSide = [0, 1, 2].includes(index);
-        let labelX = MathUtils.clamp(x + (leftSide ? -labelWidth - 32 : 32), 24, width - labelWidth - 24);
-        let labelY = height * lanes[index];
-        if (mobile) {
-          // Nearby component zones, then local collision resolution instead of distant viewport rows.
-          const part = partRects[index];
-          const preferAbove = index === 0 || index === 3;
-          labelX = MathUtils.clamp(x - labelWidth / 2, 14, width - labelWidth - 14);
-          labelY = preferAbove ? part.top - 30 : part.bottom + 18;
-          const collides = (cx: number, cy: number) =>
-            partRects.some((box) => cx < box.right + 6 && cx + labelWidth > box.left - 6 && cy < box.bottom + 6 && cy + 24 > box.top - 6) ||
-            occupied.some((box) => cx < box.x + box.width + 8 && cx + labelWidth + 8 > box.x && cy < box.y + box.height + 8 && cy + 24 + 8 > box.y);
-          let found = false;
-          for (const distance of [18, 42, 66, 90, 114, 138]) {
-            if (found) break;
-            for (const above of [preferAbove, !preferAbove]) {
-              if (found) break;
-              for (const shift of [0, -48, 48, -96, 96]) {
-                const cx = MathUtils.clamp(x - labelWidth / 2 + shift, 14, width - labelWidth - 14);
-                const cy = MathUtils.clamp(above ? part.top - distance - 24 : part.bottom + distance, 104, height - 118);
-                if (!collides(cx, cy)) { labelX = cx; labelY = cy; found = true; break; }
-              }
+        const name = compact ? compactNames[index] : elements.label.dataset.desktopName!;
+        const textWidth = name.length * (compact ? 6.2 : 7.8);
+        const labelWidth = Math.min(compact ? 126 : 168, textWidth + 4);
+        const measurementKey = `${width}:${name}:${labelWidth}`;
+        if (calloutMeasurements.current[index]?.key !== measurementKey) {
+          elements.label.textContent = name;
+          elements.label.style.width = `${labelWidth}px`;
+          // Measure wrapping only when text/viewport changes, never on every animation frame.
+          calloutMeasurements.current[index] = { key: measurementKey, height: elements.label.offsetHeight };
+        }
+        const labelHeight = calloutMeasurements.current[index].height;
+        const part = partRects[index];
+        const preferAbove = [0, 2, 4, 6].includes(index);
+        const inset = compact ? 14 : 24;
+        let labelX = MathUtils.clamp(x - labelWidth / 2, inset, width - labelWidth - inset);
+        let labelY = MathUtils.clamp(y - labelHeight - 12, safeTop, height - safeBottom - labelHeight);
+        let bestScore = Infinity;
+        const overlapArea = (cx: number, cy: number, left: number, top: number, right: number, bottom: number) =>
+          Math.max(0, Math.min(cx + labelWidth, right) - Math.max(cx, left)) *
+          Math.max(0, Math.min(cy + labelHeight, bottom) - Math.max(cy, top));
+        for (const distance of [10, 28, 46, 64, 82, 100]) {
+          for (const above of [preferAbove, !preferAbove]) {
+            for (const shift of [0, -32, 32, -64, 64]) {
+              const cx = MathUtils.clamp(x - labelWidth / 2 + shift, inset, width - labelWidth - inset);
+              const cy = MathUtils.clamp(above ? part.top - distance - labelHeight : part.bottom + distance, safeTop, height - safeBottom - labelHeight);
+              const labelOverlap = occupied.reduce((sum, box) => sum + overlapArea(cx, cy, box.x - 6, box.y - 6, box.x + box.width + 6, box.y + box.height + 6), 0);
+              const partOverlap = partRects.reduce((sum, box) => sum + overlapArea(cx, cy, box.left - 4, box.top - 4, box.right + 4, box.bottom + 4), 0);
+              const leaderLength = Math.hypot(x - MathUtils.clamp(x, cx, cx + labelWidth), y - MathUtils.clamp(y, cy, cy + labelHeight));
+              const score = labelOverlap * 100 + partOverlap * 10 + leaderLength + (above === preferAbove ? 0 : 8);
+              if (score < bestScore) { bestScore = score; labelX = cx; labelY = cy; }
             }
           }
-          occupied.push({ x: labelX, y: labelY, width: labelWidth, height: 24 });
         }
-        const displayName = compact ? mobileNames[index] : elements.label.dataset.desktopName!;
+        occupied.push({ x: labelX, y: labelY, width: labelWidth, height: labelHeight });
+        const displayName = compact ? compactNames[index] : elements.label.dataset.desktopName!;
         if (elements.label.textContent !== displayName) elements.label.textContent = displayName;
         elements.label.style.cssText = `left:${labelX}px;top:${labelY}px;width:${labelWidth}px`;
         elements.svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-        elements.line.setAttribute("x1", String(mobile ? MathUtils.clamp(x, labelX, labelX + labelWidth) : labelX + (leftSide ? labelWidth : 0)));
-        elements.line.setAttribute("y1", String(mobile ? (labelY > y ? labelY - 3 : labelY + 17) : labelY + 12));
+        elements.line.setAttribute("x1", String(MathUtils.clamp(x, labelX, labelX + labelWidth)));
+        elements.line.setAttribute("y1", String(MathUtils.clamp(y, labelY - 3, labelY + labelHeight + 3)));
         elements.line.setAttribute("x2", String(x)); elements.line.setAttribute("y2", String(y));
         elements.dot.setAttribute("cx", String(x)); elements.dot.setAttribute("cy", String(y));
         elements.svg.style.visibility = point.z < 1 && point.z > -1 && x >= 0 && x <= width && y >= 0 && y <= height ? "visible" : "hidden";

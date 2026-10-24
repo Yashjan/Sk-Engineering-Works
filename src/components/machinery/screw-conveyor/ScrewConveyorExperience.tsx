@@ -13,7 +13,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { ScrewConveyorInspection, ScrewConveyorMotion } from "./ScrewConveyorCanvas";
 import "./screw-conveyor-experience.css";
-import { componentChapters, createComponentDetail, storyDuration } from "./component-inspection";
+import { componentChapters, createComponentDetail, inspectionStart, inspectionExitDuration, storyDuration } from "./component-inspection";
 import { assetPath } from "@/lib/asset-path";
 
 const ScrewConveyorCanvas = dynamic(() => import("./ScrewConveyorCanvas"), {
@@ -340,6 +340,8 @@ export default function ScrewConveyorExperience() {
       };
 
       const measureTargets = () => {
+        // The sticky parent must cover the complete story, including the restoration tail.
+        section.style.height = `${stickyViewport.offsetHeight * (1 + (mobile ? 2.15 : 2.7) * storyDuration / 2.58)}px`;
         const viewportBounds = stickyViewport.getBoundingClientRect();
         const targetBounds = target.getBoundingClientRect();
         const centerX = targetBounds.left + targetBounds.width / 2;
@@ -372,7 +374,7 @@ export default function ScrewConveyorExperience() {
         gsap.set(technicalEnvironment.current, { opacity: 0 });
         const labels = componentLabels.current?.querySelectorAll("[data-component-callout]") ?? [];
         gsap.set(labels, { autoAlpha: 0 });
-        const labelSequence = mobile ? [3, 4, 0, 1, 2, 5].map((index) => labels[index]) : labels;
+        const labelSequence = mobile ? [4, 5, 0, 1, 2, 3, 6, 7].map((index) => labels[index]) : labels;
         gsap.set(cue, { autoAlpha: 1 });
         gsap.set(hint, { autoAlpha: 1 });
         gsap.set(motion.current, {
@@ -525,8 +527,8 @@ export default function ScrewConveyorExperience() {
             duration: 0.72,
             ease: "power3.out",
           }, 1.86)
-          // Scene 04: assembled machine contracts into a centered light window.
-          .to(finalScene, { scaleX: mobile ? 1 : 0.64, scaleY: mobile ? 1 : 0.34, xPercent: 0, yPercent: mobile ? 0 : 22, opacity: mobile ? 0 : 1, duration: 0.85, ease: "power2.inOut" }, 2.78)
+          // Scene 04: the assembled machine remains unboxed against the dark field.
+          .to(finalScene, { scaleX: mobile ? 1 : 0.64, scaleY: mobile ? 1 : 0.34, xPercent: 0, yPercent: mobile ? 0 : 22, opacity: 0, duration: 0.85, ease: "power2.inOut" }, 2.78)
           .to(motion.current, { width: mobile ? 0.8 : 0.54, x: 0, y: -0.22, z: 0, yaw: HERO_YAW, pitch: HERO_PITCH, roll: 0, floatStrength: 0, inertiaStrength: 0, duration: 0.85, ease: "power2.inOut" }, 2.78)
           .to(technicalCopy, { autoAlpha: 1, y: 0, duration: 0.45 }, 3.12)
           // Readable teaser hold, then Scene 05 travel while fully assembled.
@@ -545,7 +547,7 @@ export default function ScrewConveyorExperience() {
 
         // Scene 06 begins only after the complete exploded hold.
         timeline.to(componentLabels.current, { autoAlpha: 0, duration: 0.28 }, 8.3);
-        let chapterStart = 8.3;
+        let chapterStart = inspectionStart;
         componentChapters.forEach((chapter, index) => {
           const state = detail.current[chapter.id];
           timeline.to(state, { weight: 1, duration: 0.38, ease: "sine.inOut" }, chapterStart);
@@ -557,7 +559,8 @@ export default function ScrewConveyorExperience() {
           }
           chapterStart += chapter.duration;
         });
-        timeline.to({}, { duration: storyDuration - chapterStart }, chapterStart);
+        timeline.to(detail.current[componentChapters.at(-1)!.id], { weight: 0, duration: inspectionExitDuration, ease: "sine.inOut" }, chapterStart);
+        timeline.to(detailTexts[detailTexts.length - 1], { autoAlpha: 0, y: -10, duration: 0.25 }, chapterStart);
       }, section);
 
       const refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
@@ -565,6 +568,7 @@ export default function ScrewConveyorExperience() {
         cancelAnimationFrame(refreshFrame);
         setInspectionEnabled(false);
         animation.revert();
+        section.style.removeProperty("height");
       };
     }, section);
 
@@ -579,7 +583,7 @@ export default function ScrewConveyorExperience() {
         <div ref={sceneThree} className="screw-conveyor-scene-three" aria-hidden="true" />
         <div ref={technicalEnvironment} className="screw-conveyor-technical-environment" aria-hidden="true" />
         <div ref={componentLabels} className="screw-conveyor-component-labels" aria-label="Machine components">
-          {["MOTOR & GEARBOX", "FLEXIBLE COUPLING", "INLET BEARING & SHAFT SUPPORT", "CONVEYOR BODY / CASING", "SCREW FLIGHT & SHAFT", "OUTLET BEARING & SHAFT SUPPORT"].map((name) => (
+          {["MOTOR & GEARBOX", "FLEXIBLE COUPLING", "INLET SHAFT", "INLET BEARING", "BODY / CASING", "SCREW FLIGHT & SHAFT", "OUTLET SHAFT", "OUTLET BEARING"].map((name) => (
             <div key={name} data-component-callout>
               <svg aria-hidden="true"><line /><circle r="2.5" /></svg>
               <span data-desktop-name={name}>{name}</span>
@@ -589,7 +593,7 @@ export default function ScrewConveyorExperience() {
         <div ref={detailCopy} className="screw-conveyor-detail-copy" aria-label="Part-by-part inspection">
           {componentChapters.map((chapter, index) => (
             <article key={chapter.id}>
-              <p>{String(index + 1).padStart(2, "0")} / 06 <span>COMPONENT INSPECTION</span></p>
+              <p>{String(index + 1).padStart(2, "0")} / {String(componentChapters.length).padStart(2, "0")} <span>COMPONENT INSPECTION</span></p>
               <h2>{chapter.title}</h2>
               <p>{chapter.copy}</p>
             </article>

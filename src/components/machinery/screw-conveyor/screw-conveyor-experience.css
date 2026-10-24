@@ -98,8 +98,11 @@ body:has(.screw-conveyor-experience) [data-navbar] { opacity: 0; visibility: hid
 /* Guided chapters after the original presentation. */
 .screw-conveyor-teaser-block { position: absolute; inset: 0; z-index: 2; background: #f3f2ed; opacity: 0; transform-origin: center; pointer-events: none; }
 .screw-conveyor-technical-environment { position: absolute; inset: 0; z-index: 2; background: #f3f2ed; opacity: 0; pointer-events: none; }
-.screw-conveyor-scene-four-copy { color: #f3f2ed; top: 14%; }
+.screw-conveyor-scene-four-copy { color: #f3f2ed; top: clamp(132px, 15svh, 170px); }
 .screw-conveyor-scene-four-copy > span { color: #aeb4b1; }
+@media (min-width: 768px) and (max-height: 950px) {
+  .screw-conveyor-scene-four-copy h2 { font-size: clamp(48px, 10.5svh, 98px); }
+}
 @media (max-width: 767px) {
   .screw-conveyor-scene-four-copy { top: 16%; }
   .screw-conveyor-scene-four-copy h2 { font-size: clamp(34px, 10vw, 54px); }
