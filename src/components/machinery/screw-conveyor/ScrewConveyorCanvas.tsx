@@ -7,8 +7,12 @@ import { Box3, Matrix4, Group, Material, MathUtils, Mesh, PerspectiveCamera, Qua
 import { componentChapters, type ComponentDetail } from "./component-inspection";
 import { applyComponentVisibility, captureComponentMaterial } from "./component-materials";
 import { assetPath } from "@/lib/asset-path";
+import SaltMaterialFlow from "./SaltMaterialFlow";
+import { deriveScrewConveyorLandmarks } from "./screw-conveyor-landmarks";
 
 const modelUrl = assetPath("/models/screw-conveyor/SK_Screw_Conveyor_Web_Final_Branding_Approved.glb");
+const PRESENTATION_FOV = 32;
+const PRESENTATION_DISTANCE = 6;
 const explodePartNames = ["DRIVE_ASSEMBLY", "COUPLING", "BODY", "SCREW", "BEARING_SHAFT_INLET", "BEARING_BLOCK_INLET", "BEARING_SHAFT_OUTLET", "BEARING_BLOCK_OUTLET"] as const;
 type ExplodePartName = (typeof explodePartNames)[number];
 type ExplodeOffset = readonly [number, number, number];
@@ -34,6 +38,15 @@ const verifiedGroups = [
   "BEARING_BLOCK_OUTLET",
   "BRANDING",
 ] as const;
+const ghostShellMeshes = new Set([
+  "BODY_SECTION_08_00",
+  "BODY_SECTION_08_01",
+  "BODY_SECTION_09_00",
+  "BODY_SECTION_10_00",
+  "BODY_SECTION_11_00",
+  "BODY_SECTION_12_00",
+  "BODY_SECTION_12_01",
+]);
 
 export type ScrewConveyorMotion = {
   x: number;
@@ -74,6 +87,17 @@ export type ScrewConveyorInspection = {
   panTarget: number;
 };
 
+export type ScrewConveyorWorking = {
+  active: number;
+  progress: number;
+  cutaway: number;
+  drive: number;
+  couplingRotation: number;
+  screwRotation: number;
+  saltVisibility: number;
+  saltProgress: number;
+};
+
 export type ModelReport = {
   size: [number, number, number];
   meshCount: number;
@@ -86,10 +110,12 @@ type MachineModelProps = {
   inspection: MutableRefObject<ScrewConveyorInspection>;
   onReady: (report: ModelReport) => void;
   calloutsRef: RefObject<HTMLDivElement | null>;
+  materialCalloutRef: RefObject<HTMLDivElement | null>;
   detail: MutableRefObject<ComponentDetail>;
+  working: MutableRefObject<ScrewConveyorWorking>;
 };
 
-function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: MachineModelProps) {
+function MachineModel({ motion, inspection, onReady, calloutsRef, materialCalloutRef, detail, working }: MachineModelProps) {
   const positionGroup = useRef<Group>(null);
   const scrollInertiaGroup = useRef<Group>(null);
   const cinematicGroup = useRef<Group>(null);
@@ -98,6 +124,7 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
   const zoomGroup = useRef<Group>(null);
   const panGroup = useRef<Group>(null);
   const guidedGroup = useRef<Group>(null);
+  const modelRootGroup = useRef<Group>(null);
   const shadowGroup = useRef<Group>(null);
   const interactionRuntime = useRef({
     targetQuaternion: new Quaternion(),
@@ -113,7 +140,19 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
   const localXAxis = useMemo(() => new Vector3(1, 0, 0), []);
   const deltaQuaternion = useMemo(() => new Quaternion(), []);
   const { scene } = useGLTF(modelUrl);
-  const model = useMemo(() => scene.clone(true), [scene]);
+  const model = useMemo(() => {
+    // Build the model and its owned materials together. Later memos only read
+    // this clone, so Strict Mode cannot leave snapshots pointing at old clones.
+    const clone = scene.clone(true);
+    clone.traverse((child) => {
+      if (!(child as Mesh).isMesh) return;
+      const mesh = child as Mesh;
+      mesh.material = Array.isArray(mesh.material)
+        ? mesh.material.map((material) => material.clone())
+        : mesh.material.clone();
+    });
+    return clone;
+  }, [scene]);
   const presentation = useMemo(() => {
     model.updateWorldMatrix(true, true);
     const bounds = new Box3().setFromObject(model);
@@ -149,6 +188,7 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
       },
     };
   }, [model]);
+  const landmarks = useMemo(() => deriveScrewConveyorLandmarks(model), [model]);
   const explodeParts = useMemo(() => {
     return explodePartNames.map((name) => {
       const object = model.getObjectByName(name);
@@ -180,19 +220,11 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
       const anchor = objects[0].worldToLocal(center.clone());
       const pivots = new Map(objects.map((object) => [object.name, object.parent!.worldToLocal(center.clone())]));
       const materials: ReturnType<typeof captureComponentMaterial>[] = [];
-      const clones = new Map<Material, Material>();
       objects.forEach((object) => object.traverse((child) => {
         if (!(child as Mesh).isMesh) return;
         const mesh = child as Mesh;
-        const clone = (original: Material) => {
-          const existing = clones.get(original);
-          if (existing) return existing;
-          const material = original.clone();
-          clones.set(original, material);
-          materials.push(captureComponentMaterial(material));
-          return material;
-        };
-        mesh.material = Array.isArray(mesh.material) ? mesh.material.map(clone) : clone(mesh.material);
+        const owned = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+        owned.forEach((material) => materials.push(captureComponentMaterial(material)));
       }));
       return { chapter, objects, anchor, pivots, materials, point: new Vector3() };
     });
@@ -200,36 +232,89 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
   const passiveDetailMaterials = useMemo(() => {
     const chapterNodes = new Set<string>(componentChapters.flatMap((chapter) => [...chapter.nodes]));
     const materials: ReturnType<typeof captureComponentMaterial>[] = [];
-    const clones = new Map<Material, Material>();
     explodePartNames.filter((name) => !chapterNodes.has(name)).forEach((name) => {
       model.getObjectByName(name)?.traverse((child) => {
         if (!(child as Mesh).isMesh) return;
         const mesh = child as Mesh;
-        const clone = (original: Material) => {
-          const existing = clones.get(original);
-          if (existing) return existing;
-          const material = original.clone();
-          clones.set(original, material);
-          materials.push(captureComponentMaterial(material));
-          return material;
-        };
-        mesh.material = Array.isArray(mesh.material) ? mesh.material.map(clone) : clone(mesh.material);
+        const owned = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+        owned.forEach((material) => materials.push(captureComponentMaterial(material)));
       });
     });
     return materials;
   }, [model]);
+  const ghostShellVisuals = useMemo(() => {
+    const body = model.getObjectByName("BODY");
+    const branding = model.getObjectByName("BRANDING");
+    const visuals: Array<{ mesh: Mesh; visible: boolean }> = [];
+    body?.traverse((child) => {
+      if (!(child as Mesh).isMesh || branding?.getObjectById(child.id) || !ghostShellMeshes.has(child.name)) return;
+      visuals.push({ mesh: child as Mesh, visible: child.visible });
+    });
+    return visuals;
+  }, [model]);
+  const bodyCasingMaterials = useMemo(() => {
+    const materials = new Set<Material>();
+    ghostShellVisuals.forEach(({ mesh }) => {
+      const meshMaterial = mesh.material;
+      const meshMaterials: Material[] = Array.isArray(meshMaterial) ? meshMaterial : [meshMaterial];
+      meshMaterials.forEach((material) => materials.add(material));
+    });
+    return [...materials].map(captureComponentMaterial);
+  }, [ghostShellVisuals]);
+  const workingShellMaterials = useMemo(() => new Set(bodyCasingMaterials.map(({ material }) => material)), [bodyCasingMaterials]);
+  const brandingVisuals = useMemo(() => {
+    const visuals: Array<{
+      mesh: Mesh;
+      renderOrder: number;
+      materials: Array<{ material: Material; opacity: number; transparent: boolean; depthTest: boolean; depthWrite: boolean }>;
+    }> = [];
+    model.getObjectByName("BRANDING")?.traverse((child) => {
+      if (!(child as Mesh).isMesh) return;
+      const mesh = child as Mesh;
+      const meshMaterials: Material[] = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+      visuals.push({
+        mesh,
+        renderOrder: mesh.renderOrder,
+        materials: meshMaterials.map((material) => ({
+          material,
+          opacity: material.opacity,
+          transparent: material.transparent,
+          depthTest: material.depthTest,
+          depthWrite: material.depthWrite,
+        })),
+      });
+    });
+    return visuals;
+  }, [model]);
   const guidedCenter = useMemo(() => new Vector3(), []);
   const detailTurn = useMemo(() => new Quaternion(), []);
-  const longAxis = useMemo(() => new Vector3(0, 0, 1), []);
+  const longAxis = useMemo(() => new Vector3(...landmarks.shaftAxis), [landmarks]);
   const pivotDelta = useMemo(() => new Vector3(), []);
+  // Shares the centrally calibrated inlet with the camera and particle stream.
+  const inletCalloutAnchor = useMemo(() => new Vector3(
+    landmarks.inlet.x,
+    MathUtils.lerp(landmarks.inlet.openingY, landmarks.inlet.emitterY, 0.62),
+    landmarks.inlet.z,
+  ), [landmarks]);
+  const inletCalloutPoint = useMemo(() => new Vector3(), []);
+  const sceneCameraVectors = useRef({
+    target: new Vector3(),
+    position: new Vector3(),
+    overviewPosition: new Vector3(),
+    inlet: new Vector3(),
+    transferStart: new Vector3(),
+    transferEnd: new Vector3(),
+    discharge: new Vector3(),
+  });
 
   useEffect(() => () => {
     explodeParts.forEach(({ object }) => { object.visible = true; });
+    ghostShellVisuals.forEach(({ mesh, visible }) => { mesh.visible = visible; });
     [...detailComponents.flatMap(({ materials }) => materials), ...passiveDetailMaterials].forEach((snapshot) => {
       applyComponentVisibility(snapshot, 1);
       snapshot.material.dispose();
     });
-  }, [detailComponents, explodeParts, passiveDetailMaterials]);
+  }, [detailComponents, explodeParts, ghostShellVisuals, passiveDetailMaterials]);
 
   const calloutElements = useRef<Array<{ label: HTMLElement; line: SVGLineElement; dot: SVGCircleElement; svg: SVGSVGElement }>>([]);
   const calloutMeasurements = useRef<Array<{ key: string; height: number }>>([]);
@@ -257,8 +342,13 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
     };
   }, []);
 
-  const viewport = useThree((state) => state.viewport);
   const canvasSize = useThree((state) => state.size);
+  // Use the initial presentation camera for all model fitting. A resize during
+  // a Scene 07 close-up must not shrink this scene or earlier scenes on reversal.
+  const viewport = useMemo(() => {
+    const height = 2 * PRESENTATION_DISTANCE * Math.tan(MathUtils.degToRad(PRESENTATION_FOV / 2));
+    return { height, width: height * canvasSize.width / canvasSize.height };
+  }, [canvasSize.width, canvasSize.height]);
   useFrame(({ camera, clock }, delta) => {
     const position = positionGroup.current;
     const scrollInertia = scrollInertiaGroup.current;
@@ -272,6 +362,7 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
     if (!position || !scrollInertia || !cinematic || !interaction || !floating || !zoom || !pan || !guided || !shadow) return;
 
     const state = motion.current;
+    const workingState = working.current;
     const controls = inspection.current;
     const runtime = interactionRuntime.current;
     const frameDelta = Math.min(delta, 0.05);
@@ -309,9 +400,60 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
         object.position.add(pivotDelta);
         object.position.x += weight * 0.12 - (focusWeight - weight) * 0.035;
       });
-      materials.forEach((snapshot) => applyComponentVisibility(snapshot, 1 - focusWeight + weight));
+      materials.forEach((snapshot) => {
+        // One material owner per scene; avoid toggling transparent twice on
+        // every frame while the working cutaway is active.
+        if (workingState.active > 0.001 && workingShellMaterials.has(snapshot.material)) return;
+        applyComponentVisibility(snapshot, 1 - focusWeight + weight);
+      });
     });
     passiveDetailMaterials.forEach((snapshot) => applyComponentVisibility(snapshot, 1 - focusWeight));
+    ghostShellVisuals.forEach(({ mesh, visible }) => {
+      mesh.visible = visible;
+    });
+    if (workingState.active > 0.001) {
+      bodyCasingMaterials.forEach(({ material, opacity, transparent, depthWrite }) => {
+        const cutawayOpacity = opacity * MathUtils.lerp(1, portrait ? 0.1 : 0.075, workingState.cutaway);
+        material.opacity = cutawayOpacity;
+        const transparentCutaway = workingState.cutaway > 0.001;
+        if (material.transparent !== (transparent || transparentCutaway)) {
+          material.transparent = transparent || transparentCutaway;
+          material.needsUpdate = true;
+        }
+        material.depthWrite = transparentCutaway ? false : depthWrite;
+      });
+    }
+    const prioritizeBranding = workingState.active > 0.001 && workingState.cutaway > 0.02;
+    brandingVisuals.forEach(({ mesh, renderOrder, materials }) => {
+      mesh.renderOrder = prioritizeBranding ? 20 : renderOrder;
+      materials.forEach(({ material, opacity, transparent, depthTest, depthWrite }) => {
+        const fading = material.opacity < opacity * 0.999;
+        const nextTransparent = prioritizeBranding || fading || transparent;
+        if (material.transparent !== nextTransparent) {
+          material.transparent = nextTransparent;
+          material.needsUpdate = true;
+        }
+        material.depthTest = prioritizeBranding ? false : depthTest;
+        material.depthWrite = prioritizeBranding || fading ? false : depthWrite;
+      });
+    });
+
+    const screwPart = explodeParts.find(({ name }) => name === "SCREW");
+    const couplingPart = explodeParts.find(({ name }) => name === "COUPLING");
+    const drivePart = explodeParts.find(({ name }) => name === "DRIVE_ASSEMBLY");
+    if (screwPart && workingState.active > 0.001) {
+      detailTurn.setFromAxisAngle(longAxis, workingState.screwRotation);
+      screwPart.object.quaternion.copy(screwPart.quaternion).premultiply(detailTurn);
+    }
+    if (couplingPart && workingState.active > 0.001) {
+      detailTurn.setFromAxisAngle(longAxis, workingState.couplingRotation);
+      // The coupling's authored local axis differs from the screw's. Both
+      // turn around the measured shaft axis in their common parent's space.
+      couplingPart.object.quaternion.copy(couplingPart.quaternion).premultiply(detailTurn);
+    }
+    if (drivePart && workingState.drive > 0.001) {
+      drivePart.object.position.x += Math.sin(workingState.drive * Math.PI * 18) * 0.0025 * workingState.drive;
+    }
 
     if (controls.resetVersion !== runtime.lastResetVersion) {
       runtime.lastResetVersion = controls.resetVersion;
@@ -400,12 +542,20 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
     scrollInertia.rotation.z = MathUtils.damp(scrollInertia.rotation.z, -velocity * MathUtils.degToRad(0.38), 8, frameDelta);
     cinematic.rotation.set(state.pitch, state.yaw + state.travelTurn, state.roll);
     interaction.quaternion.slerp(runtime.targetQuaternion, 1 - Math.exp(-12 * frameDelta));
+    if (workingState.active > 0.001) {
+      // Inspection and inertial transforms belong to the earlier scenes. A
+      // direct scroll seek must not leave a decaying gesture in the camera path.
+      interaction.quaternion.identity();
+      pan.position.set(0, 0, 0);
+      zoom.scale.setScalar(1);
+      scrollInertia.position.set(0, 0, 0);
+      scrollInertia.rotation.set(0, 0, 0);
+    }
     floating.position.set(0, float, depthFloat);
     // A slower six-second-per-direction rotational drift keeps the machine feeling heavy.
     floating.rotation.z = Math.sin(clock.elapsedTime * (Math.PI * 2 / 12)) * 0.006 * state.floatStrength;
     shadow.scale.setScalar(Math.max(0.08, state.shadowStrength));
     shadow.visible = state.shadowStrength > 0.03;
-    (camera as PerspectiveCamera).position.z = state.cameraZ;
     position.updateWorldMatrix(true, true);
     guidedCenter.set(0, 0, 0);
     let guidedScale = 1;
@@ -423,7 +573,90 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
     });
     guided.scale.setScalar(guidedScale);
     guided.position.copy(guidedCenter).multiplyScalar(-guidedScale);
+    guided.rotation.set(0, 0, 0);
     guided.position.y += focusWeight * viewport.height * (portrait ? 0.04 : 0.07) / scale;
+    const sceneCamera = camera as PerspectiveCamera;
+    sceneCamera.position.set(0, 0, state.cameraZ);
+    sceneCamera.lookAt(0, 0, 0);
+
+    if (workingState.active > 0.001 && modelRootGroup.current) {
+      // Camera choreography is solved from the approved GLB's geometry. The
+      // conveyor stays in its established scene transform while the camera
+      // follows the material path in world space.
+      modelRootGroup.current.updateWorldMatrix(true, false);
+      const {
+        target: sceneCameraTarget,
+        position: sceneCameraPosition,
+        overviewPosition: overviewCameraPosition,
+        inlet: inletTarget,
+        transferStart: transferStartTarget,
+        transferEnd: transferEndTarget,
+        discharge: dischargeTarget,
+      } = sceneCameraVectors.current;
+      const screwStartZ = Math.max(landmarks.inlet.z - presentation.length * 0.075, presentation.center.z);
+      const screwEndZ = Math.min(landmarks.discharge.z + presentation.length * 0.095, presentation.center.z);
+      modelRootGroup.current.localToWorld(inletTarget.set(
+        landmarks.inlet.x,
+        MathUtils.lerp(landmarks.inlet.openingY, landmarks.inlet.emitterY, 0.25),
+        landmarks.inlet.z,
+      ));
+      modelRootGroup.current.localToWorld(transferStartTarget.set(
+        landmarks.inlet.x,
+        landmarks.bedY,
+        screwStartZ,
+      ));
+      modelRootGroup.current.localToWorld(transferEndTarget.set(
+        landmarks.discharge.x,
+        landmarks.bedY,
+        screwEndZ,
+      ));
+      modelRootGroup.current.localToWorld(dischargeTarget.set(
+        landmarks.discharge.x,
+        landmarks.discharge.y - presentation.size.y * 0.12,
+        landmarks.discharge.z,
+      ));
+
+      const progress = MathUtils.clamp(workingState.progress, 0, 1);
+      const intro = MathUtils.smootherstep(progress, 0.12, 0.25);
+      const enterBed = MathUtils.smootherstep(progress, 0.24, 0.32);
+      const transfer = MathUtils.smootherstep(progress, 0.32, 0.75);
+      const discharge = MathUtils.smootherstep(progress, 0.75, 0.9);
+      const returnToOverview = MathUtils.smootherstep(progress, 0.9, 1);
+
+      // Blend both sides of every phase boundary, including the descent from
+      // the feed opening into the bed. A reverse seek follows this same path.
+      sceneCameraTarget.set(0, 0, 0).lerp(inletTarget, intro).lerp(transferStartTarget, enterBed);
+      if (progress >= 0.32) sceneCameraTarget.copy(transferStartTarget).lerp(transferEndTarget, transfer);
+      if (progress >= 0.75) sceneCameraTarget.lerp(dischargeTarget, discharge);
+      sceneCameraTarget.multiplyScalar(1 - returnToOverview);
+
+      const closeDistance = portrait ? MathUtils.lerp(1.35, 1.05, enterBed) : 2.92;
+      const overviewDistance = Math.max(state.cameraZ, portrait ? 4.25 : 4.6);
+      const cameraDistance = MathUtils.lerp(
+        MathUtils.lerp(overviewDistance, closeDistance, intro),
+        overviewDistance,
+        returnToOverview,
+      );
+      const travelArc = Math.sin(transfer * Math.PI) * (portrait ? 0.035 : 0.1);
+      sceneCameraPosition.copy(sceneCameraTarget);
+      sceneCameraPosition.y += ((portrait ? 0.065 : 0.2) + travelArc) * intro * (1 - returnToOverview);
+      sceneCameraPosition.z += cameraDistance;
+      sceneCameraPosition.x += Math.sin(transfer * Math.PI) * (portrait ? 0.035 : 0.07);
+      sceneCameraPosition.lerp(overviewCameraPosition.set(0, 0, overviewDistance), returnToOverview);
+      sceneCamera.position.copy(sceneCameraPosition);
+      sceneCamera.lookAt(sceneCameraTarget);
+      sceneCamera.updateMatrixWorld();
+    }
+
+    if (materialCalloutRef.current && modelRootGroup.current) {
+      modelRootGroup.current.updateWorldMatrix(true, false);
+      modelRootGroup.current.localToWorld(inletCalloutPoint.copy(inletCalloutAnchor)).project(camera);
+      const x = (inletCalloutPoint.x + 1) * canvasSize.width / 2;
+      const y = (1 - inletCalloutPoint.y) * canvasSize.height / 2;
+      materialCalloutRef.current.style.left = `${x}px`;
+      materialCalloutRef.current.style.top = `${y}px`;
+      materialCalloutRef.current.style.visibility = inletCalloutPoint.z > -1 && inletCalloutPoint.z < 1 ? "visible" : "hidden";
+    }
 
     // Update after every owner has written its transform, so callouts never lag a frame.
     if (calloutsRef.current && !calloutElements.current.length) {
@@ -516,7 +749,10 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
         <group ref={interactionGroup}>
           <group ref={floatGroup}>
             <group rotation={[0, -Math.PI / 2, 0]}>
-              <primitive object={model} position={[-presentation.center.x, -presentation.center.y, -presentation.center.z]} />
+              <group ref={modelRootGroup} position={[-presentation.center.x, -presentation.center.y, -presentation.center.z]}>
+                <primitive object={model} />
+                <SaltMaterialFlow working={working} landmarks={landmarks} />
+              </group>
             </group>
           </group>
         </group>
@@ -540,12 +776,12 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, detail }: Mach
   );
 }
 
-export default function ScrewConveyorCanvas({ motion, inspection, onReady, calloutsRef, detail }: MachineModelProps) {
+export default function ScrewConveyorCanvas({ motion, inspection, onReady, calloutsRef, materialCalloutRef, detail, working }: MachineModelProps) {
   return (
     <Canvas
       className="screw-conveyor-canvas"
       dpr={[1, 1.5]}
-      camera={{ position: [0, 0, 6], fov: 32, near: 0.1, far: 100 }}
+      camera={{ position: [0, 0, PRESENTATION_DISTANCE], fov: PRESENTATION_FOV, near: 0.1, far: 100 }}
       gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
       shadows={false}
       onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
@@ -559,7 +795,7 @@ export default function ScrewConveyorCanvas({ motion, inspection, onReady, callo
         <Lightformer form="ring" intensity={0.7} position={[4, -1, -4]} scale={3} />
       </Environment>
       <Suspense fallback={null}>
-        <MachineModel motion={motion} inspection={inspection} onReady={onReady} calloutsRef={calloutsRef} detail={detail} />
+        <MachineModel motion={motion} inspection={inspection} onReady={onReady} calloutsRef={calloutsRef} materialCalloutRef={materialCalloutRef} detail={detail} working={working} />
       </Suspense>
     </Canvas>
   );

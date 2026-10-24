@@ -11,9 +11,9 @@ import {
 } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import type { ScrewConveyorInspection, ScrewConveyorMotion } from "./ScrewConveyorCanvas";
+import type { ScrewConveyorInspection, ScrewConveyorMotion, ScrewConveyorWorking } from "./ScrewConveyorCanvas";
 import "./screw-conveyor-experience.css";
-import { componentChapters, createComponentDetail, inspectionStart, inspectionExitDuration, storyDuration } from "./component-inspection";
+import { componentChapters, createComponentDetail, inspectionStart, inspectionExitDuration, storyDuration as sceneSixDuration } from "./component-inspection";
 import { assetPath } from "@/lib/asset-path";
 
 const ScrewConveyorCanvas = dynamic(() => import("./ScrewConveyorCanvas"), {
@@ -35,11 +35,16 @@ const degrees = (value: number) => value * Math.PI / 180;
 const clamp = (value: number, minimum: number, maximum: number) => Math.min(maximum, Math.max(minimum, value));
 const HERO_YAW = degrees(11);
 const HERO_PITCH = degrees(-4);
+const SCENE_SEVEN_DURATION = 8;
+const storyDuration = sceneSixDuration + SCENE_SEVEN_DURATION;
 
 export default function ScrewConveyorExperience() {
   const root = useRef<HTMLElement>(null);
   const detail = useRef(createComponentDetail());
   const detailCopy = useRef<HTMLDivElement>(null);
+  const workingIntro = useRef<HTMLDivElement>(null);
+  const workingSteps = useRef<HTMLDivElement>(null);
+  const materialCallout = useRef<HTMLDivElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
   const whiteStage = useRef<HTMLDivElement>(null);
   const sceneTwoTarget = useRef<HTMLDivElement>(null);
@@ -67,6 +72,16 @@ export default function ScrewConveyorExperience() {
     travelTurn: 0,
     portraitExplode: 0,
     explode: 0,
+  });
+  const working = useRef<ScrewConveyorWorking>({
+    active: 0,
+    progress: 0,
+    cutaway: 0,
+    drive: 0,
+    couplingRotation: 0,
+    screwRotation: 0,
+    saltVisibility: 0,
+    saltProgress: 0,
   });
   const inspection = useRef<ScrewConveyorInspection>({
     enabled: true,
@@ -263,7 +278,10 @@ export default function ScrewConveyorExperience() {
     const cue = scrollCue.current;
     const hint = inspectionHint.current;
     const interactionSurface = canvasShell.current;
-    if (!section || !stickyViewport || !panel || !target || !copy || !finalScene || !technicalCopy || !cue || !hint || !interactionSurface) return;
+    const howItWorks = workingIntro.current;
+    const processSteps = workingSteps.current;
+    const saltCallout = materialCallout.current;
+    if (!section || !stickyViewport || !panel || !target || !copy || !finalScene || !technicalCopy || !cue || !hint || !interactionSurface || !howItWorks || !processSteps || !saltCallout) return;
 
     gsap.registerPlugin(ScrollTrigger);
     const media = gsap.matchMedia();
@@ -288,6 +306,16 @@ export default function ScrewConveyorExperience() {
           travelTurn: 0,
     portraitExplode: 0,
     explode: 0,
+        });
+        Object.assign(working.current, {
+          active: 1,
+          progress: 0,
+          cutaway: 1,
+          drive: 0,
+          couplingRotation: 0,
+          screwRotation: 0,
+          saltVisibility: 1,
+          saltProgress: 0.78,
         });
         inspection.current.enabled = false;
         inspection.current.keyHorizontal = 0;
@@ -362,8 +390,22 @@ export default function ScrewConveyorExperience() {
         const supportingCopy = copy.querySelectorAll<HTMLElement>(".screw-conveyor-function, .screw-conveyor-summary");
         const heroWidth = mobile ? 0.9 : 0.84;
         const detailTexts = detailCopy.current?.querySelectorAll<HTMLElement>("article") ?? [];
+        const workingStageTexts = processSteps.querySelectorAll<HTMLElement>("article");
         gsap.set(detailTexts, { autoAlpha: 0, y: 12 });
+        gsap.set(howItWorks, { autoAlpha: 0, y: 18 });
+        gsap.set(workingStageTexts, { autoAlpha: 0, y: 12 });
+        gsap.set(saltCallout, { autoAlpha: 0 });
         componentChapters.forEach(({ id }) => gsap.set(detail.current[id], { weight: 0, progress: 0 }));
+        gsap.set(working.current, {
+          active: 0,
+          progress: 0,
+          cutaway: 0,
+          drive: 0,
+          couplingRotation: 0,
+          screwRotation: 0,
+          saltVisibility: 0,
+          saltProgress: 0,
+        });
         gsap.set(panel, { x: 0, y: 0, scaleX: 1, scaleY: 1, borderRadius: 0 });
         gsap.set(copy, { autoAlpha: 0 });
         gsap.set(kicker, { autoAlpha: 0, y: 12 });
@@ -561,6 +603,59 @@ export default function ScrewConveyorExperience() {
         });
         timeline.to(detail.current[componentChapters.at(-1)!.id], { weight: 0, duration: inspectionExitDuration, ease: "sine.inOut" }, chapterStart);
         timeline.to(detailTexts[detailTexts.length - 1], { autoAlpha: 0, y: -10, duration: 0.25 }, chapterStart);
+
+        // Scene 07: reassemble, approach the physical inlet, track the lower material bed,
+        // reach the underside discharge, and pull back to the complete operating machine.
+        const sceneSevenStart = sceneSixDuration;
+        timeline.set(working.current, { active: 1 }, sceneSevenStart);
+        timeline.to(working.current, {
+          progress: 1,
+          duration: SCENE_SEVEN_DURATION,
+          ease: "none",
+        }, sceneSevenStart);
+        timeline.to(motion.current, {
+          explode: 0,
+          portraitExplode: 0,
+          x: 0,
+          y: mobile ? -0.04 : -0.025,
+          z: 0,
+          width: mobile ? 0.82 : 0.8,
+          yaw: 0,
+          pitch: 0,
+          roll: 0,
+          travelTurn: Math.PI * 2,
+          cameraZ: 6,
+          shadowStrength: 0.45,
+          duration: 0.32,
+          ease: "power2.inOut",
+        }, sceneSevenStart);
+        timeline.to(howItWorks, { autoAlpha: 1, y: 0, duration: 0.32, ease: "power2.out" }, sceneSevenStart);
+        timeline.to(howItWorks, { autoAlpha: 0, y: -14, duration: 0.28, ease: "power1.in" }, sceneSevenStart + 0.94);
+
+        // FEED: the world-space camera approaches the derived drive-side inlet.
+        timeline.to(saltCallout, { autoAlpha: 1, duration: 0.22, ease: "power1.out" }, sceneSevenStart + 1.02);
+        timeline.to(workingStageTexts[0], { autoAlpha: 1, y: 0, duration: 0.24 }, sceneSevenStart + 1.08);
+        timeline.to(working.current, { saltVisibility: 1, duration: 0.22, ease: "power1.out" }, sceneSevenStart + 1.18);
+        timeline.to(working.current, { saltProgress: 0.2, duration: 0.92, ease: "power1.in" }, sceneSevenStart + 1.18);
+
+        // TRANSFER: only shell panels ghost while the camera tracks the salt bed.
+        timeline.to(working.current, { cutaway: 1, duration: 0.7, ease: "sine.inOut" }, sceneSevenStart + 1.82);
+        timeline.to(working.current, { drive: 1, duration: 0.4, ease: "power1.inOut" }, sceneSevenStart + 1.3);
+        timeline.to(working.current, { couplingRotation: Math.PI * 8, duration: 6.7, ease: "none" }, sceneSevenStart + 1.3);
+        timeline.to(working.current, { screwRotation: Math.PI * 8, duration: 6.7, ease: "none" }, sceneSevenStart + 1.3);
+        timeline.to(saltCallout, { autoAlpha: 0, duration: 0.22, ease: "power1.in" }, sceneSevenStart + 2.12);
+        timeline.to(workingStageTexts[0], { autoAlpha: 0, y: -10, duration: 0.2 }, sceneSevenStart + 2.12);
+        timeline.to(workingStageTexts[1], { autoAlpha: 1, y: 0, duration: 0.26 }, sceneSevenStart + 2.24);
+        timeline.to(working.current, { saltProgress: 0.82, duration: 3.76, ease: "sine.inOut" }, sceneSevenStart + 2.24);
+        timeline.to(workingStageTexts[1], { autoAlpha: 0, y: -10, duration: 0.22 }, sceneSevenStart + 5.84);
+
+        // DISCHARGE: reach the last flights and the actual underside outlet before gravity takes over.
+        timeline.to(workingStageTexts[2], { autoAlpha: 1, y: 0, duration: 0.26 }, sceneSevenStart + 5.98);
+        timeline.to(working.current, { saltProgress: 1, duration: 1.2, ease: "power2.out" }, sceneSevenStart + 6);
+
+        // Final pullback: keep the mechanism operating as the casing returns to a near-complete view.
+        timeline.to(working.current, { cutaway: 0, duration: 0.48, ease: "power2.inOut" }, sceneSevenStart + 7.2);
+        timeline.to(workingStageTexts[2], { autoAlpha: 0, y: -8, duration: 0.22 }, sceneSevenStart + 7.58);
       }, section);
 
       const refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
@@ -599,6 +694,23 @@ export default function ScrewConveyorExperience() {
             </article>
           ))}
         </div>
+        <div ref={workingIntro} className="screw-conveyor-working-intro">
+          <p>07 <span>/</span> PROCESS DEMONSTRATION</p>
+          <h2>HOW IT WORKS</h2>
+          <span>From material inlet to continuous discharge.</span>
+        </div>
+        <div ref={workingSteps} className="screw-conveyor-working-steps" aria-label="Screw conveyor working process">
+          <article><p>01 / FEED</p><span>Material enters the conveyor.</span></article>
+          <article><p>02 / TRANSFER</p><span>Rotating flights continuously move material forward.</span></article>
+          <article><p>03 / DISCHARGE</p><span>Salt exits at the opposite end.</span></article>
+        </div>
+        <div ref={materialCallout} className="screw-conveyor-material-callout" aria-hidden="true">
+          <span>MATERIAL (SALT)</span>
+          <svg viewBox="0 0 20 58" role="presentation">
+            <line x1="10" y1="2" x2="10" y2="50" />
+            <path d="M6 46 L10 52 L14 46" />
+          </svg>
+        </div>
         <div ref={sceneFourCopy} className="screw-conveyor-scene-four-copy">
           <p>04 <span>/</span> ENGINEERING</p>
           <h2>ARE YOU READY<br />TO SEE WHAT&apos;S INSIDE?</h2>
@@ -629,7 +741,7 @@ export default function ScrewConveyorExperience() {
           onKeyUp={handleKeyUp}
           onBlur={() => { inspection.current.keyHorizontal = 0; inspection.current.keyVertical = 0; }}
         >
-          <ScrewConveyorCanvas motion={motion} inspection={inspection} onReady={handleModelReady} calloutsRef={componentLabels} detail={detail} />
+          <ScrewConveyorCanvas motion={motion} inspection={inspection} onReady={handleModelReady} calloutsRef={componentLabels} materialCalloutRef={materialCallout} detail={detail} working={working} />
         </div>
 
         <div ref={sceneTwoCopy} className="screw-conveyor-identity">

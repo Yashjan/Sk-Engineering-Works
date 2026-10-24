@@ -146,6 +146,47 @@ body:has(.screw-conveyor-experience) [data-navbar] { opacity: 0; visibility: hid
 .screw-conveyor-detail-copy article::before { content: ""; position: absolute; z-index: -1; inset: -28px -7vw -10vh; background: linear-gradient(transparent, #f3f2ed 30%); }
 @media (prefers-reduced-motion: reduce) { .screw-conveyor-detail-copy article::before { display: none; } }
 
+/* Scene 07 — one assembled cutaway and a restrained three-beat process narrative. */
+.screw-conveyor-working-intro { position: absolute; top: 17%; left: 7vw; z-index: 4; color: #18201c; pointer-events: none; opacity: 0; visibility: hidden; }
+.screw-conveyor-working-intro p { margin: 0 0 18px; color: #69766d; font-size: 10px; letter-spacing: .16em; }
+.screw-conveyor-working-intro p span { margin-inline: 8px; }
+.screw-conveyor-working-intro h2 { margin: 0; font-size: clamp(50px, 7vw, 124px); font-weight: 500; line-height: .86; letter-spacing: -.06em; }
+.screw-conveyor-working-intro > span { display: block; margin-top: 22px; color: #5a675e; font-size: 14px; letter-spacing: .04em; }
+.screw-conveyor-working-steps { position: absolute; right: 6vw; bottom: 9%; z-index: 4; width: min(390px, 36vw); height: 84px; color: #18201c; pointer-events: none; }
+.screw-conveyor-working-steps article { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.screw-conveyor-working-steps article:nth-child(3) { padding-left: 70px; }
+.screw-conveyor-working-steps p { margin: 0 0 12px; color: #69766d; font-size: 10px; letter-spacing: .16em; }
+.screw-conveyor-working-steps span { display: block; font-size: 15px; line-height: 1.55; }
+.screw-conveyor-material-callout { position: absolute; z-index: 5; display: flex; align-items: center; flex-direction: column; color: #39423e; opacity: 0; visibility: hidden; transform: translate(-50%, -100%); pointer-events: none; will-change: left, top, opacity; }
+.screw-conveyor-material-callout span { padding: 0 7px 5px; background: rgb(243 242 237 / 78%); font-size: 10px; font-weight: 600; line-height: 1; letter-spacing: .16em; white-space: nowrap; }
+.screw-conveyor-material-callout svg { display: block; width: 20px; height: 58px; overflow: visible; fill: none; stroke: #59645e; stroke-width: 1; stroke-linecap: square; stroke-linejoin: miter; }
+
+@media (max-width: 767px) {
+  .screw-conveyor-working-intro { top: 16%; left: 6vw; width: 88vw; text-align: center; }
+  .screw-conveyor-working-intro h2 { font-size: clamp(42px, 13vw, 58px); }
+  .screw-conveyor-working-intro > span { margin-top: 16px; font-size: 12px; }
+  .screw-conveyor-working-steps { right: auto; bottom: calc(9% + env(safe-area-inset-bottom)); left: 6vw; width: 88vw; height: 78px; }
+  .screw-conveyor-working-steps p { margin-bottom: 9px; font-size: 9px; }
+  .screw-conveyor-working-steps article:nth-child(3) { padding-left: 0; }
+  .screw-conveyor-working-steps span { max-width: 310px; font-size: 13px; line-height: 1.45; }
+  .screw-conveyor-material-callout span { padding-bottom: 3px; font-size: 8px; letter-spacing: .13em; }
+  .screw-conveyor-material-callout svg { height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep the static mechanism and its explanations in document flow. */
+  .screw-conveyor-viewport { display: flex; flex-direction: column; }
+  .screw-conveyor-canvas-shell { position: relative; inset: auto; order: 0; flex: none; width: 100%; height: clamp(240px, 48svh, 390px); margin-top: 100px; }
+  .screw-conveyor-identity { order: 1; padding-top: 0; }
+  .screw-conveyor-detail-copy { order: 2; }
+  .screw-conveyor-working-intro { position: relative; inset: auto; margin: 60px 6vw 36px; opacity: 1; visibility: visible; }
+  .screw-conveyor-working-intro { order: 3; }
+  .screw-conveyor-working-steps { position: relative; inset: auto; display: grid; gap: 24px; width: auto; height: auto; margin: 0 6vw 70px; }
+  .screw-conveyor-working-steps { order: 4; }
+  .screw-conveyor-working-steps article { position: relative; opacity: 1; visibility: visible; }
+  .screw-conveyor-material-callout { display: none; }
+}
+
 /* Mobile teaser: unboxed machine below centered copy. */
 @media (max-width: 767px) {
   .screw-conveyor-scene-four-copy { left: 6vw; top: 22%; width: 88vw; text-align: center; transform: none; }
