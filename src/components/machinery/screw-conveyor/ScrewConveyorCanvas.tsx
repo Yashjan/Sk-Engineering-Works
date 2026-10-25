@@ -113,6 +113,7 @@ type MachineModelProps = {
   materialCalloutRef: RefObject<HTMLDivElement | null>;
   detail: MutableRefObject<ComponentDetail>;
   working: MutableRefObject<ScrewConveyorWorking>;
+  visible?: boolean;
 };
 
 function MachineModel({ motion, inspection, onReady, calloutsRef, materialCalloutRef, detail, working }: MachineModelProps) {
@@ -776,10 +777,11 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, materialCallou
   );
 }
 
-export default function ScrewConveyorCanvas({ motion, inspection, onReady, calloutsRef, materialCalloutRef, detail, working }: MachineModelProps) {
+export default function ScrewConveyorCanvas({ motion, inspection, onReady, calloutsRef, materialCalloutRef, detail, working, visible = true }: MachineModelProps) {
   return (
     <Canvas
       className="screw-conveyor-canvas"
+      frameloop={visible ? "always" : "never"}
       dpr={[1, 1.5]}
       camera={{ position: [0, 0, PRESENTATION_DISTANCE], fov: PRESENTATION_FOV, near: 0.1, far: 100 }}
       gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}

@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import {
   useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -16,6 +17,8 @@ import "./screw-conveyor-experience.css";
 import { componentChapters, createComponentDetail, inspectionStart, inspectionExitDuration, storyDuration as sceneSixDuration } from "./component-inspection";
 import { assetPath } from "@/lib/asset-path";
 import Image from "@/components/media/ProgressiveImage";
+import ScrewConveyorConfiguration, { conveyorParameters } from "./ScrewConveyorConfiguration";
+import "./screw-conveyor-closing.css";
 
 const ScrewConveyorCanvas = dynamic(() => import("./ScrewConveyorCanvas"), {
   ssr: false,
@@ -37,7 +40,10 @@ const clamp = (value: number, minimum: number, maximum: number) => Math.min(maxi
 const HERO_YAW = degrees(11);
 const HERO_PITCH = degrees(-4);
 const SCENE_SEVEN_DURATION = 8;
-const storyDuration = sceneSixDuration + SCENE_SEVEN_DURATION;
+const SCENE_EIGHT_DURATION = 4;
+const SCENE_EIGHT_LANDING_DURATION = 0.9;
+const sceneEightStart = sceneSixDuration + SCENE_SEVEN_DURATION;
+const storyDuration = sceneEightStart + SCENE_EIGHT_DURATION;
 
 export default function ScrewConveyorExperience() {
   const root = useRef<HTMLElement>(null);
@@ -47,6 +53,7 @@ export default function ScrewConveyorExperience() {
   const workingSteps = useRef<HTMLDivElement>(null);
   const materialCallout = useRef<HTMLDivElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
+  const configuration = useRef<HTMLDivElement>(null);
   const whiteStage = useRef<HTMLDivElement>(null);
   const sceneTwoTarget = useRef<HTMLDivElement>(null);
   const sceneTwoCopy = useRef<HTMLDivElement>(null);
@@ -111,6 +118,16 @@ export default function ScrewConveyorExperience() {
   const pinchStartPan = useRef(0);
   const pinchMidpoint = useRef({ x: 0, y: 0 });
   const [modelReady, setModelReady] = useState(false);
+  const [configurationIndex, setConfigurationIndex] = useState(0);
+  const [canvasVisible, setCanvasVisible] = useState(true);
+
+  useEffect(() => {
+    const section = root.current;
+    if (!section || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(([entry]) => setCanvasVisible(entry.isIntersecting), { rootMargin: "200px" });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   const handleModelReady = useCallback(() => {
     setModelReady(true);
@@ -396,6 +413,7 @@ export default function ScrewConveyorExperience() {
         gsap.set(howItWorks, { autoAlpha: 0, y: 18 });
         gsap.set(workingStageTexts, { autoAlpha: 0, y: 12 });
         gsap.set(saltCallout, { autoAlpha: 0 });
+        gsap.set(configuration.current, { autoAlpha: 0 });
         componentChapters.forEach(({ id }) => gsap.set(detail.current[id], { weight: 0, progress: 0 }));
         gsap.set(working.current, {
           active: 0,
@@ -455,6 +473,15 @@ export default function ScrewConveyorExperience() {
               const inInspectionScene = self.progress * storyDuration <= 0.012 * 8.3;
               // Mobile inspection remains available anywhere the pinned machine is visible.
               const chapterTime = self.progress * storyDuration;
+              if (chapterTime >= sceneEightStart) {
+                const phase = clamp(
+                  (chapterTime - sceneEightStart - SCENE_EIGHT_LANDING_DURATION) /
+                    (SCENE_EIGHT_DURATION - SCENE_EIGHT_LANDING_DURATION),
+                  0,
+                  0.999,
+                );
+                setConfigurationIndex(Math.floor(phase * conveyorParameters.length));
+              }
               const chapterHold = (chapterTime >= 3.65 && chapterTime <= 4.05) || (chapterTime >= 7.7 && chapterTime < 8.3);
               setInspectionEnabled(((mobile || inInspectionScene) && chapterTime < 2.58) || chapterHold);
               if (mobile && !inInspectionScene) {
@@ -657,6 +684,45 @@ export default function ScrewConveyorExperience() {
         // Final pullback: keep the mechanism operating as the casing returns to a near-complete view.
         timeline.to(working.current, { cutaway: 0, duration: 0.48, ease: "power2.inOut" }, sceneSevenStart + 7.2);
         timeline.to(workingStageTexts[2], { autoAlpha: 0, y: -8, duration: 0.22 }, sceneSevenStart + 7.58);
+
+        // Scene 07 hands the assembled machine into a smaller, dedicated visual
+        // zone before the Scene 08 copy appears. The desktop landing keeps the
+        // machine entirely to the right of the editorial heading.
+        timeline.set(working.current, { active: 0 }, sceneEightStart);
+        timeline.to(working.current, {
+          saltVisibility: 0,
+          drive: 0,
+          cutaway: 0,
+          duration: 0.5,
+          ease: "power1.out",
+        }, sceneEightStart);
+        timeline.to(motion.current, {
+          x: mobile ? 0 : 0.22,
+          y: mobile ? -0.04 : -0.015,
+          z: 0,
+          width: mobile ? 0.78 : 0.47,
+          yaw: mobile ? 0 : degrees(4),
+          pitch: 0,
+          roll: 0,
+          cameraZ: 6.08,
+          floatStrength: 0,
+          shadowStrength: 0.58,
+          inertiaStrength: 0,
+          duration: SCENE_EIGHT_LANDING_DURATION,
+          ease: "power3.inOut",
+        }, sceneEightStart);
+        timeline.fromTo(configuration.current, {
+          autoAlpha: 0,
+          y: 18,
+        }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power2.out",
+        }, sceneEightStart + 0.48);
+        timeline.to({}, {
+          duration: SCENE_EIGHT_DURATION - SCENE_EIGHT_LANDING_DURATION,
+        }, sceneEightStart + SCENE_EIGHT_LANDING_DURATION);
       }, section);
 
       const refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
@@ -712,6 +778,7 @@ export default function ScrewConveyorExperience() {
             <path d="M6 46 L10 52 L14 46" />
           </svg>
         </div>
+        <div ref={configuration} className="conveyor-config-layer"><ScrewConveyorConfiguration active={configurationIndex} onSelect={setConfigurationIndex} /></div>
         <div ref={sceneFourCopy} className="screw-conveyor-scene-four-copy">
           <p>04 <span>/</span> ENGINEERING</p>
           <h2>ARE YOU READY<br />TO SEE WHAT&apos;S INSIDE?</h2>
@@ -741,7 +808,7 @@ export default function ScrewConveyorExperience() {
           onKeyUp={handleKeyUp}
           onBlur={() => { inspection.current.keyHorizontal = 0; inspection.current.keyVertical = 0; }}
         >
-          <ScrewConveyorCanvas motion={motion} inspection={inspection} onReady={handleModelReady} calloutsRef={componentLabels} materialCalloutRef={materialCallout} detail={detail} working={working} />
+          <ScrewConveyorCanvas motion={motion} inspection={inspection} onReady={handleModelReady} calloutsRef={componentLabels} materialCalloutRef={materialCallout} detail={detail} working={working} visible={canvasVisible} />
         </div>
 
         <div ref={sceneTwoCopy} className="screw-conveyor-identity">

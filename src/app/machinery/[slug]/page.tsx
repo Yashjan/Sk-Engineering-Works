@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import ScrewConveyorExperience from "@/components/machinery/screw-conveyor/ScrewConveyorExperience";
+import ScrewConveyorClosing from "@/components/machinery/screw-conveyor/ScrewConveyorClosing";
 import { getMachineBySlug, machineryCatalog } from "@/data/machinery";
 import { createPageMetadata } from "@/config/site";
 import "./machine-detail-shell.css";
@@ -51,6 +52,7 @@ export default async function MachinePage({ params }: MachinePageProps) {
         <Navbar hasLogo={hasLogo} />
         <main id="main" className="screw-machine-detail">
           <ScrewConveyorExperience />
+          <ScrewConveyorClosing />
         </main>
       </>
     );

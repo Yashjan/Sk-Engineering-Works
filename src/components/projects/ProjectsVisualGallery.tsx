@@ -6,13 +6,35 @@ import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { projectGallery } from "@/data/projects";
+import { projectGallery, type ProjectGalleryItem } from "@/data/projects";
 import { assetPath } from "@/lib/asset-path";
 import "./projects-visual-gallery.css";
 
 const number = (value: number) => String(value).padStart(2, "0");
 
-export default function ProjectsVisualGallery() {
+type ProjectsVisualGalleryProps = {
+  items?: ProjectGalleryItem[];
+  eyebrow?: string;
+  heading?: [string, string];
+  headingId?: string;
+  ariaLabel?: string;
+  footerPrompt?: string;
+  finalLines?: [string, string, string];
+  finalLabel?: string;
+  scrollTriggerId?: string;
+};
+
+export default function ProjectsVisualGallery({
+  items = projectGallery,
+  eyebrow = "VISUAL ARCHIVE / 03",
+  heading = ["BUILT IN STEEL.", "PROVEN IN MOTION."],
+  headingId = "projects-visual-gallery-heading",
+  ariaLabel = "Visual archive",
+  footerPrompt = "SCROLL TO MOVE THROUGH THE FIELD",
+  finalLines = ["FROM DRAWING", "TO FABRICATION", "TO THE FIELD."],
+  finalLabel = "ENGINEERED / BUILT / INSTALLED",
+  scrollTriggerId = "projects-visual-gallery",
+}: ProjectsVisualGalleryProps) {
   const root = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
@@ -91,7 +113,7 @@ export default function ProjectsVisualGallery() {
 
       const story = gsap.timeline({
         scrollTrigger: {
-          id: "projects-visual-gallery",
+          id: scrollTriggerId,
           trigger: scene,
           start: "top top",
           end: () => {
@@ -168,7 +190,7 @@ export default function ProjectsVisualGallery() {
     }, section);
 
     return () => media.revert();
-  }, []);
+  }, [scrollTriggerId]);
 
   useLayoutEffect(() => {
     const story = mobileStory.current;
@@ -348,19 +370,19 @@ export default function ProjectsVisualGallery() {
   };
 
   return (
-    <section ref={root} className="projects-visual-gallery" aria-label="Visual archive">
+    <section ref={root} className="projects-visual-gallery" aria-label={ariaLabel}>
       <div ref={stage} className="projects-visual-gallery-stage">
         <header className="projects-visual-gallery-header">
-          <p>VISUAL ARCHIVE / 03</p>
-          <h2 id="projects-visual-gallery-heading">
-            <span>BUILT IN STEEL.</span>
-            <span>PROVEN IN MOTION.</span>
+          <p>{eyebrow}</p>
+          <h2 id={headingId}>
+            <span>{heading[0]}</span>
+            <span>{heading[1]}</span>
           </h2>
         </header>
 
         <div ref={viewport} className="projects-visual-gallery-viewport">
           <ol ref={track} className="projects-visual-gallery-track">
-            {projectGallery.map((item, index) => (
+            {items.map((item, index) => (
               <li
                 key={item.id}
                 className={`projects-visual-gallery-card is-${item.format} is-${item.level}`}
@@ -402,29 +424,29 @@ export default function ProjectsVisualGallery() {
         </div>
 
         <footer className="projects-visual-gallery-footer">
-          <p><span data-gallery-current>01</span> / {number(projectGallery.length)}</p>
+          <p><span data-gallery-current>01</span> / {number(items.length)}</p>
           <div aria-hidden="true"><span data-gallery-progress /></div>
-          <p>SCROLL TO MOVE THROUGH THE FIELD <span aria-hidden="true">→</span></p>
+          <p>{footerPrompt} <span aria-hidden="true">→</span></p>
         </footer>
       </div>
 
       <div ref={mobileStory} className="projects-visual-gallery-mobile">
         <div className="projects-visual-gallery-mobile-intro">
           <header className="projects-visual-gallery-mobile-header">
-            <p>VISUAL ARCHIVE / 03</p>
+            <p>{eyebrow}</p>
             <h2>
-              <span>BUILT IN STEEL.</span>
-              <span>PROVEN IN MOTION.</span>
+              <span>{heading[0]}</span>
+              <span>{heading[1]}</span>
             </h2>
           </header>
-          <article className={`projects-visual-gallery-mobile-first is-${projectGallery[0].format}`}>
+          <article className={`projects-visual-gallery-mobile-first is-${items[0].format}`}>
             <figure>
               <div className="projects-visual-gallery-mobile-media">
-                {projectGallery[0].type === "video" ? (
+                {items[0].type === "video" ? (
                   <ProgressiveVideo
-                    src={assetPath(projectGallery[0].src)}
-                    poster={projectGallery[0].poster ? assetPath(projectGallery[0].poster) : undefined}
-                    aria-label={projectGallery[0].alt}
+                    src={assetPath(items[0].src)}
+                    poster={items[0].poster ? assetPath(items[0].poster) : undefined}
+                    aria-label={items[0].alt}
                     muted
                     loop
                     playsInline
@@ -432,16 +454,16 @@ export default function ProjectsVisualGallery() {
                     onLoadedMetadata={refreshLayout}
                   />
                 ) : (
-                  <Image src={assetPath(projectGallery[0].src)} alt={projectGallery[0].alt} fill sizes="82vw" onLoad={refreshLayout} />
+                  <Image src={assetPath(items[0].src)} alt={items[0].alt} fill sizes="82vw" onLoad={refreshLayout} />
                 )}
               </div>
-              <figcaption><span>01 / {projectGallery[0].label}</span><strong>{projectGallery[0].detail}</strong></figcaption>
+              <figcaption><span>01 / {items[0].label}</span><strong>{items[0].detail}</strong></figcaption>
             </figure>
           </article>
         </div>
 
         <ol className="projects-visual-gallery-mobile-stream">
-          {projectGallery.slice(1).map((item, index) => (
+          {items.slice(1).map((item, index) => (
             <li key={item.id} className={`projects-visual-gallery-mobile-card is-${item.format}`}>
               <figure>
                 <div className="projects-visual-gallery-mobile-media">
@@ -467,10 +489,10 @@ export default function ProjectsVisualGallery() {
         </ol>
 
         <div className="projects-visual-gallery-mobile-final">
-          <p><span>FROM DRAWING</span></p>
-          <p><span>TO FABRICATION</span></p>
-          <p><span>TO THE FIELD.</span></p>
-          <small>ENGINEERED / BUILT / INSTALLED</small>
+          <p><span>{finalLines[0]}</span></p>
+          <p><span>{finalLines[1]}</span></p>
+          <p><span>{finalLines[2]}</span></p>
+          <small>{finalLabel}</small>
         </div>
       </div>
     </section>
