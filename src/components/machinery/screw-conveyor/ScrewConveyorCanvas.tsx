@@ -1,31 +1,18 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useRef, useSyncExternalStore, type MutableRefObject, type RefObject } from "react";
+import { Suspense, useEffect, useMemo, useRef, type MutableRefObject, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Lightformer, useGLTF } from "@react-three/drei";
 import { Box3, Matrix4, Group, Material, MathUtils, Mesh, PerspectiveCamera, Quaternion, Vector3 } from "three";
 import { componentChapters, type ComponentDetail } from "./component-inspection";
 import { applyComponentVisibility, captureComponentMaterial } from "./component-materials";
+import { assetPath } from "@/lib/asset-path";
 import SaltMaterialFlow from "./SaltMaterialFlow";
 import { deriveScrewConveyorLandmarks } from "./screw-conveyor-landmarks";
-import { screwConveyorModelUrl } from "./screw-conveyor-assets";
 
+const modelUrl = assetPath("/models/screw-conveyor/SK_Screw_Conveyor_Web_Final_Branding_Approved.glb");
 const PRESENTATION_FOV = 32;
 const PRESENTATION_DISTANCE = 6;
-const MOBILE_RENDER_QUERY = "(max-width: 767px), (pointer: coarse)";
-
-const subscribeToMobileProfile = (onChange: () => void) => {
-  const query = window.matchMedia(MOBILE_RENDER_QUERY);
-  query.addEventListener("change", onChange);
-  return () => query.removeEventListener("change", onChange);
-};
-
-const getMobileProfile = () => window.matchMedia(MOBILE_RENDER_QUERY).matches;
-const getServerMobileProfile = () => false;
-
-function useMobileRenderingProfile() {
-  return useSyncExternalStore(subscribeToMobileProfile, getMobileProfile, getServerMobileProfile);
-}
 const explodePartNames = ["DRIVE_ASSEMBLY", "COUPLING", "BODY", "SCREW", "BEARING_SHAFT_INLET", "BEARING_BLOCK_INLET", "BEARING_SHAFT_OUTLET", "BEARING_BLOCK_OUTLET"] as const;
 type ExplodePartName = (typeof explodePartNames)[number];
 type ExplodeOffset = readonly [number, number, number];
@@ -126,10 +113,9 @@ type MachineModelProps = {
   materialCalloutRef: RefObject<HTMLDivElement | null>;
   detail: MutableRefObject<ComponentDetail>;
   working: MutableRefObject<ScrewConveyorWorking>;
-  mobileRendering?: boolean;
 };
 
-function MachineModel({ motion, inspection, onReady, calloutsRef, materialCalloutRef, detail, working, mobileRendering = false }: MachineModelProps) {
+function MachineModel({ motion, inspection, onReady, calloutsRef, materialCalloutRef, detail, working }: MachineModelProps) {
   const positionGroup = useRef<Group>(null);
   const scrollInertiaGroup = useRef<Group>(null);
   const cinematicGroup = useRef<Group>(null);
@@ -153,7 +139,7 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, materialCallou
   const worldYAxis = useMemo(() => new Vector3(0, 1, 0), []);
   const localXAxis = useMemo(() => new Vector3(1, 0, 0), []);
   const deltaQuaternion = useMemo(() => new Quaternion(), []);
-  const { scene } = useGLTF(screwConveyorModelUrl);
+  const { scene } = useGLTF(modelUrl);
   const model = useMemo(() => {
     // Build the model and its owned materials together. Later memos only read
     // this clone, so Strict Mode cannot leave snapshots pointing at old clones.
@@ -334,10 +320,12 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, materialCallou
   const calloutMeasurements = useRef<Array<{ key: string; height: number }>>([]);
   const calloutSafeTop = useRef(24);
 
-  const readyFrame = useRef<number | null>(null);
-  useEffect(() => () => {
-    if (readyFrame.current !== null && readyFrame.current >= 0) cancelAnimationFrame(readyFrame.current);
-  }, []);
+  useEffect(() => {
+    onReady(presentation.report);
+    if (process.env.NODE_ENV === "development") {
+      console.info("[ScrewConveyor3D] model ready", presentation.report);
+    }
+  }, [onReady, presentation]);
 
   useEffect(() => {
     const navbar = document.querySelector<HTMLElement>("[data-navbar]");
@@ -372,15 +360,6 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, materialCallou
     const guided = guidedGroup.current;
     const shadow = shadowGroup.current;
     if (!position || !scrollInertia || !cinematic || !interaction || !floating || !zoom || !pan || !guided || !shadow) return;
-    if (readyFrame.current === null) {
-      readyFrame.current = requestAnimationFrame(() => {
-        readyFrame.current = -1;
-        onReady(presentation.report);
-        if (process.env.NODE_ENV === "development") {
-          console.info("[ScrewConveyor3D] first frame ready", presentation.report);
-        }
-      });
-    }
 
     const state = motion.current;
     const workingState = working.current;
@@ -783,28 +762,25 @@ function MachineModel({ motion, inspection, onReady, calloutsRef, materialCallou
       </group>
       </group>
       <group ref={shadowGroup}>
-        {!mobileRendering ? (
-          <ContactShadows
-            position={[0, -presentation.size.y / 2 - 0.018, 0]}
-            scale={presentation.length * 1.08}
-            opacity={0.13}
-            blur={2.8}
-            far={0.8}
-            resolution={256}
-            frames={1}
-          />
-        ) : null}
+        <ContactShadows
+          position={[0, -presentation.size.y / 2 - 0.018, 0]}
+          scale={presentation.length * 1.08}
+          opacity={0.13}
+          blur={2.8}
+          far={0.8}
+          resolution={256}
+          frames={1}
+        />
       </group>
     </group>
   );
 }
 
 export default function ScrewConveyorCanvas({ motion, inspection, onReady, calloutsRef, materialCalloutRef, detail, working }: MachineModelProps) {
-  const mobileRendering = useMobileRenderingProfile();
   return (
     <Canvas
       className="screw-conveyor-canvas"
-      dpr={mobileRendering ? 1 : [1, 1.5]}
+      dpr={[1, 1.5]}
       camera={{ position: [0, 0, PRESENTATION_DISTANCE], fov: PRESENTATION_FOV, near: 0.1, far: 100 }}
       gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
       shadows={false}
@@ -813,16 +789,16 @@ export default function ScrewConveyorCanvas({ motion, inspection, onReady, callo
       <ambientLight intensity={0.72} />
       <directionalLight position={[4, 6, 7]} intensity={2.1} />
       <directionalLight position={[-5, 1, 4]} intensity={0.8} />
-      <Environment resolution={mobileRendering ? 32 : 64}>
+      <Environment resolution={64}>
         <Lightformer form="rect" intensity={2.2} position={[0, 5, 5]} scale={[8, 3, 1]} />
         <Lightformer form="rect" intensity={1.2} position={[-5, 1, 2]} rotation={[0, Math.PI / 2, 0]} scale={[4, 5, 1]} />
-        {!mobileRendering ? <Lightformer form="ring" intensity={0.7} position={[4, -1, -4]} scale={3} /> : null}
+        <Lightformer form="ring" intensity={0.7} position={[4, -1, -4]} scale={3} />
       </Environment>
       <Suspense fallback={null}>
-        <MachineModel motion={motion} inspection={inspection} onReady={onReady} calloutsRef={calloutsRef} materialCalloutRef={materialCalloutRef} detail={detail} working={working} mobileRendering={mobileRendering} />
+        <MachineModel motion={motion} inspection={inspection} onReady={onReady} calloutsRef={calloutsRef} materialCalloutRef={materialCalloutRef} detail={detail} working={working} />
       </Suspense>
     </Canvas>
   );
 }
 
-useGLTF.preload(screwConveyorModelUrl);
+useGLTF.preload(modelUrl);
