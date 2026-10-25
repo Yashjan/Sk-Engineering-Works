@@ -1,6 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
+import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -116,7 +118,7 @@ export default function ManufacturingProof() {
         <figure className="proof-media proof-film">
           <div ref={film} className="proof-frame proof-film-frame">
             <Image src={workshopPoster} alt={videoFailed ? "S.K. Engineering Works fabricated blower on the workshop floor" : ""} fill sizes="(max-width: 767px) 88vw, 68vw" className="proof-film-poster" />
-            <video ref={video} id="proof-workshop-film" className="proof-video" src={workshopVideo} poster={workshopPoster} muted loop playsInline preload="metadata" hidden={videoFailed}
+            <ProgressiveVideo ref={video} id="proof-workshop-film" className="proof-video" src={workshopVideo} poster={workshopPoster} muted loop playsInline preload="metadata" hidden={videoFailed}
               aria-label="S.K. Engineering Works workshop manufacturing and fabrication footage"
               onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} onError={() => { setVideoFailed(true); setPlaying(false); }} />
             {!videoFailed ? <button className="proof-video-control" type="button" aria-label={playing ? "Pause workshop film" : "Play workshop film"} aria-controls="proof-workshop-film" onClick={togglePlayback}>

@@ -15,6 +15,7 @@ import type { ScrewConveyorInspection, ScrewConveyorMotion, ScrewConveyorWorking
 import "./screw-conveyor-experience.css";
 import { componentChapters, createComponentDetail, inspectionStart, inspectionExitDuration, storyDuration as sceneSixDuration } from "./component-inspection";
 import { assetPath } from "@/lib/asset-path";
+import Image from "@/components/media/ProgressiveImage";
 
 const ScrewConveyorCanvas = dynamic(() => import("./ScrewConveyorCanvas"), {
   ssr: false,
@@ -718,8 +719,7 @@ export default function ScrewConveyorExperience() {
         </div>
 
         <div className={`screw-conveyor-model-loader${modelReady ? " is-ready" : ""}`} aria-hidden={modelReady}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={assetPath("/images/sk-logo.png")} alt="" />
+          <Image src={assetPath("/images/sk-logo.png")} alt="" width={150} height={60} sizes="(max-width: 468px) 32vw, 150px" />
           <strong>3D MODEL IS LOADING</strong>
           <span>Please wait…</span>
         </div>

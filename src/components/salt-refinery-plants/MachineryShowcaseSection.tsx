@@ -1,7 +1,9 @@
 "use client";
 
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import Image from "next/image";
+import Image from "@/components/media/ProgressiveImage";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -86,7 +88,7 @@ function MachineVisual({
       aria-hidden={state === "outgoing"}
     >
       {machine.mediaType === "video" && machine.mediaSrc ? (
-        <video
+        <ProgressiveVideo
           src={machine.mediaSrc}
           poster={machine.mediaPoster}
           autoPlay={shouldPlay}

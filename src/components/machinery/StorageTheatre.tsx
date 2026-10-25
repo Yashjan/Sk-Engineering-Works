@@ -1,6 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
+import Image from "@/components/media/ProgressiveImage";
 import Link from "next/link";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -10,6 +12,7 @@ import { assetPath } from "@/lib/asset-path";
 import { useMachineryDirectory } from "./MachineryDirectory";
 import { AUTO_ADVANCE_MS } from "./machinery-timing";
 import { useTheatreEnvironment } from "./useTheatreEnvironment";
+import { useAdjacentImagePreload } from "@/components/media/useAdjacentImagePreload";
 import "./storage-theatre.css";
 
 const TRANSITION_MS = 620;
@@ -48,7 +51,7 @@ function StorageMedia({ machine, layer, shouldPlay }: { machine: MachineryItem; 
     {machine.mediaType === "image" && machine.mediaSrc ?
       <Image src={assetPath(machine.mediaSrc)} alt={machine.mediaAlt ?? machine.name} fill sizes="(max-width: 767px) 88vw, (max-width: 1199px) 64vw, 62vw" /> : null}
     {machine.mediaType === "video" && machine.mediaSrc ?
-      <video ref={videoRef} src={assetPath(machine.mediaSrc)} poster={machine.poster ? assetPath(machine.poster) : undefined} muted loop playsInline preload="metadata" aria-label={machine.mediaAlt ?? machine.name} /> : null}
+      <ProgressiveVideo ref={videoRef} src={assetPath(machine.mediaSrc)} poster={machine.poster ? assetPath(machine.poster) : undefined} muted loop playsInline preload="metadata" aria-label={machine.mediaAlt ?? machine.name} /> : null}
     {!machine.mediaSrc ? <div className="storage-placeholder" role="img" aria-label={`${machine.name} media coming next`}>
       <span>STORAGE / {machine.number}</span><strong>MACHINE MEDIA<br />COMING NEXT</strong>
     </div> : null}
@@ -69,6 +72,7 @@ export default function StorageTheatre() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [layers, setLayers] = useState<MediaLayer[]>([{ key: 0, machineIndex: 0, state: "active" }]);
   const { sectionVisible, autoplayVisible, desktopInput, motionAllowed, tabVisible } = useTheatreEnvironment(sectionRef);
+  useAdjacentImagePreload(storageMachines, activeIndex, sectionVisible);
   const [pointerPaused, setPointerPaused] = useState(false);
   const [focusPaused, setFocusPaused] = useState(false);
   const [autoplayRevision, setAutoplayRevision] = useState(0);

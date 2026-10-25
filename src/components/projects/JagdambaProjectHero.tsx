@@ -1,6 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
+import Image from "@/components/media/ProgressiveImage";
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -189,7 +191,7 @@ export default function JagdambaProjectHero() {
               <source media="(max-width: 767px)" srcSet={assetPath("/images/projects/jagdamba/hero/jagdamba-cover-960.webp")} />
               <Image src={assetPath(poster)} alt="Jagdamba Salt refinery in Phalodi, Rajasthan" fill loading="eager" fetchPriority="high" sizes="100vw" className="jagdamba-project-image" />
             </picture>
-            <video ref={video} className="jagdamba-project-video" autoPlay muted playsInline loop preload="metadata" poster={assetPath(poster)} width={512} height={910} aria-hidden="true" tabIndex={-1} disablePictureInPicture />
+            <ProgressiveVideo ref={video} className="jagdamba-project-video" autoPlay muted playsInline loop preload="metadata" poster={assetPath(poster)} width={512} height={910} aria-hidden="true" tabIndex={-1} disablePictureInPicture />
             <div className="jagdamba-project-shade" aria-hidden="true" />
           </div>
         </div>

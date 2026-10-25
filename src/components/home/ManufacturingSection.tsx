@@ -1,8 +1,11 @@
 "use client";
 
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "@/components/media/ProgressiveImage";
 import { assetPath } from "@/lib/asset-path";
 import "./manufacturing-section.css";
 
@@ -151,8 +154,15 @@ export default function ManufacturingSection() {
       </header>
 
       <div className="manufacturing-film-shell">
-        <div ref={frameRef} className="manufacturing-film-frame" style={{ backgroundImage: `url("${videoPoster}")` }}>
-          <video
+        <div ref={frameRef} className="manufacturing-film-frame">
+          <Image
+            className="manufacturing-video-fallback"
+            src={videoPoster}
+            alt={videoFailed ? "S.K. Engineering Works installed salt refinery equipment" : ""}
+            fill
+            sizes="(max-width: 767px) 88vw, 91vw"
+          />
+          <ProgressiveVideo
             ref={videoRef}
             className="manufacturing-video"
             src={videoSource}
@@ -166,7 +176,6 @@ export default function ManufacturingSection() {
             onPause={() => setPlaying(false)}
             onError={() => { setVideoFailed(true); setPlaying(false); }}
           />
-          {videoFailed && <div className="manufacturing-video-fallback" style={{ backgroundImage: `url("${videoPoster}")` }} role="img" aria-label="S.K. Engineering Works installed salt refinery equipment" />}
           <div className="manufacturing-film-shade" aria-hidden="true" />
           <div className="manufacturing-film-caption">
             <p>S.K. ENGINEERING WORKS</p>

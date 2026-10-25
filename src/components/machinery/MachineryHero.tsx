@@ -1,6 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
+import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -103,7 +105,7 @@ export default function MachineryHero() {
                 className="machinery-hero-poster"
               />
               {!videoFailed && (
-                <video
+                <ProgressiveVideo
                   ref={video}
                   className="machinery-hero-video"
                   src={videoSource}

@@ -1,6 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
+import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -151,7 +153,7 @@ export default function ProjectsHero() {
               >
                 <div className="projects-hero-media-visual">
                   {item.type === "video" ? (
-                    <video
+                    <ProgressiveVideo
                       ref={video}
                       src={assetPath(item.src)}
                       poster={assetPath(item.poster)}

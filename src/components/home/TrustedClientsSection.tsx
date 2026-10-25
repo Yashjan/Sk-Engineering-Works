@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "@/components/media/ProgressiveImage";
 import { assetPath } from "@/lib/asset-path";
 import "./about-credibility-section.css";
 import "./trusted-clients-section.css";
@@ -29,7 +30,7 @@ function ClientMark({ client, duplicate = false }: { client: Client; duplicate?:
     <li className={`about-client-mark${client.logo ? " has-logo" : ""}`} aria-hidden={duplicate || undefined}>
       {client.logo ? (
         <>
-          <span className="about-client-logo" role="img" aria-label={`${client.name} logo`} style={{ backgroundImage: `url("${client.logo}")` }} />
+          <Image className="about-client-logo" src={client.logo} alt={`${client.name} logo`} width={160} height={42} sizes="160px" />
           <small>{client.name}</small>
         </>
       ) : <strong>{client.name}</strong>}

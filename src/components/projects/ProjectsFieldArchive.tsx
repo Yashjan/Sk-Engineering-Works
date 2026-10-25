@@ -1,6 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
+import Image from "@/components/media/ProgressiveImage";
 import Link from "next/link";
 import {
   type PointerEvent as ReactPointerEvent,
@@ -250,7 +252,7 @@ export default function ProjectsFieldArchive() {
           >
             <div key={activeProject.id} data-active-content className="projects-field-explorer-media-frame">
               {activeProject.mediaType === "video" ? (
-                <video
+                <ProgressiveVideo
                   ref={video}
                   src={assetPath(activeProject.mediaSrc)}
                   poster={activeProject.poster ? assetPath(activeProject.poster) : undefined}

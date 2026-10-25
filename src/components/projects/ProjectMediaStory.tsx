@@ -1,6 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
+import Image from "@/components/media/ProgressiveImage";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -283,7 +285,7 @@ export default function ProjectMediaStory() {
               <div className="project-media-frame">
                 {record.type === "video" ? (
                   <>
-                    <video
+                    <ProgressiveVideo
                       ref={(element) => { registerVideo(record.id, element); }}
                       id={`project-media-${record.id}`}
                       data-src={assetPath(record.src)}

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/media/ProgressiveImage";
 import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";
 import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";

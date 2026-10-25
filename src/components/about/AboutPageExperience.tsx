@@ -1,6 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
+import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -137,7 +139,7 @@ export default function AboutPageExperience() {
           <p className="about-page-hero-intro">From mechanical fabrication and agricultural machinery to material handling systems and complete salt refinery plants.</p>
         </header>
         <figure className="about-page-hero-media">
-          <div className="about-page-hero-media-inner"><video ref={heroVideoRef} muted loop playsInline preload="metadata" poster={assetPath("/images/salt-refinery/execution/fabricated-equipment.jpeg")} aria-label="S.K. Engineering Works workshop fabrication"><source src={assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4")} type="video/mp4" /></video></div>
+          <div className="about-page-hero-media-inner"><ProgressiveVideo ref={heroVideoRef} muted loop playsInline preload="metadata" poster={assetPath("/images/salt-refinery/execution/fabricated-equipment.jpeg")} aria-label="S.K. Engineering Works workshop fabrication"><source src={assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4")} type="video/mp4" /></ProgressiveVideo></div>
           <figcaption><span>WORKSHOP / SAMBHAR LAKE</span><span>HANDS-ON ENGINEERING</span></figcaption>
         </figure>
       </div>

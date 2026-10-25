@@ -1,5 +1,7 @@
 "use client";
 
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -173,7 +175,7 @@ export default function ProjectFinalResult({
 
       <figure className="project-final-figure">
         <div className="project-final-media">
-          <video
+          <ProgressiveVideo
             ref={videoRef}
             data-src={assetPath(mediaSrc)}
             poster={assetPath(poster)}

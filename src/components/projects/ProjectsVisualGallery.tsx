@@ -1,6 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
+import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -368,7 +370,7 @@ export default function ProjectsVisualGallery() {
                   <div className="projects-visual-gallery-media">
                     <div className="projects-visual-gallery-media-layer">
                       {item.type === "video" ? (
-                        <video
+                        <ProgressiveVideo
                           src={assetPath(item.src)}
                           poster={item.poster ? assetPath(item.poster) : undefined}
                           aria-label={item.alt}
@@ -419,7 +421,7 @@ export default function ProjectsVisualGallery() {
             <figure>
               <div className="projects-visual-gallery-mobile-media">
                 {projectGallery[0].type === "video" ? (
-                  <video
+                  <ProgressiveVideo
                     src={assetPath(projectGallery[0].src)}
                     poster={projectGallery[0].poster ? assetPath(projectGallery[0].poster) : undefined}
                     aria-label={projectGallery[0].alt}
@@ -444,7 +446,7 @@ export default function ProjectsVisualGallery() {
               <figure>
                 <div className="projects-visual-gallery-mobile-media">
                   {item.type === "video" ? (
-                    <video
+                    <ProgressiveVideo
                       src={assetPath(item.src)}
                       poster={item.poster ? assetPath(item.poster) : undefined}
                       aria-label={item.alt}

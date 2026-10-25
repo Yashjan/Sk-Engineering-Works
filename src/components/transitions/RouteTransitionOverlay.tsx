@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, useImperativeHandle, useLayoutEffect, useRef } from "react";
-import Image from "next/image";
+import Image from "@/components/media/ProgressiveImage";
 import gsap from "gsap";
 import { assetPath } from "@/lib/asset-path";
 import "./route-transition.css";

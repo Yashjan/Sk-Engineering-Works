@@ -1,5 +1,7 @@
 "use client";
 
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+
 import {
   useEffect,
   useLayoutEffect,
@@ -143,7 +145,7 @@ function StageMedia({
   if (stage.mediaType === "video" && stage.mediaSrc) {
     return (
       <>
-        <video
+        <ProgressiveVideo
           ref={videoRef}
           src={loadMedia ? stage.mediaSrc : undefined}
           autoPlay={shouldPlay}

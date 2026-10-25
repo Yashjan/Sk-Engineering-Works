@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/media/ProgressiveImage";
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
