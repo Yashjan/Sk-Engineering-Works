@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import ScrewConveyorExperience from "@/components/machinery/screw-conveyor/ScrewConveyorExperience";
+import { screwConveyorModelUrl } from "@/components/machinery/screw-conveyor/screw-conveyor-assets";
 import { getMachineBySlug, machineryCatalog } from "@/data/machinery";
 import { createPageMetadata } from "@/config/site";
 import "./machine-detail-shell.css";
@@ -47,6 +48,14 @@ export default async function MachinePage({ params }: MachinePageProps) {
     const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
     return (
       <>
+        <link
+          rel="preload"
+          href={screwConveyorModelUrl}
+          as="fetch"
+          type="model/gltf-binary"
+          crossOrigin="anonymous"
+          fetchPriority="high"
+        />
         <a className="skip-link" href="#main">Skip to content</a>
         <Navbar hasLogo={hasLogo} />
         <main id="main" className="screw-machine-detail">

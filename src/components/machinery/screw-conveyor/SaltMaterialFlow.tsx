@@ -55,7 +55,7 @@ export default function SaltMaterialFlow({ working, landmarks }: {
   const count = mobile ? MOBILE_PARTICLES : DESKTOP_PARTICLES;
   const dummy = useMemo(() => new Object3D(), []);
   const crystalGeometry = useMemo(() => createCrystalGeometry(), []);
-  const grains = useMemo<Grain[]>(() => Array.from({ length: DESKTOP_PARTICLES }, (_, index) => {
+  const grains = useMemo<Grain[]>(() => Array.from({ length: count }, (_, index) => {
     const kindSeed = index % 10;
     const sizeSeed = random(index, 5);
     // Deliberate 60 / 30 / 10 size distribution.
@@ -80,7 +80,7 @@ export default function SaltMaterialFlow({ working, landmarks }: {
       rotation: [random(index, 9) * Math.PI, random(index, 10) * Math.PI, random(index, 11) * Math.PI],
       lifted: random(index, 14) > 0.86,
     };
-  }), []);
+  }), [count]);
 
   useEffect(() => () => crystalGeometry.dispose(), [crystalGeometry]);
   useEffect(() => {
@@ -153,7 +153,7 @@ export default function SaltMaterialFlow({ working, landmarks }: {
   });
 
   return (
-    <instancedMesh ref={mesh} args={[crystalGeometry, undefined, DESKTOP_PARTICLES]} frustumCulled={false}>
+    <instancedMesh ref={mesh} args={[crystalGeometry, undefined, count]} frustumCulled={false}>
       <meshStandardMaterial color="#ffffff" roughness={0.82} metalness={0} emissive="#6a675e" emissiveIntensity={0.08} />
     </instancedMesh>
   );
