@@ -3,6 +3,11 @@
 .enquiry-footer a { padding-block: 6px; }
 .enquiry-footer a:hover, .enquiry-footer a[aria-current="page"] { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
 .site-footer a { transition: color .2s; }
+.site-footer { padding-inline: clamp(20px, 6vw, 116px); }
+/* These containers already supply the page gutter. */
+.enquiry-shell > .site-footer,
+.contact-quick > .site-footer,
+.machine-enquiry-footer > .site-footer { padding-inline: 0; }
 /* Footer navigation must stay reachable even when reveal triggers cannot enter
    their start range at the document's bottom, or after route cleanup/HMR. */
 .site-footer nav { opacity: 1 !important; visibility: visible !important; transform: none !important; }

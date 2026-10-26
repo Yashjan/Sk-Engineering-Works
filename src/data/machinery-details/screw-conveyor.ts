@@ -6,7 +6,7 @@ export const screwConveyor: MachineryConfig = {
   hero: { type: "image", src: "/images/process/Screw conveyor.png", alt: "S.K. Engineering Works screw conveyor" },
   identity: { title: "CONTINUOUS MATERIAL TRANSFER", copy: "Engineered for controlled material movement across industrial process systems." },
   components: [], howItWorks: [], customization: [], realMedia: [],
-  process: { stageId: "screw-conveyor", description: "A screw conveyor connects material transfer to the wider salt refinery process.", sectionNumber: "10" },
+  process: { stageId: "screw-conveyor", description: "A screw conveyor connects material transfer to the wider salt refinery process.", sectionNumber: "10", endStageId: "pin-mill" },
   engineering: { sectionNumber: "11", description: "Equipment is planned around the complete process, available space and site conditions.", capabilities: ["2D PLANT LAYOUTS", "EQUIPMENT ARRANGEMENT", "MACHINE INTEGRATION", "SITE-SPECIFIC PLANNING"] },
   enquiry: {
     machineName: "Screw Conveyor", sectionNumber: "13",

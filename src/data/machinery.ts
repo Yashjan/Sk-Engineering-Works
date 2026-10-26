@@ -1,3 +1,5 @@
+import { processStages } from "./process";
+
 export type MachineryCategory = string;
 
 export type MachineryItem = {
@@ -16,7 +18,7 @@ export type MachineryItem = {
   detailHref: `/machinery/${string}`;
 };
 
-export const machineryCatalog: readonly MachineryItem[] = [
+const catalog: readonly MachineryItem[] = [
   {
     id: "belt-conveyor",
     number: "01",
@@ -154,6 +156,8 @@ export const machineryCatalog: readonly MachineryItem[] = [
     category: "STORAGE & PROCESS EQUIPMENT",
     categorySlug: "storage-process-equipment",
     detailHref: "/machinery/storage-silos",
+    mediaType: "image", mediaSrc: "/images/process/Sylo.png",
+    mediaAlt: "S.K. Engineering Works storage silo", mediaFit: "contain",
   },
   {
     id: "process-tanks",
@@ -166,13 +170,25 @@ export const machineryCatalog: readonly MachineryItem[] = [
     detailHref: "/machinery/process-tanks",
   },
   {
-    id: "screw-washer", number: "02", name: "SCREW WASHER", slug: "screw-washer",
+    id: "screw-washer", number: "03", name: "SCREW WASHER", slug: "screw-washer",
     category: "STORAGE & PROCESS EQUIPMENT", categorySlug: "storage-process-equipment",
     mediaType: "image", mediaSrc: "/images/process/Screw washer.png",
     mediaAlt: "S.K. Engineering Works screw washer", mediaFit: "contain",
     detailHref: "/machinery/screw-washer",
   },
+  { id: "thickener", number: "04", name: "THICKENER", slug: "thickener", category: "STORAGE & PROCESS EQUIPMENT", categorySlug: "storage-process-equipment", detailHref: "/machinery/thickener" },
+  { id: "centrifuge", number: "02", name: "CENTRIFUGE", slug: "centrifuge", category: "SCREENING & SEPARATION", categorySlug: "screening-separation", detailHref: "/machinery/centrifuge" },
+  { id: "dryer", number: "05", name: "DRYER", slug: "dryer", category: "STORAGE & PROCESS EQUIPMENT", categorySlug: "storage-process-equipment", detailHref: "/machinery/dryer" },
+  { id: "roller-crusher", number: "04", name: "ROLLER CRUSHER", slug: "roller-crusher", category: "MILLING & SIZE REDUCTION", categorySlug: "milling-size-reduction", detailHref: "/machinery/roller-crusher" },
 ] as const;
+
+// The approved process owns machine-image paths; retain established public slugs.
+const processStageForSlug: Record<string, string> = { "process-tanks": "settling-tank" };
+export const machineryCatalog: readonly MachineryItem[] = catalog.map((machine) => {
+  const stage = processStages.find((item) => item.id === (processStageForSlug[machine.slug] ?? machine.slug));
+  if (!stage) return machine;
+  return { ...machine, mediaType: "image", mediaSrc: stage.image.startsWith("/") ? stage.image : `/${stage.image}`, mediaAlt: stage.imageAlt, mediaFit: "contain" };
+});
 
 export const materialHandlingMachines = machineryCatalog.filter(
   (machine) => machine.categorySlug === "material-handling",

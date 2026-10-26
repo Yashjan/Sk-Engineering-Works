@@ -202,7 +202,7 @@ export default function StorageTheatre() {
               <Link className="storage-detail-link" href={activeMachine.detailHref}
                 onPointerEnter={(event) => { if (event.pointerType === "mouse") setPointerPaused(true); }}
                 onPointerLeave={(event) => { if (event.pointerType === "mouse") { setPointerPaused(false); holdAutoplay(AUTO_ADVANCE_MS); } }}>
-                EXPLORE 3D MODEL <span aria-hidden="true">&rarr;</span>
+                EXPLORE MACHINE <span aria-hidden="true">&rarr;</span>
               </Link>
             </div>
           </div>

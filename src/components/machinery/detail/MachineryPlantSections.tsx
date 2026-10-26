@@ -2,14 +2,17 @@ import Link from "next/link";
 import { processStages } from "@/data/process";
 import type { MachineryConfig } from "@/data/machinery-details";
 import "../screw-conveyor/screw-conveyor-closing.css";
-const plantStages = processStages.slice(0, processStages.findIndex((stage) => stage.id === "pin-mill") + 1);
 export function MachineryProcessIntegration({ config }: { config: MachineryConfig }) {
+  const end = config.process.endStageId ? processStages.findIndex((stage) => stage.id === config.process.endStageId) : -1;
+  const plantStages = end < 0 ? processStages : processStages.slice(0, end + 1);
+  const inMainProcess = plantStages.some((stage) => stage.id === config.process.stageId);
   return <>    <section className="conveyor-system conveyor-closing-section" aria-labelledby="conveyor-system-title">
       <div className="conveyor-closing-meta"><span>{config.process.sectionNumber} / COMPLETE PLANT</span><span>ONE MACHINE / CONNECTED PROCESS</span></div>
       <div className="conveyor-system-heading"><p>THIS IS ONE MACHINE.</p><h2 id="conveyor-system-title">WE ENGINEER<br />THE COMPLETE PROCESS.</h2><span>{config.process.description}</span></div>
       <ol className="conveyor-system-flow" aria-label="Salt refinery process sequence">
         {plantStages.map((stage, index) => <li key={stage.id} className={stage.id === config.process.stageId ? "is-current" : undefined}><span>{String(index + 1).padStart(2, "0")}</span><strong>{stage.name}</strong>{stage.id === config.process.stageId && <small>THIS MACHINE</small>}</li>)}
       </ol>
+      {!inMainProcess && <p className="machine-process-support"><strong>{config.name.toUpperCase()} / SUPPORTING EQUIPMENT</strong><br />{config.process.description}</p>}
       <Link className="conveyor-closing-link" href="/salt-refinery-plants">EXPLORE COMPLETE SALT REFINERY PLANTS <span aria-hidden="true">→</span></Link>
     </section>
 

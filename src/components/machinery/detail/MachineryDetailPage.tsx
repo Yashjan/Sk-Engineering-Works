@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { interactiveExperiences } from "./interactive-experiences";
 import MachineryMedia from "./MachineryMedia";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default async function MachineryDetailPage({ machine }: { machine: Machin
     content = interactive;
   } else {
     content = <>
-      <section className="machine-detail-hero" aria-labelledby="machine-title">
+      <section className="machine-detail-hero" aria-labelledby="machine-title" style={{ "--machine-title-word-length": Math.max(...machine.name.split(/\s+/).map((word) => word.length)) } as CSSProperties}>
         <div><p className="machine-eyebrow">01 / PROCESS MACHINERY</p><h1 id="machine-title">{machine.name.toUpperCase()}</h1><p>{machine.tagline}</p><div className="machine-hero-actions"><a className="machine-action" href="#machine-enquiry">DISCUSS YOUR REQUIREMENT →</a><Link href="/salt-refinery-plants">VIEW COMPLETE PLANT ↗</Link></div></div>
         <div className="machine-hero-visual"><MachineryMedia media={machine.hero} machineName={machine.name} priority sizes="(max-width: 767px) 88vw, 52vw" /><span>ENGINEERED / FABRICATED / INTEGRATED</span></div>
       </section>

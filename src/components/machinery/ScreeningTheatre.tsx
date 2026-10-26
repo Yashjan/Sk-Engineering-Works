@@ -205,7 +205,7 @@ export default function ScreeningTheatre() {
           <div key={activeMachine.id} className="screening-active-title" aria-live="polite">
             <p><span>{activeMachine.number}</span> / {total}</p>
             <div><h3><span>{activeMachine.name}</span></h3>
-              <Link className="screening-detail-link" href={activeMachine.detailHref}>EXPLORE 3D MODEL <span aria-hidden="true">&rarr;</span></Link>
+              <Link className="screening-detail-link" href={activeMachine.detailHref}>EXPLORE MACHINE <span aria-hidden="true">&rarr;</span></Link>
             </div>
           </div>
           {hasMultipleMachines ? <div className="screening-mobile-controls" aria-label="Browse screening machines">

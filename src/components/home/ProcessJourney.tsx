@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -318,7 +319,7 @@ export default function ProcessJourney({ stages }: { stages: StageWithAsset[] })
                   <h3 id={`${stage.id}-heading`}>{stage.name}</h3>
                   <p className="process-purpose">{stage.purpose}</p>
                   <ul className="process-technical-labels">{stage.labels.map((label) => <li key={label}>{label}</li>)}</ul>
-                  <a className="process-explore" href={`#${stage.id}-details`}>Explore Machine <span aria-hidden="true">→</span></a>
+                  {stage.detailHref ? <Link className="process-explore" href={stage.detailHref}>Explore Machine <span aria-hidden="true">→</span></Link> : <a className="process-explore" href={`#${stage.id}-details`}>Explore Machine <span aria-hidden="true">→</span></a>}
                 </div>
                 <div className="process-visual">
                   {stage.hasImage ? (

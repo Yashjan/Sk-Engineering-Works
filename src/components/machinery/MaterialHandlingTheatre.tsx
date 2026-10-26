@@ -247,7 +247,7 @@ export default function MaterialHandlingTheatre() {
               <div>
                 <h3>{activeMachine.name}</h3>
                 <Link className="material-theatre-detail-link" href={activeMachine.detailHref}>
-                  EXPLORE 3D MODEL <span aria-hidden="true">&rarr;</span>
+                  EXPLORE MACHINE <span aria-hidden="true">&rarr;</span>
                 </Link>
               </div>
             </div>

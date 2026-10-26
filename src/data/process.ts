@@ -6,11 +6,13 @@ export type ProcessStage = {
   image: string;
   imageAlt: string;
   labels: string[];
+  detailHref?: `/machinery/${string}`;
 };
 
 export const processStages: ProcessStage[] = [
   {
     id: "hopper",
+    detailHref: "/machinery/hopper",
     name: "RAW SALT HOPPER",
     purpose: "Raw salt receiving and temporary storage.",
     timelineLabel: "RAW INTAKE",
@@ -20,6 +22,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "belt-conveyor",
+    detailHref: "/machinery/belt-conveyor",
     name: "BELT CONVEYOR",
     purpose: "Transfers raw salt to the next processing stage.",
     timelineLabel: "CONVEYING",
@@ -29,6 +32,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "wet-mill",
+    detailHref: "/machinery/wet-mill",
     name: "WET MILL",
     purpose: "Initial wet grinding and brine mixing.",
     timelineLabel: "WET MILLING",
@@ -38,15 +42,17 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "settling-tank",
+    detailHref: "/machinery/process-tanks",
     name: "SETTLING TANK",
     purpose: "Receives wet-milled salt slurry for controlled settling and process holding.",
     timelineLabel: "SETTLING",
-    image: "images/process/tank 2.png",
+    image: "/images/process/tank 2.png",
     imageAlt: "S.K. Engineering Works settling tank",
     labels: ["SLURRY SETTLING", "PROCESS HOLDING"],
   },
   {
     id: "thickener",
+    detailHref: "/machinery/thickener",
     name: "THICKENER",
     purpose: "Separates and settles suspended solids from process liquid before the next washing stage.",
     timelineLabel: "THICKENING",
@@ -56,6 +62,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "screw-washer",
+    detailHref: "/machinery/screw-washer",
     name: "SCREW WASHER",
     purpose: "Washes and transfers salt before the dewatering stage.",
     timelineLabel: "WASHING",
@@ -65,6 +72,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "centrifuge",
+    detailHref: "/machinery/centrifuge",
     name: "CENTRIFUGE",
     purpose: "Removes excess moisture from washed salt before drying.",
     timelineLabel: "CENTRIFUGE",
@@ -74,6 +82,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "screw-conveyor",
+    detailHref: "/machinery/screw-conveyor",
     name: "SCREW CONVEYOR",
     purpose: "Transfers dewatered salt toward the dryer.",
     timelineLabel: "TRANSFER",
@@ -83,6 +92,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "dryer",
+    detailHref: "/machinery/dryer",
     name: "DRYER",
     purpose: "Reduces remaining moisture through controlled drying.",
     timelineLabel: "DRYING",
@@ -92,6 +102,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "bucket-elevator",
+    detailHref: "/machinery/bucket-elevator",
     name: "BUCKET ELEVATOR",
     purpose: "Lifts dried salt to the screening level.",
     timelineLabel: "ELEVATING",
@@ -101,6 +112,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "vibro-screen",
+    detailHref: "/machinery/vibro-screen",
     name: "VIBRO SCREEN",
     purpose: "Screens and grades salt by particle size.",
     timelineLabel: "SCREENING",
@@ -110,6 +122,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "pin-mill",
+    detailHref: "/machinery/pin-mill",
     name: "PIN MILL",
     purpose: "Fine-grinds salt to the required powder size.",
     timelineLabel: "GRINDING",
@@ -119,6 +132,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "cyclone",
+    detailHref: "/machinery/cyclone",
     name: "CYCLONE",
     purpose: "Separates salt and dust particles from the process air stream.",
     timelineLabel: "CYCLONE",
@@ -128,6 +142,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "id-fan-blower",
+    detailHref: "/machinery/id-fan-blower",
     name: "ID FAN / BLOWER",
     purpose: "Moves process air through the drying and air-handling system.",
     timelineLabel: "ID FAN / BLOWER",
@@ -137,6 +152,7 @@ export const processStages: ProcessStage[] = [
   },
   {
     id: "roller-crusher",
+    detailHref: "/machinery/roller-crusher",
     name: "ROLLER CRUSHER",
     purpose: "Breaks oversized salt lumps into a controlled smaller size.",
     timelineLabel: "ROLLER CRUSHER",
