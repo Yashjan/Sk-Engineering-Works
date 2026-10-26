@@ -6,19 +6,27 @@ export default function MachineryEnquiry({ machineName, sectionNumber = "11", he
   const [draft, setDraft] = useState<string | null>(null);
   function prepare(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get("Name") ?? "").trim();
+    const phone = String(data.get("Phone / WhatsApp") ?? "").trim();
+    const nameInput = form.elements.namedItem("Name") as HTMLInputElement;
+    const phoneInput = form.elements.namedItem("Phone / WhatsApp") as HTMLInputElement;
+    nameInput.setCustomValidity(name ? "" : "Please enter your name.");
+    phoneInput.setCustomValidity(phone.replace(/\D/g, "").length >= 7 ? "" : "Please enter a valid phone or WhatsApp number.");
+    if (!form.reportValidity()) return;
     const lines = ["Name", "Phone / WhatsApp", "Company", "Location", "Capacity / TPH", "Material", "Requirement"]
-      .map((key) => `${key}: ${String(data.get(key) || "Not specified").trim()}`);
+      .map((key) => `${key}: ${String(data.get(key) ?? "").trim() || "Not specified"}`);
     lines.unshift(`Machine: ${machineName}`);
     setDraft(whatsappUrl(`Hello S.K. Engineering Works,\nI would like to discuss a ${machineName} requirement.\n\n${lines.join("\n")}`));
   }
   return <section className="machine-enquiry machine-section" id="machine-enquiry" aria-labelledby="machine-enquiry-title">
     <p className="machine-eyebrow">{sectionNumber} / PROJECT ENQUIRY</p>
-    <h2 id="machine-enquiry-title">{heading ? <>{heading.firstLine}<br />{heading.secondLine}</> : <>LET’S ENGINEER<br />YOUR {machineName.toUpperCase()}.</>}</h2>
+    <h2 id="machine-enquiry-title">{heading ? <>{heading.firstLine}<br />{heading.secondLine}</> : <>DISCUSS YOUR<br />{machineName.toUpperCase()} REQUIREMENT</>}</h2>
     <div className="machine-enquiry-grid"><div><p>{description ?? "Tell us about your process and the equipment you need."}</p>
       <a className="machine-action" href={whatsappUrl(`Hello S.K. Engineering Works, I would like to discuss a ${machineName} requirement.`)} target="_blank" rel="noopener noreferrer">DISCUSS ON WHATSAPP ↗</a>
       <a className="machine-phone" href={companyContact.phoneHref}>{companyContact.phoneDisplay}</a>
-    </div><form onSubmit={prepare} onChange={() => setDraft(null)}>
+    </div><form onSubmit={prepare} onChange={() => setDraft(null)} onInput={(event) => { if (event.target instanceof HTMLInputElement) event.target.setCustomValidity(""); }}>
       <label className="machine-field-wide">Machine<input value={machineName} readOnly name="Machine" /></label>
       {["Name", "Phone / WhatsApp", "Company", "Location", "Capacity / TPH", "Material"].map((label) => <label key={label}>{label}{label === "Name" || label === "Phone / WhatsApp" ? " (required)" : ""}<input name={label} required={label === "Name" || label === "Phone / WhatsApp"} type={label === "Phone / WhatsApp" ? "tel" : "text"} autoComplete={label === "Name" ? "name" : label === "Phone / WhatsApp" ? "tel" : label === "Company" ? "organization" : undefined} /></label>)}
       <label className="machine-field-wide">Requirement<textarea name="Requirement" rows={3} /></label>

@@ -12,7 +12,7 @@ export type MachineryConfig = {
   howItWorks: { title: string; description: string }[];
   customization: { title: string; description: string }[];
   realMedia: MachineMedia[];
-  process: { stageId: string; description: string; sectionNumber: string; endStageId?: string };
+  process: { stageId: string; description: string; sectionNumber: string };
   engineering: { sectionNumber: string; description: string; capabilities: string[] };
   enquiry: {
     machineName: string;

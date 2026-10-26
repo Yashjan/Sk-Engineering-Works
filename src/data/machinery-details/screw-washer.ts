@@ -29,7 +29,7 @@ export const screwWasher: MachineryConfig = {
     { title: "PLANT INTEGRATION", description: "Engineered as part of the complete refinery line." },
   ],
   realMedia: [],
-  process: { stageId: "screw-washer", description: "The screw washer connects salt washing with the dewatering stage in the refinery process.", sectionNumber: "09", endStageId: "pin-mill" },
+  process: { stageId: "screw-washer", description: "The screw washer connects salt washing with the dewatering stage in the refinery process.", sectionNumber: "09" },
   engineering: { sectionNumber: "10", description: "Equipment is planned around the complete process, available space and site conditions.", capabilities: ["2D PLANT LAYOUTS", "EQUIPMENT ARRANGEMENT", "MACHINE INTEGRATION", "SITE-SPECIFIC PLANNING"] },
   enquiry: { machineName: "Screw Washer" },
 };

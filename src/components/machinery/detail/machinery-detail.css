@@ -5,7 +5,7 @@
 .machine-detail-hero h1 { font-size: clamp(48px, min(7.5vw, calc(60vw / var(--machine-title-word-length, 6))), 140px); font-weight: 500; letter-spacing: -.065em; line-height: .87; margin: 0 0 30px; }
 .machine-detail-hero > div > p:not(.machine-eyebrow) { max-width: 380px; color: #5e6b62; font-size: 16px; line-height: 1.7; }
 .machine-hero-visual { position: relative; min-height: 440px; height: 58svh; }
-.machine-hero-visual img { object-fit: contain; }
+.machine-hero-visual img { object-fit: contain; padding-bottom: 44px; }
 .machine-hero-visual > span { position: absolute; bottom: 0; inset-inline: 0; border-top: 1px solid #b5bfb6; padding-top: 15px; font-size: 9px; letter-spacing: .15em; color: #708073; }
 .machine-hero-visual video { width: 100%; height: 100%; object-fit: contain; }
 .machine-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 35px; font-size: 10px; letter-spacing: .08em; }
@@ -33,7 +33,7 @@
 .machine-construction h3 { margin: 0; font-size: 18px; font-weight: 500; }
 .machine-construction p { margin: 0; color: #637168; font-size: 14px; line-height: 1.7; }
 .machine-how { background: #e5e9e0; }
-.machine-how ol { list-style: none; margin: 50px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3vw; }
+.machine-how ol { list-style: none; margin: 50px 0 0; padding: 0; display: grid; grid-template-columns: repeat(var(--machine-how-steps, 4), minmax(0, 1fr)); gap: 3vw; }
 .machine-how li { border-top: 1px solid #9fb09f; padding-top: 22px; }
 .machine-how li > span { color: #788b7a; font-size: 11px; }
 .machine-how h3 { margin: 26px 0 14px; font-size: 20px; font-weight: 500; }
