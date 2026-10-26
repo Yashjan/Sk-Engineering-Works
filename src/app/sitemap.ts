@@ -9,6 +9,7 @@ const routes = [
   { path: "/salt-refinery-plants", changeFrequency: "monthly", priority: 0.9 },
   { path: "/machinery", changeFrequency: "monthly", priority: 0.9 },
   { path: "/projects", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/engineering", changeFrequency: "monthly", priority: 0.8 },
   { path: "/about", changeFrequency: "yearly", priority: 0.7 },
   { path: "/contact", changeFrequency: "yearly", priority: 0.7 },
 ] as const;
