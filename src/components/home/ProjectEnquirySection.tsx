@@ -15,7 +15,7 @@ type ProjectEnquirySectionProps = {
   showNavigation?: boolean;
 };
 
-export default function ProjectEnquirySection({ appearance = "dark", sectionNumber = "06", showNavigation = false }: ProjectEnquirySectionProps) {
+export default function ProjectEnquirySection({ appearance = "dark", sectionNumber = "06", showNavigation = true }: ProjectEnquirySectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {

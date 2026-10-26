@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { machineryDetails } from "@/data/machinery-details";
 import { absoluteUrl } from "@/config/site";
 
 export const dynamic = "force-static";
@@ -13,9 +14,9 @@ const routes = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map(({ path, changeFrequency, priority }) => ({
+  return [...routes.map(({ path, changeFrequency, priority }) => ({
     url: absoluteUrl(path),
     changeFrequency,
     priority,
-  }));
+  })), ...Object.keys(machineryDetails).map((slug) => ({ url: absoluteUrl(`/machinery/${slug}`), changeFrequency: "monthly" as const, priority: 0.8 }))];
 }

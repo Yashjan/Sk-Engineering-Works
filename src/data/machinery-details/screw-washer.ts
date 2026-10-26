@@ -1,0 +1,35 @@
+import type { MachineryConfig } from "./types";
+export const screwWasher: MachineryConfig = {
+  slug: "screw-washer", name: "Screw Washer", has3D: false,
+  tagline: "Continuous washing and material transfer for salt processing lines.",
+  description: "A screw washer moves salt through the washing stage and connects washing with the next step in the refinery process.",
+  seo: { title: "Screw Washer for Salt Refinery & Industrial Processing", description: "Screw Washer by S.K. Engineering Works for continuous salt washing and material transfer, configured around your refinery process and plant layout." },
+  hero: { type: "image", src: "/images/process/Screw washer.png", alt: "S.K. Engineering Works screw washer for salt processing" },
+  identity: { title: "WASHING. MOVEMENT. ONE CONTINUOUS STAGE.", copy: "Material enters the washer, passes through the washing stage and moves forward through the screw mechanism. The machine is arranged around its upstream feed and downstream dewatering equipment." },
+  components: [
+    { title: "WASHER BODY", description: "The housing for the washing and material-transfer stage." },
+    { title: "SCREW / SHAFT ASSEMBLY", description: "Moves material through the washer." },
+    { title: "DRIVE ASSEMBLY", description: "Provides rotation for the screw mechanism." },
+    { title: "INLET & OUTLET", description: "Connect the washer to the surrounding process equipment." },
+    { title: "SUPPORT / FRAME", description: "Supports the machine within the plant arrangement." },
+  ],
+  howItWorks: [
+    { title: "FEED", description: "Material enters the washing section." },
+    { title: "WASH", description: "Material passes continuously through the washing stage." },
+    { title: "TRANSFER", description: "The screw mechanism moves material forward." },
+    { title: "DISCHARGE", description: "Washed material moves to the next process stage." },
+  ],
+  customization: [
+    { title: "MACHINE DIMENSIONS", description: "Planned around the available space and process arrangement." },
+    { title: "PROCESS CAPACITY", description: "Discussed against the required production flow." },
+    { title: "MATERIAL OF CONSTRUCTION", description: "Selected according to the application." },
+    { title: "INLET / OUTLET ARRANGEMENT", description: "Aligned with upstream and downstream equipment." },
+    { title: "MOTOR & GEARBOX", description: "Selected for the intended duty." },
+    { title: "SUPPORT ARRANGEMENT", description: "Adapted to installation height and site conditions." },
+    { title: "PLANT INTEGRATION", description: "Engineered as part of the complete refinery line." },
+  ],
+  realMedia: [],
+  process: { stageId: "screw-washer", description: "The screw washer connects salt washing with the dewatering stage in the refinery process.", sectionNumber: "09" },
+  engineering: { sectionNumber: "10", description: "Equipment is planned around the complete process, available space and site conditions.", capabilities: ["2D PLANT LAYOUTS", "EQUIPMENT ARRANGEMENT", "MACHINE INTEGRATION", "SITE-SPECIFIC PLANNING"] },
+  enquiry: { machineName: "Screw Washer" },
+};

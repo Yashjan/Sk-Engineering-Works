@@ -165,6 +165,13 @@ export const machineryCatalog: readonly MachineryItem[] = [
     categorySlug: "storage-process-equipment",
     detailHref: "/machinery/process-tanks",
   },
+  {
+    id: "screw-washer", number: "02", name: "SCREW WASHER", slug: "screw-washer",
+    category: "STORAGE & PROCESS EQUIPMENT", categorySlug: "storage-process-equipment",
+    mediaType: "image", mediaSrc: "/images/process/Screw washer.png",
+    mediaAlt: "S.K. Engineering Works screw washer", mediaFit: "contain",
+    detailHref: "/machinery/screw-washer",
+  },
 ] as const;
 
 export const materialHandlingMachines = machineryCatalog.filter(

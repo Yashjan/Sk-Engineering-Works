@@ -18,7 +18,7 @@ export default function SiteFooter({ className = "" }: { className?: string }) {
   const currentPath = pathname === "/" ? pathname : pathname.replace(/\/+$/, "");
 
   return <footer className={`enquiry-footer site-footer${className ? ` ${className}` : ""}`}>
-    <nav aria-label="Footer navigation" data-motion="reveal-up">
+    <nav aria-label="Footer navigation">
       {footerLinks.map(([label, href]) => <Link key={href} href={href} aria-current={currentPath === href ? "page" : undefined}>{label}</Link>)}
     </nav>
   </footer>;

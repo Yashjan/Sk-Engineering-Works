@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { existsSync } from "node:fs";
-import path from "node:path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Navbar from "@/components/layout/Navbar";
-import ScrewConveyorExperience from "@/components/machinery/screw-conveyor/ScrewConveyorExperience";
-import ScrewConveyorClosing from "@/components/machinery/screw-conveyor/ScrewConveyorClosing";
 import { getMachineBySlug, machineryCatalog } from "@/data/machinery";
+import MachineryDetailPage from "@/components/machinery/detail/MachineryDetailPage";
+import { getMachineryDetail, machineryDetails } from "@/data/machinery-details";
 import { createPageMetadata } from "@/config/site";
 import "./machine-detail-shell.css";
 
@@ -17,17 +14,18 @@ type MachinePageProps = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return machineryCatalog.map(({ slug }) => ({ slug }));
+  return [...new Set([...machineryCatalog.map(({ slug }) => slug), ...Object.keys(machineryDetails)])].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: MachinePageProps): Promise<Metadata> {
   const { slug } = await params;
   const machine = getMachineBySlug(slug);
-  if (slug === "screw-conveyor") {
+  const detail = getMachineryDetail(slug);
+  if (detail) {
     return createPageMetadata({
-      title: "Screw Conveyor",
-      description: "Industrial screw conveyor for controlled material transfer, manufactured by S.K. Engineering Works.",
-      path: "/machinery/screw-conveyor",
+      title: detail.seo.title,
+      description: detail.seo.description,
+      path: `/machinery/${slug}`,
     });
   }
   return createPageMetadata({
@@ -41,22 +39,11 @@ export async function generateMetadata({ params }: MachinePageProps): Promise<Me
 }
 
 export default async function MachinePage({ params }: MachinePageProps) {
-  const machine = getMachineBySlug((await params).slug);
+  const { slug } = await params;
+  const detail = getMachineryDetail(slug);
+  if (detail) return <MachineryDetailPage machine={detail} />;
+  const machine = getMachineBySlug(slug);
   if (!machine) notFound();
-
-  if (machine.slug === "screw-conveyor") {
-    const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
-    return (
-      <>
-        <a className="skip-link" href="#main">Skip to content</a>
-        <Navbar hasLogo={hasLogo} />
-        <main id="main" className="screw-machine-detail">
-          <ScrewConveyorExperience />
-          <ScrewConveyorClosing />
-        </main>
-      </>
-    );
-  }
 
   return (
     <main className="machine-detail-shell">
