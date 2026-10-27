@@ -63,7 +63,7 @@
   flex-wrap: wrap;
   gap: 4px 12px;
   margin-bottom: 36px;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .1em;
 }
 
@@ -177,11 +177,11 @@
 @media (max-width: 767px) {
   .project-approach { scroll-margin-top: 82px; }
   .project-approach-shell { padding: 88px 6vw; }
-  .project-approach-eyebrow { font-size: 10px; }
+  .project-approach-eyebrow { font-size: 11px; }
   .project-approach-heading { margin-top: 38px; font-size: clamp(44px, 11.8vw, 72px); }
   .project-approach-description { margin-top: 28px; font-size: 16px; }
   .project-approach-flow { margin: 56px 0 0; }
-  .project-approach-flow-label { margin-bottom: 26px; font-size: 9px; }
+  .project-approach-flow-label { margin-bottom: 26px; font-size: 11px; }
   .project-approach-stages { padding-left: 20px; }
   .project-approach-stage { padding: 30px 0 34px; }
   .project-approach-stage-node { left: -23px; top: 36px; }

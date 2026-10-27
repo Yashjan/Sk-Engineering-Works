@@ -35,7 +35,7 @@
   gap: 8px;
   align-items: baseline;
   color: rgb(11 13 14 / 62%);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .17em;
@@ -54,12 +54,12 @@
 }
 
 .project-overview-register-heading h2 {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .project-overview-record-id {
   color: rgb(11 13 14 / 48%);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .18em;
@@ -111,7 +111,7 @@
 .project-overview-location-line {
   margin-top: clamp(26px, 2.5vw, 40px);
   color: rgb(11 13 14 / 55%);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .2em;
@@ -147,7 +147,7 @@
 
 .project-overview-summary-label {
   color: rgb(11 13 14 / 45%);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .17em;
@@ -165,7 +165,7 @@
 .project-overview-coordinate {
   position: absolute;
   color: rgb(11 13 14 / 34%);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: .16em;
@@ -202,7 +202,7 @@
   margin-top: clamp(92px, 9vw, 152px);
   padding-bottom: 13px;
   color: rgb(11 13 14 / 40%);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .19em;
@@ -239,7 +239,7 @@
   grid-template-columns: clamp(36px, 4vw, 66px) 1fr;
   align-items: baseline;
   color: rgb(11 13 14 / 52%);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .18em;
@@ -345,11 +345,11 @@
 
   .project-overview-register-heading,
   .project-overview-register-heading h2 {
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .project-overview-record-id {
-    font-size: 8px;
+    font-size: 11px;
     white-space: nowrap;
   }
 
@@ -368,7 +368,7 @@
 
   .project-overview-location-line {
     margin-top: 24px;
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .project-overview-summary-wrap {
@@ -382,7 +382,7 @@
   }
 
   .project-overview-summary-label {
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .project-overview-summary {
@@ -400,7 +400,7 @@
   .project-overview-facts-heading {
     margin-top: 78px;
     padding-bottom: 12px;
-    font-size: 7px;
+    font-size: 11px;
   }
 
   .project-overview-facts-heading span:last-child {
@@ -415,7 +415,7 @@
 
   .project-overview-fact dt {
     grid-template-columns: 34px 1fr;
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .project-overview-fact dd {

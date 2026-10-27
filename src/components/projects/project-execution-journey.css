@@ -35,7 +35,7 @@
   padding-bottom: 16px;
   border-bottom: 1px solid rgb(243 242 237 / 18%);
   color: rgb(243 242 237 / 54%);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .19em;
@@ -100,7 +100,7 @@
 .project-execution-index > p {
   margin: 0 0 38px;
   color: rgb(243 242 237 / 38%);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .17em;
@@ -119,7 +119,7 @@
   grid-template-columns: 24px minmax(0, 1fr);
   gap: 9px;
   color: rgb(243 242 237 / 30%);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: .13em;
@@ -194,7 +194,7 @@
 .project-execution-record-label {
   margin: 0 0 18px;
   color: rgb(243 242 237 / 42%);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .17em;
@@ -265,7 +265,7 @@
   background: rgb(11 13 14 / 78%);
   color: #f3f2ed;
   font: inherit;
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: .16em;
@@ -281,7 +281,7 @@
   place-items: center;
   border: 1px solid rgb(243 242 237 / 45%);
   border-radius: 50%;
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 0;
 }
 
@@ -307,7 +307,7 @@
 .project-execution-caption span,
 .project-execution-caption small {
   color: rgb(243 242 237 / 38%);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .16em;
@@ -370,7 +370,7 @@
   .project-execution-kicker {
     margin-bottom: 46px;
     padding-bottom: 14px;
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .project-execution-heading {
@@ -419,7 +419,7 @@
 
   .project-execution-record-label {
     margin-bottom: 14px;
-    font-size: 7px;
+    font-size: 11px;
   }
 
   .project-execution-record-title {

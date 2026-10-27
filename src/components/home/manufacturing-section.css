@@ -1,6 +1,6 @@
 .manufacturing-section { position: relative; overflow: clip; background: #0b0d0e; color: #f1f1ea; border-top: 1px solid #222b27; }
 .manufacturing-intro { max-width: 1920px; margin: 0 auto; padding: 64px 4.5vw 68px; }
-.manufacturing-eyebrow { display: flex; align-items: center; gap: 26px; margin-bottom: 24px; color: #b0c2b8; font-size: 10px; letter-spacing: .18em; }
+.manufacturing-eyebrow { display: flex; align-items: center; gap: 26px; margin-bottom: 24px; color: #b0c2b8; font-size: 11px; letter-spacing: .18em; }
 .manufacturing-eyebrow span + span { padding-left: 26px; border-left: 1px solid #4a5b51; color: #718b7d; }
 .manufacturing-intro-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, 28%); gap: 3vw; align-items: end; }
 .manufacturing-title { margin: 0; font-size: clamp(58px, 7.5vw, 130px); font-weight: 500; line-height: .92; letter-spacing: -.068em; white-space: nowrap; }
@@ -15,11 +15,11 @@
 .manufacturing-film-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgb(11 13 14 / 40%), transparent 42%); }
 .manufacturing-film-caption { position: absolute; bottom: 30px; left: 34px; z-index: 1; text-shadow: 0 1px 9px rgb(0 0 0 / 35%); }
 .manufacturing-film-caption p, .manufacturing-film-caption strong, .manufacturing-film-caption span { display: block; margin: 0; }
-.manufacturing-film-caption p { color: #edf1e9; font-size: 9px; letter-spacing: .17em; }
+.manufacturing-film-caption p { color: #edf1e9; font-size: 11px; letter-spacing: .17em; }
 .manufacturing-film-caption strong { margin-top: 10px; color: #fff; font-size: 13px; font-weight: 500; letter-spacing: .13em; }
-.manufacturing-film-caption span { margin-top: 7px; color: #cfddd1; font-size: 8px; letter-spacing: .17em; }
-.manufacturing-film-meta { position: absolute; top: 26px; right: 30px; display: flex; gap: 22px; color: #f0f3ec; font-size: 8px; letter-spacing: .16em; text-shadow: 0 1px 9px rgb(0 0 0 / 45%); }
-.manufacturing-video-control { position: absolute; right: 30px; bottom: 28px; z-index: 2; display: flex; align-items: center; gap: 16px; min-height: 32px; padding: 0 0 5px; border: 0; border-bottom: 1px solid #e6ede5; background: transparent; color: #fff; font-size: 9px; letter-spacing: .16em; cursor: pointer; text-shadow: 0 1px 9px rgb(0 0 0 / 45%); }
+.manufacturing-film-caption span { margin-top: 7px; color: #cfddd1; font-size: 11px; letter-spacing: .17em; }
+.manufacturing-film-meta { position: absolute; top: 26px; right: 30px; display: flex; gap: 22px; color: #f0f3ec; font-size: 11px; letter-spacing: .16em; text-shadow: 0 1px 9px rgb(0 0 0 / 45%); }
+.manufacturing-video-control { position: absolute; right: 30px; bottom: 28px; z-index: 2; display: flex; align-items: center; gap: 16px; min-height: 32px; padding: 0 0 5px; border: 0; border-bottom: 1px solid #e6ede5; background: transparent; color: #fff; font-size: 11px; letter-spacing: .16em; cursor: pointer; text-shadow: 0 1px 9px rgb(0 0 0 / 45%); }
 .manufacturing-video-control span { font-size: 16px; line-height: 1; letter-spacing: 0; }
 .manufacturing-video-control:hover { color: #c2d9cb; border-color: #c2d9cb; }
 .manufacturing-outro { max-width: 1920px; margin: 0 auto; padding: 65px 4.5vw 105px; }
@@ -30,9 +30,9 @@
 .manufacturing-capabilities ol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); list-style: none; padding: 0; margin: 0; }
 .manufacturing-capability { min-width: 0; min-height: 148px; padding: 22px 22px 20px; border-left: 1px solid #2b3931; transition: border-color .25s, color .25s; }
 .manufacturing-capability:first-child { border-left: 0; padding-left: 0; }
-.manufacturing-capability-number { display: block; width: max-content; margin-bottom: 23px; color: #81968a; font-size: 10px; letter-spacing: .12em; transition: transform .25s; }
+.manufacturing-capability-number { display: block; width: max-content; margin-bottom: 23px; color: #81968a; font-size: 11px; letter-spacing: .12em; transition: transform .25s; }
 .manufacturing-capability h3 { margin: 0 0 9px; color: #d5ded5; font-size: 11px; font-weight: 500; letter-spacing: .12em; }
-.manufacturing-capability p { max-width: 170px; margin: 0; color: #849389; font-size: 10px; line-height: 1.5; }
+.manufacturing-capability p { max-width: 170px; margin: 0; color: #849389; font-size: 11px; line-height: 1.5; }
 .manufacturing-capability:hover { border-color: #8aab97; }
 .manufacturing-capability:hover .manufacturing-capability-number { transform: translateY(-3px); color: #d7e2d9; }
 .manufacturing-capability:hover h3, .manufacturing-capability:hover p { color: #f0f3ec; }
@@ -56,7 +56,7 @@
 @media (max-width: 767px) {
   .manufacturing-section { --video-safe-x: 16px; --video-safe-y: 16px; }
   .manufacturing-intro { padding: 48px 6vw 44px; padding-bottom: 0px; }
-  .manufacturing-eyebrow { flex-wrap: wrap; gap: 9px 15px; margin-bottom: 18px; font-size: 8px; }
+  .manufacturing-eyebrow { flex-wrap: wrap; gap: 9px 15px; margin-bottom: 18px; font-size: 11px; }
   .manufacturing-eyebrow span + span { padding-left: 15px; }
   .manufacturing-title { font-size: clamp(43px, 10.1vw, 77px); }
   .manufacturing-intro-grid { gap: 16px; }
@@ -66,13 +66,13 @@
   .manufacturing-film-shell { width: 100%; }
   .manufacturing-film-frame { height: auto; aspect-ratio: 4 / 5; }
   .manufacturing-video, .manufacturing-video-fallback { inset: 0; height: 100%; object-position: center; }
-  .manufacturing-film-meta { top: var(--video-safe-y); left: var(--video-safe-x); right: auto; max-width: calc(100% - 92px); gap: 10px; font-size: 7px; letter-spacing: .1em; }
+  .manufacturing-film-meta { top: var(--video-safe-y); left: var(--video-safe-x); right: auto; max-width: calc(100% - 92px); gap: 10px; font-size: 11px; letter-spacing: .1em; }
   .manufacturing-film-meta span:first-child { display: none; }
   /* .manufacturing-film-caption { left: var(--video-safe-x); right: var(--video-safe-x); bottom: var(--video-safe-y); max-width: calc(100% - (2 * var(--video-safe-x))); } */
-  .manufacturing-film-caption p { max-width: 100%; font-size: 9px; letter-spacing: .12em; overflow-wrap: anywhere; }
-  .manufacturing-film-caption strong { max-width: 100%; margin-top: 8px; font-size: 9px; letter-spacing: .1em; overflow-wrap: anywhere; }
-  .manufacturing-film-caption span { max-width: 100%; margin-top: 6px; font-size: 7px; letter-spacing: .11em; overflow-wrap: anywhere; }
-  .manufacturing-video-control { top: calc(var(--video-safe-y)); right: calc(var(--video-safe-x) - 15px); bottom: auto; justify-content: center; min-width: 48px; min-height: 48px; padding: 6px; border-bottom: 0; font-size: 8px; letter-spacing: .1em; }
+  .manufacturing-film-caption p { max-width: 100%; font-size: 11px; letter-spacing: .12em; overflow-wrap: anywhere; }
+  .manufacturing-film-caption strong { max-width: 100%; margin-top: 8px; font-size: 11px; letter-spacing: .1em; overflow-wrap: anywhere; }
+  .manufacturing-film-caption span { max-width: 100%; margin-top: 6px; font-size: 11px; letter-spacing: .11em; overflow-wrap: anywhere; }
+  .manufacturing-video-control { top: calc(var(--video-safe-y)); right: calc(var(--video-safe-x) - 15px); bottom: auto; justify-content: center; min-width: 48px; min-height: 48px; padding: 6px; border-bottom: 0; font-size: 11px; letter-spacing: .1em; }
   .manufacturing-video-control::after { content: ""; position: absolute; right: 6px; bottom: 5px; left: 6px; border-bottom: 1px solid currentColor; }
   .manufacturing-video-control span { font-size: 13px; }
   .manufacturing-outro { padding: 46px 6vw 76px; }
@@ -89,7 +89,7 @@
   .manufacturing-capability:hover .manufacturing-capability-number { transform: none; color: #81968a; }
   .manufacturing-capability:hover h3 { color: #d5ded5; }
   .manufacturing-capability:hover p { color: #849389; }
-  .manufacturing-swipe-hint { display: flex; align-items: center; justify-content: space-between; margin: 16px 6vw 0 0; color: #718278; font-size: 7px; letter-spacing: .14em; }
+  .manufacturing-swipe-hint { display: flex; align-items: center; justify-content: space-between; margin: 16px 6vw 0 0; color: #718278; font-size: 11px; letter-spacing: .14em; }
   .manufacturing-swipe-hint span { color: #aabbb0; font-size: 13px; }
 }
 @media (max-width: 390px) {

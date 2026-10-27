@@ -93,7 +93,7 @@
 .project-system-flow-heading p {
   margin: 0;
   color: #5f665f;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: .12em;
@@ -146,7 +146,7 @@
 .project-system-detail > p {
   margin: 20px 0 0;
   color: var(--system-muted);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: .12em;
@@ -216,7 +216,7 @@
 }
 
 .project-system-schematic-in,
-.project-system-schematic-out { font-size: 8px; letter-spacing: .12em; }
+.project-system-schematic-out { font-size: 11px; letter-spacing: .12em; }
 
 .project-system-schematic-unit {
   display: flex;
@@ -301,7 +301,7 @@
 .project-system-rail-number {
   display: block;
   color: #747b75;
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.4;
   letter-spacing: .1em;
 }
@@ -310,7 +310,7 @@
   display: block;
   margin-top: 24px;
   color: #6c736e;
-  font-size: clamp(10px, .85vw, 14px);
+  font-size: clamp(11px, .85vw, 14px);
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -.015em;
@@ -333,7 +333,7 @@
 
 .project-system-air-intro { grid-column: 1 / 4; }
 .project-system-air-intro > p:first-child,
-.project-system-air-origin span { margin: 0; color: var(--system-muted); font-size: 9px; font-weight: 600; line-height: 1.5; letter-spacing: .12em; }
+.project-system-air-origin span { margin: 0; color: var(--system-muted); font-size: 11px; font-weight: 600; line-height: 1.5; letter-spacing: .12em; }
 .project-system-air-intro h3 { max-width: 14ch; margin: 20px 0 0; font-size: clamp(24px, 2.3vw, 42px); font-weight: 500; line-height: 1.03; letter-spacing: -.045em; }
 .project-system-air-intro > p:last-child { max-width: 31ch; margin: 22px 0 0; color: #505752; font-size: 15px; line-height: 1.6; }
 
@@ -379,7 +379,7 @@
   .project-system-active-copy { grid-column: 3 / 8; }
   .project-system-detail { grid-column: 8 / 13; }
   .project-system-stage button { padding-inline: 5px; }
-  .project-system-rail-name { font-size: 10px; }
+  .project-system-rail-name { font-size: 11px; }
 }
 
 @media (max-width: 1023px) {
@@ -405,7 +405,7 @@
   .project-system-mobile-selector-head p {
     margin: 0;
     color: #5f665f;
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 600;
     line-height: 1.5;
     letter-spacing: .12em;
@@ -443,7 +443,7 @@
     background-size: 28px 28px;
   }
 
-  .project-system-mobile-schematic span { font-size: 8px; letter-spacing: .12em; }
+  .project-system-mobile-schematic span { font-size: 11px; letter-spacing: .12em; }
   .project-system-mobile-schematic i { aspect-ratio: 1; border: 1px solid #7a827b; transform: rotate(45deg); }
 
   .project-system-mobile-copy {
@@ -456,7 +456,7 @@
   .project-system-mobile-copy > p:first-child {
     margin: 0;
     color: var(--system-muted);
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 600;
     line-height: 1.5;
     letter-spacing: .12em;
@@ -531,7 +531,7 @@
   .project-system-mobile-rail button:focus-visible { outline-offset: -3px; }
 
   .project-system-mobile-rail button span {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.4;
     letter-spacing: .1em;
     font-variant-numeric: tabular-nums;
@@ -539,7 +539,7 @@
 
   .project-system-mobile-rail button strong {
     margin-top: 9px;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     line-height: 1.25;
     letter-spacing: .02em;
@@ -580,15 +580,15 @@
 @media (max-width: 767px) {
   .project-system { scroll-margin-top: 82px; }
   .project-system-shell { padding: 104px 6vw 88px; }
-  .project-system-eyebrow { margin-bottom: 44px; font-size: 10px; }
+  .project-system-eyebrow { margin-bottom: 44px; font-size: 11px; }
   .project-system-heading { font-size: clamp(38px, 10.3vw, 64px); }
   .project-system-summary { margin: 36px 0 0 28px; padding-top: 20px; }
   .project-system-summary p { font-size: 15px; line-height: 1.6; }
   .project-system-canvas { margin-top: 64px; }
   .project-system-canvas-head { grid-template-columns: 1fr auto; gap: 12px; }
-  .project-system-canvas-head p { font-size: 8px; }
+  .project-system-canvas-head p { font-size: 11px; }
   .project-system-canvas-head p:nth-child(2) { display: none; }
-  .project-system-flow-heading p { font-size: 8px; }
+  .project-system-flow-heading p { font-size: 11px; }
   .project-system-air { padding: 48px 0 40px; }
   .project-system-air-intro h3 { font-size: 30px; }
   .project-system-mobile-selector { padding-block: 46px 60px; }

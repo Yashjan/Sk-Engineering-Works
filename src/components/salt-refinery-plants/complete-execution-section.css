@@ -21,7 +21,7 @@
   grid-column: 1 / -1;
   margin: 0 0 clamp(30px, 4vw, 58px);
   color: #a7adb0;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.4;
   letter-spacing: 0.18em;
 }
@@ -69,7 +69,7 @@
   gap: 0;
   margin: clamp(28px, 3vw, 42px) 0 0;
   color: #9da3a4;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
 }
 
@@ -155,7 +155,7 @@
 .execution-image figcaption {
   margin-top: 10px;
   color: #747b7c;
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.4;
   letter-spacing: 0.14em;
 }
@@ -220,7 +220,7 @@
   grid-column: 1 / 4;
   margin: 4px 0 0;
   color: #858c8d;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.45;
   letter-spacing: 0.16em;
 }
@@ -269,7 +269,7 @@
 
   .execution-eyebrow {
     margin-bottom: 28px;
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .execution-heading {
@@ -291,7 +291,7 @@
 
   .execution-sequence {
     margin-top: 24px;
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .execution-sequence span:not(:last-child)::after {
@@ -335,7 +335,7 @@
 
   .execution-image figcaption {
     margin-top: 9px;
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .execution-stage-row {
@@ -344,7 +344,7 @@
   }
 
   .execution-stage-number {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .execution-stage-row h3 {
@@ -365,7 +365,7 @@
 
   .execution-statement-kicker {
     margin: 0 0 28px;
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .execution-statement-copy {

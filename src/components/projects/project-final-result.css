@@ -35,7 +35,7 @@
   padding-bottom: 16px;
   border-bottom: 1px solid rgb(243 242 237 / 18%);
   color: rgb(243 242 237 / 54%);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .19em;
@@ -73,7 +73,7 @@
   padding-left: clamp(18px, 2.2vw, 38px);
   border-left: 1px solid rgb(243 242 237 / 22%);
   color: rgb(243 242 237 / 42%);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.75;
   letter-spacing: .17em;
@@ -113,7 +113,7 @@
   background: rgb(11 13 14 / 78%);
   color: #f3f2ed;
   font: inherit;
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: .16em;
@@ -129,7 +129,7 @@
   place-items: center;
   border: 1px solid rgb(243 242 237 / 45%);
   border-radius: 50%;
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 0;
 }
 
@@ -155,7 +155,7 @@
 .project-final-caption span,
 .project-final-caption small {
   color: rgb(243 242 237 / 38%);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .16em;
@@ -188,7 +188,7 @@
 .project-final-identity dt {
   margin: 0;
   color: rgb(243 242 237 / 38%);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .17em;
@@ -264,7 +264,7 @@
   .project-final-kicker {
     margin-bottom: 46px;
     padding-bottom: 14px;
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .project-final-heading {
@@ -276,7 +276,7 @@
     margin: 40px 0 0 auto;
     max-width: 22ch;
     padding-left: 20px;
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .project-final-figure {

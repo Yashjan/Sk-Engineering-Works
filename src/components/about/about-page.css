@@ -13,7 +13,7 @@
   padding-bottom: 14px;
   border-bottom: 1px solid currentColor;
   color: inherit;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.4;
   letter-spacing: 0.16em;
   opacity: 0.58;
@@ -51,7 +51,7 @@
 .about-page-hero-meta {
   margin: 0 0 clamp(28px, 4vh, 48px);
   color: #9da3a2;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
 }
 .about-page-hero h1 {
@@ -115,7 +115,7 @@
   gap: 20px;
   margin-top: 12px;
   color: #8e9492;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.13em;
 }
 .about-page-scroll-cue {
@@ -127,7 +127,7 @@
   gap: 12px;
   margin: 0;
   color: #747a78;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.14em;
 }
 .about-page-scroll-cue span {
@@ -200,7 +200,7 @@
   align-self: stretch;
   padding-top: 7px;
   color: #818785;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
 }
 .about-page-journey-index i {
@@ -218,7 +218,7 @@
 .about-page-journey-label {
   margin: 0 0 26px !important;
   color: #69706d !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   line-height: 1.4 !important;
   letter-spacing: 0.14em;
 }
@@ -244,7 +244,7 @@
   padding-top: 17px;
   border-top: 1px solid rgb(17 20 21 / 20%);
   color: #727876 !important;
-  font-size: 9px !important;
+  font-size: 11px !important;
   letter-spacing: 0.12em;
 }
 .about-page-client-milestone strong {
@@ -267,7 +267,7 @@
   position: absolute;
   inset: auto 0 -22px;
   color: #737977;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.12em;
 }
 .about-page-journey-word {
@@ -350,7 +350,7 @@
 .about-page-founder-placeholder span {
   padding: 10px 14px 4px;
   color: #909694;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.14em;
 }
 .about-page-founder-placeholder strong {
@@ -365,7 +365,7 @@
   left: 16px;
   z-index: 2;
   color: #929896;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.12em;
 }
 .about-page-founder-copy h2 {
@@ -388,7 +388,7 @@
 .about-page-founder-name span {
   margin-top: 9px;
   color: #89908d;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.13em;
 }
 .about-page-founder-story {
@@ -433,7 +433,7 @@
   display: block;
   margin-bottom: 28px;
   color: #717775;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 /* Current capability */
@@ -481,7 +481,7 @@
 }
 .about-page-builds-list span {
   color: #7d8380;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
 }
 .about-page-builds-list h3 {
@@ -560,7 +560,7 @@
   position: absolute;
   inset: auto 0 -23px;
   color: #919795;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.13em;
 }
 .about-page-workshop-primary figcaption {
@@ -628,7 +628,7 @@
 }
 .about-page-progress-list span {
   color: #7a807e;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
 }
 .about-page-progress-list h3 {
@@ -722,7 +722,7 @@
 .about-page-footprint-proof li span,
 .about-page-footprint-proof li small {
   color: #7f8583;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.13em;
 }
@@ -734,7 +734,7 @@
 
 @media (max-width: 1099px) {
   .about-page-section-meta {
-    font-size: 9px;
+    font-size: 11px;
   }
   .about-page-hero {
     padding: 136px 6vw 74px;
@@ -800,7 +800,7 @@
   .about-page-section-meta {
     gap: 14px;
     padding-bottom: 11px;
-    font-size: 8px;
+    font-size: 11px;
     letter-spacing: 0.12em;
   }
   .about-page-section-meta span:last-child {
@@ -823,7 +823,7 @@
   .about-page-hero-meta {
     order: 0;
     margin: 0;
-    font-size: 9px;
+    font-size: 11px;
   }
   .about-page-hero h1 {
     order: 1;
@@ -845,7 +845,7 @@
     aspect-ratio: 1.28;
   }
   .about-page-hero-media figcaption {
-    font-size: 7px;
+    font-size: 11px;
   }
   .about-page-scroll-cue {
     display: none;
@@ -910,7 +910,7 @@
   }
   .about-page-journey-label {
     margin-bottom: 18px !important;
-    font-size: 9px !important;
+    font-size: 11px !important;
   }
   .about-page-journey-copy h3 {
     margin-bottom: 20px;
@@ -978,7 +978,7 @@
   .about-page-founder-roles li {
     min-height: 100px;
     padding-right: 10px;
-    font-size: 9px;
+    font-size: 11px;
   }
   .about-page-founder-roles li span {
     margin-bottom: 22px;
@@ -1036,7 +1036,7 @@
   }
   .about-page-workshop figcaption {
     inset: auto 0 -20px;
-    font-size: 7px;
+    font-size: 11px;
   }
   .about-page-workshop-primary figcaption span:last-child {
     display: none;

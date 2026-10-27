@@ -158,7 +158,7 @@
 .project-challenges-record-kind {
   margin: 28px 0 0;
   color: #676e67;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: .14em;
@@ -187,18 +187,18 @@
   .project-challenges { scroll-margin-top: 82px; }
   .project-challenges-shell { padding: 76px 6vw 88px; }
   .project-challenges-intro { display: block; }
-  .project-challenges-eyebrow { margin-bottom: 44px; font-size: 10px; }
+  .project-challenges-eyebrow { margin-bottom: 44px; font-size: 11px; }
   .project-challenges-heading { font-size: clamp(38px, 10.4vw, 72px); }
   .project-challenges-framing { max-width: 36ch; margin: 36px 0 0 28px; padding-top: 20px; }
   .project-challenges-framing p { font-size: 15px; line-height: 1.6; }
   .project-challenges-register { margin-top: 64px; }
   .project-challenges-record { display: block; padding: 30px 0 38px; }
   .project-challenges-index { display: none; }
-  .project-challenges-label { font-size: 10px; }
+  .project-challenges-label { font-size: 11px; }
   .project-challenges-constraint h3 { max-width: 16ch; margin-top: 18px; font-size: clamp(32px, 8.6vw, 48px); }
   .project-challenges-response { margin: 30px 0 0 28px; padding-left: 18px; }
   .project-challenges-response-copy { margin-top: 14px; font-size: 16px; }
-  .project-challenges-record-kind { margin-top: 20px; font-size: 8px; }
+  .project-challenges-record-kind { margin-top: 20px; font-size: 11px; }
 }
 
 @media (max-width: 359px) {

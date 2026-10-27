@@ -13,7 +13,7 @@
 .configuration-eyebrow {
   margin: 0 0 clamp(42px, 5vw, 72px);
   color: #6b7071;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.4;
   letter-spacing: 0.18em;
 }
@@ -105,7 +105,7 @@
   padding: 14px 0;
   border-bottom: 1px solid rgb(17 20 21 / 14%);
   color: #717677;
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.4;
   letter-spacing: 0.14em;
 }
@@ -146,7 +146,7 @@
   align-self: center;
   align-items: center;
   color: #7c8182;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1;
   letter-spacing: 0.12em;
 }
@@ -292,7 +292,7 @@
 
   .configuration-eyebrow {
     margin-bottom: 28px;
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .configuration-layout {
@@ -328,7 +328,7 @@
 
   .configuration-principle {
     margin-top: 18px;
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .configuration-board {
@@ -337,7 +337,7 @@
 
   .configuration-board-meta {
     padding: 12px 0;
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .configuration-factor button {
@@ -346,7 +346,7 @@
   }
 
   .configuration-factor-number {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .configuration-factor-title {

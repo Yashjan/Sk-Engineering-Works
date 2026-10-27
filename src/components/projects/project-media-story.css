@@ -30,7 +30,7 @@
   padding-bottom: 16px;
   border-bottom: 1px solid rgb(243 242 237 / 18%);
   color: rgb(243 242 237 / 55%);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .19em;
@@ -111,7 +111,7 @@
   gap: 30px;
   padding: 15px 0 17px;
   color: rgb(243 242 237 / 50%);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .18em;
@@ -167,7 +167,7 @@
   background: rgb(11 13 14 / 78%);
   color: #f3f2ed;
   font: inherit;
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: .16em;
@@ -183,7 +183,7 @@
   place-items: center;
   border: 1px solid rgb(243 242 237 / 45%);
   border-radius: 50%;
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 0;
 }
 
@@ -209,7 +209,7 @@
 .project-media-record figcaption > span,
 .project-media-record figcaption small {
   color: rgb(243 242 237 / 38%);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: .18em;
@@ -263,7 +263,7 @@
   .project-media-story-label {
     margin-bottom: 46px;
     padding-bottom: 14px;
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .project-media-story-heading {
@@ -311,7 +311,7 @@
   .project-media-record-head {
     gap: 16px;
     padding: 13px 0 14px;
-    font-size: 7px;
+    font-size: 11px;
     letter-spacing: .15em;
   }
 
@@ -324,7 +324,7 @@
     bottom: 10px;
     min-width: 80px;
     padding: 8px 9px;
-    font-size: 7px;
+    font-size: 11px;
   }
 
   .project-media-control span {
@@ -346,7 +346,7 @@
     grid-column: 2;
     margin-top: 2px;
     text-align: left;
-    font-size: 7px;
+    font-size: 11px;
   }
 }
 
