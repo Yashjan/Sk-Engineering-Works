@@ -1,6 +1,7 @@
 "use client";
 
 import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+import Link from "next/link";
 
 import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -121,6 +122,7 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
               </dl>
               {active.scopeChips && <ul className="projects-chips" aria-label="Selected project scope">{active.scopeChips.map((chip) => <li key={chip}>{chip}</li>)}</ul>}
             </>}
+            {active.detailHref && <Link className="projects-view-link" href={active.detailHref}>VIEW PROJECT <span aria-hidden="true">↗</span></Link>}
           </div>
           <div ref={media} className="projects-media">
             <div className="projects-media-stage">
