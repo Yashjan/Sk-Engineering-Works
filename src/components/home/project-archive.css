@@ -121,6 +121,20 @@
   filter: saturate(.7) contrast(1.04);
 }
 
+.project-archive-media-notice {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  padding: 6px 8px;
+  border: 1px solid rgb(233 238 232 / 35%);
+  background: rgb(11 13 14 / 72%);
+  color: #d4ddd5;
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: .12em;
+}
+
 .project-archive-placeholder {
   position: absolute;
   inset: 0;

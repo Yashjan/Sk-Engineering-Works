@@ -44,6 +44,7 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
   const active = projects[activeIndex];
   const activeMedia = active.media[activeMediaIndex];
   const isEquipment = active.kind === "equipment";
+  const isRepresentativeMedia = Boolean(activeMedia?.isRepresentative || active.representativeMedia);
 
   const playVideo = () => {
     if (!video.current || !visible.current) return;
@@ -128,9 +129,9 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
             <div className="projects-media-stage">
               <ProjectVisual key={`${active.id}-${activeMedia?.id || "cover"}`} project={active} media={activeMedia} videoRef={video} muted={muted} onPlayStateChange={setPlaying} />
               <div className="projects-media-overlay">
-                <p>{isEquipment ? "INDUSTRIAL EQUIPMENT" : active.client || "INSTALLED PLANT PROJECT"}</p>
+                <p>{isRepresentativeMedia ? "REPRESENTATIVE FOOTAGE" : isEquipment ? "INDUSTRIAL EQUIPMENT" : active.client || "INSTALLED PLANT PROJECT"}</p>
                 <strong>{activeMedia?.label || active.category || "PROJECT VIEW"}</strong>
-                {!isEquipment && <small>{active.location.toUpperCase()}</small>}
+                {!isEquipment && <small>{isRepresentativeMedia ? "TEMPORARY PROJECT MEDIA" : active.location.toUpperCase()}</small>}
               </div>
               {activeMedia?.type === "video" && <div className="projects-media-controls">
                 <button type="button" onClick={() => { if (playing) video.current?.pause(); else playVideo(); }} aria-label={playing ? "Pause project video" : "Play project video"}>{playing ? "PAUSE" : "PLAY"}</button>

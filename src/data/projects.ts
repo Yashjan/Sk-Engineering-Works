@@ -11,6 +11,7 @@ export type Project = {
   projectType: string;
   detailHref?: string;
   coverImage: string;
+  representativeMedia?: boolean;
   media: ProjectMedia[];
   scopeChips?: string[];
   completeScope?: string[];
@@ -21,6 +22,7 @@ export type ProjectMedia = {
   type: "image" | "video";
   src: string;
   label: string;
+  isRepresentative?: boolean;
 };
 
 export type ProjectArchiveRecord = {
@@ -77,6 +79,51 @@ export const projects: Project[] = [
       "Screw Washer", "Dryer", "Cyclone", "Bucket Elevator", "Storage Silos",
       "Screw Conveyors", "Complete Plant Fitting / Installation",
     ],
+  },
+  {
+    id: "jk-salt-25tph",
+    title: "25 TPH SALT REFINERY PLANT",
+    client: "JK Salt Pvt. Ltd.",
+    location: "Santalpur, Gujarat, India",
+    capacity: "25 TPH",
+    scope: "Complete Machinery Supply",
+    projectType: "Salt Refinery Plant",
+    coverImage: "/images/salt-refinery/execution/plant-structure.jpeg",
+    representativeMedia: true,
+    media: [
+      { id: "representative-plant", type: "image", src: "/images/salt-refinery/execution/plant-structure.jpeg", label: "PLANT CONFIGURATION", isRepresentative: true },
+    ],
+    scopeChips: ["COMPLETE MACHINERY SUPPLY"],
+  },
+  {
+    id: "royal-salt-80tph",
+    title: "80 TPH SALT REFINERY MACHINERY",
+    client: "Royal Salt",
+    location: "Jambusar, Gujarat, India",
+    capacity: "80 TPH",
+    scope: "Screw Conveyors, Tanks, Centrifuge",
+    projectType: "Salt Refinery Plant Machinery",
+    coverImage: "/images/salt-refinery/execution/fabricated-equipment.jpeg",
+    representativeMedia: true,
+    media: [
+      { id: "representative-machinery", type: "image", src: "/images/salt-refinery/execution/fabricated-equipment.jpeg", label: "PROCESS MACHINERY", isRepresentative: true },
+    ],
+    scopeChips: ["SCREW CONVEYORS", "TANKS", "CENTRIFUGE"],
+  },
+  {
+    id: "kasturi-chemfood-15tph",
+    title: "15 TPH SALT REFINERY PLANT",
+    client: "Kasturi Chemfood Pvt. Ltd.",
+    location: "Nawa, Rajasthan, India",
+    capacity: "15 TPH",
+    scope: "Complete Machinery Supply",
+    projectType: "Salt Refinery Plant",
+    coverImage: "/images/salt-refinery/execution/fabrication-blower.jpeg",
+    representativeMedia: true,
+    media: [
+      { id: "representative-fabrication", type: "image", src: "/images/salt-refinery/execution/fabrication-blower.jpeg", label: "WORKSHOP FABRICATION", isRepresentative: true },
+    ],
+    scopeChips: ["COMPLETE MACHINERY SUPPLY"],
   },
   {
     id: "id-fan-blower",

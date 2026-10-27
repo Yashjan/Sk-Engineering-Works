@@ -222,6 +222,7 @@ export default function ProjectArchive({ projects, onSelect }: {
                       )}
                     </div>
                   </div>
+                  {project.representativeMedia && <span className="project-archive-media-notice">REPRESENTATIVE MEDIA</span>}
                 </div>
                 <div className="project-archive-info">
                   <span className="project-archive-number" aria-hidden="true">{number(index + 1)}</span>
