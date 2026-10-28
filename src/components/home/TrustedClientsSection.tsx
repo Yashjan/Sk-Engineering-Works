@@ -14,7 +14,6 @@ const clients: Client[] = [
   { name: "Goyal Salt Pvt. Ltd." },
   { name: "Rakshak Foods Private Limited" },
   { name: "Adhinath Chemfood Private Limited" },
-  { name: "Kasturi Chemfood Private Limited" },
   { name: "Jagdamba Salt Pvt. Ltd." },
   { name: "Pankaj Salt Pvt. Ltd.", logo: assetPath("/images/clients/pankaj-salt.png") },
   { name: "Pragati Salt Pvt. Ltd.", logo: assetPath("/images/clients/pragati-salt.png") },
