@@ -82,7 +82,7 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
         { autoAlpha: 0, y: 16 },
         { autoAlpha: 1, y: 0, duration: 0.55, ease: "power2.out", stagger: 0.04 },
       );
-      const image = media.current?.querySelector(".projects-image, .projects-video, .projects-image-placeholder");
+      const image = media.current?.querySelector(".projects-video, .projects-image-placeholder");
       if (image) {
         gsap.fromTo(image,
           { scale: 1.02 },
@@ -123,7 +123,7 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
               </dl>
               {active.scopeChips && <ul className="projects-chips" aria-label="Selected project scope">{active.scopeChips.map((chip) => <li key={chip}>{chip}</li>)}</ul>}
             </>}
-            {active.detailHref && <Link className="projects-view-link" href={active.detailHref}>VIEW PROJECT <span aria-hidden="true">↗</span></Link>}
+            {active.detailHref && <Link className="projects-view-link" href={active.detailHref}>{isEquipment ? "VIEW EQUIPMENT" : "VIEW PROJECT"} <span aria-hidden="true">↗</span></Link>}
           </div>
           <div ref={media} className="projects-media">
             <div className="projects-media-stage">
@@ -139,7 +139,7 @@ export default function ProjectsSection({ projects }: { projects: ProjectWithAss
               </div>}
               <span className="projects-media-index">{String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
             </div>
-            {active.media.length > 0 && <nav className="projects-chapters" aria-label={`${active.client || active.title} media chapters`}>
+            {active.media.length > 0 && <nav className="projects-chapters" data-chapter-count={Math.min(active.media.length, 4)} aria-label={`${active.client || active.title} media chapters`}>
               {active.media.map((item, index) => <button key={item.id} type="button" aria-current={index === activeMediaIndex ? "true" : undefined} onClick={() => setActiveMediaIndex(index)}><span>{String(index + 1).padStart(2, "0")}</span><i aria-hidden="true" />{item.label}</button>)}
             </nav>}
           </div>

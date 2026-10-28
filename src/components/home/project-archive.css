@@ -64,9 +64,11 @@
 
 .project-archive-track {
   position: relative;
-  display: flex;
-  align-items: stretch;
-  gap: var(--archive-gap);
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--archive-tile-width);
+  grid-template-rows: auto auto;
+  column-gap: var(--archive-gap);
   width: max-content;
   margin: 0;
   padding: 0 max(var(--archive-gutter), calc(100vw - var(--archive-tile-width) - var(--archive-gutter))) 0 var(--archive-gutter);
@@ -74,16 +76,18 @@
 }
 
 .project-archive-tile {
-  flex: 0 0 var(--archive-tile-width);
+  display: grid;
+  grid-row: 1 / span 2;
+  grid-template-rows: subgrid;
   width: var(--archive-tile-width);
   min-width: 0;
   scroll-snap-align: start;
 }
 
 .project-archive-link {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  display: grid;
+  grid-row: 1 / span 2;
+  grid-template-rows: subgrid;
   min-height: 0;
   color: #b1beb5;
 }
@@ -99,25 +103,23 @@
   aspect-ratio: 1.85;
   background: #18201c;
   opacity: .75;
-  transform: scale(.985);
-  transform-origin: left center;
-  transition: opacity .3s ease, transform .3s ease;
+  transition: opacity .3s ease;
 }
 
 .project-archive-parallax {
   position: absolute;
-  inset: -8%;
+  inset: 0;
 }
 
 .project-archive-hover {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform .3s ease;
 }
 
 .project-archive-hover img {
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   filter: saturate(.7) contrast(1.04);
 }
 
@@ -244,7 +246,6 @@
 .project-archive-tile[data-active="true"] .project-archive-image,
 .project-archive-link:focus-visible .project-archive-image {
   opacity: 1;
-  transform: scale(1);
 }
 
 .project-archive-tile[data-active="true"] .project-archive-caption h4,
@@ -288,10 +289,6 @@
 }
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .project-archive-link:hover .project-archive-hover {
-    transform: scale(1.015);
-  }
-
   .project-archive-link:hover .project-archive-action > span {
     transform: translateX(5px);
   }
@@ -325,19 +322,15 @@
 
   .project-archive.is-pinned .project-archive-track {
     height: 100%;
+    grid-template-rows: minmax(0, 1fr) auto;
     /* Release once the last tile reaches the trailing gutter. */
     padding-right: var(--archive-gutter);
     will-change: transform;
   }
 
   .project-archive.is-pinned .project-archive-image {
-    flex: 1;
     min-height: 0;
     aspect-ratio: auto;
-  }
-
-  .project-archive.is-pinned .project-archive-parallax {
-    will-change: transform;
   }
 
   .project-archive.is-pinned .project-archive-hint-desktop {

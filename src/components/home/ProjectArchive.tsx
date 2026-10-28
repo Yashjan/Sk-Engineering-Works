@@ -28,7 +28,6 @@ export default function ProjectArchive({ projects, onSelect }: {
     gsap.registerPlugin(ScrollTrigger);
     const tiles = Array.from(track.querySelectorAll<HTMLElement>(".project-archive-tile"));
     const links = tiles.map((tile) => tile.querySelector<HTMLAnchorElement>("a")!);
-    const images = tiles.map((tile) => tile.querySelector<HTMLElement>(".project-archive-parallax")!);
     const counter = archive.querySelector<HTMLElement>("[data-archive-current]")!;
     const progress = archive.querySelector<HTMLElement>("[data-archive-progress]")!;
     const media = gsap.matchMedia();
@@ -48,7 +47,6 @@ export default function ProjectArchive({ projects, onSelect }: {
       let refreshFrame = 0;
       let scrollFrame = 0;
       let disposed = false;
-      const moveImages = images.map((image) => gsap.quickSetter(image, "xPercent"));
 
       const measure = () => {
         viewportWidth = viewport.clientWidth;
@@ -71,7 +69,6 @@ export default function ProjectArchive({ projects, onSelect }: {
             nearest = index;
             distance = Math.abs(relative);
           }
-          if (pinned) moveImages[index](gsap.utils.clamp(-5, 5, -relative / viewportWidth * 8));
         });
         // A wide viewport can still center the penultimate tile at the end.
         if (travel > 0 && offset >= travel - 1) nearest = tiles.length - 1;
@@ -176,7 +173,6 @@ export default function ProjectArchive({ projects, onSelect }: {
         window.removeEventListener("pageshow", refresh);
         layoutObserver.disconnect();
         archive.classList.remove("is-pinned");
-        images.forEach((image) => image.style.removeProperty("transform"));
       };
     }, archive);
 
