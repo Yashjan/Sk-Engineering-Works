@@ -23,8 +23,8 @@
 .manufacturing-video-control span { font-size: 16px; line-height: 1; letter-spacing: 0; }
 .manufacturing-video-control:hover { color: #c2d9cb; border-color: #c2d9cb; }
 .manufacturing-outro { max-width: 1920px; margin: 0 auto; padding: 65px 4.5vw 105px; }
-.manufacturing-proof { margin: 0 0 55px; color: #edf0e9; font-size: clamp(36px, 4.5vw, 76px); line-height: .98; letter-spacing: -.055em; font-weight: 500; }
-.manufacturing-proof span { color: #8da196; }
+.manufacturing-section .manufacturing-proof { margin: 0 0 55px; color: #edf0e9; font-size: clamp(36px, 4.5vw, 76px); line-height: .98; letter-spacing: -.055em; font-weight: 500; }
+.manufacturing-section .manufacturing-proof span { color: #8da196; }
 .manufacturing-rule { width: 100%; height: 1px; background: #2b3931; }
 .manufacturing-rule > span { display: block; width: 100%; height: 1px; background: #9cb2a3; transform-origin: left; }
 .manufacturing-capabilities ol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); list-style: none; padding: 0; margin: 0; }
@@ -39,7 +39,7 @@
 .manufacturing-swipe-hint { display: none; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .manufacturing-eyebrow, .manufacturing-description, .manufacturing-film-caption, .manufacturing-proof, .manufacturing-capability { opacity: 0; transform: translateY(16px); }
+  .manufacturing-eyebrow, .manufacturing-description, .manufacturing-film-caption, .manufacturing-section .manufacturing-proof, .manufacturing-capability { opacity: 0; transform: translateY(16px); }
   .manufacturing-title-line > span, .manufacturing-secondary-line > span { opacity: 0; transform: translateY(105%); }
   .manufacturing-film-frame { opacity: 0; transform: scale(.94); clip-path: inset(5% 4% 5% 4%); }
   .manufacturing-rule > span { transform: scaleX(0); }
@@ -76,7 +76,7 @@
   .manufacturing-video-control::after { content: ""; position: absolute; right: 6px; bottom: 5px; left: 6px; border-bottom: 1px solid currentColor; }
   .manufacturing-video-control span { font-size: 13px; }
   .manufacturing-outro { padding: 46px 6vw 76px; }
-  .manufacturing-proof { margin-bottom: 43px; font-size: clamp(34px, 8vw, 54px); }
+  .manufacturing-section .manufacturing-proof { margin-bottom: 43px; font-size: clamp(34px, 8vw, 54px); }
   .manufacturing-capabilities { margin-right: -6vw; }
   .manufacturing-rule { width: auto; margin-right: 6vw; }
   .manufacturing-capabilities ol { display: flex; gap: 14px; width: auto; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; padding: 0 6vw 0 0; }
