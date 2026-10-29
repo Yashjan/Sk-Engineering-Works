@@ -123,6 +123,30 @@
   filter: saturate(.7) contrast(1.04);
 }
 
+.project-archive-view-all {
+  grid-template-rows: 1fr;
+  place-items: center;
+  min-height: 100%;
+  padding: 24px;
+  color: #edf0e9;
+  text-align: center;
+}
+
+.project-archive-all-title {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 28px);
+  font-size: clamp(24px, 3.5vw, 56px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.project-archive-all-title > span {
+  font-size: .8em;
+  transition: transform .25s ease;
+}
+
 .project-archive-media-notice {
   position: absolute;
   top: 16px;
@@ -291,6 +315,10 @@
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .project-archive-link:hover .project-archive-action > span {
     transform: translateX(5px);
+  }
+
+  .project-archive-view-all:hover .project-archive-all-title > span {
+    transform: translate(5px, -5px);
   }
 
   .project-archive-link:hover .project-archive-location,

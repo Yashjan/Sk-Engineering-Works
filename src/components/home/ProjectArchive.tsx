@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "@/components/media/ProgressiveImage";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -74,7 +75,7 @@ export default function ProjectArchive({ projects, onSelect }: {
         if (travel > 0 && offset >= travel - 1) nearest = tiles.length - 1;
         if (nearest !== active) {
           active = nearest;
-          counter.textContent = number(active + 1);
+          counter.textContent = active < projects.length ? number(active + 1) : "ALL";
           tiles.forEach((tile, index) => {
             tile.dataset.active = String(index === active);
             if (index === active) links[index].setAttribute("aria-current", "true");
@@ -183,7 +184,7 @@ export default function ProjectArchive({ projects, onSelect }: {
     <section ref={root} id="project-archive" className="project-archive" aria-labelledby="project-archive-heading">
       <header className="project-archive-header">
         <h3 id="project-archive-heading">PROJECTS / EQUIPMENT</h3>
-        <p className="project-archive-counter" aria-label="Current project">
+        <p className="project-archive-counter" aria-label="Current archive item">
           <span data-archive-current>01</span> / {number(projects.length)}
         </p>
       </header>
@@ -232,6 +233,11 @@ export default function ProjectArchive({ projects, onSelect }: {
               </a>
             </li>
           ))}
+          <li className="project-archive-tile" data-active="false">
+            <Link className="project-archive-link project-archive-view-all" href="/projects" aria-label="View all projects">
+              <span className="project-archive-all-title">VIEW ALL PROJECTS <span aria-hidden="true">↗</span></span>
+            </Link>
+          </li>
         </ol>
       </div>
       <footer className="project-archive-footer">
