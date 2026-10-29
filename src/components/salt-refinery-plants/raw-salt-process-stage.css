@@ -45,7 +45,7 @@
 .raw-process-support {
   margin: 0 0 .25em;
   color: #555b5d;
-  font-size: clamp(13px, 1vw, 15px);
+  font-size: clamp(13px, 1vw, 18px);
   line-height: 1.7;
 }
 
@@ -393,7 +393,7 @@
 
   .raw-process-intro {
     display: block;
-    padding-bottom: 34px;
+    padding-bottom: 0px;
   }
 
   .raw-process-eyebrow {
@@ -408,12 +408,13 @@
 
   .raw-process-support {
     margin-top: 18px;
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .raw-process-layout {
     display: block;
     padding-top: 24px;
+    border-top: 0px;
   }
 
   .raw-process-stage-item button {
