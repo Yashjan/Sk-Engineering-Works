@@ -22,7 +22,7 @@
 }
 
 .trusted-clients-standalone .about-client-mark { color: #f3f2ed; }
-.trusted-clients-standalone .about-client-logo { filter: grayscale(1) saturate(0) invert(1) contrast(1.15); }
+/* .trusted-clients-standalone .about-client-logo { filter: grayscale(1) saturate(0) invert(1) contrast(1.15); } */
 .trusted-clients-standalone .about-client-mark small { color: rgb(243 242 237 / 52%); }
 
 @media (max-width: 1023px) {

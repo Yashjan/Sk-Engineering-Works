@@ -79,9 +79,31 @@ export default function AboutCredibilitySection() {
         </header>
 
         <div className="about-flash" aria-label="Fabricated here. Installed on site. Proven in production.">
-          <p className="about-flash-line">FABRICATED HERE.</p>
-          <p className="about-flash-line">INSTALLED ON SITE.</p>
-          <p className="about-flash-line">PROVEN IN PRODUCTION.</p>
+          <div className="about-flash-meta" aria-hidden="true">
+            <span>HOW WE WORK / FIELD PROOF</span>
+            <span>WORKSHOP → SITE → PRODUCTION</span>
+          </div>
+          <div className="about-flash-sequence">
+            <p className="about-flash-line">
+              <span className="about-flash-index">01</span>
+              <span className="about-flash-title">FABRICATED HERE.</span>
+              <small>CONTROLLED WORKSHOP BUILD</small>
+            </p>
+            <p className="about-flash-line">
+              <span className="about-flash-index">02</span>
+              <span className="about-flash-title">INSTALLED ON SITE.</span>
+              <small>ASSEMBLED BY OUR TEAM</small>
+            </p>
+            <p className="about-flash-line">
+              <span className="about-flash-index">03</span>
+              <span className="about-flash-title">PROVEN IN PRODUCTION.</span>
+              <small>RUNNING IN REAL PLANTS</small>
+            </p>
+          </div>
+          <div className="about-flash-foot" aria-hidden="true">
+            <span className="about-flash-node" />
+            <span>ONE TEAM / END-TO-END EXECUTION</span>
+          </div>
         </div>
 
         <div className="about-proof">
