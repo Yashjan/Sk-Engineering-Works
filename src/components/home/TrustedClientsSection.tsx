@@ -19,7 +19,7 @@ const clients: Client[] = [
   { name: "Pragati Salt Pvt. Ltd.", logo: assetPath("/images/clients/pragati-salt.png") },
   { name: "Bharat Salt" },
   { name: "Arihant Salt Production" },
-  { name: "JK Salt Pvt. Ltd." },
+  { name: "JK Salt Pvt. Ltd.",logo: assetPath("/images/clients/jk-salt.png") },
   { name: "Divine Chemfood Pvt. Ltd." },
   { name: "Royal Salt" },
 ];

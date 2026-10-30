@@ -209,11 +209,28 @@ export const projects: Project[] = [
     scope: "",
     projectType: "Industrial Equipment",
     detailHref: "/machinery/bag-filter",
-    coverImage: "/images/salt-refinery/execution/fabricated-equipment.jpeg",
+    coverImage: "/images/salt-refinery/execution/SK_Dust_Collector_Fabrication_SK_Logo_Poster.webp",
     media: [
       { id: "fabrication", type: "video", src: "/images/salt-refinery/execution/SK_Dust_Collector_Fabrication_SK_Logo_HQ.mp4", label: "FABRICATION" },
     ],
   },
+  {
+    id: "industrial-chimney",
+    kind: "equipment",
+    category: "DUST COLLECTION",
+    title: "CHIMNEY",
+    location: "",
+    capacity: "",
+    scope: "",
+    projectType: "Industrial Equipment",
+    detailHref: "/machinery/chimney",
+    coverImage: "/images/salt-refinery/execution/Industrial_Chimney_Completed_SK_Logo_Poster.webp",
+    media: [
+      { id: "fabrication", type: "video", src: "/images/salt-refinery/execution/Industrial_Chimney_Fabrication_SK_Logo_HQ.mp4", label: "FABRICATION" },
+      { id: "completed", type: "video", src: "/images/salt-refinery/execution/Industrial_Chimney_Completed_SK_Logo_HQ.mp4", label: "COMPLETED MACHINE" },
+      { id: "overview", type: "image", src: "/images/salt-refinery/execution/Industrial_Chimney_Completed_SK_Logo_Poster,webp", label: "EQUIPMENT VIEW" },
+    ],
+  }
 ];
 
 const jagdambaProject = projects.find((project) => project.id === "jagdamba-phalodi");

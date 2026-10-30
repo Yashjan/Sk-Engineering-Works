@@ -50,7 +50,8 @@ const processStages: ProcessStage[] = [
     equipment: "WET MILL",
     description: "The incoming salt is reduced and conditioned in the Wet Mill to prepare it for the washing process.",
     relatedEquipment: "WET MILL",
-    mediaType: "placeholder",
+    mediaType: "video",
+    mediaSrc: assetPath("/videos/salt-refinery/crushing.mp4"),
   },
   {
     id: "washing",
@@ -61,7 +62,8 @@ const processStages: ProcessStage[] = [
     equipment: "ELUTRIATION + WASHING SYSTEM",
     description: "Salt moves through the washing system where unwanted impurities are separated before further processing.",
     relatedEquipment: "ELUTRIATION TANK / WASHING TANK / SCREW WASHERY",
-    mediaType: "placeholder",
+    mediaType: "video",
+    mediaSrc: assetPath("/videos/salt-refinery/washing.mp4"),
   },
   {
     id: "centrifuging",
@@ -72,7 +74,8 @@ const processStages: ProcessStage[] = [
     equipment: "CENTRIFUGE",
     description: "Washed salt enters the centrifuge where excess moisture and brine are separated from the salt.",
     relatedEquipment: "CENTRIFUGE",
-    mediaType: "placeholder",
+    mediaType: "video",
+    mediaSrc: assetPath("/videos/salt-refinery/centrifuge.mp4"),
   },
   {
     id: "drying",
@@ -83,7 +86,8 @@ const processStages: ProcessStage[] = [
     equipment: "DRYER + CYCLONE",
     description: "The salt is dried using controlled hot-air processing to reduce moisture before screening and grinding.",
     relatedEquipment: "DRYER / CYCLONE",
-    mediaType: "placeholder",
+    mediaType: "video",
+    mediaSrc: assetPath("/videos/salt-refinery/dryer.mp4"),
   },
   {
     id: "screening",
@@ -94,7 +98,8 @@ const processStages: ProcessStage[] = [
     equipment: "VIBRO SCREEN",
     description: "Dried salt is screened to separate particles by size and maintain a consistent product specification.",
     relatedEquipment: "VIBRO SCREEN",
-    mediaType: "placeholder",
+    mediaType: "video",
+    mediaSrc: assetPath("/videos/salt-refinery/screening.mp4"),
   },
   {
     id: "grinding",
@@ -105,29 +110,32 @@ const processStages: ProcessStage[] = [
     equipment: "PIN MILL",
     description: "Salt is ground to the required fineness depending on the final product specification.",
     relatedEquipment: "PIN MILL",
-    mediaType: "placeholder",
+    mediaType: "video",
+    mediaSrc: assetPath("/videos/salt-refinery/grinding.mp4"),
   },
   {
-    id: "storage",
+    id: "material-handling",
     number: "08",
-    name: "STORAGE",
-    stageLabel: "08 / STORAGE",
-    heading: ["FINISHED SALT", "MOVES TO STORAGE."],
-    equipment: "BUCKET ELEVATOR + SILOS",
-    description: "Processed salt is transferred through material-handling equipment into storage before packing.",
-    relatedEquipment: "BUCKET ELEVATOR / SCREW CONVEYOR / STORAGE SILOS",
-    mediaType: "placeholder",
+    name: "MATERIAL HANDLING & ALL",
+    stageLabel: "08 / MATERIAL HANDLING & ALL",
+    heading: ["MATERIAL MOVES", "BETWEEN EACH STAGE."],
+    equipment: "CONVEYORS + ELEVATORS + TRANSFER SYSTEMS",
+    description: "Processed salt is moved between connected stages using equipment selected for the plant layout and production flow.",
+    relatedEquipment: "BELT CONVEYOR / SCREW CONVEYOR / BUCKET ELEVATOR",
+    mediaType: "video",
+    mediaSrc: assetPath("/videos/salt-refinery/material.mp4"),
   },
   {
-    id: "packing",
+    id: "storage-packing",
     number: "09",
-    name: "PACKING",
-    stageLabel: "09 / PACKING",
-    heading: ["READY FOR", "FINAL PACKING."],
-    equipment: "PACKING SYSTEM",
-    description: "Finished salt is prepared for packing according to the required product and packaging format.",
-    relatedEquipment: "PACKING SYSTEM",
-    mediaType: "placeholder",
+    name: "STORAGE & PACKING",
+    stageLabel: "09 / STORAGE & PACKING",
+    heading: ["FINISHED SALT", "IS STORED & PACKED."],
+    equipment: "STORAGE SILOS + PACKING SYSTEM",
+    description: "Finished salt is stored and prepared for packing according to the required product and packaging format.",
+    relatedEquipment: "STORAGE SILOS / PACKING SYSTEM",
+    mediaType: "video",
+    mediaSrc: assetPath("/videos/salt-refinery/packing.mp4"),
   },
 ];
 
@@ -219,6 +227,7 @@ export default function RawSaltProcessStage() {
   const copyContent = useRef<HTMLElement>(null);
   const desktopVideo = useRef<HTMLVideoElement>(null);
   const mobileVideo = useRef<HTMLVideoElement>(null);
+  const mobileAlignmentFrame = useRef<number | null>(null);
   const displayedDesktopStage = hoveredStage ?? "raw-salt";
   const activeIndex = processStages.findIndex((stage) => stage.id === displayedDesktopStage);
   const renderedProcess = processStages.find((stage) => stage.id === renderedStage) ?? processStages[0];
@@ -294,6 +303,48 @@ export default function RawSaltProcessStage() {
     };
   }, []);
 
+  useEffect(() => () => {
+    if (mobileAlignmentFrame.current !== null) cancelAnimationFrame(mobileAlignmentFrame.current);
+  }, []);
+
+  const alignOpenedMobileStage = (stageItem: HTMLElement) => {
+    if (mobileAlignmentFrame.current !== null) cancelAnimationFrame(mobileAlignmentFrame.current);
+
+    // Wait for React to mount the accordion detail and for the previous open
+    // stage to collapse before measuring the stage's final document position.
+    mobileAlignmentFrame.current = requestAnimationFrame(() => {
+      mobileAlignmentFrame.current = requestAnimationFrame(() => {
+        mobileAlignmentFrame.current = null;
+        if (!stageItem.isConnected || window.innerWidth > 767) return;
+
+        const navbarHeight = document.querySelector<HTMLElement>("[data-navbar]")?.getBoundingClientRect().height ?? 82;
+        const safeTop = navbarHeight + 12;
+        const itemRect = stageItem.getBoundingClientRect();
+        const detailRect = stageItem.querySelector<HTMLElement>(".raw-process-mobile-detail")?.getBoundingClientRect();
+        const headingIsMisaligned = Math.abs(itemRect.top - safeTop) > 8;
+        const revealedContentIsClipped = Boolean(detailRect && detailRect.bottom > window.innerHeight - 16);
+
+        if (!headingIsMisaligned && !revealedContentIsClipped) return;
+
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (window.__lenis) {
+          window.__lenis.scrollTo(stageItem, {
+            offset: -safeTop,
+            immediate: reducedMotion,
+            duration: reducedMotion ? undefined : 0.72,
+            force: true,
+          });
+          return;
+        }
+
+        window.scrollTo({
+          top: window.scrollY + itemRect.top - safeTop,
+          behavior: reducedMotion ? "auto" : "smooth",
+        });
+      });
+    });
+  };
+
   useLayoutEffect(() => {
     const targets = [previewContent.current, copyContent.current].filter(Boolean);
     if (!targets.length) {
@@ -366,19 +417,23 @@ export default function RawSaltProcessStage() {
   }, [desktopMediaVisible, isMobile]);
 
   useEffect(() => {
-    const desktopRawSaltActive = !isMobile && hoveredStage === "raw-salt" && renderedStage === "raw-salt";
-    const mobileRawSaltActive = isMobile && selectedMobileStage === "raw-salt";
+    const desktopVideoActive = !isMobile
+      && hoveredStage !== null
+      && renderedStage === hoveredStage
+      && renderedProcess.mediaType === "video";
+    const selectedMobileProcess = processStages.find((stage) => stage.id === selectedMobileStage);
+    const mobileVideoActive = isMobile && selectedMobileProcess?.mediaType === "video";
     const desktopVideoElement = desktopVideo.current;
     const mobileVideoElement = mobileVideo.current;
 
-    syncVideoPlayback(desktopVideoElement, motionAllowed && desktopRawSaltActive);
-    syncVideoPlayback(mobileVideoElement, motionAllowed && mobileRawSaltActive);
+    syncVideoPlayback(desktopVideoElement, motionAllowed && desktopVideoActive);
+    syncVideoPlayback(mobileVideoElement, motionAllowed && mobileVideoActive);
 
     return () => {
       desktopVideoElement?.pause();
       mobileVideoElement?.pause();
     };
-  }, [hoveredStage, isMobile, motionAllowed, renderedStage, selectedMobileStage]);
+  }, [hoveredStage, isMobile, motionAllowed, renderedProcess.mediaType, renderedStage, selectedMobileStage]);
 
   const previewPosition = {
     "--active-stage": activeIndex,
@@ -454,8 +509,15 @@ export default function RawSaltProcessStage() {
                   >
                     <button
                       type="button"
-                      onClick={() => {
-                        setSelectedMobileStage((current) => current === process.id ? null : process.id);
+                      onClick={(event) => {
+                        if (selected) {
+                          setSelectedMobileStage(null);
+                          return;
+                        }
+
+                        const stageItem = event.currentTarget.closest<HTMLElement>(".raw-process-stage-item");
+                        setSelectedMobileStage(process.id);
+                        if (stageItem) alignOpenedMobileStage(stageItem);
                       }}
                       aria-expanded={selected}
                       aria-controls={mobileDetailId}
@@ -470,8 +532,8 @@ export default function RawSaltProcessStage() {
                         <div className="raw-process-mobile-media">
                           <StageMedia
                             stage={process}
-                            videoRef={process.id === "raw-salt" ? mobileVideo : undefined}
-                            shouldPlay={motionAllowed && isMobile && process.id === "raw-salt"}
+                            videoRef={mobileVideo}
+                            shouldPlay={motionAllowed && isMobile && process.mediaType === "video"}
                             loadMedia={isMobile}
                           />
                         </div>
@@ -489,8 +551,8 @@ export default function RawSaltProcessStage() {
               <div ref={previewContent} className="raw-process-preview-content">
                 <StageMedia
                   stage={renderedProcess}
-                  videoRef={renderedProcess.id === "raw-salt" ? desktopVideo : undefined}
-                  shouldPlay={motionAllowed && !isMobile && hoveredStage === "raw-salt"}
+                  videoRef={desktopVideo}
+                  shouldPlay={motionAllowed && !isMobile && hoveredStage === renderedProcess.id}
                   loadMedia={!isMobile}
                 />
               </div>
