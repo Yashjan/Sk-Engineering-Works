@@ -209,9 +209,10 @@ export const projects: Project[] = [
     scope: "",
     projectType: "Industrial Equipment",
     detailHref: "/machinery/bag-filter",
-    coverImage: "/images/salt-refinery/execution/SK_Dust_Collector_Fabrication_SK_Logo_Poster.webp",
+    coverImage: "/images/process/Bag-filter.png",
     media: [
       { id: "fabrication", type: "video", src: "/images/salt-refinery/execution/SK_Dust_Collector_Fabrication_SK_Logo_HQ.mp4", label: "FABRICATION" },
+      { id: "overview", type: "image", src: "/images/process/Bag-filter.png", label: "EQUIPMENT VIEW" },
     ],
   },
   {
@@ -224,11 +225,11 @@ export const projects: Project[] = [
     scope: "",
     projectType: "Industrial Equipment",
     detailHref: "/machinery/chimney",
-    coverImage: "/images/salt-refinery/execution/Industrial_Chimney_Completed_SK_Logo_Poster.webp",
+    coverImage: "/images/process/chimney.png",
     media: [
       { id: "fabrication", type: "video", src: "/images/salt-refinery/execution/Industrial_Chimney_Fabrication_SK_Logo_HQ.mp4", label: "FABRICATION" },
       { id: "completed", type: "video", src: "/images/salt-refinery/execution/Industrial_Chimney_Completed_SK_Logo_HQ.mp4", label: "COMPLETED MACHINE" },
-      { id: "overview", type: "image", src: "/images/salt-refinery/execution/Industrial_Chimney_Completed_SK_Logo_Poster,webp", label: "EQUIPMENT VIEW" },
+      { id: "overview", type: "image", src: "/images/process/chimney.png", label: "EQUIPMENT VIEW" },
     ],
   }
 ];
@@ -245,7 +246,7 @@ if (!jagdambaProject?.client || !jagdambaProject.detailHref || jagdambaCompleted
 
 // One ordered archive for the combined field-record section. Jagdamba is derived
 // from its existing project record; unverified capacities remain omitted.
-export const projectArchive: ProjectArchiveRecord[] = [
+const curatedProjectArchive: ProjectArchiveRecord[] = [
   {
     id: jagdambaProject.id,
     slug: "jagdamba-salt-15tph",
@@ -343,6 +344,59 @@ export const projectArchive: ProjectArchiveRecord[] = [
     detailHref: "/projects/cyclone",
     isFeatured: false,
   },
+];
+
+const archiveCategoryForProject = (project: Project): ProjectArchiveRecord["category"] => {
+  if (project.kind !== "equipment") return "salt-plants";
+
+  const category = project.category?.toLowerCase() ?? "";
+  if (category.includes("material") || category.includes("convey")) return "material-handling";
+  if (category.includes("air") || category.includes("dust")) return "air-dust";
+  return "process-equipment";
+};
+
+const toArchiveRecord = (project: Project): ProjectArchiveRecord => {
+  const media = project.media.find((item) => item.id === "completed")
+    ?? project.media.find((item) => item.id === "fabrication")
+    ?? project.media.find((item) => item.id === "overview")
+    ?? project.media[0];
+  const fallbackHref = `/projects/${project.id}`;
+  const detailHref = project.detailHref ?? fallbackHref;
+  const hrefParts = detailHref.split("/").filter(Boolean);
+
+  if (!media) throw new Error(`Project ${project.id} requires at least one archive media item.`);
+
+  return {
+    id: project.id,
+    slug: hrefParts[hrefParts.length - 1] ?? project.id,
+    name: project.client ?? project.title,
+    category: archiveCategoryForProject(project),
+    location: project.location || undefined,
+    capacity: project.capacity || undefined,
+    mediaType: media.type,
+    mediaSrc: media.src,
+    poster: media.type === "video" ? project.coverImage : undefined,
+    mediaLabel: `${media.label} / ${project.projectType}`,
+    mediaAlt: `${project.title} by S.K. Engineering Works`,
+    detailHref,
+    isFeatured: Boolean(project.isFeatured),
+  };
+};
+
+const curatedProjectIds = new Set(curatedProjectArchive.map((project) => project.id));
+const curatedProjectNames = new Set(curatedProjectArchive.map((project) => project.name));
+
+// The homepage project source is authoritative. Curated archive records keep
+// their tailored copy and order; any newly added homepage record is appended
+// automatically so the /projects page cannot silently fall behind.
+export const projectArchive: ProjectArchiveRecord[] = [
+  ...curatedProjectArchive,
+  ...projects
+    .filter((project) => (
+      !curatedProjectIds.has(project.id)
+      && !curatedProjectNames.has(project.client ?? project.title)
+    ))
+    .map(toArchiveRecord),
 ];
 
 // Real workshop and field media used by the scroll-driven visual archive.
