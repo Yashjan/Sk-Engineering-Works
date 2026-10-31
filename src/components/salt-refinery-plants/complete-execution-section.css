@@ -206,6 +206,223 @@
   display: none;
 }
 
+.execution-drawing-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.38fr) minmax(0, 1fr);
+  gap: clamp(30px, 4vw, 70px);
+  align-items: center;
+  margin-top: clamp(52px, 6vw, 88px);
+  padding: clamp(24px, 3vw, 48px);
+  border: 1px solid rgb(243 242 237 / 15%);
+  background: #e8e7e1;
+  color: #121617;
+}
+
+.execution-drawing-mobile {
+  display: none;
+}
+
+.execution-drawing-copy > p {
+  margin: 0 0 20px;
+  color: #68706e;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.17em;
+}
+
+.execution-drawing-copy h3 {
+  margin: 0;
+  font-size: clamp(24px, 2.35vw, 42px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.execution-drawing-copy > span {
+  display: block;
+  max-width: 390px;
+  margin-top: 22px;
+  color: #5c6461;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.execution-drawing-document {
+  min-width: 0;
+  margin: 0;
+}
+
+.execution-drawing-trigger {
+  display: block;
+  width: 100%;
+  padding: clamp(12px, 1.5vw, 22px);
+  border: 1px solid #c9cbc5;
+  background: #f8f7f2;
+  color: #141819;
+  text-align: left;
+  cursor: zoom-in;
+}
+
+.execution-drawing-trigger:focus-visible {
+  outline: 2px solid #1e5d43;
+  outline-offset: 4px;
+}
+
+.execution-drawing-preview {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3580 / 2080;
+  overflow: hidden;
+  background: #fff;
+}
+
+.execution-drawing-preview img {
+  object-fit: contain;
+}
+
+.execution-drawing-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #d7d8d2;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+.execution-drawing-action b {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.execution-drawing-document figcaption {
+  margin-top: 10px;
+  color: #747b78;
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+}
+
+.execution-drawing-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: clamp(10px, 2vw, 28px);
+  background: rgb(5 8 8 / 92%);
+}
+
+.execution-drawing-dialog {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: min(100%, 1780px);
+  height: min(94dvh, 1120px);
+  overflow: hidden;
+  border: 1px solid rgb(243 242 237 / 18%);
+  background: #111516;
+  color: #f3f2ed;
+}
+
+.execution-drawing-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 18px clamp(18px, 2.2vw, 34px);
+  border-bottom: 1px solid rgb(243 242 237 / 14%);
+}
+
+.execution-drawing-dialog-header p {
+  margin: 0 0 6px;
+  color: #8f9794;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+.execution-drawing-dialog-header h2 {
+  margin: 0;
+  font-size: clamp(17px, 1.6vw, 28px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.execution-drawing-controls {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 7px;
+}
+
+.execution-drawing-controls button,
+.execution-drawing-controls output {
+  display: inline-grid;
+  min-width: 38px;
+  min-height: 38px;
+  place-items: center;
+  padding: 0 10px;
+  border: 1px solid rgb(243 242 237 / 20%);
+  background: transparent;
+  color: #f3f2ed;
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.execution-drawing-controls button {
+  cursor: pointer;
+}
+
+.execution-drawing-controls button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.execution-drawing-controls button:focus-visible {
+  outline: 2px solid #b7c8be;
+  outline-offset: 2px;
+}
+
+.execution-drawing-controls .execution-drawing-close {
+  gap: 14px;
+  margin-left: 9px;
+  padding-inline: 14px;
+}
+
+.execution-drawing-close span {
+  font-size: 18px;
+}
+
+.execution-drawing-scroller {
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: clamp(12px, 2vw, 30px);
+  background: #d7d7d2;
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+.execution-drawing-scroller:focus-visible {
+  outline: 2px solid #1e5d43;
+  outline-offset: -4px;
+}
+
+.execution-drawing-full {
+  min-width: 100%;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.execution-drawing-full img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .execution-statement {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -255,6 +472,14 @@
 
   .execution-media-composition {
     min-height: 850px;
+  }
+
+  .execution-drawing-card {
+    grid-template-columns: 1fr;
+  }
+
+  .execution-drawing-copy > span {
+    max-width: 600px;
   }
 }
 
@@ -306,6 +531,42 @@
   .execution-mobile-story {
     display: block;
     margin-top: 52px;
+  }
+
+  .execution-drawing-desktop {
+    display: none;
+  }
+
+  .execution-drawing-mobile {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin: 12px 0 22px;
+    padding: 16px;
+  }
+
+  .execution-drawing-copy > p {
+    margin-bottom: 14px;
+    font-size: 8px;
+  }
+
+  .execution-drawing-copy h3 {
+    font-size: clamp(22px, 7vw, 30px);
+  }
+
+  .execution-drawing-copy > span {
+    margin-top: 14px;
+    font-size: 12px;
+  }
+
+  .execution-drawing-trigger {
+    padding: 9px;
+  }
+
+  .execution-drawing-action {
+    margin-top: 10px;
+    padding-top: 9px;
+    font-size: 8px;
   }
 
   .execution-mobile-group + .execution-mobile-group {
@@ -370,6 +631,45 @@
 
   .execution-statement-copy {
     font-size: clamp(34px, 10.2vw, 44px);
+  }
+
+  .execution-drawing-lightbox {
+    padding: 0;
+  }
+
+  .execution-drawing-dialog {
+    width: 100%;
+    height: 100dvh;
+    border: 0;
+  }
+
+  .execution-drawing-dialog-header {
+    display: grid;
+    gap: 14px;
+    padding: 14px 16px;
+  }
+
+  .execution-drawing-dialog-header h2 {
+    font-size: 17px;
+  }
+
+  .execution-drawing-controls {
+    width: 100%;
+  }
+
+  .execution-drawing-controls button,
+  .execution-drawing-controls output {
+    min-width: 36px;
+    min-height: 36px;
+    padding-inline: 8px;
+  }
+
+  .execution-drawing-controls .execution-drawing-close {
+    margin-left: auto;
+  }
+
+  .execution-drawing-scroller {
+    padding: 10px;
   }
 }
 

@@ -19,7 +19,7 @@ const journey: JourneyPhase[] = [
       "S.K. Engineering Works began in the 1990s with chain pulley blocks and mechanical fabrication work, grounded in workshop skill and hands-on engineering.",
       "As motorized lifting systems became more common, the company adapted instead of remaining limited to one product.",
     ],
-    media: "/images/salt-refinery/execution/fabricated-equipment.jpeg",
+    media: "/images/salt-refinery/complete-execution/fabricated-equipment.jpeg",
     mediaAlt: "Current S.K. Engineering Works fabrication showing the practical workshop foundation that began with mechanical work",
     mediaCaption: "PRACTICAL FABRICATION / THE FOUNDATION REMAINS",
   },
@@ -139,7 +139,7 @@ export default function AboutPageExperience() {
           <p className="about-page-hero-intro">From mechanical fabrication and agricultural machinery to material handling systems and complete salt refinery plants.</p>
         </header>
         <figure className="about-page-hero-media">
-          <div className="about-page-hero-media-inner"><ProgressiveVideo ref={heroVideoRef} muted loop playsInline preload="metadata" poster={assetPath("/images/salt-refinery/execution/fabricated-equipment.jpeg")} aria-label="S.K. Engineering Works workshop fabrication"><source src={assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4")} type="video/mp4" /></ProgressiveVideo></div>
+          <div className="about-page-hero-media-inner"><ProgressiveVideo ref={heroVideoRef} muted loop playsInline preload="metadata" poster={assetPath("/images/salt-refinery/complete-execution/fabricated-equipment.jpeg")} aria-label="S.K. Engineering Works workshop fabrication"><source src={assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4")} type="video/mp4" /></ProgressiveVideo></div>
           <figcaption><span>WORKSHOP / SAMBHAR LAKE</span><span>HANDS-ON ENGINEERING</span></figcaption>
         </figure>
       </div>
@@ -163,7 +163,7 @@ export default function AboutPageExperience() {
     <section className="about-page-founder about-page-reveal" aria-labelledby="about-founder-title">
       <div className="about-page-section-meta" data-reveal><span>THE MAN BEHIND THE WORK / 03</span><span>MANAGING DIRECTOR</span></div>
       <div className="about-page-founder-grid">
-        <figure className="about-page-founder-visual" data-reveal><Image src={assetPath("/images/salt-refinery/execution/fabrication-blower.jpeg")} alt="S.K. Engineering Works workshop context for the Managing Director profile" fill sizes="(max-width: 767px) 88vw, 41vw" /><div className="about-page-founder-placeholder"><span>MANAGING DIRECTOR PORTRAIT</span><strong>TO BE ADDED</strong></div><figcaption>WORKSHOP CONTEXT / VERIFIED PORTRAIT PENDING</figcaption></figure>
+        <figure className="about-page-founder-visual" data-reveal><Image src={assetPath("/images/salt-refinery/complete-execution/fabrication-blower.jpeg")} alt="S.K. Engineering Works workshop context for the Managing Director profile" fill sizes="(max-width: 767px) 88vw, 41vw" /><div className="about-page-founder-placeholder"><span>MANAGING DIRECTOR PORTRAIT</span><strong>TO BE ADDED</strong></div><figcaption>WORKSHOP CONTEXT / VERIFIED PORTRAIT PENDING</figcaption></figure>
         <div className="about-page-founder-copy"><h2 id="about-founder-title" data-reveal>BUILT WITH<br />HANDS-ON<br />EXPERIENCE.</h2><div className="about-page-founder-name" data-reveal><strong>FULL NAME TO BE CONFIRMED</strong><span>MANAGING DIRECTOR / S.K. ENGINEERING WORKS</span></div><div className="about-page-founder-story" data-reveal><p>Coming from a mechanical background, the Managing Director built S.K. Engineering Works around practical engineering, fabrication and problem-solving.</p><p>His work moved through chain pulley blocks, agricultural machinery and material handling before developing into large-scale salt refinery engineering.</p><p>Today, that experience guides machinery selection, fabrication, plant planning, site execution and customer problem-solving.</p></div></div>
       </div>
       <ul className="about-page-founder-roles" aria-label="Managing Director responsibilities">{founderRoles.map((role, index) => <li key={role} data-reveal><span>{String(index + 1).padStart(2, "0")}</span>{role}</li>)}</ul>
@@ -179,7 +179,7 @@ export default function AboutPageExperience() {
     <section className="about-page-workshop about-page-reveal" aria-labelledby="about-workshop-title">
       <div className="about-page-section-meta" data-reveal><span>BUILT HERE / 05</span><span>REAL WORKSHOP PROOF</span></div>
       <header className="about-page-workshop-heading"><h2 id="about-workshop-title" data-reveal>BUILT HERE.</h2><p data-reveal>FROM DRAWING<br />TO FABRICATION<br />TO WORKING MACHINE.</p></header>
-      <div className="about-page-workshop-grid"><figure className="about-page-workshop-primary" data-reveal><Image src={assetPath("/images/salt-refinery/execution/fabricated-equipment.jpeg")} alt="Fabricated stainless-steel process equipment in the S.K. Engineering Works workshop" fill sizes="(max-width: 767px) 88vw, 62vw" /><figcaption><span>PROCESS EQUIPMENT</span><span>FABRICATED IN-HOUSE</span></figcaption></figure><div className="about-page-workshop-support"><figure data-reveal><Image src={assetPath("/images/salt-refinery/execution/fabrication-blower.jpeg")} alt="Large industrial blower fabricated in the workshop" fill sizes="(max-width: 767px) 88vw, 28vw" /><figcaption>INDUSTRIAL BLOWER / FABRICATION</figcaption></figure><figure data-reveal><Image src={assetPath("/images/salt-refinery/execution/plant-structure.jpeg")} alt="Fabricated plant structure with installed process equipment" fill sizes="(max-width: 767px) 88vw, 28vw" /><figcaption>PLANT STRUCTURE / INSTALLED SYSTEM</figcaption></figure></div></div>
+      <div className="about-page-workshop-grid"><figure className="about-page-workshop-primary" data-reveal><Image src={assetPath("/images/salt-refinery/complete-execution/fabricated-equipment.jpeg")} alt="Fabricated stainless-steel process equipment in the S.K. Engineering Works workshop" fill sizes="(max-width: 767px) 88vw, 62vw" /><figcaption><span>PROCESS EQUIPMENT</span><span>FABRICATED IN-HOUSE</span></figcaption></figure><div className="about-page-workshop-support"><figure data-reveal><Image src={assetPath("/images/salt-refinery/complete-execution/fabrication-blower.jpeg")} alt="Large industrial blower fabricated in the workshop" fill sizes="(max-width: 767px) 88vw, 28vw" /><figcaption>INDUSTRIAL BLOWER / FABRICATION</figcaption></figure><figure data-reveal><Image src={assetPath("/images/salt-refinery/complete-execution/plant-structure.jpeg")} alt="Fabricated plant structure with installed process equipment" fill sizes="(max-width: 767px) 88vw, 28vw" /><figcaption>PLANT STRUCTURE / INSTALLED SYSTEM</figcaption></figure></div></div>
     </section>
 
     <section className="about-page-progression about-page-reveal" aria-labelledby="about-progression-title">

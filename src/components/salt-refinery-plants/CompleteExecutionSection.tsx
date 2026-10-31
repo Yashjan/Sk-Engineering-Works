@@ -5,6 +5,7 @@ import Image from "@/components/media/ProgressiveImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assetPath } from "@/lib/asset-path";
+import PlantElevationDrawing from "./PlantElevationDrawing";
 import "./complete-execution-section.css";
 
 type ExecutionStage = {
@@ -54,17 +55,17 @@ const executionStages: ExecutionStage[] = [
 
 const executionImages = [
   {
-    src: assetPath("/images/salt-refinery/execution/plant-structure.jpeg"),
+    src: assetPath("/images/salt-refinery/complete-execution/plant-structure.jpeg"),
     alt: "Salt refinery machinery integrated into a steel plant structure",
     caption: "PLANT STRUCTURE / SITE INTEGRATION",
   },
   {
-    src: assetPath("/images/salt-refinery/execution/fabrication-blower.jpeg"),
+    src: assetPath("/images/salt-refinery/complete-execution/fabrication-blower.jpeg"),
     alt: "Industrial blower fabricated inside the S.K. Engineering Works workshop",
     caption: "PROCESS EQUIPMENT / FABRICATION",
   },
   {
-    src: assetPath("/images/salt-refinery/execution/fabricated-equipment.jpeg"),
+    src: assetPath("/images/salt-refinery/complete-execution/fabricated-equipment.jpeg"),
     alt: "Large stainless-steel salt processing equipment under fabrication",
     caption: "HEAVY EQUIPMENT / WORKSHOP",
   },
@@ -260,13 +261,21 @@ export default function CompleteExecutionSection() {
           </div>
         </div>
 
+        <PlantElevationDrawing className="execution-drawing-desktop" anchorId="plant-elevation" />
+
         <div className="execution-mobile-story">
           {[0, 1, 2].map((groupIndex) => (
             <div className="execution-mobile-group" key={executionImages[groupIndex].src}>
               <ExecutionImage image={executionImages[groupIndex]} sizes="88vw" />
-              {executionStages
-                .slice(groupIndex * 2, groupIndex * 2 + 2)
-                .map((stage) => <StageRow key={stage.number} stage={stage} />)}
+              {groupIndex === 0 ? (
+                <>
+                  <StageRow stage={executionStages[0]} />
+                  <PlantElevationDrawing className="execution-drawing-mobile" anchorId="plant-elevation-mobile" />
+                  <StageRow stage={executionStages[1]} />
+                </>
+              ) : executionStages
+                  .slice(groupIndex * 2, groupIndex * 2 + 2)
+                  .map((stage) => <StageRow key={stage.number} stage={stage} />)}
             </div>
           ))}
         </div>

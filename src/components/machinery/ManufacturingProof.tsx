@@ -10,7 +10,7 @@ import { assetPath } from "@/lib/asset-path";
 import "./manufacturing-proof.css";
 
 const workshopVideo = assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4");
-const workshopPoster = assetPath("/images/salt-refinery/execution/fabrication-blower.jpeg");
+const workshopPoster = assetPath("/images/salt-refinery/complete-execution/fabrication-blower.jpeg");
 
 export default function ManufacturingProof() {
   const root = useRef<HTMLElement>(null);
@@ -132,7 +132,7 @@ export default function ManufacturingProof() {
 
         <figure className="proof-media proof-detail">
           <div className="proof-frame proof-detail-frame">
-            <Image src={assetPath("/images/salt-refinery/execution/fabrication-blower.jpeg")} alt="S.K. Engineering Works fabricated blower inside the workshop" fill sizes="(max-width: 767px) 88vw, 30vw" />
+            <Image src={assetPath("/images/salt-refinery/complete-execution/fabrication-blower.jpeg")} alt="S.K. Engineering Works fabricated blower inside the workshop" fill sizes="(max-width: 767px) 88vw, 30vw" />
           </div>
           <figcaption><span>02 / BLOWER FABRICATION</span></figcaption>
         </figure>
@@ -141,14 +141,14 @@ export default function ManufacturingProof() {
 
         <figure className="proof-media proof-equipment">
           <div className="proof-frame proof-equipment-frame">
-            <Image src={assetPath("/images/salt-refinery/execution/fabricated-equipment.jpeg")} alt="Large fabricated process equipment on the S.K. Engineering Works workshop floor" fill sizes="(max-width: 767px) 88vw, 52vw" />
+            <Image src={assetPath("/images/salt-refinery/complete-execution/fabricated-equipment.jpeg")} alt="Large fabricated process equipment on the S.K. Engineering Works workshop floor" fill sizes="(max-width: 767px) 88vw, 52vw" />
           </div>
           <figcaption><span>03 / EQUIPMENT FABRICATION</span><span>WORKSHOP FLOOR</span></figcaption>
         </figure>
 
         <figure className="proof-media proof-built">
           <div className="proof-frame proof-built-frame">
-            <Image src={assetPath("/images/salt-refinery/execution/plant-structure.jpeg")} alt="Installed S.K. Engineering Works process equipment within the salt refinery plant structure" fill sizes="(max-width: 767px) 88vw, 36vw" />
+            <Image src={assetPath("/images/salt-refinery/complete-execution/plant-structure.jpeg")} alt="Installed S.K. Engineering Works process equipment within the salt refinery plant structure" fill sizes="(max-width: 767px) 88vw, 36vw" />
           </div>
           <figcaption><span>04 / INSTALLED EQUIPMENT</span></figcaption>
         </figure>

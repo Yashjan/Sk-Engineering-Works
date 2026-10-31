@@ -10,7 +10,7 @@ import { assetPath } from "@/lib/asset-path";
 import "./machinery-hero.css";
 
 const videoSource = assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4");
-const videoPoster = assetPath("/images/salt-refinery/execution/fabrication-blower.jpeg");
+const videoPoster = assetPath("/images/salt-refinery/complete-execution/fabrication-blower.jpeg");
 
 export default function MachineryHero() {
   const root = useRef<HTMLElement>(null);

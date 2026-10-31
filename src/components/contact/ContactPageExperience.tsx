@@ -111,7 +111,7 @@ export default function ContactPageExperience() {
             <a href={whatsappUrl("Hello S.K. Engineering Works, I would like to discuss a project requirement.")} target="_blank" rel="noopener noreferrer" aria-label="Contact S.K. Engineering Works on WhatsApp">WHATSAPP <span aria-hidden="true">↗</span></a>
           </div>
         </header>
-        <figure className="contact-hero-media"><Image src={assetPath("/images/salt-refinery/execution/fabricated-equipment.jpeg")} alt="Industrial process equipment inside the S.K. Engineering Works workshop" fill priority sizes="(max-width: 767px) 88vw, 45vw" /><figcaption><span>WORKSHOP / SAMBHAR LAKE</span><span>PROJECT DISCUSSIONS START HERE</span></figcaption></figure>
+        <figure className="contact-hero-media"><Image src={assetPath("/images/salt-refinery/complete-execution/fabricated-equipment.jpeg")} alt="Industrial process equipment inside the S.K. Engineering Works workshop" fill priority sizes="(max-width: 767px) 88vw, 45vw" /><figcaption><span>WORKSHOP / SAMBHAR LAKE</span><span>PROJECT DISCUSSIONS START HERE</span></figcaption></figure>
       </div>
     </section>
 
@@ -163,7 +163,7 @@ export default function ContactPageExperience() {
 
     <section className="contact-location contact-reveal" aria-labelledby="contact-location-title">
       <div className="contact-section-meta" data-reveal><span>FACTORY / LOCATION / 04</span><span>SAMBHAR LAKE, RAJASTHAN</span></div>
-      <div className="contact-location-grid"><div className="contact-location-copy"><h2 id="contact-location-title" data-reveal>COME SEE<br />WHERE WE BUILD.</h2><address data-reveal><strong>S.K. Engineering Works</strong>{companyContact.addressLines[0]}<br />{companyContact.addressLines[1]}</address><a data-reveal href={companyContact.mapsUrl} target="_blank" rel="noopener noreferrer">OPEN IN GOOGLE MAPS <span aria-hidden="true">↗</span></a></div><figure data-reveal><Image src={assetPath("/images/salt-refinery/execution/fabrication-blower.jpeg")} alt="S.K. Engineering Works industrial fabrication workshop in Sambhar Lake, Rajasthan" fill sizes="(max-width: 767px) 88vw, 52vw" /><figcaption>REAL WORKSHOP / NAWA ROAD</figcaption></figure></div>
+      <div className="contact-location-grid"><div className="contact-location-copy"><h2 id="contact-location-title" data-reveal>COME SEE<br />WHERE WE BUILD.</h2><address data-reveal><strong>S.K. Engineering Works</strong>{companyContact.addressLines[0]}<br />{companyContact.addressLines[1]}</address><a data-reveal href={companyContact.mapsUrl} target="_blank" rel="noopener noreferrer">OPEN IN GOOGLE MAPS <span aria-hidden="true">↗</span></a></div><figure data-reveal><Image src={assetPath("/images/salt-refinery/complete-execution/fabrication-blower.jpeg")} alt="S.K. Engineering Works industrial fabrication workshop in Sambhar Lake, Rajasthan" fill sizes="(max-width: 767px) 88vw, 52vw" /><figcaption>REAL WORKSHOP / NAWA ROAD</figcaption></figure></div>
     </section>
 
     <section className="contact-quick contact-reveal" aria-labelledby="contact-quick-title">
