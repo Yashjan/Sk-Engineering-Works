@@ -162,7 +162,8 @@
 
 .execution-media-main,
 .execution-media-secondary,
-.execution-media-detail {
+.execution-media-detail,
+.execution-media-layout-preview {
   position: absolute;
 }
 
@@ -200,6 +201,24 @@
 
 .execution-media-detail .execution-image-frame img {
   object-position: center 46%;
+}
+
+.execution-media-layout-preview {
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  width: 51%;
+  height: 24%;
+}
+
+.execution-media-layout-preview .execution-image-frame {
+  padding: clamp(8px, 1vw, 16px);
+  border: 1px solid rgb(243 242 237 / 18%);
+  background: #f8f7f2;
+}
+
+.execution-media-layout-preview .execution-image-frame img {
+  object-fit: contain;
 }
 
 .execution-mobile-story {

@@ -11,7 +11,7 @@ import "./trusted-clients-section.css";
 type Client = { name: string; logo?: string };
 
 const clients: Client[] = [
-  { name: "Goyal Salt Pvt. Ltd." },
+  { name: "Goyal Salt Pvt. Ltd.", logo: assetPath("/images/clients/goyal-logo.png") },
   { name: "Rakshak Foods Private Limited" },
   { name: "Adhinath Chemfood Private Limited" },
   { name: "Jagdamba Salt Pvt. Ltd." },

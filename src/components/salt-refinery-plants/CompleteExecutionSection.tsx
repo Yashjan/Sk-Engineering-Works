@@ -69,6 +69,11 @@ const executionImages = [
     alt: "Large stainless-steel salt processing equipment under fabrication",
     caption: "HEAVY EQUIPMENT / WORKSHOP",
   },
+  {
+    src: assetPath("/images/salt-refinery/complete-execution/SK_Plant_Elevation_Preview.webp"),
+    alt: "Two-dimensional salt refinery plant side elevation and equipment arrangement drawing",
+    caption: "PLANT SIDE ELEVATION / EQUIPMENT ARRANGEMENT",
+  },
 ] as const;
 
 function StageRow({ stage }: { stage: ExecutionStage }) {
@@ -257,6 +262,11 @@ export default function CompleteExecutionSection() {
               image={executionImages[2]}
               className="execution-media-detail"
               sizes="(max-width: 767px) 88vw, 25vw"
+            />
+            <ExecutionImage
+              image={executionImages[3]}
+              className="execution-media-layout-preview"
+              sizes="(max-width: 767px) 1px, 28vw"
             />
           </div>
         </div>

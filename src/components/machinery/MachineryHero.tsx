@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assetPath } from "@/lib/asset-path";
 import "./machinery-hero.css";
 
-const videoSource = assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4");
+const videoSource = assetPath("/videos/manufacturing/SK_Machinery_Hero_Desktop_Web.mp4");
 const videoPoster = assetPath("/images/salt-refinery/complete-execution/fabrication-blower.jpeg");
 
 export default function MachineryHero() {

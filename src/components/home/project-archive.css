@@ -1,6 +1,6 @@
 .project-archive {
   --archive-gutter: 4.5vw;
-  --archive-tile-width: clamp(500px, 62vw, 900px);
+  --archive-tile-width: clamp(500px, 62vw, 700px);
   --archive-gap: clamp(24px, 3vw, 56px);
   position: relative;
   box-sizing: border-box;

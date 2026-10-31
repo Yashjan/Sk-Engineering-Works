@@ -134,7 +134,7 @@ const catalog: readonly MachineryItem[] = [
     category: "AIR + DUST HANDLING",
     categorySlug: "air-dust-handling",
     mediaType: "image",
-    mediaSrc: "/images/salt-refinery/complete-execution/plant-structure.jpeg",
+    mediaSrc: "/images/salt-refinery/execution/plant-structure.jpeg",
     mediaAlt: "Installed S.K. Engineering Works cyclone equipment and plant structure",
     mediaFit: "contain",
     detailHref: "/machinery/cyclone",
