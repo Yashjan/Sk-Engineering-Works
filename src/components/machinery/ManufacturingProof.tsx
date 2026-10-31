@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assetPath } from "@/lib/asset-path";
 import "./manufacturing-proof.css";
 
-const workshopVideo = assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4");
+const workshopVideo = assetPath("/videos/manufacturing/SK_Built_Here_Workshop_Cinematic.mp4");
 const workshopPoster = assetPath("/images/salt-refinery/complete-execution/fabrication-blower.jpeg");
 
 export default function ManufacturingProof() {
