@@ -19,10 +19,13 @@ const clients: Client[] = [
   { name: "Pragati Salt Pvt. Ltd.", logo: assetPath("/images/clients/pragati-salt.png") },
   { name: "Bharat Salt" },
   { name: "Arihant Salt Production" },
-  { name: "JK Salt Pvt. Ltd.",logo: assetPath("/images/clients/jk-salt.png") },
+  { name: "JK Salt Pvt. Ltd.", logo: assetPath("/images/clients/jk-salt.png") },
   { name: "Divine Chemfood Pvt. Ltd." },
   { name: "Royal Salt" },
+  { name: "Baba Ramdev", logo: assetPath("/images/clients/babaRamdev.png") },
 ];
+
+const clientRowSplit = Math.ceil(clients.length / 2);
 
 function ClientMark({ client, duplicate = false }: { client: Client; duplicate?: boolean }) {
   return (
@@ -80,11 +83,11 @@ export default function TrustedClientsSection({ animate = true, standalone = fal
 
   const content = (
     <>
-      <div className="about-trust-meta"><span>INDUSTRY TRUST / {sectionNumber}</span><span>CLIENT NETWORK / 12+</span></div>
+      <div className="about-trust-meta"><span>INDUSTRY TRUST / {sectionNumber}</span><span>CLIENT NETWORK / {clients.length}+</span></div>
       <h3 id="about-trust-heading" className="about-trust-heading">TRUSTED BY<br />SALT MANUFACTURERS.</h3>
       <div className="about-marquees" aria-label="S.K. Engineering Works client network">
-        <MarqueeRow items={clients.slice(0, 6)} />
-        <MarqueeRow items={clients.slice(6)} reverse />
+        <MarqueeRow items={clients.slice(0, clientRowSplit)} />
+        <MarqueeRow items={clients.slice(clientRowSplit)} reverse />
       </div>
     </>
   );
