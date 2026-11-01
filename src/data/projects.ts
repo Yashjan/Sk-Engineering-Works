@@ -361,7 +361,7 @@ const toArchiveRecord = (project: Project): ProjectArchiveRecord => {
     ?? project.media.find((item) => item.id === "overview")
     ?? project.media[0];
   const fallbackHref = `/projects/${project.id}`;
-  const detailHref = project.detailHref ?? fallbackHref;
+  const detailHref = fallbackHref;
   const hrefParts = detailHref.split("/").filter(Boolean);
 
   if (!media) throw new Error(`Project ${project.id} requires at least one archive media item.`);

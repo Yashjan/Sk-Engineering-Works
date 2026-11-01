@@ -29,10 +29,10 @@ type ImageRecord = {
   alt: string;
 };
 
-type MediaRecord = VideoRecord | ImageRecord;
+export type ProjectMediaRecord = VideoRecord | ImageRecord;
 
-const poster = "/images/projects/jagdamba/hero/jagdamba-cover-1600.webp";
-const records: readonly MediaRecord[] = [
+const defaultPoster = "/images/projects/jagdamba/hero/jagdamba-cover-1600.webp";
+const defaultRecords: readonly ProjectMediaRecord[] = [
   {
     type: "video",
     id: "completed-refinery",
@@ -47,7 +47,7 @@ const records: readonly MediaRecord[] = [
     id: "refinery-building",
     number: "01",
     className: "project-media-record--frame",
-    src: poster,
+    src: defaultPoster,
     caption: "Refinery building at the project site.",
     alt: "Exterior of the Jagdamba Salt refinery building at the Phalodi project site",
   },
@@ -70,7 +70,21 @@ const records: readonly MediaRecord[] = [
   },
 ];
 
-export default function ProjectMediaStory() {
+type ProjectMediaStoryProps = {
+  records?: readonly ProjectMediaRecord[];
+  poster?: string;
+  projectLabel?: string;
+  summary?: string;
+  recordNumber?: string;
+};
+
+export default function ProjectMediaStory({
+  records = defaultRecords,
+  poster = defaultPoster,
+  projectLabel = "JAGDAMBA SALT / PHALODI, RAJASTHAN",
+  summary = "Real footage from the Jagdamba Salt 15 TPH refinery project in Phalodi, Rajasthan.",
+  recordNumber = "001",
+}: ProjectMediaStoryProps = {}) {
   const root = useRef<HTMLElement>(null);
   const videos = useRef(new Map<string, HTMLVideoElement>());
   const manualVideo = useRef<HTMLVideoElement | null>(null);
@@ -262,7 +276,7 @@ export default function ProjectMediaStory() {
           <span className="project-media-story-heading-line"><span>PROJECT</span></span>
           <span className="project-media-story-heading-line"><span>IN MOTION.</span></span>
         </h2>
-        <p className="project-media-story-summary">Real footage from the Jagdamba Salt 15 TPH refinery project in Phalodi, Rajasthan.</p>
+        <p className="project-media-story-summary">{summary}</p>
       </div>
 
       <div className="project-media-sequence">
@@ -278,7 +292,7 @@ export default function ProjectMediaStory() {
             >
               <div className="project-media-record-head">
                 <p>{label} / {record.number}</p>
-                <p>JAGDAMBA SALT / PHALODI, RAJASTHAN</p>
+                <p>{projectLabel}</p>
                 <span className="project-media-record-rule" aria-hidden="true" />
               </div>
 
@@ -326,7 +340,7 @@ export default function ProjectMediaStory() {
               <figcaption>
                 <span aria-hidden="true">{record.number}</span>
                 <p>{record.caption}</p>
-                <small>PROJECT / 001</small>
+                <small>PROJECT / {recordNumber}</small>
               </figcaption>
             </figure>
           );

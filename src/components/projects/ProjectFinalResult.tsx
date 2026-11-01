@@ -1,6 +1,7 @@
 "use client";
 
 import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+import Image from "@/components/media/ProgressiveImage";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -18,6 +19,10 @@ type ProjectFinalResultProps = {
   statement: string;
   mediaSrc: string;
   poster: string;
+  mediaType?: "video" | "image";
+  mediaAlt?: string;
+  recordNumber?: string;
+  captionLabel?: string;
 };
 
 export default function ProjectFinalResult({
@@ -30,6 +35,10 @@ export default function ProjectFinalResult({
   statement,
   mediaSrc,
   poster,
+  mediaType = "video",
+  mediaAlt = "Completed Jagdamba Salt refinery plant in Phalodi, Rajasthan",
+  recordNumber = "001",
+  captionLabel = "JAGDAMBA SALT / PHALODI",
 }: ProjectFinalResultProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -170,38 +179,44 @@ export default function ProjectFinalResult({
             <span className="project-final-heading-line" key={line}><span>{line}</span></span>
           ))}
         </h2>
-        <p className="project-final-marker">PROJECT RECORD / 001<br />FINAL STATE</p>
+        <p className="project-final-marker">PROJECT RECORD / {recordNumber}<br />FINAL STATE</p>
       </header>
 
       <figure className="project-final-figure">
         <div className="project-final-media">
-          <ProgressiveVideo
-            ref={videoRef}
-            data-src={assetPath(mediaSrc)}
-            poster={assetPath(poster)}
-            preload="metadata"
-            muted
-            playsInline
-            disablePictureInPicture
-            aria-label="Completed Jagdamba Salt refinery plant in Phalodi, Rajasthan"
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
-            onEnded={() => setIsPlaying(false)}
-          />
-          <button
-            type="button"
-            className="project-final-control"
-            aria-label={`${isPlaying ? "Pause" : "Play"} completed plant footage`}
-            onClick={toggleVideo}
-          >
-            <span aria-hidden="true">{isPlaying ? "Ⅱ" : "▶"}</span>
-            {isPlaying ? "PAUSE" : "PLAY"}
-          </button>
+          {mediaType === "video" ? (
+            <>
+              <ProgressiveVideo
+                ref={videoRef}
+                data-src={assetPath(mediaSrc)}
+                poster={assetPath(poster)}
+                preload="metadata"
+                muted
+                playsInline
+                disablePictureInPicture
+                aria-label={mediaAlt}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
+              />
+              <button
+                type="button"
+                className="project-final-control"
+                aria-label={`${isPlaying ? "Pause" : "Play"} completed project footage`}
+                onClick={toggleVideo}
+              >
+                <span aria-hidden="true">{isPlaying ? "Ⅱ" : "▶"}</span>
+                {isPlaying ? "PAUSE" : "PLAY"}
+              </button>
+            </>
+          ) : (
+            <Image src={assetPath(mediaSrc)} alt={mediaAlt} fill sizes="(max-width: 767px) 100vw, 88vw" />
+          )}
         </div>
         <figcaption className="project-final-caption">
           <span>FIELD RECORD / COMPLETE</span>
           <p>{statement}</p>
-          <small>JAGDAMBA SALT / PHALODI</small>
+          <small>{captionLabel}</small>
         </figcaption>
       </figure>
 

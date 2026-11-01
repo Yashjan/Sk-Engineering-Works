@@ -44,6 +44,7 @@ export default function ProjectsFieldArchive() {
   const rail = useRef<HTMLOListElement>(null);
   const pointerStart = useRef<number | null>(null);
   const switching = useRef(false);
+  const centerRailOnChange = useRef(true);
   const [filter, setFilter] = useState<FilterId>("all");
   const [activeId, setActiveId] = useState(projectArchive[0].id);
 
@@ -154,6 +155,11 @@ export default function ProjectsFieldArchive() {
     const active = list?.querySelector<HTMLElement>(`[data-project-id="${activeId}"]`);
     if (!list || !active) return;
 
+    if (!centerRailOnChange.current) {
+      centerRailOnChange.current = true;
+      return;
+    }
+
     const target = active.offsetLeft - (list.clientWidth - active.offsetWidth) / 2;
     list.scrollTo({
       left: Math.max(0, target),
@@ -161,8 +167,9 @@ export default function ProjectsFieldArchive() {
     });
   }, [activeId, filter]);
 
-  const activate = (id: string) => {
+  const activate = (id: string, shouldCenterRail = true) => {
     if (id === activeId || switching.current) return;
+    centerRailOnChange.current = shouldCenterRail;
     const container = stage.current;
     if (!container || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setActiveId(id);
@@ -300,7 +307,7 @@ export default function ProjectsFieldArchive() {
                     type="button"
                     data-project-id={project.id}
                     aria-current={project.id === activeProject.id ? "true" : undefined}
-                    onPointerEnter={(event) => { if (event.pointerType === "mouse") activate(project.id); }}
+                    onPointerEnter={(event) => { if (event.pointerType === "mouse") activate(project.id, false); }}
                     onFocus={() => activate(project.id)}
                     onClick={() => activate(project.id)}
                   >

@@ -92,7 +92,8 @@
   transform-origin: center;
 }
 
-.project-final-media video {
+.project-final-media video,
+.project-final-media img {
   display: block;
   width: 100%;
   height: 100%;

@@ -362,7 +362,7 @@ export default function ProjectPlantSystem({ sectionNumber, heading, intro, syst
           <div className="project-system-canvas-head">
             <p>SYSTEM / 001</p>
             <p>{system.capacity} PROCESS SEQUENCE</p>
-            <p>11 PROCESS STAGES + 03 AIR STAGES</p>
+            <p>{String(system.materialFlow.length).padStart(2, "0")} PROCESS STAGES{system.airHandling.stages.length ? ` + ${String(system.airHandling.stages.length).padStart(2, "0")} AIR STAGES` : ""}</p>
           </div>
 
           <div className="project-system-desktop">
@@ -390,7 +390,7 @@ export default function ProjectPlantSystem({ sectionNumber, heading, intro, syst
 
           <div className="project-system-material-flow" style={materialStyle}>
             <span className="project-system-material-line" aria-hidden="true"><span /></span>
-            <ol className="project-system-rail" aria-label="Jagdamba Salt material process flow">
+            <ol className="project-system-rail" aria-label="Project material process flow">
               {system.materialFlow.map((stage) => {
                 const selected = activeStage.stream === "material" && stage.id === activeStage.id;
                 return (
@@ -429,7 +429,7 @@ export default function ProjectPlantSystem({ sectionNumber, heading, intro, syst
           )}
           </div>
 
-          <div className="project-system-air" style={airStyle}>
+          {system.airHandling.stages.length > 0 ? <div className="project-system-air" style={airStyle}>
             <div className="project-system-air-intro">
               <p>AIR HANDLING</p>
               <h3>CONNECTED SUPPORT FLOW</h3>
@@ -442,7 +442,7 @@ export default function ProjectPlantSystem({ sectionNumber, heading, intro, syst
             <span className="project-system-air-arrow" aria-hidden="true">→</span>
             <div className="project-system-air-flow">
               <span className="project-system-air-line" aria-hidden="true"><span /></span>
-              <ol aria-label="Jagdamba Salt air and dust handling flow">
+              <ol aria-label="Project air and dust handling flow">
                 {system.airHandling.stages.map((stage) => {
                   const selected = activeStage.stream === "air" && stage.id === activeStage.id;
                   return (
@@ -461,21 +461,21 @@ export default function ProjectPlantSystem({ sectionNumber, heading, intro, syst
                 })}
               </ol>
             </div>
-          </div>
+          </div> : null}
           </div>
 
           <div className="project-system-mobile">
             <MobileStageSelector
               stages={system.materialFlow}
               label="MAIN PROCESS"
-              description="MATERIAL FLOW / 01—11"
+              description={system.materialFlow.length === 11 ? "MATERIAL FLOW / 01—11" : `MATERIAL FLOW / ${String(system.materialFlow.length).padStart(2, "0")} STAGES`}
             />
-            <MobileStageSelector
+            {system.airHandling.stages.length > 0 ? <MobileStageSelector
               stages={system.airHandling.stages}
               label="AIR HANDLING"
-              description="SUPPORT SYSTEM / 12—14"
-              numberOffset={11}
-            />
+              description={system.materialFlow.length === 11 && system.airHandling.stages.length === 3 ? "SUPPORT SYSTEM / 12—14" : "SUPPORT SYSTEM"}
+              numberOffset={system.materialFlow.length}
+            /> : null}
           </div>
 
           {layout && (

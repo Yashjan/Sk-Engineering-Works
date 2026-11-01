@@ -8,16 +8,40 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assetPath } from "@/lib/asset-path";
 
-const poster = "/images/projects/jagdamba/hero/jagdamba-cover-1600.webp";
-const film = "/images/projects/jagdamba/hero/plant.mp4";
-const metadata = [
+const defaultPoster = "/images/projects/jagdamba/hero/jagdamba-cover-1600.webp";
+const defaultFilm = "/images/projects/jagdamba/hero/plant.mp4";
+const defaultMetadata = [
   ["CLIENT", "JAGDAMBA SALT PVT. LTD."],
   ["LOCATION", "PHALODI, RAJASTHAN"],
   ["CAPACITY", "15 TPH"],
   ["PROJECT", "SALT REFINERY"],
 ] as const;
 
-export default function JagdambaProjectHero() {
+type ProjectHeroProps = {
+  poster?: string;
+  mobilePoster?: string;
+  film?: string | null;
+  imageAlt?: string;
+  recordNumber?: string;
+  client?: string;
+  titleFirst?: string;
+  titleSecond?: string;
+  location?: string;
+  metadata?: readonly (readonly [string, string])[];
+};
+
+export default function JagdambaProjectHero({
+  poster = defaultPoster,
+  mobilePoster = "/images/projects/jagdamba/hero/jagdamba-cover-960.webp",
+  film = defaultFilm,
+  imageAlt = "Jagdamba Salt refinery in Phalodi, Rajasthan",
+  recordNumber = "001",
+  client = "JAGDAMBA SALT PVT. LTD.",
+  titleFirst = "15 TPH",
+  titleSecond = "SALT REFINERY.",
+  location = "PHALODI, RAJASTHAN",
+  metadata = defaultMetadata,
+}: ProjectHeroProps = {}) {
   const root = useRef<HTMLElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const heroVisible = useRef(false);
@@ -35,7 +59,8 @@ export default function JagdambaProjectHero() {
   const playVideo = useCallback(() => {
     const player = video.current;
     if (
-      !player
+      !film
+      || !player
       || !playbackAllowed.current
       || !heroVisible.current
       || shrinkComplete.current
@@ -50,7 +75,7 @@ export default function JagdambaProjectHero() {
     void player.play()
       .catch(() => { /* Poster stays visible when autoplay is blocked. */ })
       .finally(() => { playPending.current = false; });
-  }, []);
+  }, [film]);
 
   useEffect(() => {
     const section = root.current;
@@ -188,22 +213,22 @@ export default function JagdambaProjectHero() {
         <div className="jagdamba-project-media-frame">
           <div className="jagdamba-project-media">
             <picture>
-              <source media="(max-width: 767px)" srcSet={assetPath("/images/projects/jagdamba/hero/jagdamba-cover-960.webp")} />
-              <Image src={assetPath(poster)} alt="Jagdamba Salt refinery in Phalodi, Rajasthan" fill loading="eager" fetchPriority="high" sizes="100vw" className="jagdamba-project-image" />
+              <source media="(max-width: 767px)" srcSet={assetPath(mobilePoster)} />
+              <Image src={assetPath(poster)} alt={imageAlt} fill loading="eager" fetchPriority="high" sizes="100vw" className="jagdamba-project-image" />
             </picture>
-            <ProgressiveVideo ref={video} className="jagdamba-project-video" autoPlay muted playsInline loop preload="metadata" poster={assetPath(poster)} width={512} height={910} aria-hidden="true" tabIndex={-1} disablePictureInPicture />
+            {film ? <ProgressiveVideo ref={video} className="jagdamba-project-video" autoPlay muted playsInline loop preload="metadata" poster={assetPath(poster)} width={512} height={910} aria-hidden="true" tabIndex={-1} disablePictureInPicture /> : null}
             <div className="jagdamba-project-shade" aria-hidden="true" />
           </div>
         </div>
         <header className="jagdamba-project-heading">
-          <p className="jagdamba-project-record">FIELD RECORD <span>/</span> 001</p>
-          <p className="jagdamba-project-client">JAGDAMBA SALT PVT. LTD.</p>
+          <p className="jagdamba-project-record">FIELD RECORD <span>/</span> {recordNumber}</p>
+          <p className="jagdamba-project-client">{client}</p>
           <h1 id="jagdamba-project-title">
-            <span className="jagdamba-project-title-first">15 TPH</span>
-            <span className="jagdamba-project-title-secondary">SALT REFINERY.</span>
+            <span className="jagdamba-project-title-first">{titleFirst}</span>
+            <span className="jagdamba-project-title-secondary">{titleSecond}</span>
           </h1>
         </header>
-        <p className="jagdamba-project-location">PHALODI, RAJASTHAN</p>
+        <p className="jagdamba-project-location">{location}</p>
         <dl className="jagdamba-project-metadata">
           {metadata.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
         </dl>
