@@ -22,9 +22,9 @@
 .proof-detail-frame img { object-position: center 65%; }
 .proof-statement { grid-column: 6 / -1; grid-row: 3; align-self: start; margin: 0; font-size: clamp(42px, 4.8vw, 88px); font-weight: 500; line-height: .97; letter-spacing: -.05em; }
 .proof-statement-line:first-child { color: rgb(243 242 237 / 52%); }
-.proof-equipment { grid-column: 6 / -1; grid-row: 4; align-self: start; }
-.proof-equipment-frame { aspect-ratio: 4 / 3; }
-.proof-equipment-frame img { object-position: center 60%; }
+.proof-equipment { grid-column: 7 / -1; grid-row: 4; align-self: start; }
+.proof-equipment-frame { aspect-ratio: 3 / 4; }
+.proof-equipment-frame img { object-position: center; }
 .proof-built { grid-column: 1 / 6; grid-row: 4; align-self: start; margin-top: clamp(70px, 8vw, 150px); }
 .proof-built-frame { aspect-ratio: 4 / 5; }
 .proof-footer { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-top: clamp(64px, 6vw, 110px); padding-top: clamp(40px, 4vw, 72px); border-top: 1px solid rgb(243 242 237 / 14%); }

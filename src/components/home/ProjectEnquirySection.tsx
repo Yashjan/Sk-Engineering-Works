@@ -57,7 +57,7 @@ export default function ProjectEnquirySection({ appearance = "dark", sectionNumb
 
   return (
     <section ref={sectionRef} id="contact" className={`project-enquiry${appearance === "light" ? " project-enquiry-light" : ""}${showNavigation ? " enquiry-with-navigation" : ""}`} aria-labelledby="project-enquiry-heading">
-      <div className="enquiry-background" aria-hidden="true">LET&apos;S BUILD.</div>
+      <div className="enquiry-background" aria-hidden="true">SK WORKS.</div>
       <div className="enquiry-shell">
         <div className="enquiry-meta">
           <span>PROJECT ENQUIRY / {sectionNumber}</span>

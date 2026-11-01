@@ -132,23 +132,23 @@ export default function ManufacturingProof() {
 
         <figure className="proof-media proof-detail">
           <div className="proof-frame proof-detail-frame">
-            <Image src={assetPath("/images/salt-refinery/complete-execution/fabrication-blower.jpeg")} alt="S.K. Engineering Works fabricated blower inside the workshop" fill sizes="(max-width: 767px) 88vw, 30vw" />
+            <Image src={assetPath("/images/salt-refinery/complete-execution/steel-fabrication.webp")} alt="Steel cutting and fabrication work inside the S.K. Engineering Works workshop" fill sizes="(max-width: 767px) 88vw, 30vw" />
           </div>
-          <figcaption><span>02 / BLOWER FABRICATION</span></figcaption>
+          <figcaption><span>02 / Steel Fabrication</span></figcaption>
         </figure>
 
         <p className="proof-statement"><span className="proof-statement-line"><span>FROM STEEL</span></span><span className="proof-statement-line"><span>TO WORKING</span></span><span className="proof-statement-line"><span>MACHINE.</span></span></p>
 
         <figure className="proof-media proof-equipment">
           <div className="proof-frame proof-equipment-frame">
-            <Image src={assetPath("/images/salt-refinery/complete-execution/fabricated-equipment.jpeg")} alt="Large fabricated process equipment on the S.K. Engineering Works workshop floor" fill sizes="(max-width: 767px) 88vw, 52vw" />
+            <Image src={assetPath("/images/salt-refinery/complete-execution/Rusted Steel Tower in Fabrication Yard.png")} alt="Large cylindrical process equipment under fabrication in the S.K. Engineering Works yard" fill sizes="(max-width: 767px) 88vw, 43vw" />
           </div>
-          <figcaption><span>03 / EQUIPMENT FABRICATION</span><span>WORKSHOP FLOOR</span></figcaption>
+          <figcaption><span>03 / EQUIPMENT FABRICATION</span><span>FABRICATION YARD</span></figcaption>
         </figure>
 
         <figure className="proof-media proof-built">
           <div className="proof-frame proof-built-frame">
-            <Image src={assetPath("/images/salt-refinery/complete-execution/plant-structure.jpeg")} alt="Installed S.K. Engineering Works process equipment within the salt refinery plant structure" fill sizes="(max-width: 767px) 88vw, 36vw" />
+            <Image src={assetPath("/images/salt-refinery/complete-execution/Industrial Processing Plant Interior.png")} alt="Installed S.K. Engineering Works process equipment within the salt refinery plant structure" fill sizes="(max-width: 767px) 88vw, 36vw" />
           </div>
           <figcaption><span>04 / INSTALLED EQUIPMENT</span></figcaption>
         </figure>
