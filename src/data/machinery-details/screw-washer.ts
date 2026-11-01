@@ -4,7 +4,7 @@ export const screwWasher: MachineryConfig = {
   tagline: "Continuous washing and material transfer for salt processing lines.",
   description: "A screw washer moves salt through the washing stage and connects washing with the next step in the refinery process.",
   seo: { title: "Screw Washer for Salt Refinery & Industrial Processing", description: "Screw Washer by S.K. Engineering Works for continuous salt washing and material transfer, configured around your refinery process and plant layout." },
-  hero: { type: "image", src: "/images/process/Screw washer.png", alt: "S.K. Engineering Works screw washer for salt processing" },
+  hero: { type: "image", src: "/images/machinery/catalog/screw-washer.png", alt: "S.K. Engineering Works screw washer for salt processing" },
   identity: { title: "WASHING. MOVEMENT. ONE CONTINUOUS STAGE.", copy: "Material enters the washer, passes through the washing stage and moves forward through the screw mechanism. The machine is arranged around its upstream feed and downstream dewatering equipment." },
   components: [
     { title: "WASHER BODY", description: "The housing for the washing and material-transfer stage." },

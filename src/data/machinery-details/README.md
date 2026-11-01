@@ -6,10 +6,11 @@ configuration in `index.ts`; keep custom cinematics behind the experience adapte
 ## Machinery images
 
 Before configuring a machine, inspect existing assets under `public/images/`,
-particularly `public/images/process/`. Prefer the existing matching PNG. Use its
-exact path and filename, including spaces/capitalization. Existing project-owned
-images in other formats may be retained. Do not generate images, convert an
-existing image unnecessarily, use stock images, or substitute another machine.
+particularly `public/images/machinery/catalog/`. Prefer the existing matching
+asset and keep machine-specific proof under its owning machinery folder. Existing
+project-owned images in other formats may be retained. Do not generate images,
+convert an existing image unnecessarily, use stock images, or substitute another
+machine.
 
 If no matching image exists, omit `hero`. The shared media component renders
 “MACHINE IMAGE / COMING SOON” for absent or missing files, and also handles image

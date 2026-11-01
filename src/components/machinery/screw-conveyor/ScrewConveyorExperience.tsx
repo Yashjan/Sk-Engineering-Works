@@ -786,7 +786,7 @@ export default function ScrewConveyorExperience() {
         </div>
 
         <div className={`screw-conveyor-model-loader${modelReady ? " is-ready" : ""}`} aria-hidden={modelReady}>
-          <Image src={assetPath("/images/sk-logo.png")} alt="" width={150} height={60} sizes="(max-width: 468px) 32vw, 150px" />
+          <Image src={assetPath("/images/common/brand/sk-logo.png")} alt="" width={150} height={60} sizes="(max-width: 468px) 32vw, 150px" />
           <strong>3D MODEL IS LOADING</strong>
           <span>Please wait…</span>
         </div>

@@ -25,12 +25,12 @@ export const metadata: Metadata = createPageMetadata({
   title: "Jagdamba Salt 15 TPH Refinery",
   description: "Jagdamba Salt Pvt. Ltd. 15 TPH salt refinery project in Phalodi, Rajasthan.",
   path: "/projects/jagdamba-salt-15tph",
-  image: "/images/projects/jagdamba/hero/jagdamba-cover-1600.webp",
+  image: "/images/projects/jagdamba/hero/cover-desktop.webp",
   index: false,
 });
 
 export default function JagdambaProjectPage() {
-  const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
+  const hasLogo = existsSync(path.join(process.cwd(), "public/images/common/brand/sk-logo.png"));
   const closingSectionStart = 10;
   const trustedClientsSection = String(closingSectionStart).padStart(2, "0");
   const projectEnquirySection = String(closingSectionStart + 1).padStart(2, "0");
@@ -84,8 +84,8 @@ export default function JagdambaProjectPage() {
           projectType="SALT REFINERY"
           location="PHALODI, RAJASTHAN"
           statement="15 TPH salt refinery project for Jagdamba Salt Pvt. Ltd., Phalodi, Rajasthan."
-          mediaSrc="/images/projects/jagdamba/03_jagdamba_completed_plant.mp4"
-          poster="/images/projects/jagdamba/cover Image.png"
+          mediaSrc="/images/projects/jagdamba/completed-plant.mp4"
+          poster="/images/projects/jagdamba/cover-image.png"
         />
         <ProjectEngineeringNotes
           sectionNumber="09"

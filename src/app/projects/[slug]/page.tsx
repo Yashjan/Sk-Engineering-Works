@@ -149,7 +149,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   const summary = isPlant
     ? `${capacity} salt refinery project for ${recordName}${record.location ? ` in ${record.location}` : ""}.`
     : `A verified fabrication and equipment media record for ${record.name} by S.K. Engineering Works.`;
-  const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
+  const hasLogo = existsSync(path.join(process.cwd(), "public/images/common/brand/sk-logo.png"));
 
   return (
     <>

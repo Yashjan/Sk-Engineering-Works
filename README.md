@@ -15,8 +15,9 @@ Set `NEXT_PUBLIC_SITE_URL` to the full public site root before production builds
 
 ## Assets
 
-- Place the real company logo at `public/images/sk-logo.png`.
-- The Hero background uses `public/images/Golden Hour Salt Processing Plant.png`.
+- Place the real company logo at `public/images/common/brand/sk-logo.png`.
+- The Hero backgrounds use `public/images/home/hero/salt-processing-plant.webp`
+  and `public/images/home/hero/salt-processing-plant-mobile.webp`.
 
 The page detects these files on the server. Until they exist, it displays a neutral logo box and an abstract industrial CSS background. Restart the development server or rebuild after adding assets. No logo is generated or approximated.
 
@@ -26,9 +27,9 @@ The Hero media layer in `src/components/home/Hero.tsx` can later hold a factory 
 
 Place the transparent machinery renders at:
 
-- `public/images/process/hopper.png`
-- `public/images/process/belt-conveyor.png`
-- `public/images/process/wet-mill.png`
+- `public/images/machinery/catalog/hopper.png`
+- `public/images/machinery/catalog/belt-conveyor.png`
+- `public/images/machinery/catalog/wet-mill.png`
 
 Missing renders use abstract placement guides, not fake machinery. Restart development or rebuild after adding assets. Add future stages to `src/data/process.ts`; the rendering, stage count, timeline stops, and scroll distance derive from the array.
 

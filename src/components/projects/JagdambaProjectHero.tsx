@@ -8,7 +8,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assetPath } from "@/lib/asset-path";
 
-const defaultPoster = "/images/projects/jagdamba/hero/jagdamba-cover-1600.webp";
+const defaultPoster = "/images/projects/jagdamba/hero/cover-desktop.webp";
 const defaultFilm = "/images/projects/jagdamba/hero/plant.mp4";
 const defaultMetadata = [
   ["CLIENT", "JAGDAMBA SALT PVT. LTD."],
@@ -32,7 +32,7 @@ type ProjectHeroProps = {
 
 export default function JagdambaProjectHero({
   poster = defaultPoster,
-  mobilePoster = "/images/projects/jagdamba/hero/jagdamba-cover-960.webp",
+  mobilePoster = "/images/projects/jagdamba/hero/cover-mobile.webp",
   film = defaultFilm,
   imageAlt = "Jagdamba Salt refinery in Phalodi, Rajasthan",
   recordNumber = "001",

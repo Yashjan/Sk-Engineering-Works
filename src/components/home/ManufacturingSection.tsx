@@ -10,7 +10,7 @@ import { assetPath } from "@/lib/asset-path";
 import "./manufacturing-section.css";
 
 const videoSource = assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4");
-const videoPoster = assetPath("/images/projects/jagdamba/cover Image.png");
+const videoPoster = assetPath("/images/projects/jagdamba/cover-image.png");
 
 const capabilities = [
   { number: "01", title: "FABRICATION", detail: "Steel structures & machine bodies" },

@@ -5,8 +5,8 @@ import { createPortal } from "react-dom";
 import Image from "@/components/media/ProgressiveImage";
 import { assetPath } from "@/lib/asset-path";
 
-const previewSrc = assetPath("/images/salt-refinery/complete-execution/SK_Plant_Elevation_Preview.webp");
-const detailSrc = assetPath("/images/salt-refinery/complete-execution/SK_Plant_Elevation_Detail.png");
+const previewSrc = assetPath("/images/salt-refinery/plant-layout/plant-elevation-preview.webp");
+const detailSrc = assetPath("/images/salt-refinery/plant-layout/plant-elevation-detail.png");
 const drawingWidth = 3580;
 const drawingHeight = 2080;
 

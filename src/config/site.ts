@@ -25,8 +25,8 @@ export const siteConfig = {
     postalCode: "303604",
     addressCountry: "IN",
   },
-  logo: "/images/sk-logo.png",
-  socialImage: "/images/projects/jagdamba/cover Image.png",
+  logo: "/images/common/brand/sk-logo.png",
+  socialImage: "/images/projects/jagdamba/cover-image.png",
 } as const;
 
 export function absoluteUrl(pathname = "/") {

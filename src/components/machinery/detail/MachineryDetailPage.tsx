@@ -39,5 +39,5 @@ export default async function MachineryDetailPage({ machine }: { machine: Machin
       <SiteFooter />
     </>;
   }
-  return <><a className="skip-link" href="#main">Skip to content</a><Navbar hasLogo={existsSync(path.join(process.cwd(), "public/images/sk-logo.png"))} /><main id="main" className={adapter?.layout === "full-page" ? "screw-machine-detail" : "machinery-detail-page"}>{content}</main></>;
+  return <><a className="skip-link" href="#main">Skip to content</a><Navbar hasLogo={existsSync(path.join(process.cwd(), "public/images/common/brand/sk-logo.png"))} /><main id="main" className={adapter?.layout === "full-page" ? "screw-machine-detail" : "machinery-detail-page"}>{content}</main></>;
 }

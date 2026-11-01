@@ -13,6 +13,6 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function ContactPage() {
-  const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
+  const hasLogo = existsSync(path.join(process.cwd(), "public/images/common/brand/sk-logo.png"));
   return <><BreadcrumbJsonLd currentName="Contact" currentPath="/contact" /><a className="skip-link" href="#main">Skip to content</a><Navbar hasLogo={hasLogo} /><main id="main"><ContactPageExperience /></main></>;
 }

@@ -51,7 +51,7 @@ export default function Navbar({ hasLogo }: { hasLogo: boolean }) {
   return <header className={`navbar ${currentPath === "/" ? "" : "is-inner-page"} ${scrolled ? "is-scrolled" : ""} ${open ? "menu-open" : ""}`} data-navbar>
     <nav className="nav-inner" aria-label="Main navigation">
       <Link href="/" className="logo-link" aria-label="S.K. Engineering Works home">
-        {hasLogo ? <Image src={assetPath("/images/sk-logo.png")} alt="S.K. Engineering Works" width={160} height={64} className="logo" priority /> : <span className="logo-placeholder" aria-hidden="true" />}
+        {hasLogo ? <Image src={assetPath("/images/common/brand/sk-logo.png")} alt="S.K. Engineering Works" width={160} height={64} className="logo" priority /> : <span className="logo-placeholder" aria-hidden="true" />}
       </Link>
       <div className="desktop-links">{links.map((label, i) => <Link key={label} href={destinations[i]} aria-current={(currentPath === "/" && i === 0) || (currentPath === "/salt-refinery-plants" && i === 1) || (currentPath === "/machinery" && i === 2) || (currentPath === "/projects" && i === 3) || (currentPath === "/engineering" && i === 4) || (currentPath === "/about" && i === 5) || (currentPath === "/contact" && i === 6) ? "page" : undefined}>{label}</Link>)}</div>
       <Link className="nav-quote" href={quoteDestination}>Get a Quote <span aria-hidden="true">→</span></Link>

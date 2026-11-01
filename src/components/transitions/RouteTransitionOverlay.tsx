@@ -90,7 +90,7 @@ const RouteTransitionOverlay = forwardRef<RouteTransitionOverlayHandle>(function
       <div className="route-transition-brand">
         <div ref={brand} className="route-transition-identity">
           <Image
-            src={assetPath("/images/sk-logo.png")}
+            src={assetPath("/images/common/brand/sk-logo.png")}
             alt=""
             width={160}
             height={64}

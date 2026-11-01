@@ -37,8 +37,8 @@ export default function Hero({ hasImage }: { hasImage: boolean }) {
     <div className={`hero-media ${hasImage ? "has-image" : ""}`} aria-hidden="true">
       {hasImage ? (
         <picture className="hero-picture">
-          <source media="(max-width: 767px)" srcSet={assetPath("/images/hero/salt-processing-plant-mobile.webp")} type="image/webp" />
-          <Image src={assetPath("/images/hero/salt-processing-plant.webp")} alt="" fill sizes="100vw" fetchPriority="high" className="hero-image" />
+          <source media="(max-width: 767px)" srcSet={assetPath("/images/home/hero/salt-processing-plant-mobile.webp")} type="image/webp" />
+          <Image src={assetPath("/images/home/hero/salt-processing-plant.webp")} alt="" fill sizes="100vw" fetchPriority="high" className="hero-image" />
         </picture>
       ) : <div className="industrial-fallback"><div className="structure structure-one" /><div className="structure structure-two" /><div className="structure structure-three" /><div className="structure-crossbeam" /><div className="technical-grid" /></div>}
     </div>

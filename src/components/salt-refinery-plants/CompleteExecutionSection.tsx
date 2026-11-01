@@ -55,22 +55,22 @@ const executionStages: ExecutionStage[] = [
 
 const executionImages = [
   {
-    src: assetPath("/images/salt-refinery/complete-execution/plant-structure.jpeg"),
+    src: assetPath("/images/common/field-media/plant-structure.jpeg"),
     alt: "Salt refinery machinery integrated into a steel plant structure",
     caption: "PLANT STRUCTURE / SITE INTEGRATION",
   },
   {
-    src: assetPath("/images/salt-refinery/complete-execution/fabrication-blower.jpeg"),
+    src: assetPath("/images/common/field-media/fabrication-blower.jpeg"),
     alt: "Industrial blower fabricated inside the S.K. Engineering Works workshop",
     caption: "PROCESS EQUIPMENT / FABRICATION",
   },
   {
-    src: assetPath("/images/salt-refinery/complete-execution/fabricated-equipment.jpeg"),
+    src: assetPath("/images/common/field-media/fabricated-equipment.jpeg"),
     alt: "Large stainless-steel salt processing equipment under fabrication",
     caption: "HEAVY EQUIPMENT / WORKSHOP",
   },
   {
-    src: assetPath("/images/salt-refinery/complete-execution/SK_Plant_Elevation_Preview.webp"),
+    src: assetPath("/images/salt-refinery/plant-layout/plant-elevation-preview.webp"),
     alt: "Two-dimensional salt refinery plant side elevation and equipment arrangement drawing",
     caption: "PLANT SIDE ELEVATION / EQUIPMENT ARRANGEMENT",
   },

@@ -31,14 +31,14 @@ type ImageRecord = {
 
 export type ProjectMediaRecord = VideoRecord | ImageRecord;
 
-const defaultPoster = "/images/projects/jagdamba/hero/jagdamba-cover-1600.webp";
+const defaultPoster = "/images/projects/jagdamba/hero/cover-desktop.webp";
 const defaultRecords: readonly ProjectMediaRecord[] = [
   {
     type: "video",
     id: "completed-refinery",
     number: "01",
     className: "project-media-record--primary",
-    src: "/images/projects/jagdamba/03_jagdamba_completed_plant.mp4",
+    src: "/images/projects/jagdamba/completed-plant.mp4",
     caption: "Installed process equipment inside the completed refinery.",
     major: true,
   },
@@ -56,7 +56,7 @@ const defaultRecords: readonly ProjectMediaRecord[] = [
     id: "workshop-fabrication",
     number: "02",
     className: "project-media-record--secondary",
-    src: "/images/projects/jagdamba/01_jagdamba_fabrication.mp4",
+    src: "/images/projects/jagdamba/fabrication.mp4",
     caption: "Fabricated equipment and workshop activity.",
   },
   {
@@ -64,7 +64,7 @@ const defaultRecords: readonly ProjectMediaRecord[] = [
     id: "site-installation",
     number: "03",
     className: "project-media-record--final",
-    src: "/images/projects/jagdamba/02_jagdamba_site_installation.mp4",
+    src: "/images/projects/jagdamba/site-installation.mp4",
     caption: "Equipment, structural frame and installation activity at the project site.",
     major: true,
   },

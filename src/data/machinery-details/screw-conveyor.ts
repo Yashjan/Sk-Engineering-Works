@@ -3,7 +3,7 @@ export const screwConveyor: MachineryConfig = {
   slug: "screw-conveyor", name: "Screw Conveyor", has3D: true, interactiveExperience: "screw-conveyor",
   tagline: "Continuous material transfer", description: "Engineered for controlled material movement across industrial process systems.",
   seo: { title: "Screw Conveyor", description: "Industrial screw conveyor for controlled material transfer, manufactured by S.K. Engineering Works." },
-  hero: { type: "image", src: "/images/process/Screw conveyor.png", alt: "S.K. Engineering Works screw conveyor" },
+  hero: { type: "image", src: "/images/machinery/catalog/screw-conveyor.png", alt: "S.K. Engineering Works screw conveyor" },
   identity: { title: "CONTINUOUS MATERIAL TRANSFER", copy: "Engineered for controlled material movement across industrial process systems." },
   components: [], howItWorks: [], customization: [], realMedia: [],
   process: { stageId: "screw-conveyor", description: "A screw conveyor connects material transfer to the wider salt refinery process.", sectionNumber: "10" },

@@ -24,7 +24,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function MachineryPage() {
-  const hasLogo = existsSync(path.join(process.cwd(), "public/images/sk-logo.png"));
+  const hasLogo = existsSync(path.join(process.cwd(), "public/images/common/brand/sk-logo.png"));
 
   return (
     <>

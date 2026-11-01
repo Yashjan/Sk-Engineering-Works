@@ -11,18 +11,18 @@ import "./trusted-clients-section.css";
 type Client = { name: string; logo?: string };
 
 const clients: Client[] = [
-  { name: "Goyal Salt Pvt. Ltd.", logo: assetPath("/images/clients/goyal-logo.png") },
+  { name: "Goyal Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/goyal-salt.png") },
   { name: "Rakshak Foods Private Limited" },
   { name: "Adhinath Chemfood Private Limited" },
   { name: "Jagdamba Salt Pvt. Ltd." },
-  { name: "Pankaj Salt Pvt. Ltd.", logo: assetPath("/images/clients/pankaj-salt.png") },
-  { name: "Pragati Salt Pvt. Ltd.", logo: assetPath("/images/clients/pragati-salt.png") },
+  { name: "Pankaj Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/pankaj-salt.png") },
+  { name: "Pragati Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/pragati-salt.png") },
   { name: "Bharat Salt" },
   { name: "Arihant Salt Production" },
-  { name: "JK Salt Pvt. Ltd.", logo: assetPath("/images/clients/jk-salt.png") },
+  { name: "JK Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/jk-salt.png") },
   { name: "Divine Chemfood Pvt. Ltd." },
   { name: "Royal Salt" },
-  { name: "Baba Ramdev", logo: assetPath("/images/clients/babaRamdev.png") },
+  { name: "Baba Ramdev", logo: assetPath("/images/common/clients/baba-ramdev.png") },
 ];
 
 const clientRowSplit = Math.ceil(clients.length / 2);
