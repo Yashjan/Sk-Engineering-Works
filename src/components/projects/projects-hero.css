@@ -6,20 +6,20 @@
 .projects-hero-heading { position: relative; z-index: 6; width: 58%; margin: 0; color: #f3f2ed; font-size: clamp(72px, 8.5vw, 138px); font-weight: 500; line-height: .89; letter-spacing: -.065em; pointer-events: none; }
 .projects-hero-heading-line { display: block; overflow: hidden; padding: .025em .035em .055em 0; margin: -.025em 0 -.035em; }
 .projects-hero-heading-line > span { display: block; }
-.projects-hero-filmstrip { position: absolute; inset: -2% 0 0 59%; z-index: 3; }
+.projects-hero-filmstrip { position: absolute; inset: -3% 0 0 57%; z-index: 3; }
 .projects-hero-evidence { position: absolute; margin: 0; }
-.projects-hero-media-visual { position: relative; width: 100%; height: 100%; overflow: hidden; background: #171a1b; clip-path: inset(0); }
-.projects-hero-media-visual img, .projects-hero-media-visual video { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.76) contrast(1.04); }
+.projects-hero-media-visual { position: relative; width: 100%; height: 100%; overflow: hidden; border: 1px solid rgb(243 242 237 / 10%); background: #171a1b; box-shadow: 0 18px 46px rgb(0 0 0 / 24%); clip-path: inset(0); }
+.projects-hero-media-visual img, .projects-hero-media-visual video { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.78) contrast(1.04); }
 .projects-hero-media-meta { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-top: 9px; color: rgb(243 242 237 / 52%); font-size: 11px; font-style: normal; line-height: 1.35; letter-spacing: .13em; }
 .projects-hero-media-meta strong { color: rgb(243 242 237 / 78%); font-size: inherit; font-weight: 500; text-align: right; }
-.projects-hero-evidence-primary { top: 0; right: 0; width: 62%; height: 37%; z-index: 4; }
-.projects-hero-evidence-primary video { object-position: center 43%; }
-.projects-hero-evidence-air { top: 22%; left: 0; width: 35%; height: 28%; z-index: 3; }
-.projects-hero-evidence-air img { object-position: center 59%; }
-.projects-hero-evidence-structure { top: 45%; right: 0; width: 52%; height: 39%; z-index: 2; }
-.projects-hero-evidence-structure img { object-position: center 52%; }
-.projects-hero-evidence-workshop { right: 40%; bottom: 0; width: 45%; height: 25%; z-index: 5; }
-.projects-hero-evidence-workshop img { object-position: center 52%; }
+.projects-hero-evidence-motion { top: 12%; left: 4%; width: 76%; height: 46%; z-index: 4; }
+.projects-hero-evidence-motion video { object-position: center 48%; }
+.projects-hero-evidence-exterior { top: 0; right: 0; width: 32%; height: 25%; z-index: 6; }
+.projects-hero-evidence-exterior img { object-position: center 57%; }
+.projects-hero-evidence-installed { bottom: 4%; left: 0; width: 49%; height: 35%; z-index: 7; }
+.projects-hero-evidence-installed img { object-position: center 52%; }
+.projects-hero-evidence-system { right: 0; bottom: 7%; width: 43%; height: 31%; z-index: 5; }
+.projects-hero-evidence-system img { object-position: center 53%; }
 .projects-hero-support { position: absolute; bottom: 4%; left: 0; z-index: 7; width: min(42%, 490px); padding-top: 18px; border-top: 1px solid rgb(243 242 237 / 14%); }
 .projects-hero-support p { margin: 0; color: rgb(243 242 237 / 52%); font-size: 13px; line-height: 1.65; }
 .projects-hero-support p + p { margin-top: 10px; color: rgb(243 242 237 / 38%); font-size: 11px; }
@@ -44,17 +44,20 @@
   .projects-hero-support p + p { margin-top: 5px; font-size: 11px; }
   .projects-hero-footer { margin-top: 12px; padding-top: 11px; }
   .projects-hero-media-meta { margin-top: 6px; font-size: 11px; }
+  .projects-hero-evidence-motion { top: 10%; height: 44%; }
+  .projects-hero-evidence-installed { height: 33%; }
+  .projects-hero-evidence-system { height: 29%; }
 }
 
 @media (min-width: 768px) and (max-width: 1099px) {
   .projects-hero-shell { display: block; padding: 126px 5vw 30px; }
   .projects-hero-composition { display: flex; flex-direction: column; margin-top: 26px; }
   .projects-hero-heading { width: 100%; max-width: 850px; font-size: clamp(66px, 10vw, 104px); }
-  .projects-hero-filmstrip { position: relative; inset: auto; height: clamp(390px, 54vw, 560px); margin-top: 34px; }
-  .projects-hero-evidence-primary { width: 54%; height: 58%; }
-  .projects-hero-evidence-air { top: 14%; left: auto; right: 0; width: 33%; height: 40%; }
-  .projects-hero-evidence-structure { top: auto; right: 7%; bottom: 0; width: 46%; height: 45%; }
-  .projects-hero-evidence-workshop { right: auto; bottom: 1%; left: 8%; width: 29%; height: 31%; }
+  .projects-hero-filmstrip { position: relative; inset: auto; height: clamp(600px, 79vw, 760px); margin-top: 34px; }
+  .projects-hero-evidence-motion { top: 0; left: 0; width: 70%; height: 43%; }
+  .projects-hero-evidence-exterior { top: 6%; right: 0; width: 34%; height: 25%; }
+  .projects-hero-evidence-installed { bottom: 8%; left: 7%; width: 54%; height: 38%; }
+  .projects-hero-evidence-system { right: 0; bottom: 0; width: 46%; height: 31%; }
   .projects-hero-support { position: relative; bottom: auto; left: auto; width: min(100%, 540px); margin-top: 38px; }
   .projects-hero-footer { margin-top: 40px; }
 }
@@ -67,16 +70,18 @@
   .projects-hero-topline p:last-child { max-width: 92px; text-align: right; }
   .projects-hero-composition { display: flex; flex-direction: column; margin-top: 27px; }
   .projects-hero-heading { order: 1; width: 100%; font-size: clamp(51px, 16vw, 74px); line-height: .9; }
-  .projects-hero-filmstrip { display: contents; }
+  .projects-hero-filmstrip { display: flex; position: relative; inset: auto; order: 2; flex-direction: column; align-items: flex-start; height: auto; margin-top: 32px; }
   .projects-hero-evidence { position: relative; inset: auto; }
-  .projects-hero-evidence-primary { order: 2; width: 100%; height: auto; margin-top: 32px; }
-  .projects-hero-evidence-primary .projects-hero-media-visual { height: auto; aspect-ratio: 1.2; }
-  .projects-hero-support { position: relative; order: 3; inset: auto; width: 100%; margin-top: 35px; padding-top: 17px; }
+  .projects-hero-evidence-motion { width: 100%; height: auto; }
+  .projects-hero-evidence-motion .projects-hero-media-visual { height: auto; aspect-ratio: 1.38; }
+  .projects-hero-evidence-exterior { width: 80%; height: auto; margin-top: 36px; }
+  .projects-hero-evidence-exterior .projects-hero-media-visual { height: auto; aspect-ratio: 1.22; }
+  .projects-hero-evidence-installed { width: 92%; height: auto; align-self: flex-end; margin-top: 38px; }
+  .projects-hero-evidence-installed .projects-hero-media-visual { height: auto; aspect-ratio: 1.18; }
+  .projects-hero-evidence-system { width: 86%; height: auto; margin-top: 38px; }
+  .projects-hero-evidence-system .projects-hero-media-visual { height: auto; aspect-ratio: 1.2; }
+  .projects-hero-support { position: relative; order: 3; inset: auto; width: 100%; margin-top: 44px; padding-top: 17px; }
   .projects-hero-support p { max-width: 430px; font-size: 13px; }
-  .projects-hero-support p + p { font-size: 11px; }
-  .projects-hero-evidence-structure { order: 4; width: 68%; height: auto; align-self: flex-end; margin-top: 34px; }
-  .projects-hero-evidence-structure .projects-hero-media-visual { height: auto; aspect-ratio: .92; }
-  .projects-hero-evidence-air, .projects-hero-evidence-workshop { display: none; }
   .projects-hero-media-meta { font-size: 11px; }
   .projects-hero-footer { grid-template-columns: 1fr; gap: 0; margin-top: 42px; padding-top: 17px; }
   .projects-hero-footer > span, .projects-hero-footer p:last-child { display: none; }
@@ -85,7 +90,7 @@
 @media (max-width: 374px) {
   .projects-hero-shell { padding-top: 104px; }
   .projects-hero-heading { font-size: clamp(47px, 15.5vw, 58px); }
-  .projects-hero-evidence-primary { margin-top: 27px; }
+  .projects-hero-filmstrip { margin-top: 27px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,55 +1,51 @@
 "use client";
 
-import ProgressiveVideo from "@/components/media/ProgressiveVideo";
-
 import Image from "@/components/media/ProgressiveImage";
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assetPath } from "@/lib/asset-path";
 import "./projects-hero.css";
 
-const evidence = [
+const primaryMedia = {
+  id: "projects-in-motion",
+  className: "projects-hero-evidence-motion",
+  src: "/images/projects/page-hero/projects-hero-plant.mp4",
+  poster: "/images/projects/page-hero/plant-exterior-concept.webp",
+  alt: "S.K. Engineering Works salt refinery project footage",
+  label: "PROJECTS IN MOTION",
+  detail: "FIELD EXECUTION",
+  speed: 8,
+};
+
+const supportingMedia = [
   {
-    id: "completed-plant",
-    className: "projects-hero-evidence-primary",
-    type: "video" as const,
-    src: "/images/projects/jagdamba/completed-plant.mp4",
-    poster: "/images/projects/jagdamba/cover-image.png",
-    alt: "Completed 15 TPH salt refinery plant in Phalodi, Rajasthan",
-    label: "15 TPH / SALT REFINERY",
-    detail: "PHALODI / RAJASTHAN",
-    speed: 11,
+    id: "plant-exterior",
+    className: "projects-hero-evidence-exterior",
+    src: "/images/projects/page-hero/plant-exterior-concept.webp",
+    alt: "Salt refinery facility with production building and covered material handling area",
+    label: "PLANT INFRASTRUCTURE",
+    detail: "INDUSTRIAL FACILITY",
+    speed: 7,
   },
   {
-    id: "air-handling",
-    className: "projects-hero-evidence-air",
-    type: "image" as const,
-    src: "/images/common/field-media/fabrication-blower.jpeg",
-    alt: "Fabricated ID fan and blower inside the S.K. Engineering Works workshop",
-    label: "AIR HANDLING",
-    detail: "ID FAN / BLOWER",
-    speed: -7,
+    id: "installed-machinery",
+    className: "projects-hero-evidence-installed",
+    src: "/images/projects/page-hero/installed-machinery-concept.webp",
+    alt: "Installed salt refinery process machinery with cyclone and connected ducting",
+    label: "PROCESSING SYSTEMS",
+    detail: "EQUIPMENT INTEGRATION",
+    speed: -6,
   },
   {
-    id: "plant-structure",
-    className: "projects-hero-evidence-structure",
-    type: "image" as const,
-    src: "/images/common/field-media/plant-structure.jpeg",
-    alt: "Salt refinery equipment installed within a fabricated plant structure",
-    label: "PROJECT EXECUTION",
-    detail: "INSTALLED PLANT STRUCTURE",
-    speed: 8,
-  },
-  {
-    id: "workshop-fabrication",
-    className: "projects-hero-evidence-workshop",
-    type: "image" as const,
-    src: "/images/common/field-media/fabricated-equipment.jpeg",
-    alt: "Industrial salt processing equipment during workshop fabrication",
-    label: "WORKSHOP RECORD",
-    detail: "EQUIPMENT FABRICATION",
-    speed: -5,
+    id: "refinery-system",
+    className: "projects-hero-evidence-system",
+    src: "/images/projects/page-hero/refinery-equipment-concept.webp",
+    alt: "Connected salt refinery equipment arranged as a complete process line",
+    label: "REFINERY EQUIPMENT",
+    detail: "CONNECTED PROCESS LINE",
+    speed: 5,
   },
 ];
 
@@ -107,9 +103,9 @@ export default function ProjectsHero() {
         void element.play().then(() => {
           if (disposed || !visible || document.hidden || reducedMotion.matches) element.pause();
         }).catch(() => {});
-        return;
+      } else {
+        element.pause();
       }
-      element.pause();
     };
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
@@ -133,8 +129,8 @@ export default function ProjectsHero() {
     <section ref={root} className="projects-hero" aria-labelledby="projects-hero-heading">
       <div className="projects-hero-shell">
         <div className="projects-hero-topline">
-          <p className="projects-hero-eyebrow">PROJECTS / FIELD PROOF</p>
-          <p>FIELD RECORDS / SK</p>
+          <p className="projects-hero-eyebrow">PROJECTS / PLANT SYSTEMS</p>
+          <p>ENGINEERING RECORDS / SK</p>
         </div>
 
         <div className="projects-hero-composition">
@@ -145,33 +141,42 @@ export default function ProjectsHero() {
           </h1>
 
           <div className="projects-hero-filmstrip" aria-label="Project execution evidence">
-            {evidence.map((item) => (
+            <figure
+              className={`projects-hero-evidence ${primaryMedia.className}`}
+              data-project-parallax={primaryMedia.speed}
+            >
+              <div className="projects-hero-media-visual">
+                <ProgressiveVideo
+                  ref={video}
+                  src={assetPath(primaryMedia.src)}
+                  poster={assetPath(primaryMedia.poster)}
+                  aria-label={primaryMedia.alt}
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
+              </div>
+              <figcaption className="projects-hero-media-meta">
+                <span>{primaryMedia.label}</span>
+                <strong>{primaryMedia.detail}</strong>
+              </figcaption>
+            </figure>
+
+            {supportingMedia.map((item) => (
               <figure
                 key={item.id}
                 className={`projects-hero-evidence ${item.className}`}
                 data-project-parallax={item.speed}
               >
                 <div className="projects-hero-media-visual">
-                  {item.type === "video" ? (
-                    <ProgressiveVideo
-                      ref={video}
-                      src={assetPath(item.src)}
-                      poster={assetPath(item.poster)}
-                      aria-label={item.alt}
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                    />
-                  ) : (
-                    <Image
-                      src={assetPath(item.src)}
-                      alt={item.alt}
-                      fill
-                      loading={item.id === "air-handling" || item.id === "plant-structure" ? "eager" : undefined}
-                      sizes="(max-width: 767px) 88vw, (max-width: 1099px) 52vw, 28vw"
-                    />
-                  )}
+                  <Image
+                    src={assetPath(item.src)}
+                    alt={item.alt}
+                    fill
+                    loading={item.id === "plant-exterior" ? "eager" : undefined}
+                    sizes="(max-width: 767px) 92vw, (max-width: 1099px) 58vw, 26vw"
+                  />
                 </div>
                 <figcaption className="projects-hero-media-meta">
                   <span>{item.label}</span>
@@ -182,15 +187,14 @@ export default function ProjectsHero() {
           </div>
 
           <div className="projects-hero-support">
-            <p>Real refinery projects, industrial equipment and on-site execution by S.K. Engineering Works.</p>
-            <p>From complete salt plants to fabricated machinery installed in real production environments.</p>
+            <p>From engineered equipment to integrated refinery systems, explore the scale, craftsmanship and technical capabilities behind S.K. Engineering Works.</p>
           </div>
         </div>
 
         <footer className="projects-hero-footer">
           <p>SCROLL TO EXPLORE PROJECTS <span aria-hidden="true">&darr;</span></p>
           <span aria-hidden="true" />
-          <p>EXECUTION / INSTALLATION / OPERATION</p>
+          <p>FACILITY / EQUIPMENT / PROCESS</p>
         </footer>
       </div>
     </section>
