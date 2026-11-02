@@ -94,7 +94,7 @@ export default function ProjectsFieldArchive() {
     }
 
     const context = gsap.context(() => {
-      gsap.fromTo(".projects-field-explorer-media-frame", {
+      gsap.fromTo(".projects-field-explorer-main", {
         autoAlpha: 0,
         scale: 1.015,
         y: 14,
@@ -107,9 +107,8 @@ export default function ProjectsFieldArchive() {
         duration: 0.62,
         ease: "power3.out",
       });
-      gsap.fromTo(".projects-field-explorer-counter-current", { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.42, ease: "power3.out" });
-      gsap.fromTo(".projects-field-explorer-media-label", { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power3.out", delay: 0.08 });
-      gsap.fromTo(".projects-field-explorer-info > *", { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.48, stagger: 0.055, ease: "power3.out", delay: 0.08 });
+      gsap.fromTo(".projects-field-explorer-support-card", { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.07, ease: "power3.out", delay: 0.06 });
+      gsap.fromTo(".projects-field-explorer-info > *, .projects-field-explorer-details > *", { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.48, stagger: 0.045, ease: "power3.out", delay: 0.08 });
     }, container);
 
     return () => context.revert();
@@ -179,14 +178,15 @@ export default function ProjectsFieldArchive() {
     switching.current = true;
     const timeline = gsap.timeline({ onComplete: () => setActiveId(id) });
     timeline
-      .to(container.querySelector(".projects-field-explorer-media-frame"), {
+      .to(container.querySelectorAll(".projects-field-explorer-main, .projects-field-explorer-support-card"), {
         autoAlpha: 0,
         scale: 0.985,
         y: -10,
         duration: 0.3,
+        stagger: 0.025,
         ease: "power3.in",
       })
-      .to(container.querySelectorAll(".projects-field-explorer-counter-current, .projects-field-explorer-info, .projects-field-explorer-media-label"), {
+      .to(container.querySelectorAll(".projects-field-explorer-info, .projects-field-explorer-details"), {
         autoAlpha: 0,
         y: -10,
         duration: 0.24,
@@ -207,12 +207,12 @@ export default function ProjectsFieldArchive() {
     activate(filteredProjects[nextIndex].id);
   };
 
-  const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+  const onPointerDown = (event: ReactPointerEvent<HTMLElement>) => {
     if (event.pointerType === "mouse") return;
     pointerStart.current = event.clientX;
   };
 
-  const onPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+  const onPointerUp = (event: ReactPointerEvent<HTMLElement>) => {
     if (pointerStart.current === null) return;
     const distance = event.clientX - pointerStart.current;
     pointerStart.current = null;
@@ -246,47 +246,75 @@ export default function ProjectsFieldArchive() {
         </div>
 
         <div ref={stage} className={`projects-field-explorer${activeProject.isFeatured ? " projects-field-explorer--flagship" : ""}`}>
-          <p className="projects-field-explorer-counter" aria-label={`Project ${activeIndex + 1} of ${filteredProjects.length}`}>
-            <span key={activeProject.id} data-active-content className="projects-field-explorer-counter-current">{number(activeIndex + 1)}</span>
-            <span aria-hidden="true"> / {number(filteredProjects.length)}</span>
-          </p>
+          <article key={`info-${activeProject.id}`} data-active-content className="projects-field-explorer-info">
+            <p className="projects-field-explorer-counter" aria-label={`Project ${activeIndex + 1} of ${filteredProjects.length}`}>
+              PROJECT <span className="projects-field-explorer-counter-current">{fieldNumber(activeProject)}</span>
+              <span aria-hidden="true"> / {String(projectArchive.length).padStart(3, "0")}</span>
+            </p>
+            <p className="projects-field-explorer-field">FIELD RECORD / {fieldNumber(activeProject)}</p>
+            <h3>{activeProject.name}</h3>
+            <dl className="projects-field-explorer-facts">
+              {activeProject.capacity && <div><dt>CAPACITY</dt><dd>{activeProject.capacity}</dd></div>}
+              {activeProject.location && <div><dt>LOCATION</dt><dd>{activeProject.location}</dd></div>}
+            </dl>
+          </article>
 
-          <div
-            className="projects-field-explorer-media"
-            onPointerDown={onPointerDown}
-            onPointerUp={onPointerUp}
-            onPointerCancel={() => { pointerStart.current = null; }}
-          >
-            <div key={activeProject.id} data-active-content className="projects-field-explorer-media-frame">
-              {activeProject.mediaType === "video" ? (
-                <ProgressiveVideo
-                  ref={video}
-                  src={assetPath(activeProject.mediaSrc)}
-                  poster={activeProject.poster ? assetPath(activeProject.poster) : undefined}
-                  aria-label={activeProject.mediaAlt}
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                />
-              ) : (
-                <Image
-                  src={assetPath(activeProject.mediaSrc)}
-                  alt={activeProject.mediaAlt}
-                  fill
-                  priority={activeProject.isFeatured}
-                  sizes="(max-width: 767px) 88vw, (max-width: 1099px) 76vw, 68vw"
-                />
-              )}
+          <div key={`media-${activeProject.id}`} data-active-content className="projects-field-explorer-media">
+            <figure
+              className="projects-field-explorer-main"
+              onPointerDown={onPointerDown}
+              onPointerUp={onPointerUp}
+              onPointerCancel={() => { pointerStart.current = null; }}
+            >
+              <div className="projects-field-explorer-media-frame" data-video-crop={activeProject.videoCrop}>
+                {activeProject.mediaType === "video" ? (
+                  <ProgressiveVideo
+                    ref={video}
+                    src={assetPath(activeProject.mediaSrc)}
+                    poster={activeProject.poster ? assetPath(activeProject.poster) : undefined}
+                    aria-label={activeProject.mediaAlt}
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                  />
+                ) : (
+                  <Image
+                    src={assetPath(activeProject.mediaSrc)}
+                    alt={activeProject.mediaAlt}
+                    fill
+                    priority={activeProject.isFeatured}
+                    sizes="(max-width: 899px) 76vw, 38vw"
+                  />
+                )}
+              </div>
+              <figcaption className="projects-field-explorer-media-label">{activeProject.mediaLabel}</figcaption>
+            </figure>
+
+            <div className="projects-field-explorer-support" aria-label={`${activeProject.name} supporting project photographs`}>
+              {activeProject.supportingMedia.map((item, index) => (
+                <figure className="projects-field-explorer-support-card" key={`${activeProject.id}-${item.src}`}>
+                  <div className="projects-field-explorer-support-frame">
+                    <Image
+                      src={assetPath(item.src)}
+                      alt={item.alt}
+                      fill
+                      sizes="(max-width: 899px) 78vw, 24vw"
+                      priority={activeProject.isFeatured && index === 0}
+                    />
+                  </div>
+                  <figcaption>{number(index + 1)} / {item.label}</figcaption>
+                </figure>
+              ))}
             </div>
-            <p key={`label-${activeProject.id}`} data-active-content className="projects-field-explorer-media-label">{activeProject.mediaLabel}</p>
           </div>
 
-          <div key={`info-${activeProject.id}`} data-active-content className="projects-field-explorer-info">
-            <p className="projects-field-explorer-field">FIELD / {fieldNumber(activeProject)}</p>
-            <h3>{activeProject.name}</h3>
-            {activeProject.capacity && <p className="projects-field-explorer-capacity">{activeProject.capacity} SALT REFINERY</p>}
-            {activeProject.location && <p className="projects-field-explorer-location">{activeProject.location.replace(", ", " / ")}</p>}
+          <div key={`details-${activeProject.id}`} data-active-content className="projects-field-explorer-details">
+            <div className="projects-field-explorer-scope">
+              <span>PROJECT SCOPE</span>
+              <p>{activeProject.scope}</p>
+            </div>
+            <p className="projects-field-explorer-description">{activeProject.description}</p>
             <Link className="projects-field-explorer-link" href={activeProject.detailHref}>
               <span>VIEW PROJECT</span>
               <span aria-hidden="true">↗</span>
@@ -301,7 +329,7 @@ export default function ProjectsFieldArchive() {
           <nav className="projects-field-explorer-rail" aria-label="Project index">
             <span className="projects-field-explorer-rail-line" aria-hidden="true" />
             <ol ref={rail}>
-              {filteredProjects.map((project, index) => (
+              {filteredProjects.map((project) => (
                 <li key={project.id}>
                   <button
                     type="button"
@@ -311,7 +339,7 @@ export default function ProjectsFieldArchive() {
                     onFocus={() => activate(project.id)}
                     onClick={() => activate(project.id)}
                   >
-                    <span>{number(index + 1)}</span>
+                    <span>{fieldNumber(project)}</span>
                     <span>{project.name}</span>
                   </button>
                 </li>

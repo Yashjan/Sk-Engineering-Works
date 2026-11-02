@@ -74,11 +74,8 @@
   .projects-hero-evidence { position: relative; inset: auto; }
   .projects-hero-evidence-motion { width: 100%; height: auto; }
   .projects-hero-evidence-motion .projects-hero-media-visual { height: auto; aspect-ratio: 1.38; }
-  .projects-hero-evidence-exterior { width: 80%; height: auto; margin-top: 36px; }
-  .projects-hero-evidence-exterior .projects-hero-media-visual { height: auto; aspect-ratio: 1.22; }
-  .projects-hero-evidence-installed { width: 92%; height: auto; align-self: flex-end; margin-top: 38px; }
-  .projects-hero-evidence-installed .projects-hero-media-visual { height: auto; aspect-ratio: 1.18; }
-  .projects-hero-evidence-system { width: 86%; height: auto; margin-top: 38px; }
+  .projects-hero-evidence-exterior, .projects-hero-evidence-installed { display: none; }
+  .projects-hero-evidence-system { width: 92%; height: auto; align-self: flex-end; margin-top: 38px; }
   .projects-hero-evidence-system .projects-hero-media-visual { height: auto; aspect-ratio: 1.2; }
   .projects-hero-support { position: relative; order: 3; inset: auto; width: 100%; margin-top: 44px; padding-top: 17px; }
   .projects-hero-support p { max-width: 430px; font-size: 13px; }

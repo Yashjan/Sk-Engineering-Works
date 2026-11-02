@@ -39,8 +39,14 @@ export type ProjectArchiveRecord = {
   mediaAlt: string;
   detailHref: string;
   isFeatured: boolean;
-  supportingMediaSrc?: string;
-  supportingMediaAlt?: string;
+  scope?: string;
+  description: string;
+  videoCrop?: "portrait-center" | "landscape";
+  supportingMedia: Array<{
+    src: string;
+    alt: string;
+    label: string;
+  }>;
 };
 
 export type ProjectGalleryItem = {
@@ -261,8 +267,13 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     mediaAlt: "Completed 15 TPH Jagdamba salt refinery in Phalodi, Rajasthan",
     detailHref: jagdambaProject.detailHref,
     isFeatured: true,
-    supportingMediaSrc: jagdambaProject.coverImage,
-    supportingMediaAlt: "Completed Jagdamba salt refinery project overview",
+    scope: jagdambaProject.scope,
+    description: "A 15 TPH salt refinery delivered through process-equipment supply and complete plant fitting in Phalodi.",
+    videoCrop: "portrait-center",
+    supportingMedia: [
+      { src: jagdambaProject.coverImage, alt: "Completed Jagdamba salt refinery project overview", label: "COMPLETED PLANT" },
+      { src: "/images/projects/archive-stills/jagdamba-phalodi-field.webp", alt: "Jagdamba salt refinery structure during field installation", label: "SITE INSTALLATION" },
+    ],
   },
   {
     id: "jk-salt-santalpur",
@@ -270,6 +281,7 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     name: "JK Salt Pvt. Ltd.",
     category: "salt-plants",
     location: "Santalpur, Gujarat",
+    capacity: "25 TPH",
     mediaType: "video",
     mediaSrc: "/images/projects/jk-salt/completed-plant.mp4",
     poster: "/images/projects/jk-salt/cover-image.png",
@@ -277,6 +289,13 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     mediaAlt: "Completed 25 TPH JK Salt refinery in Santalpur, Gujarat",
     detailHref: "/projects/jk-salt-santalpur",
     isFeatured: false,
+    scope: "Complete machinery supply",
+    description: "Complete salt-refinery machinery supplied for the 25 TPH JK Salt facility in Santalpur.",
+    videoCrop: "portrait-center",
+    supportingMedia: [
+      { src: "/images/projects/jk-salt/cover-image.png", alt: "JK Salt refinery machinery overview", label: "EQUIPMENT OVERVIEW" },
+      { src: "/images/projects/archive-stills/jk-salt-25tph-field.webp", alt: "JK Salt refinery equipment documented on site", label: "FIELD RECORD" },
+    ],
   },
   {
     id: "royal-salt-jambusar",
@@ -284,6 +303,7 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     name: "Royal Salt",
     category: "salt-plants",
     location: "Jambusar, Gujarat",
+    capacity: "80 TPH",
     mediaType: "video",
     mediaSrc: "/images/projects/royal-salt/completed-machinery.mp4",
     poster: "/images/projects/royal-salt/cover.webp",
@@ -291,6 +311,13 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     mediaAlt: "Completed machinery for the 80 TPH Royal Salt refinery in Jambusar, Gujarat",
     detailHref: "/projects/royal-salt-jambusar",
     isFeatured: false,
+    scope: "Screw conveyors, tanks and centrifuge",
+    description: "Selected machinery supplied for Royal Salt's 80 TPH facility, covering screw conveyors, tanks and centrifuge equipment.",
+    videoCrop: "portrait-center",
+    supportingMedia: [
+      { src: "/images/projects/royal-salt/cover.webp", alt: "Royal Salt machinery overview", label: "SUPPLIED MACHINERY" },
+      { src: "/images/projects/archive-stills/royal-salt-80tph-field.webp", alt: "Royal Salt machinery documented at the facility", label: "FIELD RECORD" },
+    ],
   },
   {
     id: "bharat-salt-santalpur",
@@ -304,6 +331,12 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     mediaAlt: "Stainless-steel salt processing equipment during workshop fabrication",
     detailHref: "/projects/bharat-salt-santalpur",
     isFeatured: false,
+    scope: "Process equipment fabrication",
+    description: "A field archive record documenting fabricated process equipment for salt-processing operations.",
+    supportingMedia: [
+      { src: "/images/common/field-media/fabricated-equipment.jpeg", alt: "Fabricated stainless-steel process equipment", label: "WORKSHOP FABRICATION" },
+      { src: "/images/common/field-media/plant-structure.jpeg", alt: "Installed process equipment within a plant structure", label: "SITE EXECUTION" },
+    ],
   },
   {
     id: blowerProject?.id ?? "id-fan-blower",
@@ -317,6 +350,13 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     mediaAlt: "Completed industrial ID fan and blower fabricated by S.K. Engineering Works",
     detailHref: "/projects/id-fan-blower",
     isFeatured: false,
+    scope: "Air-handling equipment fabrication",
+    description: "An industrial ID fan and blower documented from workshop fabrication through completed-machine testing.",
+    videoCrop: "portrait-center",
+    supportingMedia: [
+      { src: blowerProject?.coverImage ?? "/images/machinery/catalog/id-fan-blower.png", alt: "Completed ID fan and blower", label: "EQUIPMENT OVERVIEW" },
+      { src: "/images/projects/archive-stills/id-fan-blower-field.webp", alt: "ID fan and blower during workshop fabrication", label: "WORKSHOP RECORD" },
+    ],
   },
   {
     id: beltConveyorProject?.id ?? "belt-conveyor",
@@ -330,6 +370,13 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     mediaAlt: "Completed belt conveyor manufactured for industrial material handling",
     detailHref: "/projects/belt-conveyor",
     isFeatured: false,
+    scope: "Material-handling equipment fabrication",
+    description: "A belt conveyor manufactured for continuous industrial material transfer and documented in the workshop.",
+    videoCrop: "portrait-center",
+    supportingMedia: [
+      { src: beltConveyorProject?.coverImage ?? "/images/machinery/catalog/belt-conveyor.png", alt: "Completed industrial belt conveyor", label: "EQUIPMENT OVERVIEW" },
+      { src: "/images/projects/archive-stills/belt-conveyor-field.webp", alt: "Belt conveyor during workshop fabrication", label: "WORKSHOP RECORD" },
+    ],
   },
   {
     id: cycloneProject?.id ?? "cyclone",
@@ -343,6 +390,13 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     mediaAlt: "Completed industrial cyclone system fabricated by S.K. Engineering Works",
     detailHref: "/projects/cyclone",
     isFeatured: false,
+    scope: "Air and dust-separation equipment fabrication",
+    description: "An industrial cyclone fabricated for air and dust separation, shown through real workshop records.",
+    videoCrop: "portrait-center",
+    supportingMedia: [
+      { src: cycloneProject?.coverImage ?? "/images/machinery/catalog/cyclone.png", alt: "Completed industrial cyclone", label: "EQUIPMENT OVERVIEW" },
+      { src: "/images/projects/archive-stills/cyclone-field.webp", alt: "Industrial cyclone during workshop fabrication", label: "WORKSHOP RECORD" },
+    ],
   },
 ];
 
@@ -380,6 +434,15 @@ const toArchiveRecord = (project: Project): ProjectArchiveRecord => {
     mediaAlt: `${project.title} by S.K. Engineering Works`,
     detailHref,
     isFeatured: Boolean(project.isFeatured),
+    scope: project.scope || project.category || project.projectType,
+    description: project.kind === "equipment"
+      ? `${project.title} documented through real workshop fabrication and completed-machine footage.`
+      : `${project.title} documented through real workshop and field records.`,
+    videoCrop: media.type === "video" ? "portrait-center" : undefined,
+    supportingMedia: [
+      { src: project.coverImage, alt: `${project.title} completed equipment view`, label: "EQUIPMENT OVERVIEW" },
+      { src: `/images/projects/archive-stills/${project.id}-field.webp`, alt: `${project.title} during workshop fabrication`, label: "WORKSHOP RECORD" },
+    ],
   };
 };
 
