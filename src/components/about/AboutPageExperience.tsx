@@ -9,19 +9,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assetPath } from "@/lib/asset-path";
 import "./about-page.css";
 
-type JourneyPhase = { label: string; title: string; paragraphs: string[]; media?: string; mediaAlt?: string; mediaCaption?: string };
+type JourneyPhase = { label: string; title: string; paragraphs: string[]; media?: string; mediaType?: "image" | "video"; mediaAlt?: string; mediaCaption?: string };
 
 const journey: JourneyPhase[] = [
   {
     label: "1990s / THE BEGINNING",
-    title: "CHAIN PULLEY BLOCKS.\nMECHANICAL ROOTS.",
+    title: "THE BEGINNING —\nWELL PULLEYS.",
     paragraphs: [
-      "S.K. Engineering Works began in the 1990s with chain pulley blocks and mechanical fabrication work, grounded in workshop skill and hands-on engineering.",
-      "As motorized lifting systems became more common, the company adapted instead of remaining limited to one product.",
+      "S.K. Engineering Works began its manufacturing journey with traditional hand-operated well pulleys, fabricated from mild steel (MS). These manually operated winding machines were designed to draw water from wells, marking the company's early foundation in practical metal fabrication and mechanical engineering.",
     ],
-    media: "/images/common/field-media/fabricated-equipment.jpeg",
-    mediaAlt: "Current S.K. Engineering Works fabrication showing the practical workshop foundation that began with mechanical work",
-    mediaCaption: "PRACTICAL FABRICATION / THE FOUNDATION REMAINS",
+    media: "/images/about/well-pulley-ms-blue.png",
+    mediaAlt: "Blue-painted mild steel hand-operated well pulley with cylindrical winding drum and manual crank.",
+    mediaCaption: "EARLY MANUFACTURING BEGAN WITH MS WELL PULLEYS — SIMPLE, DURABLE, MANUALLY OPERATED MACHINES USED FOR DRAWING WATER FROM WELLS.",
   },
   {
     label: "NEXT CHAPTER / AGRICULTURE + HANDLING",
@@ -30,6 +29,10 @@ const journey: JourneyPhase[] = [
       "The company expanded into agricultural machinery and material-handling systems, building on its mechanical and fabrication experience.",
       "For around eight years, this work strengthened its engineering capability and long-term customer relationships across the region.",
     ],
+    media: "/images/projects/equipment/portable-belt-conveyor/completed-machine.mp4",
+    mediaType: "video",
+    mediaAlt: "Completed belt conveyor manufactured by S.K. Engineering Works for material handling",
+    mediaCaption: "MATERIAL HANDLING / COMPLETED BELT CONVEYOR",
   },
   {
     label: "2003 / ENTRY INTO SALT",
@@ -38,9 +41,9 @@ const journey: JourneyPhase[] = [
       "Based in Sambhar Lake, one of Rajasthan’s major salt-producing regions, S.K. Engineering Works naturally moved toward salt-processing plants and machinery.",
       "Shree Namak Udhyog became the company’s first major salt-industry client and an important milestone in that transition.",
     ],
-    media: "/videos/salt-refinery/SK_Salt_Refinery_Plants_Hero_Poster.jpg",
-    mediaAlt: "Salt refinery machinery representing S.K. Engineering Works' entry into the Sambhar salt industry",
-    mediaCaption: "SALT PROCESSING / SAMBHAR ENGINEERING CONTEXT",
+    media: "/images/about/industrial-processing-plant-silos.webp",
+    mediaAlt: "Industrial salt processing plant with silos and material conveyors",
+    mediaCaption: "SALT PROCESSING / EARLY INDUSTRIAL PLANT SYSTEMS",
   },
   {
     label: "GROWTH / SALT INDUSTRY",
@@ -49,6 +52,9 @@ const journey: JourneyPhase[] = [
       "Machinery and maintenance work grew into equipment replacement, process improvements, material handling, salt refinery machinery and complete plant execution.",
       "Today, S.K. Engineering Works supports a significant part of the Sambhar–Nawa salt-industry ecosystem through machinery, maintenance and plant engineering.",
     ],
+    media: "/images/salt-refinery/plant-layout/plant-elevation-preview.webp",
+    mediaAlt: "Two-dimensional salt refinery plant elevation and equipment arrangement drawing",
+    mediaCaption: "2D PLANT LAYOUT / COMPLETE SYSTEM PLANNING",
   },
   {
     label: "EXPANSION / GUJARAT",
@@ -68,6 +74,9 @@ const journey: JourneyPhase[] = [
       "The next goal is to take S.K. Engineering Works beyond Rajasthan and Gujarat and build an export presence for industrial machinery and salt refinery systems.",
       "The company is preparing for that next stage of growth; this is the direction ahead, not a claim of current exports.",
     ],
+    media: "/images/about/export-ready-industrial-equipment.webp",
+    mediaAlt: "Industrial process equipment beside a shipping container representing future export readiness",
+    mediaCaption: "EXPORT READINESS / THE NEXT CHAPTER",
   },
 ];
 
@@ -154,7 +163,7 @@ export default function AboutPageExperience() {
         {journey.map((phase, index) => <article className={`about-page-journey-phase${phase.media ? " has-media" : ""}`} key={phase.label} data-reveal>
           <div className="about-page-journey-index"><span>{String(index + 1).padStart(2, "0")}</span><i aria-hidden="true" /></div>
           <div className="about-page-journey-copy"><p className="about-page-journey-label">{phase.label}</p><h3>{phase.title.split("\n").map((line) => <span key={line}>{line}</span>)}</h3>{phase.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{index === 2 ? <p className="about-page-client-milestone">FIRST MAJOR SALT-INDUSTRY CLIENT <strong>SHREE NAMAK UDHYOG</strong></p> : null}</div>
-          {phase.media ? <figure className="about-page-journey-media"><Image src={assetPath(phase.media)} alt={phase.mediaAlt ?? ""} fill sizes="(max-width: 767px) 88vw, 37vw" /><figcaption>{phase.mediaCaption}</figcaption></figure> : <div className="about-page-journey-word" aria-hidden="true">{index === 1 ? "ADAPT" : index === 3 ? "SYSTEMS" : "NEXT"}</div>}
+          {phase.media ? <figure className="about-page-journey-media" data-media-fit={index === 0 || index === 3 ? "contain" : undefined}>{phase.mediaType === "video" ? <ProgressiveVideo src={assetPath(phase.media)} aria-label={phase.mediaAlt} autoPlay muted loop playsInline preload="metadata" /> : <Image src={assetPath(phase.media)} alt={phase.mediaAlt ?? ""} fill sizes="(max-width: 767px) 88vw, 37vw" />}<figcaption>{phase.mediaCaption}</figcaption></figure> : <div className="about-page-journey-word" aria-hidden="true">{index === 1 ? "ADAPT" : index === 3 ? "SYSTEMS" : "NEXT"}</div>}
         </article>)}
       </div>
       <p className="about-page-story-statement" data-reveal>WHEN INDUSTRY CHANGED,<br /><span>WE CHANGED WITH IT.</span></p>
@@ -164,7 +173,7 @@ export default function AboutPageExperience() {
       <div className="about-page-section-meta" data-reveal><span>THE MAN BEHIND THE WORK / 03</span><span>MANAGING DIRECTOR</span></div>
       <div className="about-page-founder-grid">
         <figure className="about-page-founder-visual" data-reveal><Image src={assetPath("/images/common/field-media/fabrication-blower.jpeg")} alt="S.K. Engineering Works workshop context for the Managing Director profile" fill sizes="(max-width: 767px) 88vw, 41vw" /><div className="about-page-founder-placeholder"><span>MANAGING DIRECTOR PORTRAIT</span><strong>TO BE ADDED</strong></div><figcaption>WORKSHOP CONTEXT / VERIFIED PORTRAIT PENDING</figcaption></figure>
-        <div className="about-page-founder-copy"><h2 id="about-founder-title" data-reveal>BUILT WITH<br />HANDS-ON<br />EXPERIENCE.</h2><div className="about-page-founder-name" data-reveal><strong>FULL NAME TO BE CONFIRMED</strong><span>MANAGING DIRECTOR / S.K. ENGINEERING WORKS</span></div><div className="about-page-founder-story" data-reveal><p>Coming from a mechanical background, the Managing Director built S.K. Engineering Works around practical engineering, fabrication and problem-solving.</p><p>His work moved through chain pulley blocks, agricultural machinery and material handling before developing into large-scale salt refinery engineering.</p><p>Today, that experience guides machinery selection, fabrication, plant planning, site execution and customer problem-solving.</p></div></div>
+        <div className="about-page-founder-copy"><h2 id="about-founder-title" data-reveal>BUILT WITH<br />HANDS-ON<br />EXPERIENCE.</h2><div className="about-page-founder-name" data-reveal><strong>FULL NAME TO BE CONFIRMED</strong><span>MANAGING DIRECTOR / S.K. ENGINEERING WORKS</span></div><div className="about-page-founder-story" data-reveal><p>Coming from a mechanical background, the Managing Director built S.K. Engineering Works around practical engineering, fabrication and problem-solving.</p><p>His work moved through well pulleys, agricultural machinery and material handling before developing into large-scale salt refinery engineering.</p><p>Today, that experience guides machinery selection, fabrication, plant planning, site execution and customer problem-solving.</p></div></div>
       </div>
       <ul className="about-page-founder-roles" aria-label="Managing Director responsibilities">{founderRoles.map((role, index) => <li key={role} data-reveal><span>{String(index + 1).padStart(2, "0")}</span>{role}</li>)}</ul>
     </section>
