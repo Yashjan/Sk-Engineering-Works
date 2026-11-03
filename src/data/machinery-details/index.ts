@@ -17,6 +17,7 @@ import { bagFilter } from "./bag-filter";
 import { storageSilos } from "./storage-silos";
 import { screwConveyor } from "./screw-conveyor";
 import { screwWasher } from "./screw-washer";
+import { lumpCrusher } from "./lump-crusher";
 import type { MachineryConfig } from "./types";
 export const machineryDetails: Readonly<Record<string, MachineryConfig>> = {
   [screwConveyor.slug]: screwConveyor,
@@ -38,6 +39,7 @@ export const machineryDetails: Readonly<Record<string, MachineryConfig>> = {
   [hammerMillCrusher.slug]: hammerMillCrusher,
   [bagFilter.slug]: bagFilter,
   [storageSilos.slug]: storageSilos,
+  [lumpCrusher.slug]: lumpCrusher,
 
 };
 export function getMachineryDetail(slug: string) { return Object.hasOwn(machineryDetails, slug) ? machineryDetails[slug] : undefined; }

@@ -205,6 +205,19 @@ const catalog: readonly MachineryItem[] = [
   { id: "centrifuge", number: "02", name: "CENTRIFUGE", slug: "centrifuge", category: "SCREENING & SEPARATION", categorySlug: "screening-separation", detailHref: "/machinery/centrifuge" },
   { id: "dryer", number: "05", name: "DRYER", slug: "dryer", category: "STORAGE & PROCESS EQUIPMENT", categorySlug: "storage-process-equipment", detailHref: "/machinery/dryer" },
   { id: "roller-crusher", number: "04", name: "ROLLER CRUSHER", slug: "roller-crusher", category: "MILLING & SIZE REDUCTION", categorySlug: "milling-size-reduction", detailHref: "/machinery/roller-crusher" },
+  {
+    id: "lump-crusher",
+    number: "05",
+    name: "LUMP CRUSHER",
+    slug: "lump-crusher",
+    category: "MILLING & SIZE REDUCTION",
+    categorySlug: "milling-size-reduction",
+    mediaType: "image",
+    mediaSrc: "/images/machinery/catalog/lump-crusher.png",
+    mediaAlt: "S.K. Engineering Works lump crusher",
+    mediaFit: "contain",
+    detailHref: "/machinery/lump-crusher",
+  },
 ] as const;
 
 // The approved process owns machine-image paths; retain established public slugs.
