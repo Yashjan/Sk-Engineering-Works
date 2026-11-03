@@ -27,6 +27,11 @@ export const siteConfig = {
   },
   logo: "/images/common/brand/sk-logo.png",
   socialImage: "/images/projects/jagdamba/cover-image.png",
+  socialLinks: {
+    instagram: "https://www.instagram.com/skengineeringworks20/",
+    youtube: "https://www.youtube.com/@skengineeringworkssambharlake",
+    linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim() || null,
+  },
 } as const;
 
 export function absoluteUrl(pathname = "/") {

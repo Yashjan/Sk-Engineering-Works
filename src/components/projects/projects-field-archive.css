@@ -82,9 +82,9 @@
   .projects-field-explorer-facts dd { font-size: 13px; }
   .projects-field-explorer-media { display: flex; order: 2; width: 100%; margin-top: 30px; flex-direction: column; }
   .projects-field-explorer-main { align-items: center; }
-  .projects-field-explorer-media-frame { width: min(76vw, 430px); height: min(64svh, 610px); }
-  .projects-field-explorer-media-frame[data-video-crop="portrait-center"] { width: min(76vw, 390px); height: auto; }
-  .projects-field-explorer-media-label { width: min(76vw, 390px); }
+  .projects-field-explorer-media-frame { width: min(76vw, 430px); height: clamp(300px, 44svh, 380px); }
+  .projects-field-explorer-media-frame[data-video-crop="portrait-center"] { width: min(62vw, 240px); height: auto; }
+  .projects-field-explorer-media-label { width: min(76vw, 430px); }
   .projects-field-explorer-support { display: flex; width: calc(100% + 12vw); gap: 14px; margin-inline: -6vw; overflow-x: auto; padding: 4px 6vw 12px; scroll-padding-inline: 6vw; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .projects-field-explorer-support-card { flex: 0 0 min(78vw, 500px); scroll-snap-align: start; }
   .projects-field-explorer-support-frame { flex: none; width: 100%; aspect-ratio: 4 / 3; }
@@ -102,8 +102,25 @@
 @media (max-width: 430px) {
   .projects-field-archive-shell { padding-top: 58px; }
   .projects-field-explorer-info h3 { font-size: clamp(36px, 11.2vw, 48px); }
-  .projects-field-explorer-media-frame, .projects-field-explorer-media-frame[data-video-crop="portrait-center"] { width: min(78vw, 330px); }
-  .projects-field-explorer-media-label { width: min(78vw, 330px); }
+  .projects-field-explorer-media-frame { width: min(84vw, 350px); }
+  .projects-field-explorer-media-frame[data-video-crop="portrait-center"] {
+    width: min(84vw, 350px);
+    height: clamp(320px, 46svh, 390px);
+    aspect-ratio: auto;
+  }
+  .projects-field-explorer-media-frame[data-video-crop="portrait-center"] video {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: none;
+    /* The source is a landscape export with a portrait record in its centre.
+       Crop beyond the soft side-fill so only the real footage is visible. */
+    transform: scale(1.66);
+    transform-origin: center;
+  }
+  .projects-field-explorer-media-label { width: min(84vw, 350px); }
   .projects-field-explorer-support-card { flex-basis: 82vw; }
 }
 @media (max-width: 359px) {

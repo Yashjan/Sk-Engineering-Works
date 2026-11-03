@@ -1,11 +1,10 @@
 "use client";
 
-import ProgressiveVideo from "@/components/media/ProgressiveVideo";
-
-import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ProgressiveImage from "@/components/media/ProgressiveImage";
+import ProgressiveVideo from "@/components/media/ProgressiveVideo";
 import { projectGallery, type ProjectGalleryItem } from "@/data/projects";
 import { assetPath } from "@/lib/asset-path";
 import "./projects-visual-gallery.css";
@@ -31,7 +30,7 @@ export default function ProjectsVisualGallery({
   headingId = "projects-visual-gallery-heading",
   ariaLabel = "Visual archive",
   footerPrompt = "SCROLL TO MOVE THROUGH THE FIELD",
-  finalLines = ["FROM DRAWING", "TO FABRICATION", "TO THE FIELD."],
+  finalLines = ["FROM DRAWING.", "TO FABRICATION.", "TO THE FIELD."],
   finalLabel = "ENGINEERED / BUILT / INSTALLED",
   scrollTriggerId = "projects-visual-gallery",
 }: ProjectsVisualGalleryProps) {
@@ -39,7 +38,6 @@ export default function ProjectsVisualGallery({
   const stage = useRef<HTMLDivElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLOListElement>(null);
-  const mobileStory = useRef<HTMLDivElement>(null);
   const refreshFrame = useRef<number | null>(null);
 
   useLayoutEffect(() => {
@@ -50,53 +48,46 @@ export default function ProjectsVisualGallery({
     if (!section || !scene || !frame || !rail) return;
 
     gsap.registerPlugin(ScrollTrigger);
-    const cards = Array.from(rail.querySelectorAll<HTMLElement>(".projects-visual-gallery-card"));
-    const mediaLayers = Array.from(rail.querySelectorAll<HTMLElement>(".projects-visual-gallery-media-layer"));
+    const cards = gsap.utils.toArray<HTMLElement>(".projects-visual-gallery-card", rail);
+    const mediaLayers = gsap.utils.toArray<HTMLElement>(".projects-visual-gallery-media-layer", rail);
+    const header = scene.querySelector<HTMLElement>(".projects-visual-gallery-header");
+    const final = scene.querySelector<HTMLElement>(".projects-visual-gallery-final");
     const current = scene.querySelector<HTMLElement>("[data-gallery-current]");
     const progress = scene.querySelector<HTMLElement>("[data-gallery-progress]");
-    const media = gsap.matchMedia();
+    const matchMedia = gsap.matchMedia();
 
-    media.add({
+    matchMedia.add({
+      desktop: "(min-width: 1100px) and (min-height: 650px)",
       motion: "(prefers-reduced-motion: no-preference)",
-      desktop: "(min-width: 768px)",
     }, (context) => {
-      const motion = Boolean(context.conditions?.motion);
-      const desktop = Boolean(context.conditions?.desktop);
-      if (!desktop) return;
+      if (!context.conditions?.desktop || !context.conditions?.motion) return;
+
       let travel = 0;
-      let active = -1;
-
-      const measure = () => {
-        travel = Math.max(0, rail.scrollWidth - frame.clientWidth);
-      };
-
-      const render = () => {
-        const sceneCenter = scene.getBoundingClientRect().left + scene.clientWidth / 2;
-        let nearest = 0;
-        let nearestDistance = Infinity;
+      let activeIndex = -1;
+      let resizeFrame = 0;
+      const measure = () => { travel = Math.max(0, rail.scrollWidth - frame.clientWidth); };
+      const updateActiveCard = () => {
+        const center = frame.getBoundingClientRect().left + frame.clientWidth * 0.56;
+        let nearestIndex = 0;
+        let nearestDistance = Number.POSITIVE_INFINITY;
         cards.forEach((card, index) => {
           const bounds = card.getBoundingClientRect();
-          const distance = Math.abs(bounds.left + bounds.width / 2 - sceneCenter);
+          const distance = Math.abs(bounds.left + bounds.width / 2 - center);
           if (distance < nearestDistance) {
-            nearest = index;
             nearestDistance = distance;
+            nearestIndex = index;
           }
         });
-        cards.forEach((card, index) => { card.dataset.active = String(index === nearest); });
-        if (nearest !== active) {
-          active = nearest;
-          if (current) current.textContent = number(nearest + 1);
+        cards.forEach((card, index) => { card.dataset.active = String(index === nearestIndex); });
+        if (nearestIndex !== activeIndex) {
+          activeIndex = nearestIndex;
+          if (current) current.textContent = number(nearestIndex + 1);
         }
       };
 
       measure();
-      if (!motion || travel <= 0) {
-        section.classList.add("is-static");
-        render();
-        return () => section.classList.remove("is-static");
-      }
+      section.classList.add("is-horizontal");
 
-      section.classList.add("is-animated");
       const intro = gsap.timeline({
         scrollTrigger: {
           trigger: scene,
@@ -106,10 +97,43 @@ export default function ProjectsVisualGallery({
           invalidateOnRefresh: true,
         },
       });
-      intro
-        .fromTo(cards[0], { xPercent: 62, yPercent: 64, autoAlpha: 0.18 }, { xPercent: 0, yPercent: 0, autoAlpha: 1, ease: "power3.out", duration: 1 }, 0)
-        .fromTo(cards[1], { xPercent: 88, yPercent: 92, autoAlpha: 0 }, { xPercent: 0, yPercent: 0, autoAlpha: 1, ease: "power3.out", duration: 1 }, 0.12)
-        .fromTo(".projects-visual-gallery-header", { y: 28, autoAlpha: 0 }, { y: 0, autoAlpha: 1, ease: "power3.out", duration: 0.72 }, 0.08);
+      if (cards[0]) {
+        intro.fromTo(cards[0], {
+          xPercent: 62,
+          yPercent: 64,
+          autoAlpha: 0.18,
+        }, {
+          xPercent: 0,
+          yPercent: 0,
+          autoAlpha: 1,
+          duration: 1,
+          ease: "power3.out",
+        }, 0);
+      }
+      if (cards[1]) {
+        intro.fromTo(cards[1], {
+          xPercent: 88,
+          yPercent: 92,
+          autoAlpha: 0,
+        }, {
+          xPercent: 0,
+          yPercent: 0,
+          autoAlpha: 1,
+          duration: 1,
+          ease: "power3.out",
+        }, 0.12);
+      }
+      if (header) {
+        intro.fromTo(header, {
+          y: 28,
+          autoAlpha: 0,
+        }, {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.72,
+          ease: "power3.out",
+        }, 0.08);
+      }
 
       const story = gsap.timeline({
         scrollTrigger: {
@@ -118,202 +142,183 @@ export default function ProjectsVisualGallery({
           start: "top top",
           end: () => {
             measure();
-            const minimum = window.innerHeight * 1.8;
-            return `+=${Math.max(minimum, travel * 0.62)}`;
+            return `+=${Math.max(window.innerHeight * 2.2, travel * 0.72)}`;
           },
           pin: true,
-          scrub: 0.85,
+          scrub: 0.75,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onRefresh: () => {
-            measure();
-            render();
+          onRefresh: () => { measure(); updateActiveCard(); },
+          onUpdate: (self) => {
+            updateActiveCard();
+            if (progress) progress.style.transform = `scaleX(${self.progress})`;
           },
         },
       });
+
       story
         .to(rail, { x: () => -travel, duration: 1, ease: "none" }, 0)
+        .to(header, { autoAlpha: 0, y: -22, duration: 0.13, ease: "none" }, 0.05)
         .to(scene, {
           "--gallery-bg": "#aeb6a9",
           "--gallery-fg": "#111415",
-          "--gallery-muted": "rgba(17,20,21,.56)",
-          "--gallery-line": "rgba(17,20,21,.12)",
-          duration: 0.38,
+          "--gallery-muted": "rgba(17,20,21,.58)",
+          "--gallery-line": "rgba(17,20,21,.14)",
+          duration: 0.3,
           ease: "none",
-        }, 0.18)
+        }, 0.24)
         .to(scene, {
           "--gallery-bg": "#f3f2ed",
           "--gallery-fg": "#111415",
-          "--gallery-muted": "rgba(17,20,21,.52)",
-          "--gallery-line": "rgba(17,20,21,.11)",
-          duration: 0.46,
+          "--gallery-muted": "rgba(17,20,21,.56)",
+          "--gallery-line": "rgba(17,20,21,.13)",
+          duration: 0.4,
           ease: "none",
-        }, 0.54);
+        }, 0.57);
 
       mediaLayers.forEach((layer, index) => {
         story.fromTo(layer, {
-          xPercent: index % 2 === 0 ? -5 : 5,
-          yPercent: index % 3 === 0 ? 3 : -2,
-          scale: 1.08,
+          xPercent: index % 2 === 0 ? -3.5 : 3.5,
+          yPercent: index % 3 === 0 ? 2 : -1.5,
+          scale: 1.055,
         }, {
-          xPercent: index % 2 === 0 ? 5 : -5,
-          yPercent: index % 3 === 0 ? -3 : 2,
-          scale: 1.02,
+          xPercent: index % 2 === 0 ? 3.5 : -3.5,
+          yPercent: index % 3 === 0 ? -2 : 1.5,
+          scale: 1.015,
           duration: 1,
           ease: "none",
         }, 0);
       });
-      story.eventCallback("onUpdate", () => {
-        render();
-        if (progress) progress.style.transform = `scaleX(${story.progress()})`;
-      });
 
-      let resizeFrame = 0;
       const refresh = () => {
         cancelAnimationFrame(resizeFrame);
-        resizeFrame = requestAnimationFrame(() => {
-          measure();
-          ScrollTrigger.sort();
-          ScrollTrigger.refresh();
-        });
+        resizeFrame = requestAnimationFrame(() => { measure(); ScrollTrigger.refresh(); });
       };
-      refresh();
       window.addEventListener("resize", refresh);
-      render();
+      updateActiveCard();
 
       return () => {
         cancelAnimationFrame(resizeFrame);
         window.removeEventListener("resize", refresh);
-        section.classList.remove("is-animated");
+        section.classList.remove("is-horizontal");
         cards.forEach((card) => delete card.dataset.active);
       };
     }, section);
 
-    return () => media.revert();
-  }, [scrollTriggerId]);
-
-  useLayoutEffect(() => {
-    const story = mobileStory.current;
-    if (!story) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-    const firstCard = story.querySelector<HTMLElement>(".projects-visual-gallery-mobile-first");
-    const streamCards = Array.from(story.querySelectorAll<HTMLElement>(".projects-visual-gallery-mobile-card"));
-    const final = story.querySelector<HTMLElement>(".projects-visual-gallery-mobile-final");
-    const media = gsap.matchMedia();
-
-    media.add({
+    matchMedia.add({
+      editorial: "(max-width: 1099px), (max-height: 649px)",
       mobile: "(max-width: 767px)",
       motion: "(prefers-reduced-motion: no-preference)",
     }, (context) => {
-      const mobile = Boolean(context.conditions?.mobile);
-      const motion = Boolean(context.conditions?.motion);
-      if (!mobile) return;
-      if (!motion) {
-        story.classList.add("is-static");
-        return () => story.classList.remove("is-static");
-      }
-
-      story.classList.add("is-animated");
+      if (!context.conditions?.editorial || !context.conditions?.motion) return;
+      section.classList.add("is-editorial");
       const animations: gsap.core.Animation[] = [];
-      if (firstCard) {
-        animations.push(gsap.fromTo(firstCard, {
-          x: 28,
-          y: 104,
-          autoAlpha: 0.66,
-        }, {
-          x: 0,
-          y: -18,
-          autoAlpha: 1,
-          ease: "none",
+
+      if (context.conditions?.mobile) {
+        const [firstCard, ...streamCards] = cards;
+        if (firstCard) {
+          animations.push(gsap.fromTo(firstCard, {
+            x: 28,
+            y: 58,
+            autoAlpha: 0.66,
+          }, {
+            x: 0,
+            y: 0,
+            autoAlpha: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: firstCard,
+              start: "top 102%",
+              end: "bottom 48%",
+              scrub: 0.72,
+              invalidateOnRefresh: true,
+            },
+          }));
+        }
+
+        streamCards.forEach((card, index) => {
+          const direction = [18, -13, 10, -17, 12, -8, 14][index] ?? 0;
+          const rise = [48, 42, 56, 44, 52, 42, 48][index] ?? 46;
+          animations.push(gsap.fromTo(card, {
+            x: direction,
+            y: rise,
+            autoAlpha: 0.54,
+          }, {
+            x: 0,
+            y: 0,
+            autoAlpha: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 97%",
+              end: "bottom 28%",
+              scrub: 0.68,
+              invalidateOnRefresh: true,
+            },
+          }));
+        });
+
+        animations.push(gsap.timeline({
           scrollTrigger: {
-            trigger: firstCard,
-            start: "top 98%",
-            end: "bottom 42%",
-            scrub: 0.72,
+            trigger: scene,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.75,
             invalidateOnRefresh: true,
           },
-        }));
-      }
-
-      streamCards.forEach((card, index) => {
-        const direction = [18, -13, 10, -17, 12, -8][index] ?? 0;
-        const rise = [88, 72, 104, 78, 96, 74][index] ?? 84;
-        animations.push(gsap.fromTo(card, {
-          x: direction,
-          y: rise,
-          autoAlpha: 0.54,
-        }, {
-          x: 0,
-          y: index % 2 === 0 ? -24 : -14,
-          autoAlpha: 1,
+        }).to(scene, {
+          "--gallery-bg": "#101614",
+          duration: 0.3,
           ease: "none",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 97%",
-            end: "bottom 28%",
-            scrub: 0.68,
-            invalidateOnRefresh: true,
-          },
-        }));
-      });
-
-      const palette = gsap.timeline({
-        scrollTrigger: {
-          trigger: story,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.8,
-          invalidateOnRefresh: true,
-        },
-      });
-      palette
-        .to(story, { "--gallery-bg": "#101614", duration: 0.3, ease: "none" })
-        .to(story, {
+        }).to(scene, {
           "--gallery-bg": "#aeb6a9",
           "--gallery-fg": "#111415",
           "--gallery-muted": "rgba(17,20,21,.56)",
           "--gallery-line": "rgba(17,20,21,.12)",
           duration: 0.28,
           ease: "none",
-        })
-        .to(story, {
+        }).to(scene, {
           "--gallery-bg": "#f3f2ed",
           "--gallery-fg": "#111415",
           "--gallery-muted": "rgba(17,20,21,.52)",
           "--gallery-line": "rgba(17,20,21,.11)",
           duration: 0.42,
           ease: "none",
-        });
-      animations.push(palette);
+        }));
+      } else {
+        cards.forEach((card) => animations.push(gsap.fromTo(card, {
+          y: 28,
+          autoAlpha: 0,
+        }, {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.7,
+          ease: "power2.out",
+          scrollTrigger: { trigger: card, start: "top 88%", once: true },
+        })));
+      }
 
       if (final) {
         animations.push(gsap.fromTo(final.querySelectorAll("span"), {
-          yPercent: 108,
+          yPercent: 105,
           autoAlpha: 0,
         }, {
           yPercent: 0,
           autoAlpha: 1,
           stagger: 0.08,
-          duration: 0.7,
+          duration: 0.65,
           ease: "power3.out",
-          scrollTrigger: { trigger: final, start: "top 78%", once: true },
+          scrollTrigger: { trigger: final, start: "top 82%", once: true },
         }));
       }
-
-      const refreshFrame = requestAnimationFrame(() => {
-        ScrollTrigger.sort();
-        ScrollTrigger.refresh();
-      });
       return () => {
-        cancelAnimationFrame(refreshFrame);
         animations.forEach((animation) => animation.revert());
-        story.classList.remove("is-animated");
+        section.classList.remove("is-editorial");
       };
-    }, story);
+    }, section);
 
-    return () => media.revert();
-  }, []);
+    return () => matchMedia.revert();
+  }, [scrollTriggerId]);
 
   useEffect(() => {
     const section = root.current;
@@ -322,30 +327,23 @@ export default function ProjectsVisualGallery({
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const visibility = new Map(videos.map((video) => [video, 0]));
     const syncPlayback = () => {
-      let active: HTMLVideoElement | null = null;
-      let highestVisibility = 0.18;
-
-      if (!reducedMotion.matches && !document.hidden) {
+      let activeVideo: HTMLVideoElement | null = null;
+      let highestRatio = 0.45;
+      if (!document.hidden && !reducedMotion.matches) {
         visibility.forEach((ratio, video) => {
-          if (ratio > highestVisibility) {
-            active = video;
-            highestVisibility = ratio;
-          }
+          if (ratio > highestRatio) { activeVideo = video; highestRatio = ratio; }
         });
       }
-
       videos.forEach((video) => {
-        if (video === active) void video.play().catch(() => {});
-        else video.pause();
+        if (video === activeVideo) {
+          if (video.paused) void video.play().catch(() => {});
+        } else if (!video.paused) video.pause();
       });
     };
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const video = entry.target as HTMLVideoElement;
-        visibility.set(video, entry.isIntersecting ? entry.intersectionRatio : 0);
-      });
+      entries.forEach((entry) => visibility.set(entry.target as HTMLVideoElement, entry.isIntersecting ? entry.intersectionRatio : 0));
       syncPlayback();
-    }, { threshold: [0, 0.18, 0.35, 0.5, 0.75], rootMargin: "12%" });
+    }, { threshold: [0, 0.25, 0.45, 0.65, 0.85], rootMargin: "8%" });
     videos.forEach((video) => observer.observe(video));
     document.addEventListener("visibilitychange", syncPlayback);
     reducedMotion.addEventListener("change", syncPlayback);
@@ -355,7 +353,7 @@ export default function ProjectsVisualGallery({
       reducedMotion.removeEventListener("change", syncPlayback);
       videos.forEach((video) => video.pause());
     };
-  }, []);
+  }, [items]);
 
   useEffect(() => () => {
     if (refreshFrame.current !== null) cancelAnimationFrame(refreshFrame.current);
@@ -369,132 +367,46 @@ export default function ProjectsVisualGallery({
     });
   };
 
-  return (
-    <section ref={root} className="projects-visual-gallery" aria-label={ariaLabel}>
-      <div ref={stage} className="projects-visual-gallery-stage">
-        <header className="projects-visual-gallery-header">
-          <p>{eyebrow}</p>
-          <h2 id={headingId}>
-            <span>{heading[0]}</span>
-            <span>{heading[1]}</span>
-          </h2>
-        </header>
+  return <section id={scrollTriggerId} ref={root} className="projects-visual-gallery" aria-label={ariaLabel}>
+    <div ref={stage} className="projects-visual-gallery-stage">
+      <header className="projects-visual-gallery-header">
+        <p>{eyebrow}</p>
+        <h2 id={headingId}><span>{heading[0]}</span><span>{heading[1]}</span></h2>
+      </header>
 
-        <div ref={viewport} className="projects-visual-gallery-viewport">
-          <ol ref={track} className="projects-visual-gallery-track">
-            {items.map((item, index) => (
-              <li
-                key={item.id}
-                className={`projects-visual-gallery-card is-${item.format} is-${item.level}`}
-                data-active={index === 0 ? "true" : "false"}
-              >
-                <figure>
-                  <div className="projects-visual-gallery-media">
-                    <div className="projects-visual-gallery-media-layer">
-                      {item.type === "video" ? (
-                        <ProgressiveVideo
-                          src={assetPath(item.src)}
-                          poster={item.poster ? assetPath(item.poster) : undefined}
-                          aria-label={item.alt}
-                          muted
-                          loop
-                          playsInline
-                          preload="metadata"
-                          onLoadedMetadata={refreshLayout}
-                        />
-                      ) : (
-                        <Image
-                          src={assetPath(item.src)}
-                          alt={item.alt}
-                          fill
-                          sizes="(max-width: 767px) 78vw, (max-width: 1199px) 46vw, 36vw"
-                          onLoad={refreshLayout}
-                        />
-                      )}
-                    </div>
-                  </div>
-                  <figcaption>
-                    <span>{number(index + 1)} / {item.label}</span>
-                    <strong>{item.detail}</strong>
-                  </figcaption>
-                </figure>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        <footer className="projects-visual-gallery-footer">
-          <p><span data-gallery-current>01</span> / {number(items.length)}</p>
-          <div aria-hidden="true"><span data-gallery-progress /></div>
-          <p>{footerPrompt} <span aria-hidden="true">→</span></p>
-        </footer>
-      </div>
-
-      <div ref={mobileStory} className="projects-visual-gallery-mobile">
-        <div className="projects-visual-gallery-mobile-intro">
-          <header className="projects-visual-gallery-mobile-header">
-            <p>{eyebrow}</p>
-            <h2>
-              <span>{heading[0]}</span>
-              <span>{heading[1]}</span>
-            </h2>
-          </header>
-          <article className={`projects-visual-gallery-mobile-first is-${items[0].format}`}>
+      <div ref={viewport} className="projects-visual-gallery-viewport">
+        <ol ref={track} className="projects-visual-gallery-track">
+          {items.map((item, index) => <li key={item.id} className={`projects-visual-gallery-card is-${item.format} is-${item.level}`} data-active={index === 0 ? "true" : "false"}>
             <figure>
-              <div className="projects-visual-gallery-mobile-media">
-                {items[0].type === "video" ? (
-                  <ProgressiveVideo
-                    src={assetPath(items[0].src)}
-                    poster={items[0].poster ? assetPath(items[0].poster) : undefined}
-                    aria-label={items[0].alt}
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    onLoadedMetadata={refreshLayout}
-                  />
-                ) : (
-                  <Image src={assetPath(items[0].src)} alt={items[0].alt} fill sizes="82vw" onLoad={refreshLayout} />
-                )}
-              </div>
-              <figcaption><span>01 / {items[0].label}</span><strong>{items[0].detail}</strong></figcaption>
+              <div className="projects-visual-gallery-media"><div className="projects-visual-gallery-media-layer">
+                {item.type === "video" ? <ProgressiveVideo
+                  src={assetPath(item.src)}
+                  poster={item.poster ? assetPath(item.poster) : undefined}
+                  aria-label={item.alt}
+                  muted loop playsInline preload="none"
+                  onLoadedMetadata={refreshLayout}
+                /> : <ProgressiveImage
+                  src={assetPath(item.src)} alt={item.alt} fill
+                  sizes="(max-width: 767px) 88vw, (max-width: 1099px) 70vw, 38vw"
+                  onLoad={refreshLayout}
+                />}
+              </div></div>
+              <figcaption><span>{number(index + 1)} / {item.label}</span><strong>{item.detail}</strong></figcaption>
             </figure>
-          </article>
-        </div>
-
-        <ol className="projects-visual-gallery-mobile-stream">
-          {items.slice(1).map((item, index) => (
-            <li key={item.id} className={`projects-visual-gallery-mobile-card is-${item.format}`}>
-              <figure>
-                <div className="projects-visual-gallery-mobile-media">
-                  {item.type === "video" ? (
-                    <ProgressiveVideo
-                      src={assetPath(item.src)}
-                      poster={item.poster ? assetPath(item.poster) : undefined}
-                      aria-label={item.alt}
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      onLoadedMetadata={refreshLayout}
-                    />
-                  ) : (
-                    <Image src={assetPath(item.src)} alt={item.alt} fill sizes="(max-width: 767px) 84vw, 1px" onLoad={refreshLayout} />
-                  )}
-                </div>
-                <figcaption><span>{number(index + 2)} / {item.label}</span><strong>{item.detail}</strong></figcaption>
-              </figure>
-            </li>
-          ))}
+          </li>)}
         </ol>
-
-        <div className="projects-visual-gallery-mobile-final">
-          <p><span>{finalLines[0]}</span></p>
-          <p><span>{finalLines[1]}</span></p>
-          <p><span>{finalLines[2]}</span></p>
-          <small>{finalLabel}</small>
-        </div>
       </div>
-    </section>
-  );
+
+      <footer className="projects-visual-gallery-footer">
+        <p><span data-gallery-current>01</span> / {number(items.length)}</p>
+        <div aria-hidden="true"><span data-gallery-progress /></div>
+        <p>{footerPrompt} <span aria-hidden="true">→</span></p>
+      </footer>
+
+      <div className="projects-visual-gallery-final">
+        {finalLines.map((line) => <p key={line}><span>{line}</span></p>)}
+        <small>{finalLabel}</small>
+      </div>
+    </div>
+  </section>;
 }
