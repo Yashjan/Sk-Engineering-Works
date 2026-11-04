@@ -1,0 +1,93 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import AboutPage from "@/app/about/page";
+import ContactPage from "@/app/contact/page";
+import EngineeringPage from "@/app/engineering/page";
+import MachineryPage from "@/app/machinery/page";
+import MachineDetailPage from "@/app/machinery/[slug]/page";
+import ProjectsPage from "@/app/projects/page";
+import ProjectDetailPage from "@/app/projects/[slug]/page";
+import JagdambaProjectPage from "@/app/projects/jagdamba-salt-15tph/page";
+import SaltRefineryPage from "@/app/salt-refinery-plants/page";
+import { machineryCatalog } from "@/data/machinery";
+import { machineryDetails } from "@/data/machinery-details";
+import { projectArchive } from "@/data/projects";
+import { createLocalizedMetadata } from "@/i18n/metadata";
+import { getPageCopy } from "@/i18n/page-copy";
+import { isTranslatedLocale, translatedLocales } from "@/i18n/config";
+
+type LocalizedRouteProps = { params: Promise<{ locale: string; segments: string[] }> };
+
+const machinerySlugs = [...new Set([...machineryCatalog.map(({ slug }) => slug), ...Object.keys(machineryDetails)])];
+const projectSlugs = [...new Set(["jagdamba-salt-15tph", ...projectArchive.map(({ slug }) => slug)])];
+const baseSegments = [["about"], ["contact"], ["engineering"], ["machinery"], ["projects"], ["salt-refinery-plants"]];
+const allSegments = [
+  ...baseSegments,
+  ...machinerySlugs.map((slug) => ["machinery", slug]),
+  ...projectSlugs.map((slug) => ["projects", slug]),
+];
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return translatedLocales.flatMap((locale) => allSegments.map((segments) => ({ locale, segments })));
+}
+
+function routeKey(segments: string[]) {
+  return segments.join("/");
+}
+
+export async function generateMetadata({ params }: LocalizedRouteProps): Promise<Metadata> {
+  const { locale, segments } = await params;
+  if (!isTranslatedLocale(locale)) notFound();
+  const route = routeKey(segments);
+  const pathname = `/${route}`;
+  const baseKey = route === "about" || route === "contact" || route === "engineering" || route === "machinery" || route === "projects"
+    ? route
+    : route === "salt-refinery-plants" ? "salt" : null;
+  if (baseKey) return createLocalizedMetadata({ locale, pathname, ...getPageCopy(locale, baseKey) });
+
+  if (segments[0] === "machinery" && segments[1]) {
+    const machine = machineryDetails[segments[1]] ?? machineryCatalog.find(({ slug }) => slug === segments[1]);
+    const machineName = "name" in (machine ?? {}) ? (machine as { name: string }).name : machineryDetails[segments[1]]?.name;
+    return createLocalizedMetadata({
+      locale,
+      pathname,
+      title: `${machineName ?? "Machinery"} | ${locale === "hi" ? "औद्योगिक मशीनरी" : "الآلات الصناعية"}`,
+      description: locale === "hi"
+        ? `${machineName ?? "मशीन"} की अभियांत्रिकी, निर्माण और प्रक्रिया अनुप्रयोग संबंधी जानकारी।`
+        : `معلومات عن هندسة وتصنيع وتطبيقات ${machineName ?? "الآلة"}.`,
+    });
+  }
+
+  if (segments[0] === "projects" && segments[1]) {
+    const project = projectArchive.find(({ slug }) => slug === segments[1]);
+    const name = project?.name ?? "Jagdamba Salt 15 TPH Refinery";
+    return createLocalizedMetadata({
+      locale,
+      pathname,
+      title: `${name} | ${locale === "hi" ? "परियोजना रिकॉर्ड" : "سجل المشروع"}`,
+      description: locale === "hi" ? `${name} का सत्यापित परियोजना रिकॉर्ड।` : `سجل مشروع موثق لـ ${name}.`,
+      image: project?.poster ?? (project?.mediaType === "image" ? project.mediaSrc : undefined),
+      index: false,
+    });
+  }
+
+  notFound();
+}
+
+export default async function LocalizedRoutePage({ params }: LocalizedRouteProps) {
+  const { segments } = await params;
+  const route = routeKey(segments);
+  if (route === "about") return <AboutPage />;
+  if (route === "contact") return <ContactPage />;
+  if (route === "engineering") return <EngineeringPage />;
+  if (route === "machinery") return <MachineryPage />;
+  if (route === "projects") return <ProjectsPage />;
+  if (route === "salt-refinery-plants") return <SaltRefineryPage />;
+  if (segments[0] === "machinery" && segments[1]) return <MachineDetailPage params={Promise.resolve({ slug: segments[1] })} />;
+  if (segments[0] === "projects" && segments[1] === "jagdamba-salt-15tph") return <JagdambaProjectPage />;
+  if (segments[0] === "projects" && segments[1]) return <ProjectDetailPage params={Promise.resolve({ slug: segments[1] })} />;
+  notFound();
+}
+

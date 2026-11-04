@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { companyContact } from "@/data/contact";
+import { localizePathname } from "@/i18n/config";
 
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 const fallbackSiteUrl = process.env.NODE_ENV === "production"
@@ -68,7 +69,15 @@ export function createPageMetadata({
   return {
     title: { absolute: socialTitle },
     description,
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      languages: {
+        en: absoluteUrl(localizePathname(path, "en")),
+        hi: absoluteUrl(localizePathname(path, "hi")),
+        ar: absoluteUrl(localizePathname(path, "ar")),
+        "x-default": absoluteUrl(localizePathname(path, "en")),
+      },
+    },
     robots: index
       ? { index: true, follow: true }
       : { index: false, follow: true },

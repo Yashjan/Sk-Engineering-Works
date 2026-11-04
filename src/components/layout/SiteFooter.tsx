@@ -3,16 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
+import { localeFromPathname, localizePathname, stripLocale, type Locale } from "@/i18n/config";
 import "./site-footer.css";
 
-const footerLinks = [
-  ["HOME", "/"],
-  ["SALT REFINERY PLANTS", "/salt-refinery-plants"],
-  ["MACHINERY", "/machinery"],
-  ["PROJECTS", "/projects"],
-  ["ABOUT", "/about"],
-  ["CONTACT", "/contact"],
-] as const;
+const footerLabels: Record<Locale, string[]> = {
+  en: ["HOME", "SALT REFINERY PLANTS", "MACHINERY", "PROJECTS", "ABOUT", "CONTACT"],
+  hi: ["होम", "नमक रिफाइनरी संयंत्र", "मशीनरी", "परियोजनाएँ", "हमारे बारे में", "संपर्क"],
+  ar: ["الرئيسية", "مصانع تكرير الملح", "الآلات", "المشاريع", "من نحن", "اتصل بنا"],
+};
+const footerDestinations = ["/", "/salt-refinery-plants", "/machinery", "/projects", "/about", "/contact"];
 
 type SocialNetwork = keyof typeof siteConfig.socialLinks;
 
@@ -36,7 +35,9 @@ function SocialIcon({ network }: { network: SocialNetwork }) {
 
 export default function SiteFooter({ className = "" }: { className?: string }) {
   const pathname = usePathname();
-  const currentPath = pathname === "/" ? pathname : pathname.replace(/\/+$/, "");
+  const locale = localeFromPathname(pathname);
+  const unprefixedPath = stripLocale(pathname);
+  const currentPath = unprefixedPath === "/" ? unprefixedPath : unprefixedPath.replace(/\/+$/, "");
   const socialLinks = Object.entries(siteConfig.socialLinks).filter(
     (entry): entry is [SocialNetwork, string] => Boolean(entry[1]),
   );
@@ -44,7 +45,7 @@ export default function SiteFooter({ className = "" }: { className?: string }) {
   return <footer className={`enquiry-footer site-footer${className ? ` ${className}` : ""}`}>
     <div className="site-footer-row">
       <nav aria-label="Footer navigation">
-        {footerLinks.map(([label, href]) => <Link key={href} href={href} aria-current={currentPath === href ? "page" : undefined}>{label}</Link>)}
+        {footerDestinations.map((href, index) => <Link key={href} href={localizePathname(href, locale)} aria-current={currentPath === href ? "page" : undefined}>{footerLabels[locale][index]}</Link>)}
       </nav>
       <nav className="site-footer-socials" aria-label="Social media">
         {socialLinks.map(([network, href]) => (
