@@ -30,7 +30,9 @@ export const siteConfig = {
   socialLinks: {
     instagram: "https://www.instagram.com/skengineeringworks20/",
     youtube: "https://www.youtube.com/@skengineeringworkssambharlake",
-    linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim() || null,
+    linkedin:
+      process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim() ||
+      "https://www.linkedin.com/company/145400308/",
   },
 } as const;
 

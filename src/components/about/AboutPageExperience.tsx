@@ -80,7 +80,7 @@ const journey: JourneyPhase[] = [
   },
 ];
 
-const founderRoles = ["TECHNICAL DIRECTION", "PLANT PLANNING", "MACHINERY SELECTION", "FABRICATION GUIDANCE", "SITE EXECUTION", "CLIENT COORDINATION", "MAINTENANCE & PROBLEM SOLVING", "BUSINESS EXPANSION"];
+const founderRoles = ["PRACTICAL MECHANICAL ENGINEERING", "MACHINERY DESIGN & SELECTION", "FABRICATION & MANUFACTURING GUIDANCE", "SALT PROCESSING EQUIPMENT", "PLANT LAYOUT & EQUIPMENT INTEGRATION", "QUALITY & RELIABILITY", "INSTALLATION & SITE EXECUTION", "CUSTOMER REQUIREMENT UNDERSTANDING"];
 
 const currentCapabilities = [
   ["INDUSTRIAL EQUIPMENT", "Process machinery, blowers, filters, screens, mills and equipment developed around practical production needs."],
@@ -94,7 +94,7 @@ const progression = [
   ["COMPLETE SALT REFINERY", "A coordinated plant system taken from fabrication through installation."],
 ];
 
-const locations = [["SAMBHAR / NAWA", "RAJASTHAN"], ["PHALODI", "RAJASTHAN"], ["SANTALPUR", "GUJARAT"], ["JAMBUSAR", "GUJARAT"]];
+const locations = [["SAMBHAR / NAWA", "RAJASTHAN"], ["PHALODI", "RAJASTHAN"], ["SANTALPUR", "GUJARAT"], ["JAMBUSAR", "GUJARAT"], ["GANDHIDHAM", "GUJARAT"]];
 
 export default function AboutPageExperience() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -170,12 +170,12 @@ export default function AboutPageExperience() {
     </section>
 
     <section className="about-page-founder about-page-reveal" aria-labelledby="about-founder-title">
-      <div className="about-page-section-meta" data-reveal><span>THE MAN BEHIND THE WORK / 03</span><span>MANAGING DIRECTOR</span></div>
+      <div className="about-page-section-meta" data-reveal><span>03 / THE MAN BEHIND THE WORK</span><span>FOUNDER / S.K. ENGINEERING WORKS</span></div>
       <div className="about-page-founder-grid">
-        <figure className="about-page-founder-visual" data-reveal><Image src={assetPath("/images/common/field-media/fabrication-blower.jpeg")} alt="S.K. Engineering Works workshop context for the Managing Director profile" fill sizes="(max-width: 767px) 88vw, 41vw" /><div className="about-page-founder-placeholder"><span>MANAGING DIRECTOR PORTRAIT</span><strong>TO BE ADDED</strong></div><figcaption>WORKSHOP CONTEXT / VERIFIED PORTRAIT PENDING</figcaption></figure>
-        <div className="about-page-founder-copy"><h2 id="about-founder-title" data-reveal>BUILT WITH<br />HANDS-ON<br />EXPERIENCE.</h2><div className="about-page-founder-name" data-reveal><strong>FULL NAME TO BE CONFIRMED</strong><span>MANAGING DIRECTOR / S.K. ENGINEERING WORKS</span></div><div className="about-page-founder-story" data-reveal><p>Coming from a mechanical background, the Managing Director built S.K. Engineering Works around practical engineering, fabrication and problem-solving.</p><p>His work moved through well pulleys, agricultural machinery and material handling before developing into large-scale salt refinery engineering.</p><p>Today, that experience guides machinery selection, fabrication, plant planning, site execution and customer problem-solving.</p></div></div>
+        <figure className="about-page-founder-visual" data-reveal><Image src={assetPath("/images/about/ramlal-jangid-founder.webp")} alt="Mr. Ramlal Jangid, Founder of S.K. Engineering Works." fill sizes="(max-width: 767px) 88vw, (max-width: 1099px) 40vw, 41vw" /><figcaption>MR. RAMLAL JANGID / FOUNDER</figcaption></figure>
+        <div className="about-page-founder-copy"><h2 id="about-founder-title" data-reveal>BUILT WITH<br />EXPERIENCE.<br /><span>LED BY PURPOSE.</span></h2><div className="about-page-founder-name" data-reveal><strong>Mr. Ramlal Jangid</strong><span>FOUNDER | S.K. ENGINEERING WORKS</span></div><div className="about-page-founder-story" data-reveal><p>Behind S.K. Engineering Works is a foundation built on practical knowledge, hands-on fabrication, and an understanding of how industrial machinery performs in real working conditions.</p><p>From the company&apos;s early work with traditional well pulleys to its expansion into salt-processing machinery and complete refinery systems, the journey reflects a commitment to mechanical engineering, dependable manufacturing, and continuous improvement.</p><p>Under the guidance of founder Mr. Ramlal Jangid, S.K. Engineering Works continues to approach each requirement with attention to practical design, fabrication quality, equipment reliability, and the demands of installation and operation.</p></div><div className="about-page-founder-philosophy" data-reveal><span>OUR APPROACH</span><p>Good engineering goes beyond drawings and machines. It is about understanding the process, building equipment that works reliably, and delivering solutions suited to real industrial conditions.</p></div></div>
       </div>
-      <ul className="about-page-founder-roles" aria-label="Managing Director responsibilities">{founderRoles.map((role, index) => <li key={role} data-reveal><span>{String(index + 1).padStart(2, "0")}</span>{role}</li>)}</ul>
+      <ul className="about-page-founder-roles" aria-label="Engineering approach and responsibilities">{founderRoles.map((role, index) => <li key={role} data-reveal><span>{String(index + 1).padStart(2, "0")}</span>{role}</li>)}</ul>
     </section>
 
     <section className="about-page-builds about-page-reveal" aria-labelledby="about-builds-title">
@@ -186,9 +186,31 @@ export default function AboutPageExperience() {
     </section>
 
     <section className="about-page-workshop about-page-reveal" aria-labelledby="about-workshop-title">
-      <div className="about-page-section-meta" data-reveal><span>BUILT HERE / 05</span><span>REAL WORKSHOP PROOF</span></div>
-      <header className="about-page-workshop-heading"><h2 id="about-workshop-title" data-reveal>BUILT HERE.</h2><p data-reveal>FROM DRAWING<br />TO FABRICATION<br />TO WORKING MACHINE.</p></header>
-      <div className="about-page-workshop-grid"><figure className="about-page-workshop-primary" data-reveal><Image src={assetPath("/images/common/field-media/fabricated-equipment.jpeg")} alt="Fabricated stainless-steel process equipment in the S.K. Engineering Works workshop" fill sizes="(max-width: 767px) 88vw, 62vw" /><figcaption><span>PROCESS EQUIPMENT</span><span>FABRICATED IN-HOUSE</span></figcaption></figure><div className="about-page-workshop-support"><figure data-reveal><Image src={assetPath("/images/common/field-media/fabrication-blower.jpeg")} alt="Large industrial blower fabricated in the workshop" fill sizes="(max-width: 767px) 88vw, 28vw" /><figcaption>INDUSTRIAL BLOWER / FABRICATION</figcaption></figure><figure data-reveal><Image src={assetPath("/images/common/field-media/plant-structure.jpeg")} alt="Fabricated plant structure with installed process equipment" fill sizes="(max-width: 767px) 88vw, 28vw" /><figcaption>PLANT STRUCTURE / INSTALLED SYSTEM</figcaption></figure></div></div>
+      <div className="about-page-section-meta" data-reveal><span>05 / BUILT HERE</span><span>REAL WORKSHOP PROOF</span></div>
+      <header className="about-page-workshop-heading">
+        <h2 id="about-workshop-title" data-reveal>BUILT HERE.</h2>
+        <div className="about-page-workshop-intro" data-reveal>
+          <p className="about-page-workshop-subheading">FROM FABRICATION FLOOR TO INDUSTRIAL INSTALLATION.</p>
+          <p className="about-page-workshop-statement">Real fabrication. Real equipment. Real project execution.</p>
+          <p className="about-page-workshop-description">A closer look at the manufacturing and site work behind S.K. Engineering Works — from large fabricated equipment in the workshop to dispatch and integration at industrial facilities.</p>
+        </div>
+      </header>
+      <div className="about-page-workshop-grid">
+        <figure className="about-page-workshop-primary" data-reveal>
+          <Image src={assetPath("/images/about/workshop-fabrication.webp")} alt="Large cylindrical industrial equipment fabricated inside the S.K. Engineering Works workshop" fill sizes="(max-width: 767px) 88vw, 62vw" />
+          <figcaption>01 / WORKSHOP FABRICATION</figcaption>
+        </figure>
+        <div className="about-page-workshop-support">
+          <figure className="about-page-workshop-dispatch" data-reveal>
+            <Image src={assetPath("/images/about/equipment-dispatch.webp")} alt="Large fabricated conical industrial equipment loaded onto a transport truck for dispatch" fill sizes="(max-width: 767px) 88vw, 28vw" />
+            <figcaption>02 / EQUIPMENT DISPATCH</figcaption>
+          </figure>
+          <figure className="about-page-workshop-installation" data-reveal>
+            <Image src={assetPath("/images/about/site-installation.webp")} alt="Industrial processing equipment and structural steel installed at a project site" fill sizes="(max-width: 767px) 88vw, 28vw" />
+            <figcaption>03 / SITE INSTALLATION</figcaption>
+          </figure>
+        </div>
+      </div>
     </section>
 
     <section className="about-page-progression about-page-reveal" aria-labelledby="about-progression-title">
@@ -199,7 +221,7 @@ export default function AboutPageExperience() {
 
     <section className="about-page-footprint about-page-reveal" aria-labelledby="about-footprint-title">
       <div className="about-page-section-meta" data-reveal><span>EXECUTION FOOTPRINT / 07</span><span>RAJASTHAN + GUJARAT</span></div>
-      <div className="about-page-footprint-grid"><div className="about-page-footprint-copy"><h2 id="about-footprint-title" data-reveal>ROOTED IN SAMBHAR.<br /><span>WORKING ACROSS REGIONS.</span></h2><p data-reveal>Mechanical roots in Sambhar Lake have grown into machinery and salt refinery execution across Rajasthan and Gujarat.</p><div className="about-page-regions" aria-hidden="true" data-reveal><span>RAJASTHAN</span><span>GUJARAT</span></div></div><div className="about-page-footprint-proof"><figure data-reveal><Image src={assetPath("/images/projects/jagdamba/cover-image.png")} alt="Completed S.K. Engineering Works salt refinery installation in Phalodi, Rajasthan" fill sizes="(max-width: 767px) 88vw, 43vw" /><figcaption>COMPLETE PLANT / FIELD EXECUTION</figcaption></figure><ul aria-label="Verified project locations">{locations.map(([city, region], index) => <li key={city} data-reveal><span>0{index + 1}</span><strong>{city}</strong><small>{region}</small></li>)}</ul></div></div>
+      <div className="about-page-footprint-grid"><div className="about-page-footprint-copy"><h2 id="about-footprint-title" data-reveal>ROOTED IN SAMBHAR.<br /><span>WORKING ACROSS REGIONS.</span></h2><p data-reveal>Mechanical roots in Sambhar Lake have grown into machinery and salt refinery execution across Rajasthan and Gujarat.</p><div className="about-page-regions" aria-hidden="true" data-reveal><span>RAJASTHAN</span><span>GUJARAT</span></div></div><div className="about-page-footprint-proof"><figure data-reveal><Image src={assetPath("/images/about/sk-engineering-workshop.webp")} alt="S.K. Engineering Works workshop in Sambhar Lake with fabricated industrial equipment" fill sizes="(max-width: 767px) 88vw, 43vw" /><figcaption>OUR MANUFACTURING BASE / SAMBHAR LAKE, RAJASTHAN</figcaption></figure><ul aria-label="Verified project locations">{locations.map(([city, region], index) => <li key={city} data-reveal><span>0{index + 1}</span><strong>{city}</strong><small>{region}</small></li>)}</ul></div></div>
     </section>
   </div>;
 }

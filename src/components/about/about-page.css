@@ -344,57 +344,17 @@
 }
 .about-page-founder-visual {
   position: relative;
-  min-height: clamp(550px, 53vw, 820px);
+  width: min(100%, 660px);
+  min-height: 0;
+  aspect-ratio: 1122 / 1402;
   margin: 0;
   overflow: hidden;
+  border: 1px solid rgb(243 242 237 / 20%);
+  background: #171a19;
 }
 .about-page-founder-visual > img {
   object-fit: cover;
-  filter: saturate(0.72) brightness(0.65);
-}
-.about-page-founder-placeholder {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgb(243 242 237 / 22%);
-  background: linear-gradient(135deg, rgb(11 13 14 / 35%), rgb(11 13 14 / 82%));
-  text-align: center;
-}
-.about-page-founder-placeholder::before,
-.about-page-founder-placeholder::after {
-  content: "";
-  position: absolute;
-  background: rgb(243 242 237 / 18%);
-}
-.about-page-founder-placeholder::before {
-  width: 1px;
-  height: 38%;
-}
-.about-page-founder-placeholder::after {
-  width: 38%;
-  height: 1px;
-}
-.about-page-founder-placeholder span,
-.about-page-founder-placeholder strong {
-  position: relative;
-  z-index: 1;
-  background: #0b0d0e;
-}
-.about-page-founder-placeholder span {
-  padding: 10px 14px 4px;
-  color: #909694;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-}
-.about-page-founder-placeholder strong {
-  padding: 4px 14px 10px;
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
+  object-position: center top;
 }
 .about-page-founder-visual figcaption {
   position: absolute;
@@ -407,6 +367,9 @@
 }
 .about-page-founder-copy h2 {
   font-size: clamp(48px, 5.8vw, 104px);
+}
+.about-page-founder-copy h2 span {
+  color: #89908d;
 }
 .about-page-founder-name {
   margin-top: clamp(44px, 6vw, 90px);
@@ -444,6 +407,25 @@
   grid-column: 1 / -1;
   color: #d2d4d1;
   font-size: 16px;
+}
+.about-page-founder-philosophy {
+  margin-top: 34px;
+  padding: 4px 0 4px 22px;
+  border-left: 2px solid #a5bcbc;
+}
+.about-page-founder-philosophy span {
+  display: block;
+  margin-bottom: 13px;
+  color: #89908d;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+.about-page-founder-philosophy p {
+  max-width: 720px;
+  margin: 0;
+  color: #d2d4d1;
+  font-size: 15px;
+  line-height: 1.7;
 }
 .about-page-founder-roles {
   display: grid;
@@ -557,16 +539,32 @@
 }
 .about-page-workshop-heading {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 560px);
+  gap: clamp(40px, 7vw, 126px);
   align-items: end;
   margin-top: clamp(52px, 6vw, 90px);
 }
-.about-page-workshop-heading > p {
-  margin: 0 0 0.2em;
+.about-page-workshop-intro {
+  align-self: end;
+}
+.about-page-workshop-subheading {
+  margin: 0;
   color: #aeb3b0;
   font-size: clamp(16px, 1.45vw, 23px);
-  line-height: 1.18;
+  line-height: 1.22;
+}
+.about-page-workshop-statement {
+  margin: clamp(20px, 2.2vw, 34px) 0 0;
+  color: #f3f2ed;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.about-page-workshop-description {
+  max-width: 540px;
+  margin: 10px 0 0;
+  color: #8f9693;
+  font-size: 14px;
+  line-height: 1.68;
 }
 .about-page-workshop-grid {
   display: grid;
@@ -585,12 +583,24 @@
 .about-page-footprint img {
   object-fit: cover;
 }
+.about-page-workshop-primary img {
+  object-position: 50% 57%;
+}
 .about-page-workshop-support {
   display: grid;
   gap: clamp(18px, 2vw, 38px);
 }
 .about-page-workshop-support figure {
   aspect-ratio: 1.05;
+}
+.about-page-workshop-dispatch {
+  background: #0b0d0e;
+}
+.about-page-workshop-dispatch img {
+  object-fit: contain;
+}
+.about-page-workshop-installation img {
+  object-position: 50% 48%;
 }
 .about-page-workshop figcaption,
 .about-page-footprint figcaption {
@@ -767,6 +777,28 @@
   font-size: clamp(17px, 1.4vw, 22px);
   font-weight: 500;
   letter-spacing: -0.02em;
+}
+
+@media (min-width: 1100px) {
+  .about-page-footprint {
+    padding-block: clamp(68px, 7vw, 116px) clamp(78px, 8.5vw, 136px);
+  }
+  .about-page-footprint-grid {
+    gap: clamp(44px, 6vw, 104px);
+    margin-top: clamp(44px, 5vw, 80px);
+  }
+  .about-page-footprint-copy > p {
+    margin-top: clamp(24px, 2.8vw, 42px);
+  }
+  .about-page-regions {
+    margin-top: clamp(50px, 6vw, 98px);
+  }
+  .about-page-footprint-proof ul {
+    margin-top: 42px;
+  }
+  .about-page-footprint-proof li {
+    min-height: 62px;
+  }
 }
 
 @media (max-width: 1099px) {
@@ -987,10 +1019,10 @@
     width: 100%;
     min-height: 0;
     aspect-ratio: 0.82;
-    order: 2;
+    order: 1;
   }
   .about-page-founder-copy {
-    order: 1;
+    order: 2;
   }
   .about-page-founder-name {
     margin-top: 38px;
@@ -1007,6 +1039,14 @@
   }
   .about-page-founder-story p + p {
     margin-top: 14px;
+  }
+  .about-page-founder-philosophy {
+    margin-top: 27px;
+    padding-left: 17px;
+  }
+  .about-page-founder-philosophy p {
+    font-size: 14px;
+    line-height: 1.65;
   }
   .about-page-founder-roles {
     grid-template-columns: 1fr 1fr;
@@ -1051,9 +1091,15 @@
     display: block;
     margin-top: 40px;
   }
-  .about-page-workshop-heading > p {
+  .about-page-workshop-intro {
     margin-top: 24px;
+  }
+  .about-page-workshop-subheading {
     font-size: 16px;
+  }
+  .about-page-workshop-statement,
+  .about-page-workshop-description {
+    font-size: 13px;
   }
   .about-page-workshop-grid {
     display: block;
@@ -1071,12 +1117,12 @@
   .about-page-workshop-support figure {
     aspect-ratio: 0.78;
   }
+  .about-page-workshop-support .about-page-workshop-dispatch {
+    aspect-ratio: 1.24;
+  }
   .about-page-workshop figcaption {
     inset: auto 0 -20px;
     font-size: 11px;
-  }
-  .about-page-workshop-primary figcaption span:last-child {
-    display: none;
   }
 
   .about-page-progress-track {

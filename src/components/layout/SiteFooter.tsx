@@ -48,7 +48,7 @@ export default function SiteFooter({ className = "" }: { className?: string }) {
       </nav>
       <nav className="site-footer-socials" aria-label="Social media">
         {socialLinks.map(([network, href]) => (
-          <a key={network} href={href} target="_blank" rel="noreferrer" aria-label={`Follow S.K. Engineering Works on ${socialLabels[network]}`} title={socialLabels[network]}>
+          <a key={network} href={href} target="_blank" rel="noreferrer" data-social={network} aria-label={`Follow S.K. Engineering Works on ${socialLabels[network]}`} title={socialLabels[network]}>
             <SocialIcon network={network} />
           </a>
         ))}
