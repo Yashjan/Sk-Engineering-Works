@@ -39,7 +39,7 @@ const stageImages: Readonly<Record<string, { src: string; alt: string }>> = {
   HOPPER: { src: "/images/machinery/catalog/hopper.png", alt: "Salt intake hopper" },
   "BELT CONVEYOR": { src: "/images/machinery/catalog/belt-conveyor.png", alt: "Belt conveyor" },
   "WET MILL": { src: "/images/machinery/catalog/wet-mill.png", alt: "Wet mill" },
-  TANKS: { src: "/images/machinery/catalog/process-tank.png", alt: "Process tank" },
+  TANKS: { src: "/images/machinery/catalog/process-tank-secondary.png", alt: "Process tank" },
   "SCREW WASHER": { src: "/images/machinery/catalog/screw-washer.png", alt: "Screw washer" },
   CENTRIFUGE: { src: "/images/machinery/catalog/centrifuge.png", alt: "Centrifuge" },
   "SCREW CONVEYOR": { src: "/images/machinery/catalog/screw-conveyor.png", alt: "Screw conveyor" },
