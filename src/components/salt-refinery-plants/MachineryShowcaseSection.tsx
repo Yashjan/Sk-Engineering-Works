@@ -1,10 +1,11 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import ProgressiveVideo from "@/components/media/ProgressiveVideo";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "@/components/media/ProgressiveImage";
-import Link from "next/link";
+import Link from "@/components/i18n/LocalizedLink";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assetPath } from "@/lib/asset-path";

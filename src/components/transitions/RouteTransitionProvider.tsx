@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";

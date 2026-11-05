@@ -1,3 +1,4 @@
+/** @jsxImportSource @/i18n/react */
 import ProjectsVisualGallery from "@/components/projects/ProjectsVisualGallery";
 import type { ProjectGalleryItem } from "@/data/projects";
 

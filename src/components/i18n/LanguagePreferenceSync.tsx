@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";

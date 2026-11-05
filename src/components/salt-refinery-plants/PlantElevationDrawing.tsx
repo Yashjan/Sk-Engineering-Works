@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import { useEffect, useId, useRef, useState, type MouseEvent } from "react";
 import { createPortal } from "react-dom";

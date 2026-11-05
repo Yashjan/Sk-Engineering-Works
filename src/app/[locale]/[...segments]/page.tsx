@@ -1,20 +1,22 @@
+/** @jsxImportSource @/i18n/react */
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import AboutPage from "@/app/about/page";
-import ContactPage from "@/app/contact/page";
-import EngineeringPage from "@/app/engineering/page";
-import MachineryPage from "@/app/machinery/page";
-import MachineDetailPage from "@/app/machinery/[slug]/page";
-import ProjectsPage from "@/app/projects/page";
-import ProjectDetailPage from "@/app/projects/[slug]/page";
-import JagdambaProjectPage from "@/app/projects/jagdamba-salt-15tph/page";
-import SaltRefineryPage from "@/app/salt-refinery-plants/page";
+import AboutPage from "@/app/(english)/about/page";
+import ContactPage from "@/app/(english)/contact/page";
+import EngineeringPage from "@/app/(english)/engineering/page";
+import MachineryPage from "@/app/(english)/machinery/page";
+import MachineDetailPage from "@/app/(english)/machinery/[slug]/page";
+import ProjectsPage from "@/app/(english)/projects/page";
+import ProjectDetailPage from "@/app/(english)/projects/[slug]/page";
+import JagdambaProjectPage from "@/app/(english)/projects/jagdamba-salt-15tph/page";
+import SaltRefineryPage from "@/app/(english)/salt-refinery-plants/page";
 import { machineryCatalog } from "@/data/machinery";
 import { machineryDetails } from "@/data/machinery-details";
 import { projectArchive } from "@/data/projects";
 import { createLocalizedMetadata } from "@/i18n/metadata";
 import { getPageCopy } from "@/i18n/page-copy";
 import { isTranslatedLocale, translatedLocales } from "@/i18n/config";
+import { localizeServerTree } from "@/i18n/server";
 
 type LocalizedRouteProps = { params: Promise<{ locale: string; segments: string[] }> };
 
@@ -57,6 +59,7 @@ export async function generateMetadata({ params }: LocalizedRouteProps): Promise
       description: locale === "hi"
         ? `${machineName ?? "मशीन"} की अभियांत्रिकी, निर्माण और प्रक्रिया अनुप्रयोग संबंधी जानकारी।`
         : `معلومات عن هندسة وتصنيع وتطبيقات ${machineName ?? "الآلة"}.`,
+      index: Boolean(machineryDetails[segments[1]]),
     });
   }
 
@@ -77,17 +80,20 @@ export async function generateMetadata({ params }: LocalizedRouteProps): Promise
 }
 
 export default async function LocalizedRoutePage({ params }: LocalizedRouteProps) {
-  const { segments } = await params;
+  const { locale, segments } = await params;
+  if (!isTranslatedLocale(locale)) notFound();
   const route = routeKey(segments);
-  if (route === "about") return <AboutPage />;
-  if (route === "contact") return <ContactPage />;
-  if (route === "engineering") return <EngineeringPage />;
-  if (route === "machinery") return <MachineryPage />;
-  if (route === "projects") return <ProjectsPage />;
-  if (route === "salt-refinery-plants") return <SaltRefineryPage />;
-  if (segments[0] === "machinery" && segments[1]) return <MachineDetailPage params={Promise.resolve({ slug: segments[1] })} />;
-  if (segments[0] === "projects" && segments[1] === "jagdamba-salt-15tph") return <JagdambaProjectPage />;
-  if (segments[0] === "projects" && segments[1]) return <ProjectDetailPage params={Promise.resolve({ slug: segments[1] })} />;
-  notFound();
+  let page;
+  if (route === "about") page = AboutPage();
+  else if (route === "contact") page = ContactPage();
+  else if (route === "engineering") page = EngineeringPage();
+  else if (route === "machinery") page = MachineryPage();
+  else if (route === "projects") page = ProjectsPage();
+  else if (route === "salt-refinery-plants") page = SaltRefineryPage();
+  else if (segments[0] === "machinery" && segments[1]) page = MachineDetailPage({ params: Promise.resolve({ slug: segments[1] }) });
+  else if (segments[0] === "projects" && segments[1] === "jagdamba-salt-15tph") page = JagdambaProjectPage();
+  else if (segments[0] === "projects" && segments[1]) page = ProjectDetailPage({ params: Promise.resolve({ slug: segments[1] }) });
+  else notFound();
+  return localizeServerTree(await page, locale);
 }
 

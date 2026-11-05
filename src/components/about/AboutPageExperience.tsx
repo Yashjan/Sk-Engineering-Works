@@ -1,15 +1,23 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import ProgressiveVideo from "@/components/media/ProgressiveVideo";
 
 import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useRef } from "react";
+import { useLocaleTranslation } from "@/components/i18n/LocaleRuntime";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assetPath } from "@/lib/asset-path";
 import "./about-page.css";
 
 type JourneyPhase = { label: string; title: string; paragraphs: string[]; media?: string; mediaType?: "image" | "video"; mediaAlt?: string; mediaCaption?: string };
+
+const aboutHeadingCopy = {
+  en: { hero: ["BUILT THROUGH", "ENGINEERING.", "GROWN THROUGH", "EXPERIENCE."], founder: ["BUILT WITH", "EXPERIENCE.", "LED BY PURPOSE."] },
+  hi: { hero: ["इंजीनियरिंग से", "निर्मित।", "अनुभव से", "विकसित।"], founder: ["अनुभव से", "निर्मित।", "उद्देश्य से प्रेरित।"] },
+  ar: { hero: ["بُنيت عبر", "الهندسة.", "ونمت عبر", "الخبرة."], founder: ["بُنيت بخبرة.", "وتقودها", "رؤية واضحة."] },
+} as const;
 
 const journey: JourneyPhase[] = [
   {
@@ -97,6 +105,8 @@ const progression = [
 const locations = [["SAMBHAR / NAWA", "RAJASTHAN"], ["PHALODI", "RAJASTHAN"], ["SANTALPUR", "GUJARAT"], ["JAMBUSAR", "GUJARAT"], ["GANDHIDHAM", "GUJARAT"]];
 
 export default function AboutPageExperience() {
+  const { locale } = useLocaleTranslation();
+  const headingCopy = aboutHeadingCopy[locale];
   const rootRef = useRef<HTMLDivElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
 
@@ -143,7 +153,7 @@ export default function AboutPageExperience() {
         <header className="about-page-hero-copy">
           <p className="about-page-hero-meta">ABOUT / S.K. ENGINEERING WORKS</p>
           <h1 id="about-page-title">
-            {['BUILT THROUGH', 'ENGINEERING.', 'GROWN THROUGH', 'EXPERIENCE.'].map((line) => <span className="about-page-hero-line" key={line}><span>{line}</span></span>)}
+            {headingCopy.hero.map((line) => <span className="about-page-hero-line" key={line}><span data-no-translate>{line}</span></span>)}
           </h1>
           <p className="about-page-hero-intro">From mechanical fabrication and agricultural machinery to material handling systems and complete salt refinery plants.</p>
         </header>
@@ -173,7 +183,7 @@ export default function AboutPageExperience() {
       <div className="about-page-section-meta" data-reveal><span>03 / THE MAN BEHIND THE WORK</span><span>FOUNDER / S.K. ENGINEERING WORKS</span></div>
       <div className="about-page-founder-grid">
         <figure className="about-page-founder-visual" data-reveal><Image src={assetPath("/images/about/ramlal-jangid-founder.webp")} alt="Mr. Ramlal Jangid, Founder of S.K. Engineering Works." fill sizes="(max-width: 767px) 88vw, (max-width: 1099px) 40vw, 41vw" /><figcaption>MR. RAMLAL JANGID / FOUNDER</figcaption></figure>
-        <div className="about-page-founder-copy"><h2 id="about-founder-title" data-reveal>BUILT WITH<br />EXPERIENCE.<br /><span>LED BY PURPOSE.</span></h2><div className="about-page-founder-name" data-reveal><strong>Mr. Ramlal Jangid</strong><span>FOUNDER | S.K. ENGINEERING WORKS</span></div><div className="about-page-founder-story" data-reveal><p>Behind S.K. Engineering Works is a foundation built on practical knowledge, hands-on fabrication, and an understanding of how industrial machinery performs in real working conditions.</p><p>From the company&apos;s early work with traditional well pulleys to its expansion into salt-processing machinery and complete refinery systems, the journey reflects a commitment to mechanical engineering, dependable manufacturing, and continuous improvement.</p><p>Under the guidance of founder Mr. Ramlal Jangid, S.K. Engineering Works continues to approach each requirement with attention to practical design, fabrication quality, equipment reliability, and the demands of installation and operation.</p></div><div className="about-page-founder-philosophy" data-reveal><span>OUR APPROACH</span><p>Good engineering goes beyond drawings and machines. It is about understanding the process, building equipment that works reliably, and delivering solutions suited to real industrial conditions.</p></div></div>
+        <div className="about-page-founder-copy"><h2 id="about-founder-title" data-reveal data-no-translate>{headingCopy.founder[0]}<br />{headingCopy.founder[1]}<br /><span data-no-translate>{headingCopy.founder[2]}</span></h2><div className="about-page-founder-name" data-reveal><strong>Mr. Ramlal Jangid</strong><span>FOUNDER | S.K. ENGINEERING WORKS</span></div><div className="about-page-founder-story" data-reveal><p>Behind S.K. Engineering Works is a foundation built on practical knowledge, hands-on fabrication, and an understanding of how industrial machinery performs in real working conditions.</p><p>From the company&apos;s early work with traditional well pulleys to its expansion into salt-processing machinery and complete refinery systems, the journey reflects a commitment to mechanical engineering, dependable manufacturing, and continuous improvement.</p><p>Under the guidance of founder Mr. Ramlal Jangid, S.K. Engineering Works continues to approach each requirement with attention to practical design, fabrication quality, equipment reliability, and the demands of installation and operation.</p></div><div className="about-page-founder-philosophy" data-reveal><span>OUR APPROACH</span><p>Good engineering goes beyond drawings and machines. It is about understanding the process, building equipment that works reliably, and delivering solutions suited to real industrial conditions.</p></div></div>
       </div>
       <ul className="about-page-founder-roles" aria-label="Engineering approach and responsibilities">{founderRoles.map((role, index) => <li key={role} data-reveal><span>{String(index + 1).padStart(2, "0")}</span>{role}</li>)}</ul>
     </section>

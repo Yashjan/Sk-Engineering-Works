@@ -1,4 +1,5 @@
-import Image from "next/image";
+/** @jsxImportSource @/i18n/react */
+import Image from "@/components/i18n/LocalizedImage";
 import type { MachineryConfig } from "@/data/machinery-details";
 import { assetPath } from "@/lib/asset-path";
 export function MachineryComingSoon3D({ machine }: { machine: MachineryConfig }) {

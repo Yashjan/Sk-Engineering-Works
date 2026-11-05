@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import { createContext, useCallback, useContext, useMemo, useRef, useState, type ReactNode } from "react";
 import type { MachineryItem } from "@/data/machinery";

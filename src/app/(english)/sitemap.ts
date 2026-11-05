@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { machineryDetails } from "@/data/machinery-details";
 import { absoluteUrl } from "@/config/site";
+import { localizePathname, locales } from "@/i18n/config";
 
 export const dynamic = "force-static";
 
@@ -15,9 +16,9 @@ const routes = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [...routes.map(({ path, changeFrequency, priority }) => ({
-    url: absoluteUrl(path),
-    changeFrequency,
-    priority,
-  })), ...Object.keys(machineryDetails).map((slug) => ({ url: absoluteUrl(`/machinery/${slug}`), changeFrequency: "monthly" as const, priority: 0.8 }))];
+  const paths = [...routes, ...Object.keys(machineryDetails).map((slug) => ({ path: `/machinery/${slug}`, changeFrequency: "monthly" as const, priority: 0.8 }))];
+  return locales.flatMap((locale) => paths.map(({ path, changeFrequency, priority }) => ({
+    url: absoluteUrl(localizePathname(path, locale)), changeFrequency, priority,
+    alternates: { languages: Object.fromEntries(locales.map((alternative) => [alternative, absoluteUrl(localizePathname(path, alternative))])) },
+  })));
 }

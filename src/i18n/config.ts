@@ -14,7 +14,7 @@ export const localeLabels: Record<Locale, string> = {
 
 export const localeHtml: Record<Locale, { lang: string; dir: "ltr" | "rtl" }> = {
   en: { lang: "en-IN", dir: "ltr" },
-  hi: { lang: "hi-IN", dir: "ltr" },
+  hi: { lang: "hi", dir: "ltr" },
   ar: { lang: "ar", dir: "rtl" },
 };
 
@@ -36,6 +36,16 @@ export function stripLocale(pathname: string) {
   const parts = normalized.split("/").filter(Boolean);
   if (parts[0] && isTranslatedLocale(parts[0])) parts.shift();
   return parts.length ? `/${parts.join("/")}` : "/";
+}
+
+export function isAppHref(href: string) {
+  if (!href.startsWith("/") || href.startsWith("//")) return false;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  const path = basePath && (href === basePath || href.startsWith(`${basePath}/`))
+    ? href.slice(basePath.length) || "/"
+    : href;
+  return !/^\/(?:_next|images|videos|assets|files|fonts)(?:\/|$)/i.test(path) &&
+    !/\.(?:png|jpe?g|webp|avif|svg|gif|ico|mp4|webm|pdf|xml|txt|webmanifest)(?:[?#]|$)/i.test(path);
 }
 
 export function localizePathname(pathname: string, locale: Locale) {

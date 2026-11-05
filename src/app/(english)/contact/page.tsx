@@ -1,3 +1,4 @@
+/** @jsxImportSource @/i18n/react */
 import type { Metadata } from "next";
 import { existsSync } from "node:fs";
 import path from "node:path";

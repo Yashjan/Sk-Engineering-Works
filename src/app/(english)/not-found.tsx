@@ -1,4 +1,5 @@
-import Link from "next/link";
+/** @jsxImportSource @/i18n/react */
+import Link from "@/components/i18n/LocalizedLink";
 import type { Metadata } from "next";
 import { existsSync } from "node:fs";
 import path from "node:path";

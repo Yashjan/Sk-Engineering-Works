@@ -1,15 +1,25 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import Image from "@/components/media/ProgressiveImage";
-import Link from "next/link";
+import Link from "@/components/i18n/LocalizedLink";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { waitForIntro } from "@/components/layout/intro-coordination";
+import { useLocaleTranslation } from "@/components/i18n/LocaleRuntime";
 import { assetPath } from "@/lib/asset-path";
+
+const headlineCopy = {
+  en: { first: ["INDUSTRIAL", "EQUIPMENT."], second: ["COMPLETE PLANT", "SYSTEMS"], period: "." },
+  hi: { first: ["औद्योगिक", "उपकरण।"], second: ["संपूर्ण संयंत्र", "प्रणालियाँ"], period: "।" },
+  ar: { first: ["معدات", "صناعية."], second: ["أنظمة مصانع", "متكاملة"], period: "." },
+} as const;
 
 export default function Hero({ hasImage }: { hasImage: boolean }) {
   const root = useRef<HTMLElement>(null);
+  const { locale } = useLocaleTranslation();
+  const headline = headlineCopy[locale];
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const media = gsap.matchMedia();
@@ -46,8 +56,8 @@ export default function Hero({ hasImage }: { hasImage: boolean }) {
     <div className="hero-copy">
       <p className="hero-eyebrow"><span aria-hidden="true" />INDUSTRIAL EQUIPMENT + PLANT ENGINEERING · SAMBHAR LAKE, RAJASTHAN</p>
       <h1 id="hero-heading" className="hero-positioning-heading">
-        <span className="headline-line"><span>INDUSTRIAL<span className="hero-mobile-break"><br /></span> EQUIPMENT.</span></span>
-        <span className="headline-line headline-final"><span>COMPLETE PLANT<span className="hero-mobile-break"><br /></span> SYSTEMS<span className="headline-period">.</span></span></span>
+        <span className="headline-line"><span data-no-translate>{headline.first[0]}<span className="hero-mobile-break"><br /></span> {headline.first[1]}</span></span>
+        <span className="headline-line headline-final"><span data-no-translate>{headline.second[0]}<span className="hero-mobile-break"><br /></span> {headline.second[1]}<span className="headline-period">{headline.period}</span></span></span>
       </h1>
       <div className="hero-support"><p className="hero-description">Engineering and manufacturing industrial process equipment, material handling systems, and complete salt refinery plants.</p>
         <div className="hero-actions"><Link className="button-primary" href="/salt-refinery-plants">EXPLORE SALT REFINERY PLANTS <span aria-hidden="true">→</span></Link><Link className="button-secondary" href="/machinery">VIEW MACHINERY <span aria-hidden="true">→</span></Link></div>

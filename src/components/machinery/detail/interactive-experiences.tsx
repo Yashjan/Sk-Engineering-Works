@@ -1,3 +1,4 @@
+/** @jsxImportSource @/i18n/react */
 import type { ReactNode } from "react";
 // Full-page adapters preserve established cinematics. New visual-only adapters
 // replace the Coming Soon slot while retaining every shared commercial section.

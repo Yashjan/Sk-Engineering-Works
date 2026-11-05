@@ -1,3 +1,4 @@
+/** @jsxImportSource @/i18n/react */
 import { existsSync, statSync } from "node:fs";
 import path from "node:path";
 import type { MachineMedia } from "@/data/machinery-details/types";

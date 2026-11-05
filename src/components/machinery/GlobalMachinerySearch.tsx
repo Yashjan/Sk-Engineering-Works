@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import { useState, type FocusEvent } from "react";
 import { machineryCatalog } from "@/data/machinery";

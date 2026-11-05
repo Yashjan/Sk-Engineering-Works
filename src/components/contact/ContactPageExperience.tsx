@@ -1,7 +1,9 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import Image from "@/components/media/ProgressiveImage";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { useLocaleTranslation } from "@/components/i18n/LocaleRuntime";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SiteFooter from "@/components/layout/SiteFooter";
@@ -27,6 +29,7 @@ function value(data: FormData, key: string) {
 }
 
 export default function ContactPageExperience() {
+  const { translate } = useLocaleTranslation();
   const rootRef = useRef<HTMLDivElement>(null);
   const [errors, setErrors] = useState<Errors>({});
 
@@ -65,12 +68,12 @@ export default function ContactPageExperience() {
     const requirement = value(data, "requirement");
     const details = value(data, "details");
 
-    if (!name) nextErrors.name = "Please enter your name.";
-    if (!phone) nextErrors.phone = "Please enter a phone or WhatsApp number.";
-    else if (phone.replace(/\D/g, "").length < 7) nextErrors.phone = "Please enter a valid phone number.";
-    if (!requirement) nextErrors.requirement = "Please select a requirement type.";
-    if (!details) nextErrors.details = "Please describe your project requirement.";
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = "Please enter a valid email address.";
+    if (!name) nextErrors.name = translate("Please enter your name.");
+    if (!phone) nextErrors.phone = translate("Please enter a phone or WhatsApp number.");
+    else if (phone.replace(/\D/g, "").length < 7) nextErrors.phone = translate("Please enter a valid phone number.");
+    if (!requirement) nextErrors.requirement = translate("Please select a requirement type.");
+    if (!details) nextErrors.details = translate("Please describe your project requirement.");
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = translate("Please enter a valid email address.");
 
     setErrors(nextErrors);
     const firstInvalid = Object.keys(nextErrors)[0];

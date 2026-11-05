@@ -1,5 +1,6 @@
 "use client";
-import Image from "next/image";
+/** @jsxImportSource @/i18n/react */
+import Image from "@/components/i18n/LocalizedImage";
 import { useState } from "react";
 import MachineryImagePlaceholder from "./MachineryImagePlaceholder";
 export default function MachineryImage({ src, alt, machineName, priority, sizes }: {

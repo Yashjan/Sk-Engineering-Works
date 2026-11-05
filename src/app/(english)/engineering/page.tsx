@@ -1,6 +1,7 @@
+/** @jsxImportSource @/i18n/react */
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import Image from "@/components/i18n/LocalizedImage";
+import Link from "@/components/i18n/LocalizedLink";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import EngineeringEnquiry from "@/components/engineering/EngineeringEnquiry";

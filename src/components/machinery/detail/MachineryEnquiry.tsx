@@ -1,9 +1,12 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 import { useState, type FormEvent } from "react";
+import { useLocaleTranslation } from "@/components/i18n/LocaleRuntime";
 import { companyContact, whatsappUrl } from "@/data/contact";
 import type { MachineryConfig } from "@/data/machinery-details/types";
 export default function MachineryEnquiry({ machineName, sectionNumber = "11", heading, description }: MachineryConfig["enquiry"]) {
   const [draft, setDraft] = useState<string | null>(null);
+  const { translate } = useLocaleTranslation();
   function prepare(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -12,8 +15,8 @@ export default function MachineryEnquiry({ machineName, sectionNumber = "11", he
     const phone = String(data.get("Phone / WhatsApp") ?? "").trim();
     const nameInput = form.elements.namedItem("Name") as HTMLInputElement;
     const phoneInput = form.elements.namedItem("Phone / WhatsApp") as HTMLInputElement;
-    nameInput.setCustomValidity(name ? "" : "Please enter your name.");
-    phoneInput.setCustomValidity(phone.replace(/\D/g, "").length >= 7 ? "" : "Please enter a valid phone or WhatsApp number.");
+    nameInput.setCustomValidity(name ? "" : translate("Please enter your name."));
+    phoneInput.setCustomValidity(phone.replace(/\D/g, "").length >= 7 ? "" : translate("Please enter a valid phone or WhatsApp number."));
     if (!form.reportValidity()) return;
     const lines = ["Name", "Phone / WhatsApp", "Company", "Location", "Capacity / TPH", "Material", "Requirement"]
       .map((key) => `${key}: ${String(data.get(key) ?? "").trim() || "Not specified"}`);
@@ -26,7 +29,7 @@ export default function MachineryEnquiry({ machineName, sectionNumber = "11", he
     <div className="machine-enquiry-grid"><div><p>{description ?? "Tell us about your process and the equipment you need."}</p>
       <a className="machine-action" href={whatsappUrl(`Hello S.K. Engineering Works, I would like to discuss a ${machineName} requirement.`)} target="_blank" rel="noopener noreferrer">DISCUSS ON WHATSAPP ↗</a>
       <a className="machine-phone" href={companyContact.phoneHref}>{companyContact.phoneDisplay}</a>
-    </div><form onSubmit={prepare} onChange={() => setDraft(null)} onInput={(event) => { if (event.target instanceof HTMLInputElement) event.target.setCustomValidity(""); }}>
+    </div><form noValidate onSubmit={prepare} onChange={() => setDraft(null)} onInput={(event) => { if (event.target instanceof HTMLInputElement) event.target.setCustomValidity(""); }}>
       <label className="machine-field-wide">Machine<input value={machineName} readOnly name="Machine" /></label>
       {["Name", "Phone / WhatsApp", "Company", "Location", "Capacity / TPH", "Material"].map((label) => <label key={label}>{label}{label === "Name" || label === "Phone / WhatsApp" ? " (required)" : ""}<input name={label} required={label === "Name" || label === "Phone / WhatsApp"} type={label === "Phone / WhatsApp" ? "tel" : "text"} autoComplete={label === "Name" ? "name" : label === "Phone / WhatsApp" ? "tel" : label === "Company" ? "organization" : undefined} /></label>)}
       <label className="machine-field-wide">Requirement<textarea name="Requirement" rows={3} /></label>

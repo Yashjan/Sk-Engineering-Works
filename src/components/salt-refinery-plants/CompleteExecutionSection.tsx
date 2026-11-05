@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import { useLayoutEffect, useRef } from "react";
 import Image from "@/components/media/ProgressiveImage";

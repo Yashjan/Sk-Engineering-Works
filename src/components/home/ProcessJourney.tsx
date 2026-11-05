@@ -1,6 +1,7 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
-import Link from "next/link";
+import Link from "@/components/i18n/LocalizedLink";
 import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";

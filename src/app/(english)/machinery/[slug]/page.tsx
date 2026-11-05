@@ -1,5 +1,6 @@
+/** @jsxImportSource @/i18n/react */
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/i18n/LocalizedLink";
 import { notFound } from "next/navigation";
 import { getMachineBySlug, machineryCatalog } from "@/data/machinery";
 import MachineryDetailPage from "@/components/machinery/detail/MachineryDetailPage";

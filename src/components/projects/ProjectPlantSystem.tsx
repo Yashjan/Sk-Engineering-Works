@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import Image from "@/components/media/ProgressiveImage";
 import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";

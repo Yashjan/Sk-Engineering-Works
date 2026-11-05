@@ -1,7 +1,8 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import Image from "@/components/media/ProgressiveImage";
-import Link from "next/link";
+import Link from "@/components/i18n/LocalizedLink";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { assetPath } from "@/lib/asset-path";
@@ -108,7 +109,7 @@ export default function Navbar({ hasLogo }: { hasLogo: boolean }) {
       <div ref={languageControl} className={`language-selector${languageOpen ? " is-open" : ""}`}>
         <button ref={languageButton} type="button" className="language-selector-toggle" aria-haspopup="menu" aria-expanded={languageOpen} aria-label={locale === "hi" ? "भाषा चुनें" : locale === "ar" ? "اختر اللغة" : "Select language"} onClick={() => setLanguageOpen((value) => !value)} onKeyDown={(event) => { if (!languageOpen && (event.key === "ArrowDown" || event.key === "ArrowUp")) { event.preventDefault(); setLanguageOpen(true); } }}><GlobeIcon /><span>{locale.toUpperCase()}</span><b aria-hidden="true">⌄</b></button>
         <div className="language-selector-menu" role="menu" hidden={!languageOpen} aria-label={languageMenuLabels[locale]} data-no-translate>
-          {locales.map((option) => <Link key={option} href={localizePathname(pathname, option)} role="menuitemradio" aria-checked={locale === option} data-locale-switch="true" onClick={() => selectLanguage(option)}><span>{localeLabels[option]}</span>{locale === option ? <b aria-hidden="true">✓</b> : null}</Link>)}
+          {locales.map((option) => <Link key={option} href={localizePathname(pathname, option)} role="menuitemradio" aria-checked={locale === option} data-locale-switch="true" onClick={() => selectLanguage(option)}><span data-no-translate>{localeLabels[option]}</span>{locale === option ? <b aria-hidden="true">✓</b> : null}</Link>)}
         </div>
       </div>
       <Link className="nav-quote" href={quoteDestination}><span className="nav-quote-full">{quoteLabels[locale]}</span><span className="nav-quote-compact">{compactQuoteLabels[locale]}</span><span className="nav-quote-arrow" aria-hidden="true">→</span></Link>

@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";

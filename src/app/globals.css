@@ -133,6 +133,8 @@ h1 { margin: 0; font-size: clamp(60px, 8.1vw, 148px); font-weight: 600; line-hei
 html[dir="rtl"] body,
 html[dir="rtl"] .i18n-content { direction: ltr; }
 html[dir="rtl"] .i18n-content :where(h1, h2, h3, h4, h5, h6, p, a, button, label, input, textarea, select, option, li, dt, dd, figcaption) {
+  direction: rtl;
+  text-align: right;
   unicode-bidi: plaintext;
   letter-spacing: 0;
 }

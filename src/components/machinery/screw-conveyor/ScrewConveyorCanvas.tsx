@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import { Suspense, useEffect, useMemo, useRef, type MutableRefObject, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";

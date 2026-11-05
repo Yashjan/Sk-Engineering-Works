@@ -1,4 +1,5 @@
-import Link from "next/link";
+/** @jsxImportSource @/i18n/react */
+import Link from "@/components/i18n/LocalizedLink";
 import { processStages } from "@/data/process";
 import type { MachineryConfig } from "@/data/machinery-details";
 import "../screw-conveyor/screw-conveyor-closing.css";

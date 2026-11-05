@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import { useLayoutEffect } from "react";
 import { usePathname } from "next/navigation";

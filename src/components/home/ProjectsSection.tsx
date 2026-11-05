@@ -1,7 +1,8 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import ProgressiveVideo from "@/components/media/ProgressiveVideo";
-import Link from "next/link";
+import Link from "@/components/i18n/LocalizedLink";
 
 import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";

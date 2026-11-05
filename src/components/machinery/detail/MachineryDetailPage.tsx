@@ -1,7 +1,8 @@
+/** @jsxImportSource @/i18n/react */
 import type { CSSProperties, ReactNode } from "react";
 import { interactiveExperiences } from "./interactive-experiences";
 import MachineryMedia from "./MachineryMedia";
-import Link from "next/link";
+import Link from "@/components/i18n/LocalizedLink";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import SiteFooter from "@/components/layout/SiteFooter";

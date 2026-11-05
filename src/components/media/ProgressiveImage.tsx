@@ -1,7 +1,9 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import Image, { type ImageProps } from "next/image";
 import { useState, type SyntheticEvent } from "react";
+import { useLocaleTranslation } from "@/components/i18n/LocaleRuntime";
 
 /**
  * Project-wide image primitive. Images remain native Next.js images, so all
@@ -18,6 +20,7 @@ export default function ProgressiveImage({
   ...props
 }: ImageProps) {
   const sourceKey = typeof src === "string" ? src : "src" in src ? src.src : src.default.src;
+  const { translate } = useLocaleTranslation();
   const [loadedSource, setLoadedSource] = useState<string | null>(null);
   const loaded = loadedSource === sourceKey;
 
@@ -29,7 +32,7 @@ export default function ProgressiveImage({
     <Image
       {...props}
       src={src}
-      alt={alt}
+      alt={translate(alt)}
       className={classes}
       loading={loading ?? (props.priority || props.preload || props.fetchPriority === "high" ? undefined : "lazy")}
       data-media-state={loaded ? "loaded" : "loading"}

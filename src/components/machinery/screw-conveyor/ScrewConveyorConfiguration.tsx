@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 export const conveyorParameters = [
   { title: "CUSTOM LENGTH", description: "Designed to suit plant layout and material transfer distance.", marker: "LENGTH" },

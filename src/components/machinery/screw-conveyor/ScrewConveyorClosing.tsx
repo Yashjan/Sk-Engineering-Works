@@ -1,3 +1,4 @@
+/** @jsxImportSource @/i18n/react */
 import { MachineryProcessIntegration, MachineryEngineering } from "../detail/MachineryPlantSections";
 import { screwConveyor as config } from "@/data/machinery-details/screw-conveyor";
 import TrustedClientsSection from "@/components/home/TrustedClientsSection";

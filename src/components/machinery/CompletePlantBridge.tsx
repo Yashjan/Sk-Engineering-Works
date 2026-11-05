@@ -1,7 +1,8 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import Image from "@/components/media/ProgressiveImage";
-import Link from "next/link";
+import Link from "@/components/i18n/LocalizedLink";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

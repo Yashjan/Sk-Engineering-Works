@@ -1,6 +1,7 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
-import Link from "next/link";
+import Link from "@/components/i18n/LocalizedLink";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { localeFromPathname, localizePathname, stripLocale, type Locale } from "@/i18n/config";

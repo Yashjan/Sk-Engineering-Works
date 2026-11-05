@@ -1,4 +1,5 @@
-import Link from "next/link";
+/** @jsxImportSource @/i18n/react */
+import Link from "@/components/i18n/LocalizedLink";
 import "./machinery-gateway.css";
 
 const categories = [

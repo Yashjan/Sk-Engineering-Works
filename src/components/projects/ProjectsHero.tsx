@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @/i18n/react */
 
 import Image from "@/components/media/ProgressiveImage";
 import ProgressiveVideo from "@/components/media/ProgressiveVideo";
