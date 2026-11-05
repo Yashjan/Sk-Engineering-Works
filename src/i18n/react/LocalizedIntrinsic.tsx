@@ -1,7 +1,7 @@
 "use client";
 
 import { createElement, Fragment, type ElementType, type ReactNode } from "react";
-import { useLocaleTranslation } from "@/components/i18n/LocaleRuntime";
+import { useLocaleTranslation } from "@/i18n/context";
 import { isAppHref, localizePathname } from "@/i18n/config";
 
 const translatedAttributes = ["aria-label", "aria-description", "title", "placeholder", "alt"] as const;

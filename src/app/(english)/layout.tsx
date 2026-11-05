@@ -6,6 +6,7 @@ import RouteTransitionProvider from "@/components/transitions/RouteTransitionPro
 import LanguagePreferenceSync from "@/components/i18n/LanguagePreferenceSync";
 import { absoluteAssetUrl, absoluteUrl, siteConfig } from "@/config/site";
 import { siteStructuredData } from "@/lib/structured-data";
+import { localeHtml } from "@/i18n/config";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -42,7 +43,7 @@ export const viewport: Viewport = { themeColor: "#0B0D0E" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const introScript = `(function(){try{document.documentElement.dataset.skIntro='active';}catch(e){}})();`;
-  return <html lang="en" dir="ltr" data-locale="en" data-scroll-behavior="smooth" suppressHydrationWarning><head>
+  return <html lang={localeHtml.en.lang} dir={localeHtml.en.dir} data-locale="en" data-scroll-behavior="smooth" suppressHydrationWarning><head>
     {/* Activate the global hard-load intro before route content can paint. */}
     <script dangerouslySetInnerHTML={{ __html: introScript }} />
     <JsonLd data={siteStructuredData} />

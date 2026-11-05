@@ -11,7 +11,7 @@ import { assetPath } from "@/lib/asset-path";
 import "./manufacturing-section.css";
 
 const videoSource = assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4");
-const videoPoster = assetPath("/images/projects/jagdamba/cover-image.png");
+const videoPoster = assetPath("/images/projects/jagdamba/cover-image.webp");
 
 const capabilities = [
   { number: "01", title: "FABRICATION", detail: "Steel structures & machine bodies" },
@@ -194,7 +194,7 @@ export default function ManufacturingSection() {
         <p className="manufacturing-proof">BUILT IN-HOUSE.<br /><span>INSTALLED ON SITE.</span></p>
         <div className="manufacturing-capabilities">
           <div className="manufacturing-rule" aria-hidden="true"><span /></div>
-          <ol>
+          <ol tabIndex={0} aria-label="Manufacturing capabilities">
             {capabilities.map((capability) => <li className="manufacturing-capability" key={capability.number}>
               <span className="manufacturing-capability-number">{capability.number}</span>
               <h3>{capability.title}</h3>

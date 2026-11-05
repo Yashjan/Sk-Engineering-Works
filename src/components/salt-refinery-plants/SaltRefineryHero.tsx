@@ -119,7 +119,7 @@ export default function SaltRefineryHero() {
           </ol>
         </div>
 
-        <div className="salt-process-rail" aria-label="Salt refinery process overview">
+        <div className="salt-process-rail" role="region" tabIndex={0} aria-label="Salt refinery process overview">
           <span className="salt-process-line" aria-hidden="true" />
           <ol>
             {stages.map((stage) => <li className="salt-process-stage" key={stage}><span aria-hidden="true" />{stage}</li>)}

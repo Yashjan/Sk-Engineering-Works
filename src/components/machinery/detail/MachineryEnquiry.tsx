@@ -1,7 +1,7 @@
 "use client";
 /** @jsxImportSource @/i18n/react */
 import { useState, type FormEvent } from "react";
-import { useLocaleTranslation } from "@/components/i18n/LocaleRuntime";
+import { useLocaleTranslation } from "@/i18n/context";
 import { companyContact, whatsappUrl } from "@/data/contact";
 import type { MachineryConfig } from "@/data/machinery-details/types";
 export default function MachineryEnquiry({ machineName, sectionNumber = "11", heading, description }: MachineryConfig["enquiry"]) {

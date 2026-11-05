@@ -27,9 +27,9 @@ The Hero media layer in `src/components/home/Hero.tsx` can later hold a factory 
 
 Place the transparent machinery renders at:
 
-- `public/images/machinery/catalog/hopper.png`
-- `public/images/machinery/catalog/belt-conveyor.png`
-- `public/images/machinery/catalog/wet-mill.png`
+- `public/images/machinery/catalog/hopper.webp`
+- `public/images/machinery/catalog/belt-conveyor.webp`
+- `public/images/machinery/catalog/wet-mill.webp`
 
 Missing renders use abstract placement guides, not fake machinery. Restart development or rebuild after adding assets. Add future stages to `src/data/process.ts`; the rendering, stage count, timeline stops, and scroll distance derive from the array.
 

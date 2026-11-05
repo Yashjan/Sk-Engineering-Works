@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import LocaleRuntime from "@/components/i18n/LocaleRuntime";
+import HindiLocaleRuntime from "@/components/i18n/HindiLocaleRuntime";
+import ArabicLocaleRuntime from "@/components/i18n/ArabicLocaleRuntime";
 import LanguagePreferenceSync from "@/components/i18n/LanguagePreferenceSync";
 import SiteIntro from "@/components/layout/SiteIntro";
 import GlobalMotionSystem from "@/components/motion/GlobalMotionSystem";
@@ -29,11 +30,12 @@ export default async function LocalizedLayout({ children, params }: LayoutProps<
   const { locale } = await params;
   if (!isTranslatedLocale(locale)) notFound();
   const html = localeHtml[locale];
+  const LocaleRuntimeForLocale = locale === "hi" ? HindiLocaleRuntime : ArabicLocaleRuntime;
 
   const introScript = `(function(){try{document.documentElement.dataset.skIntro='active';}catch(e){}})();`;
   return <html lang={html.lang} dir={html.dir} data-locale={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
     <head><script dangerouslySetInnerHTML={{ __html: introScript }} /><JsonLd data={siteStructuredData} /></head>
-    <body><LanguagePreferenceSync /><SiteIntro /><GlobalMotionSystem /><LocaleRuntime locale={locale}><RouteTransitionProvider>{children}</RouteTransitionProvider></LocaleRuntime></body>
+    <body><LanguagePreferenceSync /><SiteIntro /><GlobalMotionSystem /><LocaleRuntimeForLocale><RouteTransitionProvider>{children}</RouteTransitionProvider></LocaleRuntimeForLocale></body>
   </html>;
 }
 

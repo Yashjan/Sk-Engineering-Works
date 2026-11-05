@@ -9,7 +9,7 @@ export type ProjectExecutionStage = {
   layout: "right" | "left" | "wide";
 };
 
-const jagdambaPoster = "/images/projects/jagdamba/cover-image.png";
+const jagdambaPoster = "/images/projects/jagdamba/cover-image.webp";
 
 export const jagdambaExecutionStages: readonly ProjectExecutionStage[] = [
   {

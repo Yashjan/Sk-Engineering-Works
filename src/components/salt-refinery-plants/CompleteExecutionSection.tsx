@@ -56,17 +56,17 @@ const executionStages: ExecutionStage[] = [
 
 const executionImages = [
   {
-    src: assetPath("/images/common/field-media/plant-structure.jpeg"),
+    src: assetPath("/images/common/field-media/plant-structure.webp"),
     alt: "Salt refinery machinery integrated into a steel plant structure",
     caption: "PLANT STRUCTURE / SITE INTEGRATION",
   },
   {
-    src: assetPath("/images/common/field-media/fabrication-blower.jpeg"),
+    src: assetPath("/images/common/field-media/fabrication-blower.webp"),
     alt: "Industrial blower fabricated inside the S.K. Engineering Works workshop",
     caption: "PROCESS EQUIPMENT / FABRICATION",
   },
   {
-    src: assetPath("/images/common/field-media/fabricated-equipment.jpeg"),
+    src: assetPath("/images/common/field-media/fabricated-equipment.webp"),
     alt: "Large stainless-steel salt processing equipment under fabrication",
     caption: "HEAVY EQUIPMENT / WORKSHOP",
   },

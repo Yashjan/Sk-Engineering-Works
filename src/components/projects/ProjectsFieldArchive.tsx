@@ -292,7 +292,7 @@ export default function ProjectsFieldArchive() {
               <figcaption className="projects-field-explorer-media-label">{activeProject.mediaLabel}</figcaption>
             </figure>
 
-            <div className="projects-field-explorer-support" aria-label={`${activeProject.name} supporting project photographs`}>
+            <div className="projects-field-explorer-support" role="region" tabIndex={0} aria-label={`${activeProject.name} supporting project photographs`}>
               {activeProject.supportingMedia.map((item, index) => (
                 <figure className="projects-field-explorer-support-card" key={`${activeProject.id}-${item.src}`}>
                   <div className="projects-field-explorer-support-frame">

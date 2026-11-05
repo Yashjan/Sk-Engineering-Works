@@ -16,8 +16,8 @@ const clients: Client[] = [
   { name: "Rakshak Foods Private Limited" },
   { name: "Adhinath Chemfood Private Limited" },
   { name: "Jagdamba Salt Pvt. Ltd." },
-  { name: "Pankaj Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/pankaj-salt.png") },
-  { name: "Pragati Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/pragati-salt.png") },
+  { name: "Pankaj Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/pankaj-salt.webp") },
+  { name: "Pragati Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/pragati-salt.webp") },
   { name: "Bharat Salt" },
   { name: "Arihant Salt Production" },
   { name: "JK Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/jk-salt.png") },
@@ -43,7 +43,7 @@ function ClientMark({ client, duplicate = false }: { client: Client; duplicate?:
 
 function MarqueeRow({ items, reverse = false }: { items: Client[]; reverse?: boolean }) {
   return (
-    <div className={`about-marquee-row${reverse ? " is-reverse" : ""}`}>
+    <div className={`about-marquee-row${reverse ? " is-reverse" : ""}`} role="region" tabIndex={0} aria-label="Client logos">
       <ul className="about-marquee-track">
         {items.map((client) => <ClientMark client={client} key={client.name} />)}
         {items.map((client) => <ClientMark client={client} duplicate key={`duplicate-${client.name}`} />)}

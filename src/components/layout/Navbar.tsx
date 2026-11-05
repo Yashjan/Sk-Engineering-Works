@@ -6,7 +6,7 @@ import Link from "@/components/i18n/LocalizedLink";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { assetPath } from "@/lib/asset-path";
-import { localeFromPathname, localeLabels, locales, localizePathname, stripLocale, type Locale } from "@/i18n/config";
+import { localeFromPathname, localeHtml, localeLabels, locales, localizePathname, stripLocale, type Locale } from "@/i18n/config";
 
 const links: Record<Locale, string[]> = {
   en: ["Home", "Salt Refinery Plants", "Machinery", "Projects", "Engineering", "About", "Contact"],
@@ -89,9 +89,17 @@ export default function Navbar({ hasLogo }: { hasLogo: boolean }) {
         items[event.key === "Home" ? 0 : items.length - 1]?.focus();
       }
     };
+    // Menu-button pattern: move focus into the menu on open, and close it once
+    // keyboard focus leaves the control so it never stays open behind Tab.
+    const control = languageControl.current;
+    const focusOut = (event: FocusEvent) => {
+      if (!control?.contains(event.relatedTarget as Node | null)) setLanguageOpen(false);
+    };
+    (control?.querySelector<HTMLAnchorElement>("[role='menuitemradio'][aria-checked='true']") ?? control?.querySelector<HTMLAnchorElement>("[role='menuitemradio']"))?.focus();
     window.addEventListener("pointerdown", close);
     window.addEventListener("keydown", keydown);
-    return () => { window.removeEventListener("pointerdown", close); window.removeEventListener("keydown", keydown); };
+    control?.addEventListener("focusout", focusOut);
+    return () => { window.removeEventListener("pointerdown", close); window.removeEventListener("keydown", keydown); control?.removeEventListener("focusout", focusOut); };
   }, [languageOpen]);
 
   const selectLanguage = (nextLocale: Locale) => {
@@ -109,7 +117,7 @@ export default function Navbar({ hasLogo }: { hasLogo: boolean }) {
       <div ref={languageControl} className={`language-selector${languageOpen ? " is-open" : ""}`}>
         <button ref={languageButton} type="button" className="language-selector-toggle" aria-haspopup="menu" aria-expanded={languageOpen} aria-label={locale === "hi" ? "भाषा चुनें" : locale === "ar" ? "اختر اللغة" : "Select language"} onClick={() => setLanguageOpen((value) => !value)} onKeyDown={(event) => { if (!languageOpen && (event.key === "ArrowDown" || event.key === "ArrowUp")) { event.preventDefault(); setLanguageOpen(true); } }}><GlobeIcon /><span>{locale.toUpperCase()}</span><b aria-hidden="true">⌄</b></button>
         <div className="language-selector-menu" role="menu" hidden={!languageOpen} aria-label={languageMenuLabels[locale]} data-no-translate>
-          {locales.map((option) => <Link key={option} href={localizePathname(pathname, option)} role="menuitemradio" aria-checked={locale === option} data-locale-switch="true" onClick={() => selectLanguage(option)}><span data-no-translate>{localeLabels[option]}</span>{locale === option ? <b aria-hidden="true">✓</b> : null}</Link>)}
+          {locales.map((option) => <Link key={option} href={localizePathname(pathname, option)} role="menuitemradio" tabIndex={-1} aria-checked={locale === option} lang={localeHtml[option].lang} hrefLang={option} data-locale-switch="true" onClick={() => selectLanguage(option)}><span data-no-translate>{localeLabels[option]}</span>{locale === option ? <b aria-hidden="true">✓</b> : null}</Link>)}
         </div>
       </div>
       <Link className="nav-quote" href={quoteDestination}><span className="nav-quote-full">{quoteLabels[locale]}</span><span className="nav-quote-compact">{compactQuoteLabels[locale]}</span><span className="nav-quote-arrow" aria-hidden="true">→</span></Link>

@@ -69,7 +69,7 @@ export default function AboutCredibilitySection() {
             </div>
             <figure className="about-factory-media" data-motion="media-parallax">
               <Image
-                src={assetPath("/images/projects/jagdamba/cover-image.png")}
+                src={assetPath("/images/projects/jagdamba/cover-image.webp")}
                 alt="S.K. Engineering Works salt refinery installation"
                 fill
                 sizes="(max-width: 479px) 0px, (max-width: 767px) 88vw, 36vw"

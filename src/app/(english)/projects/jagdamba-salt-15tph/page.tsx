@@ -86,7 +86,7 @@ export default function JagdambaProjectPage() {
           location="PHALODI, RAJASTHAN"
           statement="15 TPH salt refinery project for Jagdamba Salt Pvt. Ltd., Phalodi, Rajasthan."
           mediaSrc="/images/projects/jagdamba/completed-plant.mp4"
-          poster="/images/projects/jagdamba/cover-image.png"
+          poster="/images/projects/jagdamba/cover-image.webp"
         />
         <ProjectEngineeringNotes
           sectionNumber="09"

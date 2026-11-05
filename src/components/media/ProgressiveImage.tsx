@@ -3,7 +3,7 @@
 
 import Image, { type ImageProps } from "next/image";
 import { useState, type SyntheticEvent } from "react";
-import { useLocaleTranslation } from "@/components/i18n/LocaleRuntime";
+import { useLocaleTranslation } from "@/i18n/context";
 
 /**
  * Project-wide image primitive. Images remain native Next.js images, so all

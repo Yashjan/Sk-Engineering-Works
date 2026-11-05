@@ -2,24 +2,29 @@
 /** @jsxImportSource @/i18n/react */
 
 import { useRouter } from "next/navigation";
-import { type MouseEvent as ReactMouseEvent, type ReactNode, useContext, useMemo } from "react";
+import { type MouseEvent as ReactMouseEvent, type ReactNode, useMemo } from "react";
 import { isAppHref, localizePathname, type Locale } from "@/i18n/config";
-import { createTranslator } from "@/i18n/translate";
-import ar from "@/i18n/dictionaries/ar.json";
-import hi from "@/i18n/dictionaries/hi.json";
+import { createTranslator, type TranslationDictionary } from "@/i18n/translate";
 import { identity, LocaleContext } from "@/i18n/context";
 
-export function useLocaleTranslation() { return useContext(LocaleContext); }
+export { useLocaleTranslation } from "@/i18n/context";
 
+/**
+ * Client translation provider. The dictionary is supplied by a per-language
+ * wrapper (HindiLocaleRuntime / ArabicLocaleRuntime) so each locale's pages
+ * only download their own translation table.
+ */
 export default function LocaleRuntime({
   locale,
+  dictionary,
   children,
 }: {
   locale: Locale;
+  dictionary?: TranslationDictionary;
   children: ReactNode;
 }) {
   const router = useRouter();
-  const translate = useMemo(() => locale === "hi" ? createTranslator(hi) : locale === "ar" ? createTranslator(ar) : identity, [locale]);
+  const translate = useMemo(() => dictionary ? createTranslator(dictionary) : identity, [dictionary]);
 
   const captureLocalizedNavigation = (event: ReactMouseEvent<HTMLDivElement>) => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;

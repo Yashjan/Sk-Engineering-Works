@@ -2,7 +2,7 @@
 /** @jsxImportSource @/i18n/react */
 
 import { useState, type FormEvent } from "react";
-import { useLocaleTranslation } from "@/components/i18n/LocaleRuntime";
+import { useLocaleTranslation } from "@/i18n/context";
 import { companyContact, whatsappUrl } from "@/data/contact";
 
 export default function EngineeringEnquiry() {

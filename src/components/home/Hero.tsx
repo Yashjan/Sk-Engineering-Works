@@ -7,7 +7,7 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { waitForIntro } from "@/components/layout/intro-coordination";
-import { useLocaleTranslation } from "@/components/i18n/LocaleRuntime";
+import { useLocaleTranslation } from "@/i18n/context";
 import { assetPath } from "@/lib/asset-path";
 
 const headlineCopy = {

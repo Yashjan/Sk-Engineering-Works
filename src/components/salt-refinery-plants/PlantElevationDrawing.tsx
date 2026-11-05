@@ -7,7 +7,7 @@ import Image from "@/components/media/ProgressiveImage";
 import { assetPath } from "@/lib/asset-path";
 
 const previewSrc = assetPath("/images/salt-refinery/plant-layout/plant-elevation-preview.webp");
-const detailSrc = assetPath("/images/salt-refinery/plant-layout/plant-elevation-detail.png");
+const detailSrc = assetPath("/images/salt-refinery/plant-layout/plant-elevation-detail.webp");
 const drawingWidth = 3580;
 const drawingHeight = 2080;
 

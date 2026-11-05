@@ -72,12 +72,12 @@ export const projects: Project[] = [
     scope: "Process equipment supply & complete plant fitting",
     projectType: "Salt Refinery Plant",
     detailHref: "/projects/jagdamba-salt-15tph",
-    coverImage: "/images/projects/jagdamba/cover-image.png",
+    coverImage: "/images/projects/jagdamba/cover-image.webp",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/jagdamba/fabrication.mp4", label: "FABRICATION" },
       { id: "installation", type: "video", src: "/images/projects/jagdamba/site-installation.mp4", label: "SITE INSTALLATION" },
       { id: "completed", type: "video", src: "/images/projects/jagdamba/completed-plant.mp4", label: "COMPLETED PLANT" },
-      { id: "overview", type: "image", src: "/images/projects/jagdamba/cover-image.png", label: "OVERVIEW" },
+      { id: "overview", type: "image", src: "/images/projects/jagdamba/cover-image.webp", label: "OVERVIEW" },
     ],
     scopeChips: ["HOPPER", "WET MILL", "WASHING", "DRYING", "CONVEYING", "STORAGE", "INSTALLATION"],
     completeScope: [
@@ -94,12 +94,12 @@ export const projects: Project[] = [
     capacity: "25 TPH",
     scope: "Complete Machinery Supply",
     projectType: "Salt Refinery Plant",
-    coverImage: "/images/projects/jk-salt/cover-image.png",
+    coverImage: "/images/projects/jk-salt/cover-image.webp",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/jk-salt/fabrication.mp4", label: "FABRICATION" },
       { id: "installation", type: "video", src: "/images/projects/jk-salt/site-installation.mp4", label: "SITE INSTALLATION" },
       { id: "completed", type: "video", src: "/images/projects/jk-salt/completed-plant.mp4", label: "COMPLETED PLANT" },
-      { id: "overview", type: "image", src: "/images/projects/jk-salt/cover-image.png", label: "OVERVIEW" },
+      { id: "overview", type: "image", src: "/images/projects/jk-salt/cover-image.webp", label: "OVERVIEW" },
     ],
     scopeChips: ["COMPLETE MACHINERY SUPPLY"],
   },
@@ -130,11 +130,11 @@ export const projects: Project[] = [
     scope: "",
     projectType: "Industrial Equipment",
     detailHref: "/machinery/id-fan-blower",
-    coverImage: "/images/machinery/catalog/id-fan-blower.png",
+    coverImage: "/images/machinery/catalog/id-fan-blower.webp",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/equipment/id-fan-blower/fabrication.mp4", label: "FABRICATION" },
       { id: "completed", type: "video", src: "/images/projects/equipment/id-fan-blower/completed-machine.mp4", label: "COMPLETED MACHINE" },
-      { id: "overview", type: "image", src: "/images/machinery/catalog/id-fan-blower.png", label: "EQUIPMENT VIEW" },
+      { id: "overview", type: "image", src: "/images/machinery/catalog/id-fan-blower.webp", label: "EQUIPMENT VIEW" },
     ],
   },
   {
@@ -147,11 +147,11 @@ export const projects: Project[] = [
     scope: "",
     projectType: "Industrial Equipment",
     detailHref: "/machinery/screw-conveyor",
-    coverImage: "/images/machinery/catalog/screw-conveyor.png",
+    coverImage: "/images/machinery/catalog/screw-conveyor.webp",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/equipment/screw-conveyor/fabrication.mp4", label: "FABRICATION" },
       { id: "completed", type: "video", src: "/images/projects/equipment/screw-conveyor/completed-machine.mp4", label: "COMPLETED MACHINE" },
-      { id: "overview", type: "image", src: "/images/machinery/catalog/screw-conveyor.png", label: "EQUIPMENT VIEW" },
+      { id: "overview", type: "image", src: "/images/machinery/catalog/screw-conveyor.webp", label: "EQUIPMENT VIEW" },
     ],
   },
   {
@@ -164,11 +164,11 @@ export const projects: Project[] = [
     scope: "",
     projectType: "Industrial Equipment",
     detailHref: "/machinery/portable-belt-conveyor",
-    coverImage: "/images/projects/equipment/portable-belt-conveyor/equipment-view.png",
+    coverImage: "/images/projects/equipment/portable-belt-conveyor/equipment-view.webp",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/equipment/portable-belt-conveyor/fabrication.mp4", label: "FABRICATION" },
       { id: "completed", type: "video", src: "/images/projects/equipment/portable-belt-conveyor/completed-machine.mp4", label: "COMPLETED MACHINE" },
-      { id: "overview", type: "image", src: "/images/projects/equipment/portable-belt-conveyor/equipment-view.png", label: "EQUIPMENT VIEW" },
+      { id: "overview", type: "image", src: "/images/projects/equipment/portable-belt-conveyor/equipment-view.webp", label: "EQUIPMENT VIEW" },
     ],
   },
   {
@@ -181,11 +181,11 @@ export const projects: Project[] = [
     scope: "",
     projectType: "Industrial Equipment",
     detailHref: "/machinery/cyclone",
-    coverImage: "/images/machinery/catalog/cyclone.png",
+    coverImage: "/images/machinery/catalog/cyclone.webp",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/equipment/cyclone/fabrication.mp4", label: "FABRICATION" },
       { id: "completed", type: "video", src: "/images/projects/equipment/cyclone/completed-machine.mp4", label: "COMPLETED MACHINE" },
-      { id: "overview", type: "image", src: "/images/machinery/catalog/cyclone.png", label: "EQUIPMENT VIEW" },
+      { id: "overview", type: "image", src: "/images/machinery/catalog/cyclone.webp", label: "EQUIPMENT VIEW" },
     ],
   },
   {
@@ -198,11 +198,11 @@ export const projects: Project[] = [
     scope: "",
     projectType: "Industrial Equipment",
     detailHref: "/machinery/belt-conveyor",
-    coverImage: "/images/machinery/catalog/belt-conveyor.png",
+    coverImage: "/images/machinery/catalog/belt-conveyor.webp",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/equipment/belt-conveyor/fabrication.mp4", label: "FABRICATION" },
       { id: "completed", type: "video", src: "/images/projects/equipment/belt-conveyor/completed-machine.mp4", label: "COMPLETED MACHINE" },
-      { id: "overview", type: "image", src: "/images/machinery/catalog/belt-conveyor.png", label: "EQUIPMENT VIEW" },
+      { id: "overview", type: "image", src: "/images/machinery/catalog/belt-conveyor.webp", label: "EQUIPMENT VIEW" },
     ],
   },
   {
@@ -215,10 +215,10 @@ export const projects: Project[] = [
     scope: "",
     projectType: "Industrial Equipment",
     detailHref: "/machinery/bag-filter",
-    coverImage: "/images/machinery/catalog/bag-filter.png",
+    coverImage: "/images/machinery/catalog/bag-filter.webp",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/equipment/bag-filter/fabrication.mp4", label: "FABRICATION" },
-      { id: "overview", type: "image", src: "/images/machinery/catalog/bag-filter.png", label: "EQUIPMENT VIEW" },
+      { id: "overview", type: "image", src: "/images/machinery/catalog/bag-filter.webp", label: "EQUIPMENT VIEW" },
     ],
   },
   {
@@ -231,11 +231,11 @@ export const projects: Project[] = [
     scope: "",
     projectType: "Industrial Equipment",
     detailHref: "/machinery/chimney",
-    coverImage: "/images/machinery/catalog/industrial-chimney.png",
+    coverImage: "/images/machinery/catalog/industrial-chimney.webp",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/equipment/industrial-chimney/fabrication.mp4", label: "FABRICATION" },
       { id: "completed", type: "video", src: "/images/projects/equipment/industrial-chimney/completed-machine.mp4", label: "COMPLETED MACHINE" },
-      { id: "overview", type: "image", src: "/images/machinery/catalog/industrial-chimney.png", label: "EQUIPMENT VIEW" },
+      { id: "overview", type: "image", src: "/images/machinery/catalog/industrial-chimney.webp", label: "EQUIPMENT VIEW" },
     ],
   }
 ];
@@ -284,7 +284,7 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     capacity: "25 TPH",
     mediaType: "video",
     mediaSrc: "/images/projects/jk-salt/completed-plant.mp4",
-    poster: "/images/projects/jk-salt/cover-image.png",
+    poster: "/images/projects/jk-salt/cover-image.webp",
     mediaLabel: "COMPLETED PLANT / PROJECT FOOTAGE",
     mediaAlt: "Completed 25 TPH JK Salt refinery in Santalpur, Gujarat",
     detailHref: "/projects/jk-salt-santalpur",
@@ -293,7 +293,7 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     description: "Complete salt-refinery machinery supplied for the 25 TPH JK Salt facility in Santalpur.",
     videoCrop: "portrait-center",
     supportingMedia: [
-      { src: "/images/projects/jk-salt/cover-image.png", alt: "JK Salt refinery machinery overview", label: "EQUIPMENT OVERVIEW" },
+      { src: "/images/projects/jk-salt/cover-image.webp", alt: "JK Salt refinery machinery overview", label: "EQUIPMENT OVERVIEW" },
       { src: "/images/projects/archive-stills/jk-salt-25tph-field.webp", alt: "JK Salt refinery equipment documented on site", label: "FIELD RECORD" },
     ],
   },
@@ -326,7 +326,7 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     category: "salt-plants",
     location: "Santalpur, Gujarat",
     mediaType: "image",
-    mediaSrc: "/images/common/field-media/fabricated-equipment.jpeg",
+    mediaSrc: "/images/common/field-media/fabricated-equipment.webp",
     mediaLabel: "PROCESS EQUIPMENT / WORKSHOP FABRICATION",
     mediaAlt: "Stainless-steel salt processing equipment during workshop fabrication",
     detailHref: "/projects/bharat-salt-santalpur",
@@ -334,8 +334,8 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     scope: "Process equipment fabrication",
     description: "A field archive record documenting fabricated process equipment for salt-processing operations.",
     supportingMedia: [
-      { src: "/images/common/field-media/fabricated-equipment.jpeg", alt: "Fabricated stainless-steel process equipment", label: "WORKSHOP FABRICATION" },
-      { src: "/images/common/field-media/plant-structure.jpeg", alt: "Installed process equipment within a plant structure", label: "SITE EXECUTION" },
+      { src: "/images/common/field-media/fabricated-equipment.webp", alt: "Fabricated stainless-steel process equipment", label: "WORKSHOP FABRICATION" },
+      { src: "/images/common/field-media/plant-structure.webp", alt: "Installed process equipment within a plant structure", label: "SITE EXECUTION" },
     ],
   },
   {
@@ -345,7 +345,7 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     category: "air-dust",
     mediaType: "video",
     mediaSrc: "/images/projects/equipment/id-fan-blower/completed-machine.mp4",
-    poster: blowerProject?.coverImage ?? "/images/machinery/catalog/id-fan-blower.png",
+    poster: blowerProject?.coverImage ?? "/images/machinery/catalog/id-fan-blower.webp",
     mediaLabel: "AIR HANDLING / COMPLETED MACHINE",
     mediaAlt: "Completed industrial ID fan and blower fabricated by S.K. Engineering Works",
     detailHref: "/projects/id-fan-blower",
@@ -354,7 +354,7 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     description: "An industrial ID fan and blower documented from workshop fabrication through completed-machine testing.",
     videoCrop: "portrait-center",
     supportingMedia: [
-      { src: blowerProject?.coverImage ?? "/images/machinery/catalog/id-fan-blower.png", alt: "Completed ID fan and blower", label: "EQUIPMENT OVERVIEW" },
+      { src: blowerProject?.coverImage ?? "/images/machinery/catalog/id-fan-blower.webp", alt: "Completed ID fan and blower", label: "EQUIPMENT OVERVIEW" },
       { src: "/images/projects/archive-stills/id-fan-blower-field.webp", alt: "ID fan and blower during workshop fabrication", label: "WORKSHOP RECORD" },
     ],
   },
@@ -365,7 +365,7 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     category: "material-handling",
     mediaType: "video",
     mediaSrc: "/images/projects/equipment/belt-conveyor/completed-machine.mp4",
-    poster: beltConveyorProject?.coverImage ?? "/images/machinery/catalog/belt-conveyor.png",
+    poster: beltConveyorProject?.coverImage ?? "/images/machinery/catalog/belt-conveyor.webp",
     mediaLabel: "MATERIAL HANDLING / COMPLETED MACHINE",
     mediaAlt: "Completed belt conveyor manufactured for industrial material handling",
     detailHref: "/projects/belt-conveyor",
@@ -374,7 +374,7 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     description: "A belt conveyor manufactured for continuous industrial material transfer and documented in the workshop.",
     videoCrop: "portrait-center",
     supportingMedia: [
-      { src: beltConveyorProject?.coverImage ?? "/images/machinery/catalog/belt-conveyor.png", alt: "Completed industrial belt conveyor", label: "EQUIPMENT OVERVIEW" },
+      { src: beltConveyorProject?.coverImage ?? "/images/machinery/catalog/belt-conveyor.webp", alt: "Completed industrial belt conveyor", label: "EQUIPMENT OVERVIEW" },
       { src: "/images/projects/archive-stills/belt-conveyor-field.webp", alt: "Belt conveyor during workshop fabrication", label: "WORKSHOP RECORD" },
     ],
   },
@@ -385,7 +385,7 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     category: "air-dust",
     mediaType: "video",
     mediaSrc: "/images/projects/equipment/cyclone/completed-machine.mp4",
-    poster: cycloneProject?.coverImage ?? "/images/machinery/catalog/cyclone.png",
+    poster: cycloneProject?.coverImage ?? "/images/machinery/catalog/cyclone.webp",
     mediaLabel: "AIR / DUST SEPARATION / COMPLETED MACHINE",
     mediaAlt: "Completed industrial cyclone system fabricated by S.K. Engineering Works",
     detailHref: "/projects/cyclone",
@@ -394,7 +394,7 @@ const curatedProjectArchive: ProjectArchiveRecord[] = [
     description: "An industrial cyclone fabricated for air and dust separation, shown through real workshop records.",
     videoCrop: "portrait-center",
     supportingMedia: [
-      { src: cycloneProject?.coverImage ?? "/images/machinery/catalog/cyclone.png", alt: "Completed industrial cyclone", label: "EQUIPMENT OVERVIEW" },
+      { src: cycloneProject?.coverImage ?? "/images/machinery/catalog/cyclone.webp", alt: "Completed industrial cyclone", label: "EQUIPMENT OVERVIEW" },
       { src: "/images/projects/archive-stills/cyclone-field.webp", alt: "Industrial cyclone during workshop fabrication", label: "WORKSHOP RECORD" },
     ],
   },
@@ -520,7 +520,7 @@ export const projectGallery: ProjectGalleryItem[] = [
   {
     id: "plant-elevation-detail",
     type: "image",
-    src: "/images/salt-refinery/plant-layout/plant-elevation-detail.png",
+    src: "/images/salt-refinery/plant-layout/plant-elevation-detail.webp",
     alt: "Detailed 2D plant elevation drawing prepared for salt refinery engineering",
     label: "2D ENGINEERING DRAWING",
     detail: "PLANT ELEVATION",

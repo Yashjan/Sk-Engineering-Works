@@ -27,7 +27,7 @@ export const siteConfig = {
     addressCountry: "IN",
   },
   logo: "/images/common/brand/sk-logo.png",
-  socialImage: "/images/projects/jagdamba/cover-image.png",
+  socialImage: "/images/projects/jagdamba/cover-image-og.jpg",
   socialLinks: {
     instagram: "https://www.instagram.com/skengineeringworks20/",
     youtube: "https://www.youtube.com/@skengineeringworkssambharlake",

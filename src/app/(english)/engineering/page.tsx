@@ -4,6 +4,7 @@ import Image from "@/components/i18n/LocalizedImage";
 import Link from "@/components/i18n/LocalizedLink";
 import { existsSync } from "node:fs";
 import path from "node:path";
+import InViewVideo from "@/components/media/InViewVideo";
 import EngineeringEnquiry from "@/components/engineering/EngineeringEnquiry";
 import Navbar from "@/components/layout/Navbar";
 import SiteFooter from "@/components/layout/SiteFooter";
@@ -34,14 +35,14 @@ function Photo({ src, alt, label, priority = false, className = "" }: { src: str
 }
 
 function Video({ src, poster, label }: { src: string; poster: string; label: string }) {
-  return <figure className="eng-photo eng-video"><div><video src={assetPath(src)} poster={assetPath(poster)} autoPlay muted loop playsInline preload="metadata" aria-label={label} /></div><figcaption>{label}</figcaption></figure>;
+  return <figure className="eng-photo eng-video"><div><InViewVideo src={assetPath(src)} poster={assetPath(poster)} aria-label={label} /></div><figcaption>{label}</figcaption></figure>;
 }
 
 function PlantDrawing() {
   return <figure className="eng-plan-document">
     <div className="eng-plan-document-meta"><span>DOCUMENT / 2D-01</span><span>PLANT SIDE ELEVATION</span></div>
     <div className="eng-plan-document-canvas"><Image src={assetPath("/images/salt-refinery/plant-layout/plant-elevation-preview.webp")} alt="S.K. Engineering Works 2D salt refinery plant side elevation and equipment arrangement" fill sizes="(max-width: 767px) 88vw, 56vw" /></div>
-    <figcaption><span>ACTUAL PLANT ELEVATION / EQUIPMENT ARRANGEMENT</span><a href={assetPath("/images/salt-refinery/plant-layout/plant-elevation-detail.png")} target="_blank" rel="noopener noreferrer">INSPECT HIGH-RES DRAWING ↗</a></figcaption>
+    <figcaption><span>ACTUAL PLANT ELEVATION / EQUIPMENT ARRANGEMENT</span><a href={assetPath("/images/salt-refinery/plant-layout/plant-elevation-detail.webp")} target="_blank" rel="noopener noreferrer">INSPECT HIGH-RES DRAWING ↗</a></figcaption>
   </figure>;
 }
 
@@ -53,7 +54,7 @@ export default function EngineeringPage() {
     <main id="main" className="engineering-page">
       <section className="eng-hero eng-section" aria-labelledby="eng-title">
         <div className="eng-hero-copy"><p className="eng-kicker">ENGINEERING / PLANT PLANNING</p><h1 id="eng-title">BEFORE WE<br />FABRICATE,<br /><span>WE ENGINEER.</span></h1><p className="eng-lead">Every machine and plant begins with process understanding, layout planning and equipment integration.</p><div className="eng-actions"><a className="eng-button eng-button-light" href="#engineering-enquiry">DISCUSS YOUR PROJECT →</a><Link href="/salt-refinery-plants">VIEW SALT REFINERY PLANTS ↗</Link></div><div className="eng-hero-register" aria-label="Engineering capabilities"><span>2D PLANT LAYOUTS</span><span>EQUIPMENT ARRANGEMENT</span><span>SITE-SPECIFIC PLANNING</span></div></div>
-        <figure className="eng-hero-media"><div><Image src={assetPath("/images/machinery/manufacturing-proof/installed-processing-plant.png")} alt="Installed processing plant showing coordinated structures and process equipment" fill sizes="(max-width: 767px) 88vw, 48vw" priority /></div><figcaption><span>PLANNED AS A SYSTEM</span><span>BUILT FOR THE SITE / 01</span></figcaption></figure>
+        <figure className="eng-hero-media"><div><Image src={assetPath("/images/machinery/manufacturing-proof/installed-processing-plant.webp")} alt="Installed processing plant showing coordinated structures and process equipment" fill sizes="(max-width: 767px) 88vw, 48vw" priority /></div><figcaption><span>PLANNED AS A SYSTEM</span><span>BUILT FOR THE SITE / 01</span></figcaption></figure>
       </section>
 
       <section className="eng-process eng-section" aria-labelledby="eng-process-title"><div className="eng-heading-row"><div><p className="eng-kicker">01 / PROCESS UNDERSTANDING</p><h2 id="eng-process-title">ENGINEERING STARTS<br />WITH THE PROCESS.</h2></div><p>Before equipment is positioned or fabricated, the process sequence must be understood. Each stage informs the next connection and the plant around it.</p></div><ol className="eng-process-list">{processStages.map((stage, index) => <li key={stage.id}><span>{String(index + 1).padStart(2, "0")}</span>{stage.name}</li>)}</ol><Link className="eng-text-link" href="/salt-refinery-plants">EXPLORE THE COMPLETE PROCESS ↗</Link></section>
@@ -62,9 +63,9 @@ export default function EngineeringPage() {
 
       <section className="eng-arrangement eng-section" aria-labelledby="eng-arrangement-title"><div className="eng-heading-row"><div><p className="eng-kicker">03 / EQUIPMENT ARRANGEMENT</p><h2 id="eng-arrangement-title">EVERY MACHINE<br />HAS TO FIT THE SYSTEM.</h2></div><p>Machines are arranged as connected parts of a process—not as isolated pieces of equipment.</p></div><div className="eng-arrangement-grid"><Video src="/videos/manufacturing/SK_Built_Here_Workshop_Cinematic.mp4" poster="/images/machinery/manufacturing-proof/steel-fabrication.webp" label="FABRICATION / WORKSHOP" /><List items={arrangement} /></div></section>
 
-      <section className="eng-equipment eng-section" aria-labelledby="eng-equipment-title"><div><p className="eng-kicker">04 / MACHINE ENGINEERING</p><h2 id="eng-equipment-title">FROM PLANT REQUIREMENT<br />TO MACHINE DESIGN.</h2><p className="eng-copy">Machine design considers how each piece of equipment will be fabricated, supported and connected within the wider process.</p><List items={equipment} /><Link className="eng-text-link" href="/machinery">EXPLORE OUR MACHINERY ↗</Link></div><Photo className="eng-machine-photo" src="/images/machinery/catalog/pin-mill.png" alt="S.K. Engineering Works Pin Mill machine render" label="MACHINE DESIGN / PIN MILL EXAMPLE" /></section>
+      <section className="eng-equipment eng-section" aria-labelledby="eng-equipment-title"><div><p className="eng-kicker">04 / MACHINE ENGINEERING</p><h2 id="eng-equipment-title">FROM PLANT REQUIREMENT<br />TO MACHINE DESIGN.</h2><p className="eng-copy">Machine design considers how each piece of equipment will be fabricated, supported and connected within the wider process.</p><List items={equipment} /><Link className="eng-text-link" href="/machinery">EXPLORE OUR MACHINERY ↗</Link></div><Photo className="eng-machine-photo" src="/images/machinery/catalog/pin-mill.webp" alt="S.K. Engineering Works Pin Mill machine render" label="MACHINE DESIGN / PIN MILL EXAMPLE" /></section>
 
-      <section className="eng-fabrication eng-section" aria-labelledby="eng-fabrication-title"><div className="eng-heading-row"><div><p className="eng-kicker">05 / FROM PLAN TO BUILD</p><h2 id="eng-fabrication-title">FROM DRAWING<br />TO FABRICATION.</h2></div><p>Engineering decisions carry through to fabrication and assembly, connecting the intended process with real equipment.</p></div><div className="eng-fabrication-grid"><ol className="eng-handoff" aria-label="Engineering to fabrication sequence">{handoff.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong><i aria-hidden="true">→</i></li>)}</ol><Photo src="/images/common/field-media/fabrication-blower.jpeg" alt="Fabrication of industrial blower equipment" label="FABRICATION / REAL EQUIPMENT" /></div></section>
+      <section className="eng-fabrication eng-section" aria-labelledby="eng-fabrication-title"><div className="eng-heading-row"><div><p className="eng-kicker">05 / FROM PLAN TO BUILD</p><h2 id="eng-fabrication-title">FROM DRAWING<br />TO FABRICATION.</h2></div><p>Engineering decisions carry through to fabrication and assembly, connecting the intended process with real equipment.</p></div><div className="eng-fabrication-grid"><ol className="eng-handoff" aria-label="Engineering to fabrication sequence">{handoff.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong><i aria-hidden="true">→</i></li>)}</ol><Photo src="/images/common/field-media/fabrication-blower.webp" alt="Fabrication of industrial blower equipment" label="FABRICATION / REAL EQUIPMENT" /></div></section>
 
       <section className="eng-system eng-section" aria-labelledby="eng-system-title"><p className="eng-kicker">06 / COMPLETE PLANT INTEGRATION</p><div className="eng-heading-row"><div><p className="eng-system-pre">ONE MACHINE IS ONLY PART OF THE SYSTEM.</p><h2 id="eng-system-title">WE ENGINEER<br />THE COMPLETE PROCESS.</h2></div><p>Material transfer, elevation, sequencing, supports and access are planned together, including ducting or piping where the process requires it.</p></div><Link className="eng-button eng-button-dark" href="/salt-refinery-plants">EXPLORE SALT REFINERY PLANTS ↗</Link></section>
 

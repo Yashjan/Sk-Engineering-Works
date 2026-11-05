@@ -2,10 +2,11 @@
 /** @jsxImportSource @/i18n/react */
 
 import ProgressiveVideo from "@/components/media/ProgressiveVideo";
+import InViewVideo from "@/components/media/InViewVideo";
 
 import Image from "@/components/media/ProgressiveImage";
 import { useEffect, useRef } from "react";
-import { useLocaleTranslation } from "@/components/i18n/LocaleRuntime";
+import { useLocaleTranslation } from "@/i18n/context";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assetPath } from "@/lib/asset-path";
@@ -26,7 +27,7 @@ const journey: JourneyPhase[] = [
     paragraphs: [
       "S.K. Engineering Works began its manufacturing journey with traditional hand-operated well pulleys, fabricated from mild steel (MS). These manually operated winding machines were designed to draw water from wells, marking the company's early foundation in practical metal fabrication and mechanical engineering.",
     ],
-    media: "/images/about/well-pulley-ms-blue.png",
+    media: "/images/about/well-pulley-ms-blue.webp",
     mediaAlt: "Blue-painted mild steel hand-operated well pulley with cylindrical winding drum and manual crank.",
     mediaCaption: "EARLY MANUFACTURING BEGAN WITH MS WELL PULLEYS — SIMPLE, DURABLE, MANUALLY OPERATED MACHINES USED FOR DRAWING WATER FROM WELLS.",
   },
@@ -71,7 +72,7 @@ const journey: JourneyPhase[] = [
       "Growing experience in salt machinery and complete refinery systems took the company beyond Rajasthan and into Gujarat.",
       "S.K. Engineering Works now executes work across both states, carrying workshop capability through to site installation.",
     ],
-    media: "/images/projects/jagdamba/cover-image.png",
+    media: "/images/projects/jagdamba/cover-image.webp",
     mediaAlt: "Completed salt refinery plant representing S.K. Engineering Works execution across Rajasthan and Gujarat",
     mediaCaption: "COMPLETE REFINERY / FIELD EXECUTION",
   },
@@ -158,7 +159,7 @@ export default function AboutPageExperience() {
           <p className="about-page-hero-intro">From mechanical fabrication and agricultural machinery to material handling systems and complete salt refinery plants.</p>
         </header>
         <figure className="about-page-hero-media">
-          <div className="about-page-hero-media-inner"><ProgressiveVideo ref={heroVideoRef} muted loop playsInline preload="metadata" poster={assetPath("/images/common/field-media/fabricated-equipment.jpeg")} aria-label="S.K. Engineering Works workshop fabrication"><source src={assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4")} type="video/mp4" /></ProgressiveVideo></div>
+          <div className="about-page-hero-media-inner"><ProgressiveVideo ref={heroVideoRef} muted loop playsInline preload="metadata" poster={assetPath("/images/common/field-media/fabricated-equipment.webp")} aria-label="S.K. Engineering Works workshop fabrication"><source src={assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4")} type="video/mp4" /></ProgressiveVideo></div>
           <figcaption><span>WORKSHOP / SAMBHAR LAKE</span><span>HANDS-ON ENGINEERING</span></figcaption>
         </figure>
       </div>
@@ -173,7 +174,7 @@ export default function AboutPageExperience() {
         {journey.map((phase, index) => <article className={`about-page-journey-phase${phase.media ? " has-media" : ""}`} key={phase.label} data-reveal>
           <div className="about-page-journey-index"><span>{String(index + 1).padStart(2, "0")}</span><i aria-hidden="true" /></div>
           <div className="about-page-journey-copy"><p className="about-page-journey-label">{phase.label}</p><h3>{phase.title.split("\n").map((line) => <span key={line}>{line}</span>)}</h3>{phase.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{index === 2 ? <p className="about-page-client-milestone">FIRST MAJOR SALT-INDUSTRY CLIENT <strong>SHREE NAMAK UDHYOG</strong></p> : null}</div>
-          {phase.media ? <figure className="about-page-journey-media" data-media-fit={index === 0 || index === 3 ? "contain" : undefined}>{phase.mediaType === "video" ? <ProgressiveVideo src={assetPath(phase.media)} aria-label={phase.mediaAlt} autoPlay muted loop playsInline preload="metadata" /> : <Image src={assetPath(phase.media)} alt={phase.mediaAlt ?? ""} fill sizes="(max-width: 767px) 88vw, 37vw" />}<figcaption>{phase.mediaCaption}</figcaption></figure> : <div className="about-page-journey-word" aria-hidden="true">{index === 1 ? "ADAPT" : index === 3 ? "SYSTEMS" : "NEXT"}</div>}
+          {phase.media ? <figure className="about-page-journey-media" data-media-fit={index === 0 || index === 3 ? "contain" : undefined}>{phase.mediaType === "video" ? <InViewVideo src={assetPath(phase.media)} aria-label={phase.mediaAlt} /> : <Image src={assetPath(phase.media)} alt={phase.mediaAlt ?? ""} fill sizes="(max-width: 767px) 88vw, 37vw" />}<figcaption>{phase.mediaCaption}</figcaption></figure> : <div className="about-page-journey-word" aria-hidden="true">{index === 1 ? "ADAPT" : index === 3 ? "SYSTEMS" : "NEXT"}</div>}
         </article>)}
       </div>
       <p className="about-page-story-statement" data-reveal>WHEN INDUSTRY CHANGED,<br /><span>WE CHANGED WITH IT.</span></p>
