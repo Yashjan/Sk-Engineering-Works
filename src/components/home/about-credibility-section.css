@@ -45,7 +45,14 @@
 .about-marquee-track { display: flex; width: max-content; list-style: none; margin: 0; padding: 0; animation: about-marquee-left 42s linear infinite; }
 .about-marquee-row.is-reverse .about-marquee-track { animation-name: about-marquee-right; }
 .about-marquees:hover .about-marquee-track { animation-play-state: paused; }
-.about-client-mark { display: flex; position: relative; flex: 0 0 clamp(220px, 19vw, 340px); min-height: 72px; align-items: center; justify-content: center; padding: 12px 28px; border-right: 1px solid #d0d0c9; color: #282c28; text-align: center; opacity: .48; transition: opacity .25s, transform .25s; }
+.about-client-mark { display: flex; position: relative; flex: 0 0 clamp(220px, 19vw, 340px); min-height: 72px; align-items: center; justify-content: center; padding: 12px 28px; border-right: 1px solid #d0d0c9; color: #282c28; text-align: center; transition: opacity .25s, transform .25s; }
+/* Dim the logo artwork (logotypes are exempt from contrast) rather than the whole mark,
+   so client names stay readable at WCAG AA while the logo wall keeps its muted look. */
+.about-client-logo { opacity: .48; transition: opacity .25s; }
+.about-client-mark:hover .about-client-logo { opacity: 1; }
+.about-client-mark strong, .about-client-mark small { color: #6b6c68; transition: color .25s; }
+.about-client-mark:hover strong { color: #282c28; }
+.about-client-mark:hover small { color: #656963; }
 .about-client-mark:hover { opacity: 1; transform: scale(1.018); }
 .about-client-mark strong { max-width: 250px; font-size: clamp(11px, .9vw, 15px); font-weight: 500; line-height: 1.2; letter-spacing: .04em; text-transform: uppercase; }
 .about-client-logo { display: block; width: min(160px, 80%); height: 42px; object-fit: contain;}
@@ -131,5 +138,6 @@
   .about-marquee-row::-webkit-scrollbar { display: none; }
   .about-marquee-track { animation: none; }
   .about-client-mark[aria-hidden="true"] { display: none; }
-  .about-client-mark { opacity: .72; transition: none; }
+  .about-client-mark, .about-client-mark strong, .about-client-mark small, .about-client-logo { transition: none; }
+  .about-client-logo { opacity: .72; }
 }

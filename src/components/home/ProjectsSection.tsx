@@ -15,7 +15,7 @@ type ProjectWithAsset = Project & { hasImage: boolean };
 
 function ProjectVisual({ project, media, videoRef, muted, onPlayStateChange }: { project: ProjectWithAsset; media?: ProjectMedia; videoRef: React.RefObject<HTMLVideoElement | null>; muted: boolean; onPlayStateChange: (playing: boolean) => void }) {
   if (media?.type === "video") {
-    return <ProgressiveVideo ref={videoRef} className="projects-video" src={media.src} poster={project.hasImage ? project.coverImage : undefined} muted={muted} playsInline loop preload="metadata" aria-label={`${project.title} — ${media.label.toLowerCase()}`} onPlay={() => onPlayStateChange(true)} onPause={() => onPlayStateChange(false)} />;
+    return <ProgressiveVideo ref={videoRef} className="projects-video" src={media.src} poster={project.hasImage ? project.coverImage : undefined} muted={muted} playsInline loop preload="metadata" deferUntilNear aria-label={`${project.title} — ${media.label.toLowerCase()}`} onPlay={() => onPlayStateChange(true)} onPause={() => onPlayStateChange(false)} />;
   }
   if (media?.type === "image" && media.src) {
     return <Image src={media.src} alt={`${project.title} — ${media.label.toLowerCase()}`} fill sizes="(min-width: 900px) 58vw, 94vw" className="projects-image" />;

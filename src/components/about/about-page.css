@@ -16,7 +16,7 @@
   font-size: 11px;
   line-height: 1.4;
   letter-spacing: 0.16em;
-  opacity: 0.58;
+  opacity: 0.62;
 }
 
 /* Hero */
@@ -223,6 +223,7 @@
 }
 .about-page-journey-phase:nth-of-type(even) .about-page-client-milestone {
   border-color: rgb(243 242 237 / 22%);
+  color: #aab2ae !important;
 }
 .about-page-journey-phase:nth-of-type(even) .about-page-client-milestone strong {
   color: #f3f2ed;
@@ -231,7 +232,7 @@
   position: relative;
   align-self: stretch;
   padding-top: 7px;
-  color: #818785;
+  color: #686d6c;
   font-size: 11px;
   letter-spacing: 0.14em;
 }
@@ -275,7 +276,7 @@
   margin-top: 28px !important;
   padding-top: 17px;
   border-top: 1px solid rgb(17 20 21 / 20%);
-  color: #727876 !important;
+  color: #696e6c !important;
   font-size: 11px !important;
   letter-spacing: 0.12em;
 }
@@ -303,7 +304,7 @@
 .about-page-journey-media figcaption {
   position: absolute;
   inset: auto 0 -22px;
-  color: #737977;
+  color: #696e6c;
   font-size: 11px;
   letter-spacing: 0.12em;
 }
@@ -451,7 +452,7 @@
 .about-page-founder-roles li span {
   display: block;
   margin-bottom: 28px;
-  color: #717775;
+  color: #787e7c;
   font-size: 11px;
 }
 
@@ -499,7 +500,7 @@
   border-right: 0;
 }
 .about-page-builds-list span {
-  color: #7d8380;
+  color: #696e6c;
   font-size: 11px;
   letter-spacing: 0.14em;
 }
@@ -674,7 +675,7 @@
   border-right: 0;
 }
 .about-page-progress-list span {
-  color: #7a807e;
+  color: #696e6c;
   font-size: 11px;
   letter-spacing: 0.14em;
 }

@@ -12,7 +12,7 @@
 
 .configuration-eyebrow {
   margin: 0 0 clamp(42px, 5vw, 72px);
-  color: #6b7071;
+  color: #696e6f;
   font-size: 11px;
   line-height: 1.4;
   letter-spacing: 0.18em;
@@ -104,7 +104,7 @@
   gap: 24px;
   padding: 14px 0;
   border-bottom: 1px solid rgb(17 20 21 / 14%);
-  color: #717677;
+  color: #696e6f;
   font-size: 11px;
   line-height: 1.4;
   letter-spacing: 0.14em;
@@ -145,7 +145,7 @@
   display: flex;
   align-self: center;
   align-items: center;
-  color: #7c8182;
+  color: #696e6e;
   font-size: 11px;
   line-height: 1;
   letter-spacing: 0.12em;

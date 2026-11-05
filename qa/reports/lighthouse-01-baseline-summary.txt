@@ -1,0 +1,15 @@
+page                        form     Perf A11y  BP SEO    FCP    LCP    TBT    CLS     SI    bytes  req  LCP element
+about                       desktop    90   94 100 100   0.2s   2.0s    18ms  0.000   1.0s   16.8MB   71  ge-hero-media-inner > video.progressive-video
+about                       mobile     68   94  96 100   1.1s   9.3s   292ms  0.000   3.0s   14.5MB   42  ge-hero-media-inner > video.progressive-video
+engineering                 desktop    79   96 100 100   0.2s   4.0s     0ms  0.000   0.9s   11.7MB   68  .eng-hero > figure.eng-hero-media > div > img
+engineering                 mobile     74   96 100 100   0.9s  19.2s   101ms  0.000   3.1s   10.0MB   46  .eng-hero > figure.eng-hero-media > div > img
+home                        desktop    74   96 100 100   0.3s   5.6s    63ms  0.000   1.6s   25.4MB   82   picture.hero-picture > img.progressive-image
+home                        mobile     67   96 100 100   1.2s  13.9s   277ms  0.000   4.2s    7.9MB   54  ask#intro-_R_aivb_ > g > text.site-intro-text
+machinery                   desktop   100   96 100 100   0.3s   0.6s     0ms  0.000   1.0s    6.7MB   68  ask#intro-_R_aivb_ > g > text.site-intro-text
+machinery                   mobile     75   96  96 100   1.2s   5.1s   264ms  0.000   3.5s    7.5MB   43  -composition > div.machinery-hero-support > p
+machinery_belt-conveyor     desktop    92   96 100 100   0.2s   1.7s     0ms  0.000   1.3s    1.9MB   68  e-detail-hero > div.machine-hero-visual > img
+machinery_belt-conveyor     mobile     74   96 100 100   1.1s   9.8s    86ms  0.000   3.5s    1.8MB   47  e-detail-hero > div.machine-hero-visual > img
+machinery_screw-conveyor    desktop    41   93 100 100   0.3s   3.6s 26227ms  0.000  12.1s   11.9MB   78  ort > div.screw-conveyor-scene-four-copy > h2
+machinery_screw-conveyor    mobile     35   93  96 100   1.1s  20.7s110236ms  0.000  34.3s   11.8MB   51  ort > div.screw-conveyor-scene-four-copy > h2
+salt-refinery-plants        desktop    99   96 100 100   0.3s   0.7s    37ms  0.000   1.1s    7.5MB   71  div.salt-hero-media > video.progressive-video
+salt-refinery-plants        mobile     77   96  96 100   1.1s   3.3s   568ms  0.000   3.5s    5.9MB   44  div.salt-hero-media > video.progressive-video

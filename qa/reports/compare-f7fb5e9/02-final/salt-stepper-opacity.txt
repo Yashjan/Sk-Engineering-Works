@@ -1,0 +1,8 @@
+base
+  desktop idle:        ACTIVE   name=1.00 number=0.55 line=28.0% | inactive name=0.44 number=0.24 line=6.2% | inactive name=0.44 number=0.24 line=6.2% | inactive name=0.44 number=0.24 line=6.2%
+  desktop hover row 3: inactive name=0.28 number=0.15 line=3.9% | inactive name=0.28 number=0.15 line=3.9% | ACTIVE   name=1.00 number=0.55 line=28.0% | inactive name=0.28 number=0.15 line=3.9%
+  mobile:              ACTIVE   name=1.00 number=0.55 line=28.0% | inactive name=0.42 number=0.55 line=14.0% | inactive name=0.42 number=0.55 line=14.0% | inactive name=0.42 number=0.55 line=14.0%
+curr
+  desktop idle:        ACTIVE   name=1.00 number=0.82 line=28.0% | inactive name=0.60 number=0.60 line=6.0% | inactive name=0.60 number=0.60 line=6.0% | inactive name=0.60 number=0.60 line=6.0%
+  desktop hover row 3: inactive name=0.60 number=0.60 line=4.0% | inactive name=0.60 number=0.60 line=4.0% | ACTIVE   name=1.00 number=0.82 line=28.0% | inactive name=0.60 number=0.60 line=4.0%
+  mobile:              ACTIVE   name=1.00 number=0.82 line=28.0% | inactive name=0.60 number=0.60 line=14.0% | inactive name=0.60 number=0.60 line=14.0% | inactive name=0.60 number=0.60 line=14.0%

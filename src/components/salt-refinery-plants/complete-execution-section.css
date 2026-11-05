@@ -108,7 +108,7 @@
 
 .execution-stage-number {
   padding-top: 4px;
-  color: #747b7c;
+  color: #7a8081;
   font-size: 11px;
   line-height: 1;
   letter-spacing: 0.12em;
@@ -154,7 +154,7 @@
 
 .execution-image figcaption {
   margin-top: 10px;
-  color: #747b7c;
+  color: #7a8081;
   font-size: 11px;
   line-height: 1.4;
   letter-spacing: 0.14em;
@@ -243,7 +243,7 @@
 
 .execution-drawing-copy > p {
   margin: 0 0 20px;
-  color: #68706e;
+  color: #616866;
   font-size: 10px;
   font-weight: 600;
   line-height: 1.4;
@@ -321,7 +321,7 @@
 
 .execution-drawing-document figcaption {
   margin-top: 10px;
-  color: #747b78;
+  color: #616765;
   font-size: 10px;
   line-height: 1.4;
   letter-spacing: 0.14em;

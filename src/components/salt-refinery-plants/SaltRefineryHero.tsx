@@ -99,7 +99,6 @@ export default function SaltRefineryHero() {
           <div className="salt-hero-media" aria-hidden="true">
             <ProgressiveVideo
               ref={video}
-              src={assetPath("/videos/salt-refinery/SK_Salt_Refinery_Plants_Hero_10s.mp4")}
               poster={assetPath("/videos/salt-refinery/SK_Salt_Refinery_Plants_Hero_Poster.jpg")}
               autoPlay={motionAllowed}
               muted
@@ -107,7 +106,11 @@ export default function SaltRefineryHero() {
               playsInline
               preload="metadata"
               tabIndex={-1}
-            />
+            >
+              {/* Phones render this slot ~340px wide; the 540p encode avoids a 720p download there. */}
+              <source media="(max-width: 767px)" src={assetPath("/videos/salt-refinery/SK_Salt_Refinery_Plants_Hero_10s_540p.mp4")} type="video/mp4" />
+              <source src={assetPath("/videos/salt-refinery/SK_Salt_Refinery_Plants_Hero_10s.mp4")} type="video/mp4" />
+            </ProgressiveVideo>
             <span className="salt-hero-media-shade" />
             <span className="salt-hero-media-label">REAL PROJECT EXECUTION</span>
           </div>

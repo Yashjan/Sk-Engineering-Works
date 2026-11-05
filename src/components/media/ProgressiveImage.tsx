@@ -34,7 +34,9 @@ export default function ProgressiveImage({
       src={src}
       alt={translate(alt)}
       className={classes}
-      loading={loading ?? (props.priority || props.preload || props.fetchPriority === "high" ? undefined : "lazy")}
+      // next/image defaults to lazy; a high-priority (LCP) image must be eager so the
+      // preload scanner can fetch it before layout instead of after it.
+      loading={loading ?? (props.priority || props.preload ? undefined : props.fetchPriority === "high" ? "eager" : "lazy")}
       data-media-state={loaded ? "loaded" : "loading"}
       onLoad={(event: SyntheticEvent<HTMLImageElement>) => {
         setLoadedSource(sourceKey);

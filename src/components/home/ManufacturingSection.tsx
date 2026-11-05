@@ -172,6 +172,7 @@ export default function ManufacturingSection() {
             playsInline
             loop
             preload="metadata"
+            deferUntilNear
             aria-label="S.K. Engineering Works manufacturing and fabrication footage"
             onPlay={() => setPlaying(true)}
             onPause={() => setPlaying(false)}

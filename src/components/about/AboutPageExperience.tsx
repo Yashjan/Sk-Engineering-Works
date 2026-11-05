@@ -114,12 +114,20 @@ export default function AboutPageExperience() {
   useEffect(() => {
     const video = heroVideoRef.current;
     if (!video) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.25) void video.play().catch(() => undefined);
+    // Respect reduced motion: the hero then stays on its poster frame.
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let visible = false;
+    const sync = () => {
+      if (visible && !reduceMotion.matches) void video.play().catch(() => undefined);
       else video.pause();
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting && entry.intersectionRatio >= 0.25;
+      sync();
     }, { threshold: [0, 0.25, 0.6] });
     observer.observe(video);
-    return () => { observer.disconnect(); video.pause(); };
+    reduceMotion.addEventListener("change", sync);
+    return () => { observer.disconnect(); reduceMotion.removeEventListener("change", sync); video.pause(); };
   }, []);
 
   useEffect(() => {
@@ -159,7 +167,7 @@ export default function AboutPageExperience() {
           <p className="about-page-hero-intro">From mechanical fabrication and agricultural machinery to material handling systems and complete salt refinery plants.</p>
         </header>
         <figure className="about-page-hero-media">
-          <div className="about-page-hero-media-inner"><ProgressiveVideo ref={heroVideoRef} muted loop playsInline preload="metadata" poster={assetPath("/images/common/field-media/fabricated-equipment.webp")} aria-label="S.K. Engineering Works workshop fabrication"><source src={assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4")} type="video/mp4" /></ProgressiveVideo></div>
+          <div className="about-page-hero-media-inner"><ProgressiveVideo ref={heroVideoRef} muted loop playsInline preload="metadata" poster={assetPath("/images/common/field-media/fabricated-equipment.webp")} aria-label="S.K. Engineering Works workshop fabrication"><source media="(max-width: 767px)" src={assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_540p.mp4")} type="video/mp4" /><source src={assetPath("/videos/manufacturing/SK_Inside_Our_Manufacturing_Cinematic_720p.mp4")} type="video/mp4" /></ProgressiveVideo></div>
           <figcaption><span>WORKSHOP / SAMBHAR LAKE</span><span>HANDS-ON ENGINEERING</span></figcaption>
         </figure>
       </div>

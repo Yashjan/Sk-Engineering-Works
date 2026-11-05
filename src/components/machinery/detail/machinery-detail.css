@@ -1,6 +1,6 @@
 .machinery-detail-page { background: #f3f2ed; color: #19211e; }
 .machine-detail-hero { min-height: 95svh; display: grid; grid-template-columns: 1fr 1.1fr; align-items: center; gap: 4vw; padding: 150px 6vw 70px; }
-.machine-eyebrow { font-size: 11px; letter-spacing: .16em; color: #69766e; margin: 0 0 28px; }
+.machine-eyebrow { font-size: 11px; letter-spacing: .16em; color: #5d6962; margin: 0 0 28px; }
 .machine-detail-hero > div { min-width: 0; }
 .machine-detail-hero h1 { font-size: clamp(48px, min(7.5vw, calc(60vw / var(--machine-title-word-length, 6))), 140px); font-weight: 500; letter-spacing: -.065em; line-height: .87; margin: 0 0 30px; }
 .machine-detail-hero > div > p:not(.machine-eyebrow) { max-width: 380px; color: #5e6b62; font-size: 16px; line-height: 1.7; }
@@ -29,28 +29,28 @@
 .machine-coming-status strong { font-weight: 500; color: #b7cabc; }
 .machine-construction { list-style: none; margin: 45px 0 0; padding: 0; }
 .machine-construction li { border-top: 1px solid #bac4b9; padding: 22px 0; display: grid; grid-template-columns: 60px 1fr 1fr; gap: 20px; align-items: baseline; }
-.machine-construction li > span { color: #788b7a; font-size: 11px; }
+.machine-construction li > span { color: #617163; font-size: 11px; }
 .machine-construction h3 { margin: 0; font-size: 18px; font-weight: 500; }
 .machine-construction p { margin: 0; color: #637168; font-size: 14px; line-height: 1.7; }
 .machine-how { background: #e5e9e0; }
 .machine-how ol { list-style: none; margin: 50px 0 0; padding: 0; display: grid; grid-template-columns: repeat(var(--machine-how-steps, 4), minmax(0, 1fr)); gap: 3vw; }
 .machine-how li { border-top: 1px solid #9fb09f; padding-top: 22px; }
-.machine-how li > span { color: #788b7a; font-size: 11px; }
+.machine-how li > span { color: #5b6a5d; font-size: 11px; }
 .machine-how h3 { margin: 26px 0 14px; font-size: 20px; font-weight: 500; }
 .machine-how li > p { color: #5c6b60; font-size: 14px; line-height: 1.8; }
 .machine-editorial-list { margin-top: 40px; }
 .machine-editorial-list details { border-top: 1px solid #bac4b9; padding-block: 20px; }
 .machine-editorial-list summary { cursor: pointer; font-size: 15px; letter-spacing: .04em; }
-.machine-editorial-list summary > span { display: inline-block; width: 44px; color: #7b8b7c; font-size: 11px; }
+.machine-editorial-list summary > span { display: inline-block; width: 44px; color: #626f63; font-size: 11px; }
 .machine-editorial-list details > p { margin: 18px 0 0 44px; color: #5c6a61; font-size: 14px; line-height: 1.8; }
 .machine-asset-note { margin-top: 40px; padding-block: 35px; border-block: 1px solid #bac4b9; max-width: 680px; }
-.machine-asset-note > span { font-size: 11px; letter-spacing: .13em; color: #667e6b; }
+.machine-asset-note > span { font-size: 11px; letter-spacing: .13em; color: #5c7160; }
 .machine-asset-note p { color: #5d6b61; line-height: 1.8; font-size: 14px; }
 .machine-asset-note a { display: inline-block; padding-block: 12px; font-size: 11px; letter-spacing: .08em; text-decoration: underline; text-underline-offset: 5px; }
 .machine-media-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; margin-top: 40px; }
 .machine-media-grid figure { margin: 0; }
 .machine-media-grid :is(img, video) { width: 100%; height: auto; }
-.machine-media-grid figcaption { font-size: 11px; color: #627768; padding-top: 12px; }
+.machine-media-grid figcaption { font-size: 11px; color: #5e7264; padding-top: 12px; }
 .machine-enquiry-grid { margin-top: 45px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 7vw; }
 .machine-enquiry-grid > div > p { max-width: 330px; color: #5a6a5e; line-height: 1.8; font-size: 15px; }
 .machine-phone { display: block; width: fit-content; margin-top: 24px; font-size: 21px; }
@@ -58,7 +58,7 @@
 .machine-enquiry label { display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: #55695a; }
 .machine-enquiry :is(input, textarea) { width: 100%; min-width: 0; padding: 12px 0; border: 0; border-bottom: 1px solid #9eaf9d; border-radius: 0; background: transparent; color: #17261b; font: inherit; font-size: 16px; }
 .machine-field-wide { grid-column: 1 / -1; }
-.machine-enquiry small { font-size: 11px; line-height: 1.7; color: #677a6b; }
+.machine-enquiry small { font-size: 11px; line-height: 1.7; color: #607164; }
 @media (max-width: 767px) {
   .machine-detail-hero { grid-template-columns: 1fr; gap: 25px; padding: 130px 6vw 42px; min-height: 0; }
   .machine-detail-hero h1 { font-size: clamp(42px, min(16vw, calc(140vw / var(--machine-title-word-length, 6))), 88px); }

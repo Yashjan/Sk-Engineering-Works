@@ -43,7 +43,7 @@
 .projects-chapters[data-chapter-count="1"] { grid-template-columns: 1fr; }
 .projects-chapters[data-chapter-count="2"] { grid-template-columns: repeat(2, 1fr); }
 .projects-chapters[data-chapter-count="3"] { grid-template-columns: repeat(3, 1fr); }
-.projects-chapters button { display: flex; align-items: center; gap: 10px; padding: 0 15px; border: 0; border-right: 1px solid #29372f; background: transparent; color: #708278; text-align: left; font-size: 11px; letter-spacing: .1em; cursor: pointer; }
+.projects-chapters button { display: flex; align-items: center; gap: 10px; padding: 0 15px; border: 0; border-right: 1px solid #29372f; background: transparent; color: #74867c; text-align: left; font-size: 11px; letter-spacing: .1em; cursor: pointer; }
 .projects-chapters button:last-child { border-right: 0; }
 .projects-chapters button span { font-size: 11px; }
 .projects-chapters button i { display: block; width: 20px; border-top: 1px solid currentColor; }

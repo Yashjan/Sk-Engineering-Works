@@ -29,18 +29,22 @@
 .eng-process { border-top: 1px solid #343c38; }
 .eng-process-list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 58px 0 28px; padding: 0; list-style: none; }
 .eng-process-list li { min-height: 76px; padding: 15px 12px 14px 0; border-top: 1px solid #465149; color: #d8ddd9; font-size: 11px; line-height: 1.4; letter-spacing: .06em; }
-.eng-process-list span, .eng-list span { display: block; margin-bottom: 9px; color: #91a498; font-size: 10px; }
+.eng-process-list span, .eng-list span { display: block; margin-bottom: 9px; color: #637067; font-size: 10px; }
+/* Index numbers keep their original light colour on the dark sections (AA there) and use the
+   darker tone only where the list sits on the light paper sections. */
+.eng-process-list span, .eng-list span { color: #91a498; }
+.eng-layout .eng-list span, .eng-site .eng-list span { color: #637067; }
 .eng-text-link { display: inline-block; margin-top: 24px; padding-bottom: 9px; border-bottom: 1px solid currentColor; font-size: 11px; letter-spacing: .1em; }
 
 .eng-layout, .eng-equipment, .eng-site { display: grid; grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr); align-items: center; gap: clamp(50px, 7vw, 124px); }
 .eng-layout, .eng-site { background: #f3f2ed; color: #19241f; }
 .eng-layout .eng-copy, .eng-site .eng-copy { color: #526158; }
-.eng-layout .eng-kicker, .eng-site .eng-kicker { color: #68796e; }
+.eng-layout .eng-kicker, .eng-site .eng-kicker { color: #617166; }
 .eng-list { margin: 34px 0 0; padding: 0; list-style: none; }
 .eng-list li { display: grid; grid-template-columns: 42px 1fr; padding: 13px 0; border-top: 1px solid rgb(117 140 124 / 35%); font-size: 11px; line-height: 1.4; letter-spacing: .08em; }
 .eng-list span { margin: 0; }
 .eng-plan-document { min-width: 0; margin: 0; padding: 18px; border: 1px solid #aeb9b1; background: #e7eae3; }
-.eng-plan-document-meta, .eng-plan-document figcaption { display: flex; justify-content: space-between; gap: 20px; color: #68796e; font-size: 10px; line-height: 1.5; letter-spacing: .12em; }
+.eng-plan-document-meta, .eng-plan-document figcaption { display: flex; justify-content: space-between; gap: 20px; color: #5c6a61; font-size: 10px; line-height: 1.5; letter-spacing: .12em; }
 .eng-plan-document-meta { padding: 0 2px 14px; }
 .eng-plan-document-canvas { position: relative; min-height: clamp(390px, 40vw, 610px); overflow: hidden; border: 1px solid rgb(87 105 93 / 28%); background: #fff; }
 .eng-plan-document-canvas img { object-fit: contain; }
@@ -60,14 +64,14 @@
 .eng-equipment .eng-photo > div { aspect-ratio: 1.12; background: #e7ebe5; }
 .eng-equipment .eng-photo img { object-fit: contain; padding: 5%; }
 .eng-fabrication { background: #e3e8df; color: #19251c; }
-.eng-fabrication .eng-kicker { color: #68796e; }
+.eng-fabrication .eng-kicker { color: #5a6960; }
 .eng-fabrication .eng-heading-row > p { color: #526158; }
 .eng-fabrication-grid { display: grid; grid-template-columns: minmax(280px, .7fr) minmax(0, 1.3fr); align-items: stretch; gap: clamp(24px, 4vw, 70px); margin-top: 52px; }
 .eng-fabrication-grid .eng-photo > div { height: 100%; min-height: 430px; aspect-ratio: auto; }
-.eng-fabrication-grid .eng-photo figcaption { color: #5d6d61; }
+.eng-fabrication-grid .eng-photo figcaption { color: #5a6a5e; }
 .eng-handoff { display: flex; margin: 0; padding: 0; border-top: 1px solid #a9b8ae; flex-direction: column; list-style: none; }
 .eng-handoff li { display: grid; grid-template-columns: 42px 1fr auto; min-height: 74px; align-items: center; gap: 16px; border-bottom: 1px solid #bdc8c0; }
-.eng-handoff li span { color: #7b8c81; font-size: 10px; letter-spacing: .12em; }
+.eng-handoff li span { color: #5c6961; font-size: 10px; letter-spacing: .12em; }
 .eng-handoff li strong { font-size: clamp(13px, 1.18vw, 18px); font-weight: 500; letter-spacing: .06em; }
 .eng-handoff li i { color: #718579; font-size: 18px; font-style: normal; }
 

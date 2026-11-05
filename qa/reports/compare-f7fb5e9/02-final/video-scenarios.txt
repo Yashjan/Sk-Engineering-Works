@@ -1,0 +1,26 @@
+base .projects-video      lenis-jump       playing  playing  playing
+base .projects-video      scrollbar-jump   playing  playing  playing
+base .projects-video      anchor-link      playing  playing  playing
+base .projects-video      wheel            playing  playing  playing
+base .projects-video      back-navigation  playing  playing  playing
+base .projects-video      reload-restored  (offscreen)PAUSED  (offscreen)PAUSED  PAUSED
+base .manufacturing-video lenis-jump       playing  playing  playing
+base .manufacturing-video scrollbar-jump   playing  playing  playing
+base .manufacturing-video anchor-link      playing  playing  playing
+base .manufacturing-video wheel            playing  playing  playing
+base .manufacturing-video back-navigation  playing  playing  playing
+base .manufacturing-video reload-restored  PAUSED  (offscreen)PAUSED  (offscreen)PAUSED
+curr .projects-video      lenis-jump       playing  playing  playing
+curr .projects-video      scrollbar-jump   playing  playing  playing
+curr .projects-video      anchor-link      playing  playing  playing
+curr .projects-video      wheel            playing  playing  playing
+curr .projects-video      back-navigation  playing  playing  playing
+curr .projects-video      reload-restored  (offscreen)PAUSED  (offscreen)PAUSED  (offscreen)PAUSED
+curr .manufacturing-video lenis-jump       playing  playing  playing
+curr .manufacturing-video scrollbar-jump   playing  playing  playing
+curr .manufacturing-video anchor-link      playing  playing  playing
+curr .manufacturing-video wheel            playing  playing  playing
+curr .manufacturing-video back-navigation  playing  playing  playing
+curr .manufacturing-video reload-restored  (offscreen)PAUSED  (offscreen)PAUSED  (offscreen)PAUSED
+base initial-load requests for deferred media: cover-image.webp, fabrication.mp4, SK_Inside_Our_Manufacturing_Cinematic_720p.mp4
+curr initial-load requests for deferred media: none

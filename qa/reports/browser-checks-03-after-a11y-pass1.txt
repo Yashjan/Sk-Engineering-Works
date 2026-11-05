@@ -1,0 +1,37 @@
+FAIL http://localhost:4106/Sk-Engineering-Works/ :: axe color-contrast(serious) x11: .machinery-gateway-eyebrow
+FAIL http://localhost:4106/Sk-Engineering-Works/about/ :: axe color-contrast(serious) x29: .about-page-story > .about-page-section-meta[data-reveal="true"] > span:nth-child(1)
+FAIL http://localhost:4106/Sk-Engineering-Works/engineering/ :: axe color-contrast(serious) x23: .eng-layout-copy > .eng-kicker
+FAIL http://localhost:4106/Sk-Engineering-Works/salt-refinery-plants/ :: axe color-contrast(serious) x53: .salt-hero-scope > li:nth-child(1) > span
+FAIL http://localhost:4106/Sk-Engineering-Works/machinery/ :: axe color-contrast(serious) x26: .machinery-hero-code > span
+FAIL http://localhost:4106/Sk-Engineering-Works/machinery/ :: Tab stop has no focus indicator: input ""
+FAIL http://localhost:4106/Sk-Engineering-Works/machinery/belt-conveyor/ :: axe color-contrast(serious) x59: div:nth-child(1) > .machine-eyebrow
+FAIL http://localhost:4106/Sk-Engineering-Works/contact/ :: axe color-contrast(serious) x9: .contact-direct-eyebrow
+FAIL http://localhost:4106/Sk-Engineering-Works/projects/ :: axe color-contrast(serious) x9: .projects-field-archive-label
+FAIL http://localhost:4106/Sk-Engineering-Works/hi/ :: axe color-contrast(serious) x11: .machinery-gateway-eyebrow
+FAIL http://localhost:4106/Sk-Engineering-Works/hi/about/ :: axe color-contrast(serious) x30: .about-page-story > .about-page-section-meta[data-reveal="true"] > span:nth-child(1)
+FAIL http://localhost:4106/Sk-Engineering-Works/hi/engineering/ :: axe color-contrast(serious) x22: .eng-layout-copy > .eng-kicker
+FAIL http://localhost:4106/Sk-Engineering-Works/hi/salt-refinery-plants/ :: axe color-contrast(serious) x54: .salt-hero-scope > li:nth-child(1) > span
+FAIL http://localhost:4106/Sk-Engineering-Works/hi/machinery/ :: axe color-contrast(serious) x29: .machinery-hero-code > span
+FAIL http://localhost:4106/Sk-Engineering-Works/hi/machinery/ :: Tab stop has no focus indicator: input ""
+FAIL http://localhost:4106/Sk-Engineering-Works/hi/machinery/belt-conveyor/ :: axe color-contrast(serious) x59: div:nth-child(1) > .machine-eyebrow
+FAIL http://localhost:4106/Sk-Engineering-Works/hi/contact/ :: axe color-contrast(serious) x9: .contact-direct-eyebrow
+FAIL http://localhost:4106/Sk-Engineering-Works/hi/projects/ :: axe color-contrast(serious) x11: .projects-field-archive-label
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/ :: axe color-contrast(serious) x8: ol[aria-label="فئات الآلات"] > li:nth-child(1) > span
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/about/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/about/ :: axe color-contrast(serious) x20: .about-page-founder-roles > li:nth-child(1) > span
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/engineering/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/engineering/ :: axe color-contrast(serious) x19: .eng-layout-copy > .eng-kicker
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/salt-refinery-plants/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/salt-refinery-plants/ :: axe color-contrast(serious) x31: .salt-hero-scope > li:nth-child(1) > span
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/machinery/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/machinery/ :: axe color-contrast(serious) x22: .machinery-hero-code > span
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/machinery/ :: Tab stop has no focus indicator: input ""
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/machinery/belt-conveyor/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/machinery/belt-conveyor/ :: axe color-contrast(serious) x44: div:nth-child(1) > .machine-eyebrow
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/contact/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/contact/ :: axe color-contrast(serious) x4: .contact-direct-row[data-reveal="true"]:nth-child(1) > dt > span
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/projects/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4106/Sk-Engineering-Works/ar/projects/ :: axe color-contrast(serious) x4: .projects-field-explorer-counter > span[aria-hidden="true"]
+
+35 failures

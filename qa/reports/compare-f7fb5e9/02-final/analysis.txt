@@ -1,0 +1,370 @@
+VIDEO desktop:/ #0 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #0 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #1 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #1 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #2 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #2 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #3 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #3 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #4 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #4 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #5 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #5 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #6 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #6 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #7 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #7 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #8 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #8 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #9 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #9 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #10 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #10 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #11 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #11 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #12 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ #13 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #0 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #0 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #1 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #1 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #2 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #2 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #3 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #3 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #4 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #4 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #5 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #5 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #6 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #6 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #7 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #7 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #8 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #8 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #9 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #9 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #10 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/ #11 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO mobile:/about/ #0 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=true|paused=false|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=true|paused=false|ready=data
+VIDEO mobile:/about/ #1 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #2 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #3 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #4 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #5 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #6 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #7 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #8 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #9 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #10 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #11 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #12 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #13 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #14 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #15 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/about/ #16 [0]
+   base: |SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Inside_Our_Manufacturing_Cinematic_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/salt-refinery-plants/ #0 [0]
+   base: |SK_Salt_Refinery_Plants_Hero_10s.mp4|true|inView=true|paused=false|ready=data
+   curr: |SK_Salt_Refinery_Plants_Hero_10s_540p.mp4|true|inView=true|paused=false|ready=data
+VIDEO mobile:/salt-refinery-plants/ #1 [0]
+   base: |SK_Salt_Refinery_Plants_Hero_10s.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Salt_Refinery_Plants_Hero_10s_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/salt-refinery-plants/ #2 [0]
+   base: |SK_Salt_Refinery_Plants_Hero_10s.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Salt_Refinery_Plants_Hero_10s_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/salt-refinery-plants/ #3 [0]
+   base: |SK_Salt_Refinery_Plants_Hero_10s.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Salt_Refinery_Plants_Hero_10s_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/salt-refinery-plants/ #4 [0]
+   base: |SK_Salt_Refinery_Plants_Hero_10s.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Salt_Refinery_Plants_Hero_10s_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/salt-refinery-plants/ #5 [0]
+   base: |SK_Salt_Refinery_Plants_Hero_10s.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Salt_Refinery_Plants_Hero_10s_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/salt-refinery-plants/ #6 [0]
+   base: |SK_Salt_Refinery_Plants_Hero_10s.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Salt_Refinery_Plants_Hero_10s_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/salt-refinery-plants/ #7 [0]
+   base: |SK_Salt_Refinery_Plants_Hero_10s.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Salt_Refinery_Plants_Hero_10s_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/salt-refinery-plants/ #8 [0]
+   base: |SK_Salt_Refinery_Plants_Hero_10s.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Salt_Refinery_Plants_Hero_10s_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/salt-refinery-plants/ #9 [0]
+   base: |SK_Salt_Refinery_Plants_Hero_10s.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Salt_Refinery_Plants_Hero_10s_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO mobile:/salt-refinery-plants/ #10 [0]
+   base: |SK_Salt_Refinery_Plants_Hero_10s.mp4|true|inView=false|paused=true|ready=data
+   curr: |SK_Salt_Refinery_Plants_Hero_10s_540p.mp4|true|inView=false|paused=true|ready=data
+VIDEO desktop:/ar/ #0 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #0 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #1 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #1 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #2 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #2 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #3 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #3 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #4 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #4 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #5 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #5 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #6 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #6 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #7 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #7 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #8 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #8 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #9 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #9 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #10 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #10 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #11 [0]
+   base: projects-video|fabrication.mp4|true|inView=false|paused=true|ready=data
+   curr: projects-video|fabrication.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #11 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #12 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+VIDEO desktop:/ar/ #13 [1]
+   base: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|true|inView=false|paused=true|ready=data
+   curr: manufacturing-video|SK_Inside_Our_Manufacturing_Cinematic_720p.mp4|false|inView=false|paused=true|ready=0
+
+PIXEL DIFF (>0.05% of pixels changed by >20/255; video+canvas masked):
+    4.26%  mobile:/machinery/screw-conveyor/ #13  box=[79,164,732,803]  mobile_machinery_screw-conveyor__13.png
+    1.59%  mobile:/projects/ #8  box=[49,496,766,1515]  mobile_projects__08.png
+    1.19%  mobile:/salt-refinery-plants/ #9  box=[84,518,776,1549]  mobile_salt-refinery-plants__09.png
+    1.18%  desktop:/salt-refinery-plants/ #7  box=[52,308,1343,888]  desktop_salt-refinery-plants__07.png
+    1.17%  desktop:/hi/machinery/ #13  box=[50,704,1352,856]  desktop_hi_machinery__13.png
+    1.15%  desktop:/machinery/ #13  box=[46,704,1349,856]  desktop_machinery__13.png
+    1.15%  desktop:/about/ #14  box=[48,693,1347,845]  desktop_about__14.png
+    0.91%  mobile:/ #15  box=[54,1284,764,1557]  mobile_home_15.png
+    0.81%  mobile:/about/ #15  box=[83,1296,767,1569]  mobile_about__15.png
+    0.77%  desktop:/projects/ #6  box=[48,112,1347,896]  desktop_projects__06.png
+    0.76%  mobile:/machinery/screw-conveyor/ #15  box=[48,439,767,1687]  mobile_machinery_screw-conveyor__15.png
+    0.70%  mobile:/salt-refinery-plants/ #2  box=[127,235,546,953]  mobile_salt-refinery-plants__02.png
+    0.48%  desktop:/ #10  box=[65,278,1377,795]  desktop_home_10.png
+    0.41%  desktop:/machinery/ #7  box=[69,427,702,686]  desktop_machinery__07.png
+    0.35%  mobile:/projects/ #1  box=[48,1307,776,1535]  mobile_projects__01.png
+    0.35%  mobile:/salt-refinery-plants/ #1  box=[36,564,743,664]  mobile_salt-refinery-plants__01.png
+    0.35%  desktop:/ #6  box=[65,245,1377,795]  desktop_home_06.png
+    0.34%  desktop:/ #8  box=[65,280,350,642]  desktop_home_08.png
+    0.33%  desktop:/machinery/ #4  box=[69,362,599,621]  desktop_machinery__04.png
+    0.32%  desktop:/ar/ #10  box=[65,286,1377,795]  desktop_ar__10.png
+    0.31%  desktop:/ #1  box=[65,273,455,635]  desktop_home_01.png
+    0.30%  desktop:/ar/ #9  box=[65,287,1377,795]  desktop_ar__09.png
+    0.30%  desktop:/ #3  box=[65,231,1377,794]  desktop_home_03.png
+    0.28%  desktop:/hi/machinery/ #7  box=[65,428,555,691]  desktop_hi_machinery__07.png
+    0.25%  mobile:/projects/ #2  box=[48,1076,778,1651]  mobile_projects__02.png
+    0.25%  desktop:/salt-refinery-plants/ #1  box=[65,441,343,865]  desktop_salt-refinery-plants__01.png
+    0.25%  desktop:/ #9  box=[65,278,1377,795]  desktop_home_09.png
+    0.24%  desktop:/hi/machinery/ #4  box=[67,363,479,630]  desktop_hi_machinery__04.png
+    0.24%  desktop:/projects/jk-salt-santalpur/ #12  box=[302,166,1338,691]  desktop_projects_jk-salt-santalpur__12.png
+    0.24%  desktop:/projects/jk-salt-santalpur/ #10  box=[621,503,1338,827]  desktop_projects_jk-salt-santalpur__10.png
+    0.23%  desktop:/ar/ #3  box=[84,273,553,594]  desktop_ar__03.png
+    0.21%  desktop:/projects/jk-salt-santalpur/ #11  box=[302,253,398,323]  desktop_projects_jk-salt-santalpur__11.png
+    0.20%  desktop:/ar/ #6  box=[65,287,553,603]  desktop_ar__06.png
+    0.19%  desktop:/ #7  box=[59,270,445,566]  desktop_home_07.png
+    0.17%  desktop:/projects/ #2  box=[320,301,1359,421]  desktop_projects__02.png
+    0.17%  desktop:/hi/machinery/ #6  box=[611,363,1222,877]  desktop_hi_machinery__06.png
+    0.16%  desktop:/machinery/ #6  box=[611,364,1222,878]  desktop_machinery__06.png
+    0.16%  desktop:/ar/ #2  box=[145,287,552,582]  desktop_ar__02.png
+    0.16%  desktop:/projects/ #1  box=[65,340,1341,801]  desktop_projects__01.png
+    0.15%  desktop:/ #5  box=[66,329,1376,794]  desktop_home_05.png
+    0.13%  desktop:/ar/ #8  box=[139,321,552,616]  desktop_ar__08.png
+    0.13%  desktop:/projects/ #5  box=[48,625,1424,875]  desktop_projects__05.png
+    0.12%  mobile:/ #13  box=[69,1130,328,1148]  mobile_home_13.png
+    0.12%  desktop:/machinery/screw-conveyor/ #14  box=[0,539,1424,789]  desktop_machinery_screw-conveyor__14.png
+    0.11%  desktop:/machinery/ #2  box=[65,140,1357,549]  desktop_machinery__02.png
+    0.10%  desktop:/ar/ #4  box=[89,231,1376,794]  desktop_ar__04.png
+    0.10%  mobile:/projects/ #3  box=[71,164,779,867]  mobile_projects__03.png
+    0.07%  mobile:/salt-refinery-plants/ #8  box=[49,1060,270,1381]  mobile_salt-refinery-plants__08.png
+    0.07%  desktop:/hi/machinery/ #2  box=[65,136,1357,549]  desktop_hi_machinery__02.png
+    0.06%  desktop:/projects/jk-salt-santalpur/ #15  box=[84,581,260,607]  desktop_projects_jk-salt-santalpur__15.png
+    0.06%  desktop:/projects/ #4  box=[367,751,1406,875]  desktop_projects__04.png
+    0.05%  desktop:/machinery/ #1  box=[65,134,1038,361]  desktop_machinery__01.png
+  175/227 screenshots identical within noise
+
+PROBES base: {"lenisWheelTrace":[113,113,329,367,367,441,465,489,508,515,525,529],"transition":[{"t":21,"path":"/hi/","overlay":"hidden/0.00/"},{"t":278,"path":"/hi/machinery/","overlay":"hidden/0.00/"}]} 
+PROBES curr: {"lenisWheelTrace":[147,147,147,397,397,453,453,494,494,516,524,524],"transition":[{"t":20,"path":"/hi/","overlay":"hidden/0.00/"},{"t":280,"path":"/hi/machinery/","overlay":"hidden/0.00/"}]}
+
+PROJECTS SHOWCASE base: [{"step":"scrolled into view","v":{"src":"fabrication.mp4","paused":false,"ready":4,"poster":"cover-image.webp"}},{"step":"buttons","list":[{"i":0,"text":"लूटना","label":"प्यूज प्रोजेक्ट वीडियो"},{"i":1,"text":"ध्वनि बंद","label":"परियोजना वीडियो ध्वनि चालू करें"},{"i":2,"text":"01निर्माण","label":""},{"i":3,"text":"02साइट इंस्टॉलेशन","label":""},{"i":4,"text":"03पूरा संयंत्र","label":""},{"i":5,"text":"04अवलोकन","label":""}]},{"step":"click ध्वनि बंद","v":{"src":"fabrication.mp4","paused":false,"ready":4,"poster":"cover-image.webp"}},{"step":"click 01निर्माण","v":{"src":"fabrication.mp4","paused":false,"ready":4,"poster":"cover-image.webp"}},{"step":"click 02साइट इंस्टॉलेशन","v":{"src":"site-installation.mp4","paused":false,"ready":4,"poster":"cover-image.webp"}}] 
+PROJECTS SHOWCASE curr: [{"step":"scrolled into view","v":{"src":"fabrication.mp4","paused":false,"ready":4,"poster":"cover-image.webp"}},{"step":"buttons","list":[{"i":0,"text":"रोकें","label":"प्यूज प्रोजेक्ट वीडियो"},{"i":1,"text":"ध्वनि बंद","label":"परियोजना वीडियो ध्वनि चालू करें"},{"i":2,"text":"01निर्माण","label":""},{"i":3,"text":"02साइट इंस्टॉलेशन","label":""},{"i":4,"text":"03पूरा संयंत्र","label":""},{"i":5,"text":"04अवलोकन","label":""}]},{"step":"click ध्वनि बंद","v":{"src":"fabrication.mp4","paused":false,"ready":4,"poster":"cover-image.webp"}},{"step":"click 01निर्माण","v":{"src":"fabrication.mp4","paused":false,"ready":4,"poster":"cover-image.webp"}},{"step":"click 02साइट इंस्टॉलेशन","v":{"src":"site-installation.mp4","paused":false,"ready":4,"poster":"cover-image.webp"}}]
+
+3D base: {"canvas":true,"box":{"w":1425,"h":900,"y":0},"webgl":true,"shot":true} 
+3D curr: {"canvas":true,"box":{"w":1425,"h":900,"y":0},"webgl":true,"shot":true}

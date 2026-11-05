@@ -23,7 +23,10 @@
 
 .trusted-clients-standalone .about-client-mark { color: #f3f2ed; }
 /* .trusted-clients-standalone .about-client-logo { filter: grayscale(1) saturate(0) invert(1) contrast(1.15); } */
-.trusted-clients-standalone .about-client-mark small { color: rgb(243 242 237 / 52%); }
+.trusted-clients-standalone .about-client-mark strong { color: #7c7c7a; }
+.trusted-clients-standalone .about-client-mark small { color: #7b7c7b; }
+.trusted-clients-standalone .about-client-mark:hover strong { color: #f3f2ed; }
+.trusted-clients-standalone .about-client-mark:hover small { color: rgb(243 242 237 / 52%); }
 
 @media (max-width: 1023px) {
   .trusted-clients-shell { padding-inline: 6vw; }

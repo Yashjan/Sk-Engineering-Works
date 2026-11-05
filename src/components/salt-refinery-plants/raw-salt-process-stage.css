@@ -22,7 +22,7 @@
 .raw-process-eyebrow {
   grid-column: 1 / -1;
   margin: 0 0 20px;
-  color: rgb(17 20 21 / 52%);
+  color: rgb(17 20 21 / 60%);
   font-size: 11px;
   letter-spacing: .18em;
 }
@@ -116,7 +116,7 @@
 
 .raw-process-stage-item button span,
 .raw-process-desktop-row span {
-  color: rgb(17 20 21 / 55%);
+  color: rgb(17 20 21 / 60%);
   font-size: 11px;
   font-variant-numeric: tabular-nums;
   letter-spacing: .12em;
@@ -130,16 +130,32 @@
   letter-spacing: .08em;
 }
 
+/* Desktop rows dim as a whole (as originally). .6 is the lowest row opacity at which the
+   step text still meets WCAG AA (4.6:1 on #f5ede1); numbers are full ink inside the dimmed row. */
+.raw-process-desktop-list .raw-process-desktop-row span {
+  color: rgb(17 20 21 / 100%);
+}
+
 .raw-process-desktop-list .raw-process-stage-item {
-  opacity: .44;
+  opacity: .6;
 }
 
 .raw-process-interaction[data-hovering="true"] .raw-process-desktop-list .raw-process-stage-item {
-  opacity: .28;
+  opacity: .6;
+}
+
+/* The divider lines are decorative, so they keep the original de-emphasis exactly:
+   effective 14% × .44 at rest and 14% × .28 while another step is hovered (÷ the .6 row). */
+.raw-process-desktop-list .raw-process-stage-item:not([data-active="true"]) .raw-process-desktop-row:not(:focus-visible) {
+  border-color: rgb(17 20 21 / 10.27%);
+}
+
+.raw-process-interaction[data-hovering="true"] .raw-process-desktop-list .raw-process-stage-item:not([data-active="true"]) .raw-process-desktop-row:not(:focus-visible) {
+  border-color: rgb(17 20 21 / 6.53%);
 }
 
 .raw-process-mobile-list .raw-process-stage-item:not([data-active="true"]) button {
-  color: rgb(17 20 21 / 42%);
+  color: rgb(17 20 21 / 60%);
 }
 
 .raw-process-interaction[data-hovering="true"] .raw-process-desktop-list .raw-process-stage-item[data-active="true"],
@@ -158,7 +174,13 @@
 .raw-process-stage-item[data-active="true"] button span,
 .raw-process-stage-item[data-active="true"] .raw-process-desktop-row span,
 .raw-process-stage-item button:focus-visible span {
-  color: rgb(17 20 21 / 55%);
+  color: rgb(17 20 21 / 82%);
+}
+
+/* A focused desktop step that is not (yet) the active row stays inside the .6 row
+   opacity, so its number keeps full ink to remain at the AA floor like other steps. */
+.raw-process-desktop-list .raw-process-stage-item:not([data-active="true"]) button:focus-visible span {
+  color: rgb(17 20 21 / 100%);
 }
 
 .raw-process-stage-marker {
@@ -311,7 +333,7 @@
 
 .raw-process-copy-eyebrow {
   margin: 2px 0 20px;
-  color: rgb(17 20 21 / 55%);
+  color: rgb(17 20 21 / 60%);
   font-size: 11px;
   letter-spacing: .16em;
 }
@@ -351,7 +373,7 @@
 .raw-process-related > span {
   display: block;
   margin-bottom: 10px;
-  color: rgb(17 20 21 / 52%);
+  color: rgb(17 20 21 / 60%);
   font-size: 11px;
   letter-spacing: .16em;
 }

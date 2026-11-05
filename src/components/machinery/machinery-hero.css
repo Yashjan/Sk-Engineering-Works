@@ -20,7 +20,7 @@
 .machinery-hero-scroll { display: flex; align-items: center; gap: 12px; margin: 0; color: rgb(243 242 237 / 65%); font-size: 11px; font-weight: 500; letter-spacing: .14em; }
 .machinery-hero-scroll > span { display: block; width: 24px; height: 1px; background: rgb(243 242 237 / 38%); }
 .machinery-hero-scroll b { color: #f3f2ed; font-size: 13px; font-weight: 400; }
-.machinery-hero-code { display: grid; grid-template-columns: auto auto; gap: 24px; margin: 0; color: rgb(243 242 237 / 42%); font-size: 11px; font-weight: 500; line-height: 1.4; letter-spacing: .14em; }
+.machinery-hero-code { display: grid; grid-template-columns: auto auto; gap: 24px; margin: 0; color: rgb(243 242 237 / 49%); font-size: 11px; font-weight: 500; line-height: 1.4; letter-spacing: .14em; }
 .machinery-hero-code strong { color: rgb(243 242 237 / 72%); font-weight: 500; }
 
 @media (prefers-reduced-motion: no-preference) {

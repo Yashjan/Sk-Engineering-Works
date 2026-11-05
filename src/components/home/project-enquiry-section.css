@@ -107,7 +107,7 @@
 .project-enquiry-light::before,
 .project-enquiry-light .enquiry-region-line { background: rgb(17 20 21 / 22%); }
 .project-enquiry-light .enquiry-background { color: rgb(17 20 21 / 3%); }
-.project-enquiry-light .enquiry-meta { border-color: rgb(17 20 21 / 18%); color: rgb(17 20 21 / 58%); }
+.project-enquiry-light .enquiry-meta { border-color: rgb(17 20 21 / 18%); color: rgb(17 20 21 / 60%); }
 .project-enquiry-light .enquiry-meta a:hover,
 .project-enquiry-light .enquiry-heading-muted .enquiry-heading-line:last-child,
 .project-enquiry-light .enquiry-answer,
@@ -122,7 +122,7 @@
 .project-enquiry-light .enquiry-lower-contact,
 .project-enquiry-light .enquiry-lower-contact p,
 .project-enquiry-light .enquiry-maps,
-.project-enquiry-light .enquiry-scope-compact { color: rgb(17 20 21 / 58%); }
+.project-enquiry-light .enquiry-scope-compact { color: rgb(17 20 21 / 60%); }
 .project-enquiry-light .enquiry-primary,
 .project-enquiry-light .enquiry-secondary { border-color: #111415; }
 .project-enquiry-light .enquiry-primary { background: #111415; color: #f3f2ed; }

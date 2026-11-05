@@ -5,3 +5,7 @@ build/
 *.tsbuildinfo
 .env*
 !.env.example
+
+# QA: raw Lighthouse JSON (~11MB per run) stays local; summaries are committed
+qa/reports/lighthouse/
+__pycache__/

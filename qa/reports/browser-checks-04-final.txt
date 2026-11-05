@@ -1,0 +1,16 @@
+FAIL http://localhost:4302/Sk-Engineering-Works/about/ :: axe color-contrast(serious) x2: .about-page-regions > span:nth-child(1)
+FAIL http://localhost:4302/Sk-Engineering-Works/engineering/ :: axe color-contrast(serious) x12: .eng-arrangement-grid > ul > li:nth-child(1) > span
+FAIL http://localhost:4302/Sk-Engineering-Works/hi/about/ :: axe color-contrast(serious) x2: .about-page-regions > span:nth-child(1)
+FAIL http://localhost:4302/Sk-Engineering-Works/hi/engineering/ :: axe color-contrast(serious) x12: .eng-arrangement-grid > ul > li:nth-child(1) > span
+FAIL http://localhost:4302/Sk-Engineering-Works/ar/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4302/Sk-Engineering-Works/ar/about/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4302/Sk-Engineering-Works/ar/about/ :: axe color-contrast(serious) x1: .about-page-regions > span:nth-child(2)
+FAIL http://localhost:4302/Sk-Engineering-Works/ar/engineering/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4302/Sk-Engineering-Works/ar/engineering/ :: axe color-contrast(serious) x12: .eng-arrangement-grid > ul > li:nth-child(1) > span
+FAIL http://localhost:4302/Sk-Engineering-Works/ar/salt-refinery-plants/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4302/Sk-Engineering-Works/ar/machinery/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4302/Sk-Engineering-Works/ar/machinery/belt-conveyor/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4302/Sk-Engineering-Works/ar/contact/ :: dir after hydration html=rtl body=ltr, expected rtl
+FAIL http://localhost:4302/Sk-Engineering-Works/ar/projects/ :: dir after hydration html=rtl body=ltr, expected rtl
+
+14 failures

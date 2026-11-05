@@ -163,7 +163,7 @@ export default function ProjectsVisualGallery({
         .to(scene, {
           "--gallery-bg": "#aeb6a9",
           "--gallery-fg": "#111415",
-          "--gallery-muted": "rgba(17,20,21,.58)",
+          "--gallery-muted": "rgba(17,20,21,.7)",
           "--gallery-line": "rgba(17,20,21,.14)",
           duration: 0.3,
           ease: "none",
@@ -171,7 +171,7 @@ export default function ProjectsVisualGallery({
         .to(scene, {
           "--gallery-bg": "#f3f2ed",
           "--gallery-fg": "#111415",
-          "--gallery-muted": "rgba(17,20,21,.56)",
+          "--gallery-muted": "rgba(17,20,21,.62)",
           "--gallery-line": "rgba(17,20,21,.13)",
           duration: 0.4,
           ease: "none",
@@ -274,14 +274,14 @@ export default function ProjectsVisualGallery({
         }).to(scene, {
           "--gallery-bg": "#aeb6a9",
           "--gallery-fg": "#111415",
-          "--gallery-muted": "rgba(17,20,21,.56)",
+          "--gallery-muted": "rgba(17,20,21,.7)",
           "--gallery-line": "rgba(17,20,21,.12)",
           duration: 0.28,
           ease: "none",
         }).to(scene, {
           "--gallery-bg": "#f3f2ed",
           "--gallery-fg": "#111415",
-          "--gallery-muted": "rgba(17,20,21,.52)",
+          "--gallery-muted": "rgba(17,20,21,.62)",
           "--gallery-line": "rgba(17,20,21,.11)",
           duration: 0.42,
           ease: "none",

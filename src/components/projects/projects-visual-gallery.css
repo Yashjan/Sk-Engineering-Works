@@ -82,9 +82,12 @@
   position: relative;
   flex: 0 0 auto;
   margin-top: var(--gallery-card-top);
-  opacity: .68;
   transition: opacity 280ms ease;
 }
+/* Inactive cards dim their photo (not their caption, which keeps AA contrast). Matches the
+   original look exactly: the dim applies only while GSAP has not set the card's opacity inline. */
+.projects-visual-gallery-card .projects-visual-gallery-media { transition: opacity 280ms ease; }
+.projects-visual-gallery-card:not([data-active="true"]):not([style*="opacity"]) .projects-visual-gallery-media { opacity: .68; }
 .projects-visual-gallery-card.is-high { --gallery-card-top: clamp(116px, 15vh, 162px); }
 .projects-visual-gallery-card.is-middle { --gallery-card-top: clamp(238px, 29vh, 318px); }
 .projects-visual-gallery-card.is-low { --gallery-card-top: clamp(326px, 40vh, 430px); }
@@ -114,7 +117,6 @@
   object-fit: cover;
   filter: saturate(.86) contrast(1.03);
 }
-.projects-visual-gallery-card[data-active="true"] { opacity: 1; }
 .projects-visual-gallery-card figcaption {
   display: flex;
   align-items: flex-start;
@@ -205,6 +207,7 @@
     margin-top: 0;
     opacity: 1;
   }
+  .projects-visual-gallery-card:not([data-active="true"]):not([style*="opacity"]) .projects-visual-gallery-media { opacity: 1; }
   .projects-visual-gallery-card:nth-child(even) { align-self: flex-end; }
   .projects-visual-gallery-card.is-portrait { width: min(50vw, 470px); }
   .projects-visual-gallery-media-layer { inset: 0; transform: none !important; }
@@ -324,6 +327,7 @@
     margin-top: 0;
     opacity: 1;
   }
+  .projects-visual-gallery-card:not([data-active="true"]):not([style*="opacity"]) .projects-visual-gallery-media { opacity: 1; }
   .projects-visual-gallery-card:nth-child(even) { align-self: flex-end; }
   .projects-visual-gallery-media-layer { inset: 0; transform: none !important; }
   .projects-visual-gallery-footer { display: none; }

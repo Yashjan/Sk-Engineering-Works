@@ -1,0 +1,4 @@
+/                          LCP 8804ms  FCP 1032  DCL 1316  load 6264  introReveal 7498  introDone 7799  runs=[8804,8664,8892]
+   candidates (last run): 1012ms text.site-intro-text 8686px²  →  8064ms p.hero-eyebrow 10575px²  →  8892ms p.hero-description 18847px²
+/about/                    LCP 716ms  FCP 716  DCL 1092  load 6100  introReveal 5328  introDone 5644  runs=[716,728,568]
+   candidates (last run): 568ms p.about-page-hero-intro 20496px²

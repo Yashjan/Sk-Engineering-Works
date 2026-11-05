@@ -1,0 +1,36 @@
+base desktop
+   - card=1.00(inline) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(inline) media=1.00 → photo=1.00 caption=1.00 
+   - card=0.68(css) media=1.00 → photo=0.68 caption=0.68 visible
+   - card=0.68(css) media=1.00 → photo=0.68 caption=0.68 visible
+   A card=1.00(css) media=1.00 → photo=1.00 caption=1.00 visible
+base desktop-reduced
+   A card=1.00(css) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(css) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(css) media=1.00 → photo=1.00 caption=1.00 visible
+   - card=1.00(css) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(css) media=1.00 → photo=1.00 caption=1.00 
+base mobile
+   A card=1.00(inline) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(inline) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(inline) media=1.00 → photo=1.00 caption=1.00 
+   - card=0.96(inline) media=1.00 → photo=0.96 caption=0.96 visible
+   - card=0.74(inline) media=1.00 → photo=0.74 caption=0.74 visible
+curr desktop
+   - card=1.00(inline) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(inline) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(css) media=0.68 → photo=0.68 caption=1.00 visible
+   - card=1.00(css) media=0.68 → photo=0.68 caption=1.00 visible
+   A card=1.00(css) media=1.00 → photo=1.00 caption=1.00 visible
+curr desktop-reduced
+   A card=1.00(css) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(css) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(css) media=1.00 → photo=1.00 caption=1.00 visible
+   - card=1.00(css) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(css) media=1.00 → photo=1.00 caption=1.00 
+curr mobile
+   A card=1.00(inline) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(inline) media=1.00 → photo=1.00 caption=1.00 
+   - card=1.00(inline) media=1.00 → photo=1.00 caption=1.00 
+   - card=0.96(inline) media=1.00 → photo=0.96 caption=0.96 visible
+   - card=0.74(inline) media=1.00 → photo=0.74 caption=0.74 visible

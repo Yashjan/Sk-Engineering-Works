@@ -300,7 +300,7 @@
 
 .project-system-rail-number {
   display: block;
-  color: #747b75;
+  color: #686f69;
   font-size: 11px;
   line-height: 1.4;
   letter-spacing: .1em;
@@ -309,7 +309,7 @@
 .project-system-rail-name {
   display: block;
   margin-top: 24px;
-  color: #6c736e;
+  color: #686e6a;
   font-size: clamp(11px, .85vw, 14px);
   font-weight: 600;
   line-height: 1.25;
@@ -509,7 +509,7 @@
     border: 0;
     border-block: 1px solid var(--system-rule);
     background: transparent;
-    color: #747b75;
+    color: #686f69;
     cursor: pointer;
   }
 
