@@ -17,6 +17,7 @@ Everything here is review material: nothing in `qa/` is built, bundled or deploy
 | `compare-f7fb5e9/` | Behaviour/visual comparison against commit `f7fb5e9` (GSAP, ScrollTrigger, Lenis, transitions, video, 3D, galleries) — see its README. |
 | `contrast-05-final.json`, `contrast-06-stepper-recheck.json`, `browser-checks-05-final.txt`, `lcp-trace-05-final.txt`, `export-validation-05-final.txt` | Final validation after the approved fixes. |
 | `contrast-07-final.json`, `export-validation-06-final.txt` | Re-check after the last cleanup (Hindi play labels, stepper dividers). |
+| `video-labels-final.txt`, `export-validation-07-final.txt` | Every video play/pause/sound control on Home, Machinery and four project pages: accessible name (Chrome accessibility tree) and visible text before and after a click, in EN/HI/AR. Final: no untranslated names. |
 | `image-quality-webp.txt` | PSNR and worst 8×8-block error for every PNG/JPEG → WebP conversion against the original in git history. |
 
 ### Known, intentional remaining items
@@ -40,6 +41,7 @@ qa/tools/run_lighthouse.sh out <label> 4301                  # then: python3 qa/
 node qa/tools/lcp_trace.mjs http://localhost:4300/Sk-Engineering-Works 5 / /about/
 node qa/tools/contrast_audit.mjs http://localhost:4300/Sk-Engineering-Works out.json   # QA_PAGES="engineering/,…" to limit
 node qa/tools/browser_checks.mjs http://localhost:4300/Sk-Engineering-Works
+node qa/tools/video_labels_probe.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works   # video control labels, EN/HI/AR
 node qa/tools/i18n_noncontent_audit.mjs                      # lists code-only dictionary keys (add --apply to remove)
 # Build comparison against another commit: export it with `git archive <sha> | tar -x -C <dir>`, build, serve both, then
 node qa/tools/compare_build.mjs $QA_NODE_MODULES http://localhost:<port>/Sk-Engineering-Works base <outdir>   # and again with label current
