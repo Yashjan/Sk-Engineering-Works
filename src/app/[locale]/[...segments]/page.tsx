@@ -16,6 +16,7 @@ import { projectArchive } from "@/data/projects";
 import { createLocalizedMetadata } from "@/i18n/metadata";
 import { getPageCopy } from "@/i18n/page-copy";
 import { isTranslatedLocale, translatedLocales } from "@/i18n/config";
+import { localizeMachine } from "@/i18n/machinery-content";
 import { localizeServerTree } from "@/i18n/server";
 
 type LocalizedRouteProps = { params: Promise<{ locale: string; segments: string[] }> };
@@ -52,6 +53,12 @@ export async function generateMetadata({ params }: LocalizedRouteProps): Promise
   if (segments[0] === "machinery" && segments[1]) {
     const machine = machineryDetails[segments[1]] ?? machineryCatalog.find(({ slug }) => slug === segments[1]);
     const machineName = "name" in (machine ?? {}) ? (machine as { name: string }).name : machineryDetails[segments[1]]?.name;
+    // A machine with build-time localized copy uses its translated SEO text; others keep the generic template below.
+    const detail = machineryDetails[segments[1]];
+    const localized = detail && localizeMachine(detail, locale);
+    if (localized && localized !== detail) {
+      return createLocalizedMetadata({ locale, pathname, title: localized.seo.title, description: localized.seo.description, index: true });
+    }
     return createLocalizedMetadata({
       locale,
       pathname,
@@ -90,7 +97,7 @@ export default async function LocalizedRoutePage({ params }: LocalizedRouteProps
   else if (route === "machinery") page = MachineryPage();
   else if (route === "projects") page = ProjectsPage();
   else if (route === "salt-refinery-plants") page = SaltRefineryPage();
-  else if (segments[0] === "machinery" && segments[1]) page = MachineDetailPage({ params: Promise.resolve({ slug: segments[1] }) });
+  else if (segments[0] === "machinery" && segments[1]) page = MachineDetailPage({ params: Promise.resolve({ slug: segments[1], locale }) });
   else if (segments[0] === "projects" && segments[1] === "jagdamba-salt-15tph") page = JagdambaProjectPage();
   else if (segments[0] === "projects" && segments[1]) page = ProjectDetailPage({ params: Promise.resolve({ slug: segments[1] }) });
   else notFound();

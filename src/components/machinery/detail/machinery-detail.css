@@ -92,3 +92,9 @@
 }
 .machine-process-support { margin: 28px 0 0; max-width: 650px; color: #65786a; font-size: 13px; line-height: 1.8; }
 .machine-process-support strong { font-size: 11px; color: #263c2d; letter-spacing: .08em; font-weight: 500; }
+
+/* Linked process stages: underline only, so nothing moves and no element changes size. */
+.conveyor-system-flow strong a { text-decoration: underline 1px transparent; text-underline-offset: 4px; transition: text-decoration-color .2s ease; }
+.conveyor-system-flow strong a:focus-visible { text-decoration-color: currentColor; }
+@media (hover: hover) { .conveyor-system-flow strong a:hover { text-decoration-color: currentColor; } }
+@media (prefers-reduced-motion: reduce) { .conveyor-system-flow strong a { transition: none; } }

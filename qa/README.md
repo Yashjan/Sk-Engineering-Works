@@ -18,6 +18,11 @@ Everything here is review material: nothing in `qa/` is built, bundled or deploy
 | `contrast-05-final.json`, `contrast-06-stepper-recheck.json`, `browser-checks-05-final.txt`, `lcp-trace-05-final.txt`, `export-validation-05-final.txt` | Final validation after the approved fixes. |
 | `contrast-07-final.json`, `export-validation-06-final.txt` | Re-check after the last cleanup (Hindi play labels, stepper dividers). |
 | `video-labels-final.txt`, `export-validation-07-final.txt` | Every video play/pause/sound control on Home, Machinery and four project pages: accessible name (Chrome accessibility tree) and visible text before and after a click, in EN/HI/AR. Final: no untranslated names. |
+| `belt-conveyor-content/`, `export-validation-08-belt-conveyor.txt` | Belt Conveyor content pilot: engineering verification checklist (what must be confirmed before specifications are published), page probe, contrast, and validation against the previous commit. |
+| `belt-conveyor-content/localization-split-validation.txt`, `export-validation-09-belt-split.txt` | Build-time split of long machine copy: JavaScript per page before and after, per-language content checks, behaviour comparison. |
+| `belt-conveyor-content/final-content-validation.txt`, `export-validation-10-belt-final-content.txt` | Belt Conveyor after removing claims engineering has not confirmed: exact page differences, metadata and JSON-LD, JavaScript per page. |
+| `belt-conveyor-content/final-corrections-validation.txt`, `export-validation-11-belt-arabic-final.txt` | Final Belt Conveyor sentence and Arabic corrupted labels: exact page differences, JavaScript per page, Contact and About in all three languages. |
+| `belt-conveyor-content/pre-release-validation.txt`, `export-validation-12-pre-release.txt` | Before release: enquiry forms and WhatsApp drafts, Contact and About, and the smoke test (animation, media, transitions, 3D) in all three languages. |
 | `image-quality-webp.txt` | PSNR and worst 8×8-block error for every PNG/JPEG → WebP conversion against the original in git history. |
 
 ### Known, intentional remaining items
@@ -42,6 +47,11 @@ node qa/tools/lcp_trace.mjs http://localhost:4300/Sk-Engineering-Works 5 / /abou
 node qa/tools/contrast_audit.mjs http://localhost:4300/Sk-Engineering-Works out.json   # QA_PAGES="engineering/,…" to limit
 node qa/tools/browser_checks.mjs http://localhost:4300/Sk-Engineering-Works
 node qa/tools/video_labels_probe.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works   # video control labels, EN/HI/AR
+node qa/tools/machinery_page_probe.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works belt-conveyor   # links, JSON-LD, headings, overflow, RTL, accordions, enquiry
+node qa/tools/contact_about_probe.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works   # Contact and About after hydration, EN/HI/AR: corrected labels, raw tokens
+node qa/tools/enquiry_probe.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works   # enquiry forms and WhatsApp drafts, EN/HI/AR
+node qa/tools/release_smoke.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works   # also works on the live URL: load, Lenis, pins, images, video, transitions, 3D
+node qa/tools/js_weight.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works   # JS each page downloads, required vs prefetch
 node qa/tools/i18n_noncontent_audit.mjs                      # lists code-only dictionary keys (add --apply to remove)
 # Build comparison against another commit: export it with `git archive <sha> | tar -x -C <dir>`, build, serve both, then
 node qa/tools/compare_build.mjs $QA_NODE_MODULES http://localhost:<port>/Sk-Engineering-Works base <outdir>   # and again with label current

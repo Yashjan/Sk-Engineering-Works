@@ -1,0 +1,212 @@
+Final corrections: Belt Conveyor overview sentence and Arabic corrupted labels, validation
+"before" = the build reported in final-content-validation.txt. "after" = this build.
+
+Exported HTML files: before 120, after 120, same list: True
+Pages with any change in text, attributes, title/description, JSON-LD or element structure: 5
+  ar/about/index.html: text
+  ar/contact/index.html: text
+  ar/machinery/belt-conveyor/index.html: text
+  hi/machinery/belt-conveyor/index.html: text
+  machinery/belt-conveyor/index.html: text
+
+Exact differences on every changed page
+[ar/about/index.html] element counts: 496 -> 496, same sequence: True
+  - text: التوسيع / ×
+  - text: قاعدة تصنيعنا / ×0x ×1x
+  + text: التوسّع / غوجارات
+  + text: قاعدة تصنيعنا / بحيرة سامبهار، راجستان
+[ar/contact/index.html] element counts: 238 -> 238, same sequence: True
+  - text: / × ×
+  - text: دردشة على ×0x
+  + text: اتصل بنا / S.K. ENGINEERING WORKS
+  + text: تحدث معنا عبر واتساب
+[ar/machinery/belt-conveyor/index.html] element counts: 363 -> 363, same sequence: True
+  - text: توفّر S.K. Engineering Works، ومقرها Sambhar Lake بولاية راجستان، نواقل حزامية لمعالجة الملح ومناولة المواد الصناعية. وفي خط تكرير الملح، ينقل الناقل الملح الخام من قادوس
+  + text: توفّر S.K. Engineering Works، ومقرها Sambhar Lake بولاية راجستان، نواقل حزامية لمعالجة الملح ومناولة المواد الصناعية. وفي تطبيقات تكرير الملح، يمكن للنواقل الحزامية نقل ا
+[hi/machinery/belt-conveyor/index.html] element counts: 363 -> 363, same sequence: True
+  - text: Sambhar Lake, राजस्थान स्थित S.K. Engineering Works नमक प्रसंस्करण और औद्योगिक सामग्री प्रबंधन के लिए बेल्ट कन्वेयर उपलब्ध कराता है। नमक रिफाइनरी लाइन में कन्वेयर कच्चे न
+  + text: Sambhar Lake, राजस्थान स्थित S.K. Engineering Works नमक प्रसंस्करण और औद्योगिक सामग्री प्रबंधन के लिए बेल्ट कन्वेयर उपलब्ध कराता है। नमक रिफाइनरी अनुप्रयोगों में, संयंत्र
+[machinery/belt-conveyor/index.html] element counts: 362 -> 362, same sequence: True
+  - text: S.K. Engineering Works, based at Sambhar Lake, Rajasthan, offers belt conveyors for salt processing and industrial material handling. In a salt refinery line, the conveyo
+  + text: S.K. Engineering Works, based at Sambhar Lake, Rajasthan, offers belt conveyors for salt processing and industrial material handling. In salt refinery applications, belt 
+
+Long sentences on each Belt Conveyor page (of 29): rendered HTML / whole file
+  en page: en 27/29, hi 0/0, ar 0/0
+  hi page: en 0/0, hi 27/29, ar 0/0
+  ar page: en 0/0, hi 0/0, ar 27/29
+
+Metadata and structured data
+[en] title (58): Belt Conveyor for Salt Processing | S.K. Engineering Works
+     og:title matches: True
+     description (159): Belt conveyors for salt processing and bulk material handling from S.K. Engineering Works, Sambhar Lake, Rajasthan. Planned around your route and plant layout.
+     Other JSON-LD: ['Organization', 'WebSite']
+     Breadcrumb: Home > Machinery > Belt Conveyor
+     Product keys: ['@context', '@type', 'brand', 'category', 'description', 'image', 'name', 'url']
+     Product description matches meta: True; brand: S.K. Engineering Works
+     hero alt: Industrial belt conveyor with troughed carrying idlers on a steel support frame and a geared motor driving the end pulley
+[hi] title (60): नमक प्रसंस्करण के लिए बेल्ट कन्वेयर | S.K. Engineering Works
+     og:title matches: True
+     description (179): S.K. Engineering Works, Sambhar Lake, राजस्थान की ओर से नमक प्रसंस्करण और बल्क सामग्री प्रबंधन के लिए बेल्ट कन्वेयर। इनकी योजना आपके मार्ग और संयंत्र लेआउट के अनुसार बनाई जाती है।
+     Other JSON-LD: ['Organization', 'WebSite']
+     Breadcrumb: होम > मशीनरी > बेल्ट कन्वेयर
+     Product keys: ['@context', '@type', 'brand', 'category', 'description', 'image', 'name', 'url']
+     Product description matches meta: True; brand: S.K. Engineering Works
+     hero alt: औद्योगिक बेल्ट कन्वेयर, जिसमें स्टील सपोर्ट फ्रेम पर ट्रफ़ वाले कैरिंग आइडलर और अंतिम पुली को चलाने वाली गियर मोटर है
+[ar] title (49): ناقل حزامي لمعالجة الملح | S.K. Engineering Works
+     og:title matches: True
+     description (149): نواقل حزامية لمعالجة الملح ومناولة المواد السائبة من S.K. Engineering Works في Sambhar Lake بولاية راجستان. تُخطَّط وفق مسار النقل ومخطط المصنع لديك.
+     Other JSON-LD: ['Organization', 'WebSite']
+     Breadcrumb: الرئيسية > الآلات > ناقل حزامي
+     Product keys: ['@context', '@type', 'brand', 'category', 'description', 'image', 'name', 'url']
+     Product description matches meta: True; brand: S.K. Engineering Works
+     hero alt: ناقل حزامي صناعي ببكرات حمل حوضية على إطار دعم فولاذي ومحرك مزود بعلبة تروس يدير البكرة الطرفية
+
+Claims still present in each Belt Conveyor file (everything, including page data)
+  en: {'Jagdamba': 4, '15 TPH': 0, 'Phalodi': 0, 'belt conveyor manufacturer': 0, 'JSON-LD "manufacturer"': 0, 'Sambhar Lake': 12}
+  hi: {'Jagdamba': 4, '15 TPH': 0, 'Phalodi': 0, 'belt conveyor manufacturer': 0, 'JSON-LD "manufacturer"': 0, 'Sambhar Lake': 12}
+  ar: {'Jagdamba': 4, '15 TPH': 0, 'Phalodi': 0, 'belt conveyor manufacturer': 0, 'JSON-LD "manufacturer"': 0, 'Sambhar Lake': 12}
+
+The 4 "Jagdamba" matches per file are the site-wide default social image path (og:image, twitter:image, each in the head and in page data):
+  /images/projects/jagdamba/cover-image-og.jpg. A photograph of a building with no text; used on 84 pages; unchanged.
+Any "manufactur" wording on the Belt Conveyor files: {'en': 0, 'hi': 0, 'ar': 0}
+
+JavaScript files, before vs after, by content
+  files: 54 -> 54; identical content in both: 45
+  only before: _next/static/chunks/app/[locale]/layout-2d4a168555b10ef5.js 476.8 KB
+  only after: _next/static/chunks/app/[locale]/layout-a418f68c88557705.js 476.9 KB
+  JS containing the removed label or title: []
+  long sentences anywhere in the exported JS (of 29): {'en': 0, 'hi': 0, 'ar': 0}
+
+Old English sentence anywhere in exported HTML: []
+
+JavaScript each page downloads, after (fresh browser per page; KB; "required" excludes prefetch)
+page                             required raw required gz +prefetch gz  HTML gz  long sentences in required JS | in all JS
+//                                      668.4       212.5        259.9     17.0  {} | {}
+/hi/                                   1400.1       381.8        381.8     18.8  {} | {}
+/ar/                                   1400.1       381.8        381.8     18.4  {} | {}
+/machinery/belt-conveyor/               679.0       216.4        273.1     14.2  {} | {}
+/hi/machinery/belt-conveyor/           1360.9       370.8        381.8     17.6  {} | {}
+/ar/machinery/belt-conveyor/           1360.9       370.8        381.8     16.8  {} | {}
+/contact/                               685.9       218.0        259.9      8.0  {} | {}
+/ar/contact/                           1360.9       370.8        381.8      9.2  {} | {}
+/about/                                 688.8       218.8        259.9     12.3  {} | {}
+/ar/about/                             1360.9       370.8        381.8     13.4  {} | {}
+
+Contact and About in EN/HI/AR, desktop and mobile, after the client translation runtime has run
+
+## /contact/ (desktop)
+  ok   lang en-IN, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   meta: CONTACT / S.K. ENGINEERING WORKS
+  ok   chat: CHAT ON WHATSAPP
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /about/ (desktop)
+  ok   lang en-IN, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   caption: OUR MANUFACTURING BASE / SAMBHAR LAKE, RAJASTHAN
+  ok   expansion: EXPANSION / GUJARAT
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+
+## /contact/ (mobile)
+  ok   lang en-IN, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   meta: CONTACT / S.K. ENGINEERING WORKS
+  ok   chat: CHAT ON WHATSAPP
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /about/ (mobile)
+  ok   lang en-IN, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   caption: OUR MANUFACTURING BASE / SAMBHAR LAKE, RAJASTHAN
+  ok   expansion: EXPANSION / GUJARAT
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+
+## /hi/contact/ (desktop)
+  ok   lang hi, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   meta: संपर्क / S.K. ENGINEERING WORKS
+  ok   chat: WHATSAPP पर चैट करें
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /hi/about/ (desktop)
+  ok   lang hi, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   caption: हमारे विनिर्माण आधार / SAMBHAR LAKE, RAJASTHAN
+  ok   expansion: विस्तार / GUJARAT
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+
+## /hi/contact/ (mobile)
+  ok   lang hi, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   meta: संपर्क / S.K. ENGINEERING WORKS
+  ok   chat: WHATSAPP पर चैट करें
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /hi/about/ (mobile)
+  ok   lang hi, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   caption: हमारे विनिर्माण आधार / SAMBHAR LAKE, RAJASTHAN
+  ok   expansion: विस्तार / GUJARAT
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+
+## /ar/contact/ (desktop)
+  ok   lang ar, dir rtl
+  ok   no raw tokens in text, attributes or title
+  ok   meta: اتصل بنا / S.K. ENGINEERING WORKS
+  ok   chat: تحدث معنا عبر واتساب
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /ar/about/ (desktop)
+  ok   lang ar, dir rtl
+  ok   no raw tokens in text, attributes or title
+  ok   caption: قاعدة تصنيعنا / بحيرة سامبهار، راجستان
+  ok   expansion: التوسّع / غوجارات
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+
+## /ar/contact/ (mobile)
+  ok   lang ar, dir rtl
+  ok   no raw tokens in text, attributes or title
+  ok   meta: اتصل بنا / S.K. ENGINEERING WORKS
+  ok   chat: تحدث معنا عبر واتساب
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /ar/about/ (mobile)
+  ok   lang ar, dir rtl
+  ok   no raw tokens in text, attributes or title
+  ok   caption: قاعدة تصنيعنا / بحيرة سامبهار، راجستان
+  ok   expansion: التوسّع / غوجارات
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+
+failures: 0
+
+Belt Conveyor page-level browser checks: page-probe.txt in this folder (117 ok, 0 failures).
+Exported-page validation: ../export-validation-11-belt-arabic-final.txt.
+
+Not changed, outside this correction: "OPEN WHATSAPP WITH DETAILS" still has a corrupted Arabic value.
+It is shown after submitting the Belt Conveyor and Engineering enquiry forms: ar/machinery/belt-conveyor/ and ar/engineering/: × × × × مع التفاصيل
+Fixed afterwards, on approval: see pre-release-validation.txt.

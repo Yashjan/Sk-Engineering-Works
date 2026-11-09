@@ -1,0 +1,34 @@
+Belt Conveyor pilot: validation summary (against commit 8f438cb)
+
+Exported pages: every page's visible text, attributes, metadata, JSON-LD and element structure compared
+identical pages: 65
+ar 28 ['ar', 'ar/engineering', 'ar/machinery', 'ar/machinery/bag-filter', 'ar/machinery/belt-conveyor', 'ar/machinery/bucket-elevator', 'ar/machinery/centrifuge', 'ar/machinery/cyclone', 'ar/machinery/dryer', 'ar/machinery/hammer-mill-crusher', 'ar/machinery/hopper', 'ar/machinery/id-fan-blower', 'a
+en 1 ['machinery/belt-conveyor']
+hi 25 ['hi', 'hi/engineering', 'hi/machinery', 'hi/machinery/bag-filter', 'hi/machinery/belt-conveyor', 'hi/machinery/bucket-elevator', 'hi/machinery/centrifuge', 'hi/machinery/cyclone', 'hi/machinery/dryer', 'hi/machinery/hammer-mill-crusher', 'hi/machinery/hopper', 'hi/machinery/id-fan-blower', 'h
+pages with element-structure change: ['ar/machinery/belt-conveyor/index.html', 'hi/machinery/belt-conveyor/index.html', 'machinery/belt-conveyor/index.html']
+
+Lighthouse, mobile (category scores; before = 8f438cb)
+base     {'performance': 96, 'accessibility': 100, 'best-practices': 100, 'seo': 100} LCP 2.6 s TBT 20 ms
+curr     {'performance': 95, 'accessibility': 100, 'best-practices': 100, 'seo': 100} LCP 2.7 s TBT 30 ms
+base-hi  {'performance': 91} LCP 3.2 s TBT 50 ms
+curr-hi  {'performance': 90, 'accessibility': 100, 'best-practices': 100, 'seo': 100} LCP 3.4 s TBT 60 ms
+base-ar  {'performance': 88} LCP 3.7 s TBT 40 ms
+curr-ar  {'performance': 86, 'accessibility': 100, 'best-practices': 100, 'seo': 100} LCP 3.8 s TBT 50 ms
+
+Screw Conveyor repeat test (comparison flagged it; not a real difference)
+run1 base desktop h=34712 styled=87 fabrication.mp4:playing/rs4 site-installation.mp4:paused/rs0 completed-plant.mp4:paused/rs0
+run1 base mobile h=28171 styled=68 fabrication.mp4:playing/rs4 site-installation.mp4:playing/rs4 completed-plant.mp4:playing/rs4
+run1 curr desktop h=34712 styled=71 fabrication.mp4:playing/rs4 site-installation.mp4:paused/rs0 completed-plant.mp4:paused/rs0
+run1 curr mobile h=28171 styled=68 fabrication.mp4:playing/rs4 site-installation.mp4:playing/rs4 completed-plant.mp4:playing/rs4
+run2 base desktop h=34712 styled=87 fabrication.mp4:playing/rs4 site-installation.mp4:paused/rs0 completed-plant.mp4:paused/rs0
+run2 base mobile h=28171 styled=68 fabrication.mp4:playing/rs4 site-installation.mp4:playing/rs4 completed-plant.mp4:playing/rs4
+run2 curr desktop h=34712 styled=71 fabrication.mp4:playing/rs4 site-installation.mp4:paused/rs0 completed-plant.mp4:paused/rs0
+run2 curr mobile h=28171 styled=68 fabrication.mp4:playing/rs4 site-installation.mp4:playing/rs4 completed-plant.mp4:playing/rs4
+run3 base desktop h=34712 styled=71 fabrication.mp4:playing/rs4 site-installation.mp4:paused/rs0 completed-plant.mp4:paused/rs0
+run3 base mobile h=28171 styled=68 fabrication.mp4:playing/rs4 site-installation.mp4:playing/rs4 completed-plant.mp4:playing/rs4
+run3 curr desktop h=34712 styled=71 fabrication.mp4:playing/rs4 site-installation.mp4:paused/rs0 completed-plant.mp4:paused/rs0
+run3 curr mobile h=28171 styled=68 fabrication.mp4:playing/rs4 site-installation.mp4:playing/rs4 completed-plant.mp4:playing/rs4
+
+Behaviour comparison, English belt page and all other pages
+STEP COUNT differs desktop:/machinery/belt-conveyor/: 10 vs 11
+  197/227 screenshots identical within noise

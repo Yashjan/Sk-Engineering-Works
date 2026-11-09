@@ -1,0 +1,10 @@
+page                             required raw required gz +prefetch gz  HTML gz  long sentences in required JS | in all JS
+/machinery/belt-conveyor/               679.0       216.4        273.1     14.3  {} | {}
+/hi/machinery/belt-conveyor/           1361.1       370.9        381.9     17.6  {} | {}
+/ar/machinery/belt-conveyor/           1361.1       370.9        381.9     17.0  {} | {}
+/                                       668.4       212.5        259.9     17.0  {} | {}
+/hi/                                   1400.2       381.9        381.9     18.8  {} | {}
+/ar/                                   1400.2       381.9        381.9     18.4  {} | {}
+/machinery/wet-mill/                    679.0       216.4        273.1     10.4  {} | {}
+/hi/machinery/wet-mill/                1361.1       370.9        381.9     12.7  {} | {}
+/ar/machinery/wet-mill/                1361.1       370.9        381.9     12.3  {} | {}

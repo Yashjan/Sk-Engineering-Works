@@ -25,6 +25,27 @@ export const siteStructuredData = {
   ],
 } as const;
 
+// Product markup carries only what the page states. Offers, prices, availability
+// and ratings are deliberately absent until they are real, verified values.
+export function productStructuredData({ name, description, path, image, category }: {
+  name: string;
+  description: string;
+  path: string;
+  image?: string;
+  category: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name,
+    description,
+    category,
+    url: absoluteUrl(path),
+    ...(image ? { image: absoluteAssetUrl(image) } : {}),
+    brand: { "@type": "Brand", name: siteConfig.name },
+  };
+}
+
 export function breadcrumbStructuredData(
   items: ReadonlyArray<{ name: string; path: string }>,
 ) {

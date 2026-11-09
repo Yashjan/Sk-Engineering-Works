@@ -12,7 +12,18 @@ export type MachineryConfig = {
   howItWorks: { title: string; description: string }[];
   customization: { title: string; description: string }[];
   realMedia: MachineMedia[];
-  process: { stageId: string; description: string; sectionNumber: string };
+  // Replaces the "no photography" note when real records exist elsewhere on the site.
+  fabrication?: { note: string; links: { href: string; label: string }[] };
+  // Enables Product structured data. Never add offers, ratings or specifications that are not verified.
+  structuredData?: { category: string };
+  process: {
+    stageId: string;
+    description: string;
+    sectionNumber: string;
+    // Links the other stage names in the process sequence to their machine pages.
+    linkStages?: boolean;
+    related?: { label: string; href: `/machinery/${string}`; linkLabel: string };
+  };
   engineering: { sectionNumber: string; description: string; capabilities: string[] };
   enquiry: {
     machineName: string;

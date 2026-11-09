@@ -1,0 +1,57 @@
+Belt Conveyor: build-time localization split, validation
+"before" = the uncommitted Belt Conveyor build before this split. "after" = this build.
+
+JavaScript each page downloads (fresh browser per page; KB; "required" excludes prefetch)
+Long sentences: how many of the 29 appear in the JS, per language.
+
+BEFORE
+page                             required raw required gz +prefetch gz  HTML gz  long sentences in required JS | in all JS
+/machinery/belt-conveyor/               679.0       216.4        273.1     14.3  {} | {}
+/hi/machinery/belt-conveyor/           1387.0       378.0        389.0     17.1  {"en":28,"hi":29,"ar":29} | {"en":28,"hi":29,"ar":29}
+/ar/machinery/belt-conveyor/           1387.0       378.0        389.0     16.7  {"en":28,"hi":29,"ar":29} | {"en":28,"hi":29,"ar":29}
+/                                       668.4       212.5        259.9     17.0  {} | {}
+/hi/                                   1426.2       389.0        389.0     18.8  {"en":28,"hi":29,"ar":29} | {"en":28,"hi":29,"ar":29}
+/ar/                                   1426.2       389.0        389.0     18.4  {"en":28,"hi":29,"ar":29} | {"en":28,"hi":29,"ar":29}
+/machinery/wet-mill/                    679.0       216.4        273.1     10.4  {} | {}
+/hi/machinery/wet-mill/                1387.0       378.0        389.0     12.7  {"en":28,"hi":29,"ar":29} | {"en":28,"hi":29,"ar":29}
+/ar/machinery/wet-mill/                1387.0       378.0        389.0     12.3  {"en":28,"hi":29,"ar":29} | {"en":28,"hi":29,"ar":29}
+
+AFTER
+page                             required raw required gz +prefetch gz  HTML gz  long sentences in required JS | in all JS
+/machinery/belt-conveyor/               679.0       216.4        273.1     14.3  {} | {}
+/hi/machinery/belt-conveyor/           1361.1       370.9        381.9     17.6  {} | {}
+/ar/machinery/belt-conveyor/           1361.1       370.9        381.9     17.0  {} | {}
+/                                       668.4       212.5        259.9     17.0  {} | {}
+/hi/                                   1400.2       381.9        381.9     18.8  {} | {}
+/ar/                                   1400.2       381.9        381.9     18.4  {} | {}
+/machinery/wet-mill/                    679.0       216.4        273.1     10.4  {} | {}
+/hi/machinery/wet-mill/                1361.1       370.9        381.9     12.7  {} | {}
+/ar/machinery/wet-mill/                1361.1       370.9        381.9     12.3  {} | {}
+
+Exported pages, before vs after (visible text, attributes, title/description, JSON-LD, element structure)
+115 of 119 pages identical. The other 4 (hi/ar Screw Conveyor and Screw Washer) differ only in title and description,
+which returned to their committed text: the previous round had changed them unintentionally.
+Against committed 8f438cb, title, description and JSON-LD differ only on the 3 Belt Conveyor pages.
+
+Long sentences on each Belt Conveyor page (of 29)
+EN page: en 29, hi 0, ar 0 | HI page: en 0, hi 29, ar 0 | AR page: en 0, hi 0, ar 29
+Same counts in rendered HTML and across the whole file including the RSC payload.
+
+Build-time safeguards, tested in a scratch copy
+Client component importing the server-only module: build fails.
+A missing Arabic sentence: validate:i18n fails and the build fails.
+
+Behaviour comparison, before vs after
+  205/228 screenshots identical within noise
+PROBES base: {"lenisWheelTrace":[78,261,315,368,415,451,479,493,505,514,523,527],"transition":[{"t":16,"path":"/hi/","overlay":"hidden/0.00/"},{"t":166,"path":"/hi/machinery/","overlay":"hidden/0.00/"
+PROBES curr: {"lenisWheelTrace":[102,102,298,298,431,459,480,496,507,516,522,527],"transition":[{"t":23,"path":"/hi/","overlay":"hidden/0.00/"},{"t":178,"path":"/hi/machinery/","overlay":"hidden/0.00/
+Belt Conveyor: no state, video or screenshot differences.
+
+Screw Conveyor video flag (site-installation.mp4 at one scroll position)
+JavaScript assets are identical between builds (same content hashes); only the CSS file differs.
+Alternating capture order, same steps, 4 runs:
+after  steps 12-15:  | fabrication.:paused,site-install:playing,completed-pl:paused |  |  || settled: 
+before steps 12-15:  | fabrication.:paused,site-install:playing,completed-pl:paused |  |  || settled: 
+after  steps 12-15:  | fabrication.:paused,site-install:playing,completed-pl:paused |  |  || settled: 
+before steps 12-15:  | fabrication.:paused,site-install:playing,completed-pl:paused |  |  || settled:
+

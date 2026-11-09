@@ -1,0 +1,134 @@
+
+## /machinery/belt-conveyor/  desktop
+  ok   lang=en-IN dir=ltr
+  ok   one h1 (1)
+  ok   no skipped heading levels [1222233333332333322222]
+  ok   no horizontal overflow (-15px)
+  ok   canonical + 4 hreflang
+  ok   images have alt text (2)
+  ok   Product JSON-LD without offers/price/ratings: Belt Conveyor
+  ok   breadcrumb has 3 levels and matches this locale's URL: Home > Machinery > Belt Conveyor
+  ok   no unconfirmed project or manufacturing claims in the page source
+  ok   Product JSON-LD does not assert a manufacturer
+  ok   section 08 keeps a general Projects link
+  ok   current stage is marked and not linked; 14/15 other stages linked
+  ok   all 18 internal links keep the locale prefix
+  ok   all internal links return 200
+       links: DISCUSS YOUR REQUIREMENT → | VIEW COMPLETE PLANT ↗ | ASK ABOUT FABRICATION & INSTALLATION → | VIEW THE BELT CONVEYOR WORKSHOP RECORD ↗ | VIEW ALL PROJECTS ↗ | PORTABLE BELT CONVEYOR ↗ | EXPLORE COMPLETE SALT REFINERY PLANTS →
+  ok   8 configuration accordions open
+  ok   enquiry validates, then prepares a WhatsApp draft naming the machine
+  ok   stage link cue: rest rgba(0, 0, 0, 0), hover rgb(102, 110, 104), focus rgb(102, 110, 104)
+  ok   hover and focus change no element size or position
+  ok   client-side navigation to this page shows the same copy as a direct load
+  ok   language switch to ar shows translated copy
+  ok   stage link navigates: /Sk-Engineering-Works/machinery/hopper/
+  ok   no JS or console errors
+
+## /machinery/belt-conveyor/  mobile
+  ok   lang=en-IN dir=ltr
+  ok   one h1 (1)
+  ok   no skipped heading levels [1222233333332333322222]
+  ok   no horizontal overflow (0px)
+  ok   canonical + 4 hreflang
+  ok   images have alt text (2)
+  ok   Product JSON-LD without offers/price/ratings: Belt Conveyor
+  ok   breadcrumb has 3 levels and matches this locale's URL: Home > Machinery > Belt Conveyor
+  ok   no unconfirmed project or manufacturing claims in the page source
+  ok   Product JSON-LD does not assert a manufacturer
+  ok   section 08 keeps a general Projects link
+  ok   current stage is marked and not linked; 14/15 other stages linked
+  ok   all 18 internal links keep the locale prefix
+  ok   all internal links return 200
+  ok   8 configuration accordions open
+  ok   enquiry validates, then prepares a WhatsApp draft naming the machine
+  ok   no JS or console errors
+
+## /hi/machinery/belt-conveyor/  desktop
+  ok   lang=hi dir=ltr
+  ok   one h1 (1)
+  ok   no skipped heading levels [1222233333332333322222]
+  ok   no horizontal overflow (-15px)
+  ok   canonical + 4 hreflang
+  ok   images have alt text (2)
+  ok   Product JSON-LD without offers/price/ratings: बेल्ट कन्वेयर
+  ok   breadcrumb has 3 levels and matches this locale's URL: होम > मशीनरी > बेल्ट कन्वेयर
+  ok   no unconfirmed project or manufacturing claims in the page source
+  ok   Product JSON-LD does not assert a manufacturer
+  ok   section 08 keeps a general Projects link
+  ok   current stage is marked and not linked; 14/15 other stages linked
+  ok   all 18 internal links keep the locale prefix
+  ok   all internal links return 200
+       links: अपनी आवश्यकता पर चर्चा करें → | पूरा संयंत्र देखें ↗ | निर्माण और स्थापना के बारे में पूछो → | बेल्ट कन्वेयर का कार्यशाला रिकॉर्ड देखें ↗ | सभी परियोजनाएँ देखें ↗ | पोर्टेबल बेल्ट कन्वेयर ↗ | पूर्ण नमक रिफाइनरी संयंत्रों का पता लगाएं →
+  ok   8 configuration accordions open
+  ok   enquiry validates, then prepares a WhatsApp draft naming the machine
+  ok   stage link cue: rest rgba(0, 0, 0, 0), hover rgb(102, 110, 104), focus rgb(102, 110, 104)
+  ok   hover and focus change no element size or position
+  ok   client-side navigation to this page shows the same copy as a direct load
+  ok   language switch to ar shows translated copy
+  ok   stage link navigates: /Sk-Engineering-Works/hi/machinery/hopper/
+  ok   no JS or console errors
+
+## /hi/machinery/belt-conveyor/  mobile
+  ok   lang=hi dir=ltr
+  ok   one h1 (1)
+  ok   no skipped heading levels [1222233333332333322222]
+  ok   no horizontal overflow (0px)
+  ok   canonical + 4 hreflang
+  ok   images have alt text (2)
+  ok   Product JSON-LD without offers/price/ratings: बेल्ट कन्वेयर
+  ok   breadcrumb has 3 levels and matches this locale's URL: होम > मशीनरी > बेल्ट कन्वेयर
+  ok   no unconfirmed project or manufacturing claims in the page source
+  ok   Product JSON-LD does not assert a manufacturer
+  ok   section 08 keeps a general Projects link
+  ok   current stage is marked and not linked; 14/15 other stages linked
+  ok   all 18 internal links keep the locale prefix
+  ok   all internal links return 200
+  ok   8 configuration accordions open
+  ok   enquiry validates, then prepares a WhatsApp draft naming the machine
+  ok   no JS or console errors
+
+## /ar/machinery/belt-conveyor/  desktop
+  ok   lang=ar dir=rtl
+  ok   one h1 (1)
+  ok   no skipped heading levels [1222233333332333322222]
+  ok   no horizontal overflow (-15px)
+  ok   canonical + 4 hreflang
+  ok   images have alt text (2)
+  ok   Product JSON-LD without offers/price/ratings: ناقل حزامي
+  ok   breadcrumb has 3 levels and matches this locale's URL: الرئيسية > الآلات > ناقل حزامي
+  ok   no unconfirmed project or manufacturing claims in the page source
+  ok   Product JSON-LD does not assert a manufacturer
+  ok   section 08 keeps a general Projects link
+  ok   current stage is marked and not linked; 14/15 other stages linked
+  ok   all 18 internal links keep the locale prefix
+  ok   all internal links return 200
+       links: ناقش متطلباتك | عرض المصنع الكامل ↗ | اسأل عن التصنيع والتركيب | عرض سجل الورشة للناقل الحزامي ↗ | عرض جميع المشاريع ↗ | ناقل حزامي متنقل ↗ | استكشاف مصانع تكرير الملح الكاملة →
+  ok   8 configuration accordions open
+  ok   enquiry validates, then prepares a WhatsApp draft naming the machine
+  ok   stage link cue: rest rgba(0, 0, 0, 0), hover rgb(102, 110, 104), focus rgb(102, 110, 104)
+  ok   hover and focus change no element size or position
+  ok   client-side navigation to this page shows the same copy as a direct load
+  ok   language switch to hi shows translated copy
+  ok   stage link navigates: /Sk-Engineering-Works/ar/machinery/hopper/
+  ok   no JS or console errors
+
+## /ar/machinery/belt-conveyor/  mobile
+  ok   lang=ar dir=rtl
+  ok   one h1 (1)
+  ok   no skipped heading levels [1222233333332333322222]
+  ok   no horizontal overflow (0px)
+  ok   canonical + 4 hreflang
+  ok   images have alt text (2)
+  ok   Product JSON-LD without offers/price/ratings: ناقل حزامي
+  ok   breadcrumb has 3 levels and matches this locale's URL: الرئيسية > الآلات > ناقل حزامي
+  ok   no unconfirmed project or manufacturing claims in the page source
+  ok   Product JSON-LD does not assert a manufacturer
+  ok   section 08 keeps a general Projects link
+  ok   current stage is marked and not linked; 14/15 other stages linked
+  ok   all 18 internal links keep the locale prefix
+  ok   all internal links return 200
+  ok   8 configuration accordions open
+  ok   enquiry validates, then prepares a WhatsApp draft naming the machine
+  ok   no JS or console errors
+
+failures: 0

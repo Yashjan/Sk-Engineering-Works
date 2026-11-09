@@ -10,9 +10,10 @@ export function MachineryProcessIntegration({ config }: { config: MachineryConfi
       <div className="conveyor-closing-meta"><span>{config.process.sectionNumber} / COMPLETE PLANT</span><span>ONE MACHINE / CONNECTED PROCESS</span></div>
       <div className="conveyor-system-heading"><p>THIS IS ONE MACHINE.</p><h2 id="conveyor-system-title">WE ENGINEER<br />THE COMPLETE PROCESS.</h2><span>{config.process.description}</span></div>
       <ol className="conveyor-system-flow" aria-label="Salt refinery process sequence">
-        {plantStages.map((stage, index) => <li key={stage.id} className={stage.id === config.process.stageId ? "is-current" : undefined} aria-current={stage.id === config.process.stageId ? "step" : undefined}><span>{String(index + 1).padStart(2, "0")}</span><strong>{stage.name}</strong>{stage.id === config.process.stageId && <small>THIS MACHINE</small>}</li>)}
+        {plantStages.map((stage, index) => <li key={stage.id} className={stage.id === config.process.stageId ? "is-current" : undefined} aria-current={stage.id === config.process.stageId ? "step" : undefined}><span>{String(index + 1).padStart(2, "0")}</span><strong>{config.process.linkStages && stage.detailHref && stage.id !== config.process.stageId ? <Link href={stage.detailHref}>{stage.name}</Link> : stage.name}</strong>{stage.id === config.process.stageId && <small>THIS MACHINE</small>}</li>)}
       </ol>
       {!inMainProcess && <p className="machine-process-support"><strong>{config.name.toUpperCase()} / SUPPORTING EQUIPMENT</strong><br />{config.process.description}</p>}
+      {config.process.related && <p className="machine-process-support" style={{ marginBottom: "32px" }}><strong>{config.process.related.label}<br /><Link href={config.process.related.href} style={{ display: "inline-block", paddingBlock: "4px", textDecoration: "underline", textUnderlineOffset: "5px" }}>{config.process.related.linkLabel}</Link></strong></p>}
       <Link className="conveyor-closing-link" href="/salt-refinery-plants">EXPLORE COMPLETE SALT REFINERY PLANTS <span aria-hidden="true">→</span></Link>
     </section>
 

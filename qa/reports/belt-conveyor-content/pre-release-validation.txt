@@ -1,0 +1,453 @@
+Pre-release validation on the local export, after the final Arabic label fix
+Exported-page validation: ../export-validation-12-pre-release.txt.
+
+Page transition overlay
+The smoke run below reports 2 FAIL lines: the overlay was not seen after clicking Machinery on the Hindi and Arabic home pages.
+Those navigations still work, in the same document. The live site at 337e135 behaves the same, and this release does not
+change the transition code, so it is an existing gap rather than a regression. release_smoke.mjs now records it as a known note.
+Frame-by-frame trace of the overlay (local, then live at 337e135):
+local en/  {"defaultPrevented":true,"count":1,"rows":[[0,"- op=0.00 vis=hidden"],[9,"- op=1.00 vis=visible"],[717,"- op=0.00 vis=hidden"]],"path":"/Sk-Engineering-Works/machinery/"}
+local hi/  {"defaultPrevented":null,"count":1,"rows":[[0,"- op=0.00 vis=hidden"]],"path":"/Sk-Engineering-Works/hi/machinery/"}
+local ar/  {"defaultPrevented":null,"count":1,"rows":[[0,"- op=0.00 vis=hidden"]],"path":"/Sk-Engineering-Works/ar/machinery/"}
+live  en/  {"defaultPrevented":true,"count":1,"rows":[[0,"- op=0.00 vis=hidden"],[2,"- op=1.00 vis=visible"],[690,"- op=0.00 vis=hidden"]],"path":"/Sk-Engineering-Works/machinery/"}
+live  hi/  {"defaultPrevented":null,"count":1,"rows":[[0,"- op=0.00 vis=hidden"]],"path":"/Sk-Engineering-Works/hi/machinery/"}
+live  ar/  {"defaultPrevented":null,"count":1,"rows":[[0,"- op=0.00 vis=hidden"]],"path":"/Sk-Engineering-Works/ar/machinery/"}
+
+Enquiry forms in EN/HI/AR (enquiry_probe.mjs)
+
+## /machinery/belt-conveyor/
+  ok   empty form is blocked: no WhatsApp button yet
+  ok   button label: OPEN WHATSAPP WITH DETAILS ↗
+  ok   one arrow at most, no raw tokens
+  ok   draft goes to the company number: wa.me/919828460532
+  ok   clicking opens WhatsApp in a new tab: https://api.whatsapp.com/send/
+  ok   draft contains every value entered
+       draft: Hello S.K. Engineering Works, | I would like to discuss a Belt Conveyor requirement. |  | Machine: Belt Conveyor | Name: QA Test Name | Phone / WhatsApp: 9876543210 | Company: QA Company | Location: QA Location | Capacity / TPH: QA Capacity | Material: QA Material | Requirement: QA Requirement
+  ok   no JS errors
+
+## /engineering/
+  ok   empty form is blocked: no WhatsApp button yet
+  ok   button label: OPEN WHATSAPP WITH DETAILS ↗
+  ok   one arrow at most, no raw tokens
+  ok   draft goes to the company number: wa.me/919828460532
+  ok   clicking opens WhatsApp in a new tab: https://api.whatsapp.com/send/
+  ok   draft contains every value entered
+       draft: Hello S.K. Engineering Works, | I would like to discuss an engineering / plant requirement. |  | Name: QA Test Name | Phone / WhatsApp: 9876543210 | Company: QA Company | Location: QA Location | Project requirement: QA Requirement
+  ok   no JS errors
+
+## /hi/machinery/belt-conveyor/
+  ok   empty form is blocked: no WhatsApp button yet
+  ok   button label: विवरण के साथ WHATSAPP खोलें
+  ok   one arrow at most, no raw tokens
+  ok   draft goes to the company number: wa.me/919828460532
+  ok   clicking opens WhatsApp in a new tab: https://api.whatsapp.com/send/
+  ok   draft contains every value entered
+       draft: Hello S.K. Engineering Works, | I would like to discuss a Belt Conveyor requirement. |  | Machine: Belt Conveyor | Name: QA Test Name | Phone / WhatsApp: 9876543210 | Company: QA Company | Location: QA Location | Capacity / TPH: QA Capacity | Material: QA Material | Requirement: QA Requirement
+  ok   no JS errors
+
+## /hi/engineering/
+  ok   empty form is blocked: no WhatsApp button yet
+  ok   button label: विवरण के साथ WHATSAPP खोलें
+  ok   one arrow at most, no raw tokens
+  ok   draft goes to the company number: wa.me/919828460532
+  ok   clicking opens WhatsApp in a new tab: https://api.whatsapp.com/send/
+  ok   draft contains every value entered
+       draft: Hello S.K. Engineering Works, | I would like to discuss an engineering / plant requirement. |  | Name: QA Test Name | Phone / WhatsApp: 9876543210 | Company: QA Company | Location: QA Location | Project requirement: QA Requirement
+  ok   no JS errors
+
+## /ar/machinery/belt-conveyor/
+  ok   empty form is blocked: no WhatsApp button yet
+  ok   button label: فتح واتساب مع التفاصيل ↗
+  ok   one arrow at most, no raw tokens
+  ok   draft goes to the company number: wa.me/919828460532
+  ok   clicking opens WhatsApp in a new tab: https://api.whatsapp.com/send/
+  ok   draft contains every value entered
+       draft: Hello S.K. Engineering Works, | I would like to discuss a Belt Conveyor requirement. |  | Machine: Belt Conveyor | Name: QA Test Name | Phone / WhatsApp: 9876543210 | Company: QA Company | Location: QA Location | Capacity / TPH: QA Capacity | Material: QA Material | Requirement: QA Requirement
+  ok   no JS errors
+
+## /ar/engineering/
+  ok   empty form is blocked: no WhatsApp button yet
+  ok   button label: فتح واتساب مع التفاصيل ↗
+  ok   one arrow at most, no raw tokens
+  ok   draft goes to the company number: wa.me/919828460532
+  ok   clicking opens WhatsApp in a new tab: https://api.whatsapp.com/send/
+  ok   draft contains every value entered
+       draft: Hello S.K. Engineering Works, | I would like to discuss an engineering / plant requirement. |  | Name: QA Test Name | Phone / WhatsApp: 9876543210 | Company: QA Company | Location: QA Location | Project requirement: QA Requirement
+  ok   no JS errors
+
+failures: 0
+
+Contact and About in EN/HI/AR (contact_about_probe.mjs)
+
+## /contact/ (desktop)
+  ok   lang en-IN, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   meta: CONTACT / S.K. ENGINEERING WORKS
+  ok   chat: CHAT ON WHATSAPP
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /about/ (desktop)
+  ok   lang en-IN, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   caption: OUR MANUFACTURING BASE / SAMBHAR LAKE, RAJASTHAN
+  ok   expansion: EXPANSION / GUJARAT
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+
+## /contact/ (mobile)
+  ok   lang en-IN, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   meta: CONTACT / S.K. ENGINEERING WORKS
+  ok   chat: CHAT ON WHATSAPP
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /about/ (mobile)
+  ok   lang en-IN, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   caption: OUR MANUFACTURING BASE / SAMBHAR LAKE, RAJASTHAN
+  ok   expansion: EXPANSION / GUJARAT
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+
+## /hi/contact/ (desktop)
+  ok   lang hi, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   meta: संपर्क / S.K. ENGINEERING WORKS
+  ok   chat: WHATSAPP पर चैट करें
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /hi/about/ (desktop)
+  ok   lang hi, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   caption: हमारे विनिर्माण आधार / SAMBHAR LAKE, RAJASTHAN
+  ok   expansion: विस्तार / GUJARAT
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+
+## /hi/contact/ (mobile)
+  ok   lang hi, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   meta: संपर्क / S.K. ENGINEERING WORKS
+  ok   chat: WHATSAPP पर चैट करें
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /hi/about/ (mobile)
+  ok   lang hi, dir ltr
+  ok   no raw tokens in text, attributes or title
+  ok   caption: हमारे विनिर्माण आधार / SAMBHAR LAKE, RAJASTHAN
+  ok   expansion: विस्तार / GUJARAT
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+
+## /ar/contact/ (desktop)
+  ok   lang ar, dir rtl
+  ok   no raw tokens in text, attributes or title
+  ok   meta: اتصل بنا / S.K. ENGINEERING WORKS
+  ok   chat: تحدث معنا عبر واتساب
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /ar/about/ (desktop)
+  ok   lang ar, dir rtl
+  ok   no raw tokens in text, attributes or title
+  ok   caption: قاعدة تصنيعنا / بحيرة سامبهار، راجستان
+  ok   expansion: التوسّع / غوجارات
+  ok   no horizontal overflow (-15px)
+  ok   no JS errors
+
+## /ar/contact/ (mobile)
+  ok   lang ar, dir rtl
+  ok   no raw tokens in text, attributes or title
+  ok   meta: اتصل بنا / S.K. ENGINEERING WORKS
+  ok   chat: تحدث معنا عبر واتساب
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+  ok   WhatsApp links: https://wa.me/919828460532 (4)
+       phone links: tel:+919828460532
+
+## /ar/about/ (mobile)
+  ok   lang ar, dir rtl
+  ok   no raw tokens in text, attributes or title
+  ok   caption: قاعدة تصنيعنا / بحيرة سامبهار، راجستان
+  ok   expansion: التوسّع / غوجارات
+  ok   no horizontal overflow (0px)
+  ok   no JS errors
+
+failures: 0
+
+Release smoke test (release_smoke.mjs)
+
+## /
+  ok   HTTP 200, lang en-IN, dir ltr
+  ok   Lenis running; 2 ScrollTrigger pins
+  ok   scrolled to 39643 of 39643
+  ok   images: 33 loaded of 40, none broken
+  ok   video sources: 2 reachable as video; 2 of 2 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /about/
+  ok   HTTP 200, lang en-IN, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 12615 of 12615
+  ok   images: 17 loaded of 22, none broken
+  ok   video sources: 3 reachable as video; 2 of 2 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /engineering/
+  ok   HTTP 200, lang en-IN, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 6692 of 6692
+  ok   images: 7 loaded of 7, none broken
+  ok   video sources: 1 reachable as video; 1 of 1 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /salt-refinery-plants/
+  ok   HTTP 200, lang en-IN, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 7164 of 7164
+  ok   images: 13 loaded of 22, none broken
+  ok   video sources: 3 reachable as video; 2 of 3 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /machinery/
+  ok   HTTP 200, lang en-IN, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 11947 of 11947
+  ok   images: 18 loaded of 23, none broken
+  ok   video sources: 2 reachable as video; 2 of 2 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /machinery/belt-conveyor/
+  ok   HTTP 200, lang en-IN, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 8354 of 8354
+  ok   images: 4 loaded of 4, none broken
+  ok   video sources: 0 reachable as video; 0 of 0 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /projects/
+  ok   HTTP 200, lang en-IN, dir ltr
+  ok   Lenis running; 1 ScrollTrigger pins
+  ok   scrolled to 6254 of 6254
+  ok   images: 18 loaded of 23, none broken
+  ok   video sources: 4 reachable as video; 4 of 4 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /projects/jagdamba-salt-15tph/
+  ok   HTTP 200, lang en-IN, dir ltr
+  ok   Lenis running; 1 ScrollTrigger pins
+  ok   scrolled to 20268 of 20268
+  ok   images: 10 loaded of 16, none broken
+  ok   video sources: 4 reachable as video; 8 of 8 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /contact/
+  ok   HTTP 200, lang en-IN, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 3520 of 3520
+  ok   images: 4 loaded of 4, none broken
+  ok   video sources: 0 reachable as video; 0 of 0 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## page transition from /
+  ok   client navigation to /Sk-Engineering-Works/machinery/: same document true, overlay shown true, Lenis true
+
+## /hi/
+  ok   HTTP 200, lang hi, dir ltr
+  ok   Lenis running; 2 ScrollTrigger pins
+  ok   scrolled to 39513 of 39513
+  ok   images: 34 loaded of 40, none broken
+  ok   video sources: 2 reachable as video; 2 of 2 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /hi/about/
+  ok   HTTP 200, lang hi, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 12176 of 12176
+  ok   images: 17 loaded of 22, none broken
+  ok   video sources: 3 reachable as video; 2 of 2 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /hi/engineering/
+  ok   HTTP 200, lang hi, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 6604 of 6604
+  ok   images: 7 loaded of 7, none broken
+  ok   video sources: 1 reachable as video; 1 of 1 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /hi/salt-refinery-plants/
+  ok   HTTP 200, lang hi, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 7094 of 7094
+  ok   images: 13 loaded of 22, none broken
+  ok   video sources: 3 reachable as video; 2 of 3 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /hi/machinery/
+  ok   HTTP 200, lang hi, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 11947 of 11947
+  ok   images: 18 loaded of 23, none broken
+  ok   video sources: 2 reachable as video; 2 of 2 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /hi/machinery/belt-conveyor/
+  ok   HTTP 200, lang hi, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 8303 of 8303
+  ok   images: 4 loaded of 4, none broken
+  ok   video sources: 0 reachable as video; 0 of 0 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /hi/projects/
+  ok   HTTP 200, lang hi, dir ltr
+  ok   Lenis running; 1 ScrollTrigger pins
+  ok   scrolled to 6254 of 6254
+  ok   images: 18 loaded of 23, none broken
+  ok   video sources: 4 reachable as video; 4 of 4 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /hi/projects/jagdamba-salt-15tph/
+  ok   HTTP 200, lang hi, dir ltr
+  ok   Lenis running; 1 ScrollTrigger pins
+  ok   scrolled to 19798 of 19798
+  ok   images: 10 loaded of 16, none broken
+  ok   video sources: 4 reachable as video; 8 of 8 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /hi/contact/
+  ok   HTTP 200, lang hi, dir ltr
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 3440 of 3440
+  ok   images: 4 loaded of 4, none broken
+  ok   video sources: 0 reachable as video; 0 of 0 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## page transition from /hi/
+  FAIL client navigation to /Sk-Engineering-Works/hi/machinery/: same document true, overlay shown false, Lenis true
+
+## /ar/
+  ok   HTTP 200, lang ar, dir rtl
+  ok   Lenis running; 2 ScrollTrigger pins
+  ok   scrolled to 39651 of 39651
+  ok   images: 34 loaded of 40, none broken
+  ok   video sources: 2 reachable as video; 2 of 2 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /ar/about/
+  ok   HTTP 200, lang ar, dir rtl
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 12275 of 12275
+  ok   images: 17 loaded of 22, none broken
+  ok   video sources: 3 reachable as video; 2 of 2 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /ar/engineering/
+  ok   HTTP 200, lang ar, dir rtl
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 6585 of 6585
+  ok   images: 7 loaded of 7, none broken
+  ok   video sources: 1 reachable as video; 1 of 1 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /ar/salt-refinery-plants/
+  ok   HTTP 200, lang ar, dir rtl
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 7106 of 7106
+  ok   images: 13 loaded of 22, none broken
+  ok   video sources: 3 reachable as video; 2 of 3 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /ar/machinery/
+  ok   HTTP 200, lang ar, dir rtl
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 11983 of 11983
+  ok   images: 18 loaded of 23, none broken
+  ok   video sources: 2 reachable as video; 2 of 2 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /ar/machinery/belt-conveyor/
+  ok   HTTP 200, lang ar, dir rtl
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 8055 of 8055
+  ok   images: 4 loaded of 4, none broken
+  ok   video sources: 0 reachable as video; 0 of 0 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /ar/projects/
+  ok   HTTP 200, lang ar, dir rtl
+  ok   Lenis running; 1 ScrollTrigger pins
+  ok   scrolled to 6290 of 6290
+  ok   images: 18 loaded of 23, none broken
+  ok   video sources: 4 reachable as video; 4 of 4 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /ar/projects/jagdamba-salt-15tph/
+  ok   HTTP 200, lang ar, dir rtl
+  ok   Lenis running; 1 ScrollTrigger pins
+  ok   scrolled to 19918 of 19918
+  ok   images: 10 loaded of 16, none broken
+  ok   video sources: 4 reachable as video; 8 of 8 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## /ar/contact/
+  ok   HTTP 200, lang ar, dir rtl
+  ok   Lenis running; 0 ScrollTrigger pins
+  ok   scrolled to 3599 of 3599
+  ok   images: 4 loaded of 4, none broken
+  ok   video sources: 0 reachable as video; 0 of 0 elements decoded data
+  ok   no JS errors
+  ok   no failed requests
+
+## page transition from /ar/
+  FAIL client navigation to /Sk-Engineering-Works/ar/machinery/: same document true, overlay shown false, Lenis true
+
+## 3D screw conveyor
+  ok   canvas present
+  ok   canvas size 1425 x 900
+  ok   the 3D view changes during a pointer drag
+  ok   no JS errors
+
+failures: 2
+

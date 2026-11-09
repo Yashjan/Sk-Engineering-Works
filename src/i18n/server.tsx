@@ -7,6 +7,10 @@ import { createTranslator } from "./translate";
 const dictionaries = { hi, ar } as const;
 const translatedAttributes = ["aria-label", "aria-description", "title", "placeholder", "alt"] as const;
 
+export function translateServerText(value: string, locale: TranslatedLocale) {
+  return createTranslator(dictionaries[locale])(value);
+}
+
 export function localizeServerTree(node: ReactNode, locale: TranslatedLocale): ReactNode {
   const translate = createTranslator(dictionaries[locale]);
   const visit = (value: ReactNode): ReactNode => {
