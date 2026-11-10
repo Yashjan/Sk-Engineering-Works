@@ -1,0 +1,267 @@
+Complete Salt Refinery Plants: validation
+"committed" = c06c005. "this build" = the uncommitted changes. Both built from source and served the same way.
+
+Exported pages, committed vs this build (visible text, attributes, title/description, JSON-LD, element structure, media)
+HTML files: 120 -> 120, same list: True
+Pages with any change: 3 of 120
+
+== ar/salt-refinery-plants/index.html: meta, ld, text, attrs, tags | elements 661 -> 675, same structure: False | same media: True
+
+== hi/salt-refinery-plants/index.html: meta, ld, text, attrs, tags | elements 661 -> 675, same structure: False | same media: True
+
+== salt-refinery-plants/index.html: meta, ld, text, attrs, tags | elements 660 -> 674, same structure: False | same media: True
+On each plants page the only structural change is +15 links and -1 line break (1 inline link in the process intro, 7 in each of the two execution layouts).
+
+Static assets, both built from the same directory so content hashes compare: 67 of 72 files byte-identical, including all CSS
+and the GSAP, ScrollTrigger, Lenis and Three.js chunks. Changed: the plants sections chunk 37.3 -> 34.9 KB, the enquiry section chunk
+(12.1 KB, new optional prop), the translation chunk 476.9 -> 460.9 KB, and the two build manifests. Images and videos: 115 of 115 identical.
+
+JavaScript each page downloads (fresh browser per page; KB; "required" excludes prefetch)
+"old" = the previous long English copy; en/hi/ar = the new long copy. Counts are sentences found in the JS.
+COMMITTED
+page                             required raw required gz +prefetch gz  HTML gz  long sentences in required JS | in all JS
+/salt-refinery-plants/                  706.2       221.6        259.7     12.1  {"old":7} | {"old":7}
+/hi/salt-refinery-plants/              1360.9       370.7        381.6     13.5  {"old":7} | {"old":7}
+/ar/salt-refinery-plants/              1360.9       370.7        381.6     13.3  {"old":7} | {"old":7}
+//                                      668.3       212.0        259.7     17.0  {} | {"old":7}
+/hi/                                   1400.0       381.6        381.6     18.8  {"old":7} | {"old":7}
+/ar/                                   1400.0       381.6        381.6     18.4  {"old":7} | {"old":7}
+/machinery/belt-conveyor/               679.0       216.0        272.9     14.2  {} | {"old":7}
+/hi/machinery/belt-conveyor/           1360.9       370.7        381.6     17.6  {"old":7} | {"old":7}
+/ar/machinery/belt-conveyor/           1360.9       370.7        381.6     16.8  {"old":7} | {"old":7}
+THIS BUILD
+page                             required raw required gz +prefetch gz  HTML gz  long sentences in required JS | in all JS
+/salt-refinery-plants/                  703.9       221.3        259.1     14.7  {} | {}
+/hi/salt-refinery-plants/              1342.6       366.2        377.2     17.1  {} | {}
+/ar/salt-refinery-plants/              1342.6       366.2        377.2     16.3  {} | {}
+//                                      668.4       212.5        259.1     17.0  {} | {}
+/hi/                                   1381.8       377.2        377.2     18.8  {} | {}
+/ar/                                   1381.8       377.2        377.2     18.4  {} | {}
+/machinery/belt-conveyor/               679.0       216.4        272.3     14.2  {} | {}
+/hi/machinery/belt-conveyor/           1342.6       366.2        377.2     17.6  {} | {}
+/ar/machinery/belt-conveyor/           1342.6       366.2        377.2     16.8  {} | {}
+
+Lighthouse, simulated mobile throttling (2 runs each)
+en.mobile   committed  perf 88 a11y 100 bp 96 seo 100 LCP 3.1s TBT 271ms CLS 0.000 SI 3.1s | perf 87 a11y 100 bp 96 seo 100 LCP 3.1s TBT 299ms CLS 0.000 SI 3.1s
+en.mobile   this build perf 86 a11y 100 bp 100 seo 100 LCP 3.6s TBT 213ms CLS 0.000 SI 3.1s | perf 85 a11y 100 bp 100 seo 100 LCP 3.6s TBT 229ms CLS 0.000 SI 3.1s
+hi.mobile   committed  perf 77 a11y 100 bp 96 seo 100 LCP 4.1s TBT 370ms CLS 0.000 SI 3.2s | perf 78 a11y 100 bp 96 seo 100 LCP 4.1s TBT 343ms CLS 0.000 SI 3.2s
+hi.mobile   this build perf 78 a11y 100 bp 100 seo 100 LCP 4.2s TBT 303ms CLS 0.000 SI 3.3s | perf 78 a11y 100 bp 100 seo 100 LCP 4.2s TBT 292ms CLS 0.000 SI 3.3s
+ar.mobile   committed  perf 79 a11y 100 bp 96 seo 100 LCP 4.1s TBT 321ms CLS 0.000 SI 3.3s | perf 76 a11y 100 bp 96 seo 100 LCP 4.1s TBT 402ms CLS 0.000 SI 3.3s
+ar.mobile   this build perf 80 a11y 100 bp 96 seo 100 LCP 3.8s TBT 340ms CLS 0.000 SI 3.2s | perf 79 a11y 100 bp 96 seo 100 LCP 3.8s TBT 345ms CLS 0.000 SI 3.3s
+en.desktop  committed  perf 99 a11y 100 bp 100 seo 100 LCP 0.7s TBT 38ms CLS 0.000 SI 1.1s | perf 99 a11y 100 bp 100 seo 100 LCP 0.7s TBT 35ms CLS 0.000 SI 1.1s
+en.desktop  this build perf 99 a11y 100 bp 100 seo 100 LCP 0.7s TBT 23ms CLS 0.000 SI 1.0s | perf 99 a11y 100 bp 100 seo 100 LCP 0.7s TBT 26ms CLS 0.000 SI 1.1s
+The LCP element is the hero video poster in both builds; its time is mostly render delay during the unchanged hero intro animation.
+
+Observed LCP, mobile with network and 4x CPU throttling, 7 cold runs each (median)
+COMMITTED
+/salt-refinery-plants/     LCP 2420ms  FCP 556  DCL 578  load 3437  introReveal 4835  introDone 5134  runs=[2420,2460,2404,2408,2404,2432,2428]
+   candidates (last run): 544ms p.salt-hero-support 18290px²  →  2428ms video.progressive-video.is-media-loading 65056px² SK_Salt_Refinery_Plants_Hero_Poster.jpg
+/hi/salt-refinery-plants/  LCP 2644ms  FCP 1084  DCL 1122  load 3875  introReveal 6491  introDone 6791  runs=[2632,2560,2644,2640,2908,2868,2916]
+   candidates (last run): 896ms p.salt-hero-support 11960px²  →  2916ms video.progressive-video.is-media-loading 65045px² SK_Salt_Refinery_Plants_Hero_Poster.jpg
+/ar/salt-refinery-plants/  LCP 2900ms  FCP 932  DCL 1023  load 3917  introReveal 6515  introDone 6814  runs=[2912,2644,2536,2920,2884,2940,2900]
+   candidates (last run): 932ms p.salt-hero-support 12880px²  →  2900ms video.progressive-video.is-media-loading 65045px² SK_Salt_Refinery_Plants_Hero_Poster.jpg
+THIS BUILD
+/salt-refinery-plants/     LCP 2408ms  FCP 600  DCL 606  load 3445  introReveal 4810  introDone 5112  runs=[2408,2420,2360,2368,2368,2412,2428]
+   candidates (last run): 548ms span.salt-hero-heading-line 13376px²  →  2428ms video.progressive-video.is-media-loading 65045px² SK_Salt_Refinery_Plants_Hero_Poster.jpg
+/hi/salt-refinery-plants/  LCP 2644ms  FCP 1108  DCL 1130  load 3821  introReveal 6323  introDone 6624  runs=[2644,2624,2920,2624,2580,2876,2892]
+   candidates (last run): 956ms p.salt-hero-support 13940px²  →  2892ms video.progressive-video.is-media-loading 65045px² SK_Salt_Refinery_Plants_Hero_Poster.jpg
+/ar/salt-refinery-plants/  LCP 2880ms  FCP 972  DCL 1063  load 3856  introReveal 6380  introDone 6669  runs=[2628,2652,2652,2896,2892,2880,2892]
+   candidates (last run): 972ms p.salt-hero-support 13560px²  →  2892ms video.progressive-video.is-media-loading 65045px² SK_Salt_Refinery_Plants_Hero_Poster.jpg
+
+Video and motion state at matching section anchors (page height differs, so fixed scroll positions do not line up)
+All 12 anchor states identical (desktop 1440px and mobile 390px): same videos playing and paused, no section content left hidden.
+
+Behaviour snapshot of 22 page views (compare_build): no state or video differences on any page other than salt-refinery-plants;
+pixel differences elsewhere 0.6 to 1.1% (marquee and animation timing), and 9.2% on one mobile Screw Conveyor scroll-scrub frame,
+whose code is unchanged. Lenis wheel trace ends at 527 in both. On salt-refinery-plants every snapshot is offset because the page is taller.
+PROBES base: {"lenisWheelTrace":[105,105,323,323,412,460,481,496,507,516,523,527],"transition":[{"t":15,"path":"/hi/","overlay":"hidden/0.00/"},{"t":188,"path":"/hi/machinery/","overlay":"hidden/0.00/"}]}
+PROBES curr: {"lenisWheelTrace":[147,147,147,372,372,456,456,498,511,518,523,527],"transition":[{"t":13,"path":"/hi/","overlay":"hidden/0.00/"},{"t":242,"path":"/hi/machinery/","overlay":"hidden/0.00/"}]}
+
+Contrast (axe, EN/HI/AR, desktop and mobile, salt-refinery-plants): 0 contrast violations
+Browser checks (axe, keyboard, RTL, overflow, all main pages): 11 failures, identical to the committed build and to browser-checks-05-final.txt
+(about-page contrast, and body direction computing LTR on Arabic pages); none is on content changed here.
+
+Page probe (plants_page_probe.mjs), EN/HI/AR on desktop and mobile, against the committed build
+
+## /salt-refinery-plants/ (desktop)
+  ok   lang en-IN, dir ltr
+  ok   title (68): Complete Salt Refinery Plants & Engineering | S.K. Engineering Works
+  ok   description (167)
+  ok   canonical, hreflang and indexable
+  ok   one h1: FROM RAW SALTTO FINISHEDPRODUCT.
+  ok   heading levels do not skip
+  ok   no horizontal overflow (-15px)
+  ok   images have alt text
+  ok   breadcrumb in this language: Home > Salt Refinery Plants
+  ok   Service JSON-LD without offers, prices or ratings: Complete Salt Refinery Plants
+  ok   Organization JSON-LD present
+  ok   no unconfirmed claims in the page source or percentages in its text
+  ok   hero: COMPLETE SALT REFINERY PLANTS / 01
+  ok   6 execution stages and 6 configuration factors in the page
+  ok   execution stages use this language's build-time copy
+  ok   configuration factors use this language's build-time copy
+  ok   section intros and enquiry text use this language's copy
+  ok   8 inline links keep the language prefix
+  ok   inline links return 200
+  ok   enquiry telephone and WhatsApp actions unchanged
+       enquiry text: To discuss a plant, share what you know: required capacity, raw salt source, desired finished salt, new plant or expansion, location, site area, existing machinery and planned timeline.
+  ok   all 9 stages show this language's description and a video (9/9)
+  ok   hovering stages does not move the page below (1891)
+  ok   stage headings fit their column
+  ok   all 6 configuration factors open without clipping
+  ok   plant drawing opens and closes
+  ok   no JS errors
+  ok   baseline match: 0 pins, Lenis true, 3 videos, same images
+       section heights vs baseline: complete-execution 2808 -> 2839; plant-configuration 1024 -> 1073; project-enquiry 837 -> 843
+
+## /salt-refinery-plants/ (mobile)
+  ok   lang en-IN, dir ltr
+  ok   title (68): Complete Salt Refinery Plants & Engineering | S.K. Engineering Works
+  ok   description (167)
+  ok   canonical, hreflang and indexable
+  ok   one h1: FROM RAW SALTTO FINISHEDPRODUCT.
+  ok   heading levels do not skip
+  ok   no horizontal overflow (0px)
+  ok   images have alt text
+  ok   breadcrumb in this language: Home > Salt Refinery Plants
+  ok   Service JSON-LD without offers, prices or ratings: Complete Salt Refinery Plants
+  ok   Organization JSON-LD present
+  ok   no unconfirmed claims in the page source or percentages in its text
+  ok   hero: COMPLETE SALT REFINERY PLANTS / 01
+  ok   6 execution stages and 6 configuration factors in the page
+  ok   execution stages use this language's build-time copy
+  ok   configuration factors use this language's build-time copy
+  ok   section intros and enquiry text use this language's copy
+  ok   8 inline links keep the language prefix
+  ok   inline links return 200
+  ok   enquiry telephone and WhatsApp actions unchanged
+  ok   all 9 stages show this language's description and a video (9/9)
+  ok   stage headings fit their column
+  ok   all 6 configuration factors open without clipping
+  ok   plant drawing opens and closes
+  ok   no JS errors
+  ok   baseline match: 0 pins, Lenis true, 3 videos, same images
+       section heights vs baseline: salt-refinery-hero 835 -> 812; raw-process 1405 -> 1453; complete-execution 3621 -> 3802; plant-configuration 1199 -> 1313; project-enquiry 882 -> 904
+
+## /hi/salt-refinery-plants/ (desktop)
+  ok   lang hi, dir ltr
+  ok   title (68): संपूर्ण नमक रिफाइनरी संयंत्र और इंजीनियरिंग | S.K. Engineering Works
+  ok   description (140)
+  ok   canonical, hreflang and indexable
+  ok   one h1: कच्चे नमक सेतैयारउत्पाद तक।
+  ok   heading levels do not skip
+  ok   no horizontal overflow (-15px)
+  ok   images have alt text
+  ok   breadcrumb in this language: होम > नमक रिफाइनरी संयंत्र
+  ok   Service JSON-LD without offers, prices or ratings: संपूर्ण नमक रिफाइनरी संयंत्र
+  ok   Organization JSON-LD present
+  ok   no unconfirmed claims in the page source or percentages in its text
+  ok   hero: संपूर्ण नमक रिफाइनरी संयंत्र / 01
+  ok   6 execution stages and 6 configuration factors in the page
+  ok   execution stages use this language's build-time copy
+  ok   configuration factors use this language's build-time copy
+  ok   section intros and enquiry text use this language's copy
+  ok   8 inline links keep the language prefix
+  ok   inline links return 200
+  ok   enquiry telephone and WhatsApp actions unchanged
+       enquiry text: संयंत्र पर चर्चा के लिए जो जानकारी उपलब्ध हो, साझा करें: आवश्यक क्षमता, कच्चे नमक का स्रोत, वांछित तैयार नमक, नया संयंत्र या विस्तार, स्थान, स्थल का क्षेत्रफल, मौजूदा मशीनरी और नियोजित समय-सीमा।
+  ok   all 9 stages show this language's description and a video (9/9)
+  ok   hovering stages does not move the page below (1868)
+  ok   stage headings fit their column
+  ok   all 6 configuration factors open without clipping
+  ok   plant drawing opens and closes
+  ok   no JS errors
+  ok   baseline match: 0 pins, Lenis true, 3 videos, same images
+       section heights vs baseline: plant-configuration 976 -> 1000; project-enquiry 837 -> 843
+
+## /hi/salt-refinery-plants/ (mobile)
+  ok   lang hi, dir ltr
+  ok   title (68): संपूर्ण नमक रिफाइनरी संयंत्र और इंजीनियरिंग | S.K. Engineering Works
+  ok   description (140)
+  ok   canonical, hreflang and indexable
+  ok   one h1: कच्चे नमक सेतैयारउत्पाद तक।
+  ok   heading levels do not skip
+  ok   no horizontal overflow (0px)
+  ok   images have alt text
+  ok   breadcrumb in this language: होम > नमक रिफाइनरी संयंत्र
+  ok   Service JSON-LD without offers, prices or ratings: संपूर्ण नमक रिफाइनरी संयंत्र
+  ok   Organization JSON-LD present
+  ok   no unconfirmed claims in the page source or percentages in its text
+  ok   hero: संपूर्ण नमक रिफाइनरी संयंत्र / 01
+  ok   6 execution stages and 6 configuration factors in the page
+  ok   execution stages use this language's build-time copy
+  ok   configuration factors use this language's build-time copy
+  ok   section intros and enquiry text use this language's copy
+  ok   8 inline links keep the language prefix
+  ok   inline links return 200
+  ok   enquiry telephone and WhatsApp actions unchanged
+  ok   all 9 stages show this language's description and a video (9/9)
+  ok   stage headings fit their column
+  ok   all 6 configuration factors open without clipping
+  ok   plant drawing opens and closes
+  ok   no JS errors
+  ok   baseline match: 0 pins, Lenis true, 3 videos, same images
+       section heights vs baseline: raw-process 1381 -> 1453; complete-execution 3493 -> 3638; plant-configuration 1176 -> 1291; project-enquiry 841 -> 887
+
+## /ar/salt-refinery-plants/ (desktop)
+  ok   lang ar, dir rtl
+  ok   title (61): مصانع تكرير الملح المتكاملة والهندسة | S.K. Engineering Works
+  ok   description (132)
+  ok   canonical, hreflang and indexable
+  ok   one h1: من الملح الخامإلى المنتجالنهائي.
+  ok   heading levels do not skip
+  ok   no horizontal overflow (-15px)
+  ok   images have alt text
+  ok   breadcrumb in this language: الرئيسية > مصانع تكرير الملح
+  ok   Service JSON-LD without offers, prices or ratings: مصانع تكرير الملح المتكاملة
+  ok   Organization JSON-LD present
+  ok   no unconfirmed claims in the page source or percentages in its text
+  ok   hero: مصانع تكرير الملح المتكاملة / 01
+  ok   6 execution stages and 6 configuration factors in the page
+  ok   execution stages use this language's build-time copy
+  ok   configuration factors use this language's build-time copy
+  ok   section intros and enquiry text use this language's copy
+  ok   8 inline links keep the language prefix
+  ok   inline links return 200
+  ok   enquiry telephone and WhatsApp actions unchanged
+       enquiry text: لمناقشة مصنع، شاركنا ما تعرفه: السعة المطلوبة، ومصدر الملح الخام، والملح النهائي المطلوب، وهل هو مصنع جديد أم توسعة، والموقع، ومساحة الموقع، والآلات الحالية، والجدول الزمني المخطط.
+  ok   all 9 stages show this language's description and a video (9/9)
+  ok   hovering stages does not move the page below (1868)
+  ok   stage headings fit their column
+  ok   all 6 configuration factors open without clipping
+  ok   plant drawing opens and closes
+  ok   no JS errors
+  ok   baseline match: 0 pins, Lenis true, 3 videos, same images
+       section heights vs baseline: plant-configuration 952 -> 976; project-enquiry 874 -> 898
+
+## /ar/salt-refinery-plants/ (mobile)
+  ok   lang ar, dir rtl
+  ok   title (61): مصانع تكرير الملح المتكاملة والهندسة | S.K. Engineering Works
+  ok   description (132)
+  ok   canonical, hreflang and indexable
+  ok   one h1: من الملح الخامإلى المنتجالنهائي.
+  ok   heading levels do not skip
+  ok   no horizontal overflow (0px)
+  ok   images have alt text
+  ok   breadcrumb in this language: الرئيسية > مصانع تكرير الملح
+  ok   Service JSON-LD without offers, prices or ratings: مصانع تكرير الملح المتكاملة
+  ok   Organization JSON-LD present
+  ok   no unconfirmed claims in the page source or percentages in its text
+  ok   hero: مصانع تكرير الملح المتكاملة / 01
+  ok   6 execution stages and 6 configuration factors in the page
+  ok   execution stages use this language's build-time copy
+  ok   configuration factors use this language's build-time copy
+  ok   section intros and enquiry text use this language's copy
+  ok   8 inline links keep the language prefix
+  ok   inline links return 200
+  ok   enquiry telephone and WhatsApp actions unchanged
+  ok   all 9 stages show this language's description and a video (9/9)
+  ok   stage headings fit their column
+  ok   all 6 configuration factors open without clipping
+  ok   plant drawing opens and closes
+  ok   no JS errors
+  ok   baseline match: 0 pins, Lenis true, 3 videos, same images
+       section heights vs baseline: raw-process 1381 -> 1453; complete-execution 3436 -> 3595; plant-configuration 1145 -> 1237; project-enquiry 841 -> 887
+  ok   /machinery/ keeps its own enquiry text
+
+failures: 0

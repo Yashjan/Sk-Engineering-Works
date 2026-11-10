@@ -123,7 +123,7 @@
   .about-trust-heading { margin: 18px 0 24px; font-size: clamp(28px, 8vw, 32px); line-height: .98; }
   .about-marquees { mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
   .about-client-mark { flex-basis: 210px; min-height: 60px; padding: 8px 20px; }
-  .about-client-mark strong { font-size: 11px; }
+  .about-client-mark strong { font-size: 12px; font-weight: 600; }
   .about-client-logo { height: 38px; }
   .about-global-close { display: block; min-height: 0; margin-top: 34px; padding-top: 0; }
   .about-global-close h3 { font-size: clamp(26px, 7.4vw, 30px); line-height: 1; }

@@ -34,4 +34,8 @@
 
 @media (max-width: 767px) {
   .trusted-clients-shell { padding: 42px 6vw 11px 38px; }
+
+  .trusted-clients-standalone .about-client-mark strong {
+    color: #9a9c98;
+  }
 }

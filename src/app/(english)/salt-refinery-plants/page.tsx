@@ -10,31 +10,51 @@ import MachineryShowcaseSection from "@/components/salt-refinery-plants/Machiner
 import PlantConfigurationSection from "@/components/salt-refinery-plants/PlantConfigurationSection";
 import RawSaltProcessStage from "@/components/salt-refinery-plants/RawSaltProcessStage";
 import SaltRefineryHero from "@/components/salt-refinery-plants/SaltRefineryHero";
-import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import JsonLd from "@/components/seo/JsonLd";
 import { createPageMetadata } from "@/config/site";
+import { isTranslatedLocale, localizePathname, type Locale } from "@/i18n/config";
+import { getPageCopy } from "@/i18n/page-copy";
+import { getPlantCopy } from "@/i18n/plant-content";
+import { translateServerText } from "@/i18n/server";
+import { breadcrumbStructuredData, serviceStructuredData } from "@/lib/structured-data";
+
+const pagePath = "/salt-refinery-plants";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Salt Refinery Plants & Machinery",
-  description: "Explore complete salt refinery plants, process systems and salt-processing machinery engineered for washing, centrifuging, drying, screening, grinding, storage and handling.",
-  path: "/salt-refinery-plants",
+  ...getPageCopy("en", "salt"),
+  path: pagePath,
 });
 
-export default function SaltRefineryPlantsPage() {
+// locale is set only when the translated route renders this page.
+export default async function SaltRefineryPlantsPage({ params }: { params?: Promise<{ locale?: Locale }> }) {
+  const { locale = "en" } = (await params) ?? {};
   const hasLogo = existsSync(path.join(process.cwd(), "public/images/common/brand/sk-logo.png"));
+  const copy = getPlantCopy(locale);
+  const translate = (value: string) => isTranslatedLocale(locale) ? translateServerText(value, locale) : value;
+  const localizedPath = localizePathname(pagePath, locale);
 
   return (
     <>
-      <BreadcrumbJsonLd currentName="Salt Refinery Plants" currentPath="/salt-refinery-plants" />
+      <JsonLd data={breadcrumbStructuredData([
+        { name: translate("Home"), path: localizePathname("/", locale) },
+        { name: translate("Salt Refinery Plants"), path: localizedPath },
+      ])} />
+      <JsonLd data={serviceStructuredData({
+        name: copy.service.name,
+        description: getPageCopy(locale, "salt").description,
+        path: localizedPath,
+        serviceType: copy.service.serviceType,
+      })} />
       <a className="skip-link" href="#main">Skip to content</a>
       <Navbar hasLogo={hasLogo} />
       <main id="main">
-        <SaltRefineryHero />
-        <RawSaltProcessStage />
-        <CompleteExecutionSection />
-        <PlantConfigurationSection />
+        <SaltRefineryHero copy={copy.hero} />
+        <RawSaltProcessStage copy={copy.process} />
+        <CompleteExecutionSection copy={copy.execution} />
+        <PlantConfigurationSection copy={copy.configuration} />
         <MachineryShowcaseSection />
         <TrustedClientsSection standalone />
-        <ProjectEnquirySection appearance="light" />
+        <ProjectEnquirySection appearance="light" support={copy.enquiry.support} />
       </main>
     </>
   );

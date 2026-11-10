@@ -5,52 +5,41 @@ import { useLayoutEffect, useRef } from "react";
 import Image from "@/components/media/ProgressiveImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { PlantCopy } from "@/i18n/plant-content/types";
 import { assetPath } from "@/lib/asset-path";
 import PlantElevationDrawing from "./PlantElevationDrawing";
+import RichCopy from "./RichCopy";
 import "./complete-execution-section.css";
 
 type ExecutionStage = {
   number: string;
   title: string;
-  description: string;
 };
 
 const executionStages: ExecutionStage[] = [
   {
     number: "01",
     title: "PLANT LAYOUT PLANNING",
-    description:
-      "We plan machine positioning, structure arrangement and process movement around the production requirement and available plant space.",
   },
   {
     number: "02",
     title: "PROCESS DESIGN",
-    description:
-      "The complete refinery flow is planned from raw salt intake through crushing, washing, centrifuging, drying, screening, grinding, storage and packing.",
   },
   {
     number: "03",
     title: "MACHINERY FABRICATION",
-    description:
-      "Process equipment and material-handling machinery are fabricated to suit the required refinery configuration and production flow.",
   },
   {
     number: "04",
     title: "STRUCTURAL INTEGRATION",
-    description:
-      "Machines, platforms, frames and interconnecting systems are coordinated into one functional plant structure.",
   },
   {
     number: "05",
     title: "INSTALLATION & SETUP",
-    description:
-      "Equipment is installed and aligned on site to create a connected refinery production line.",
   },
   {
     number: "06",
-    title: "READY-TO-RUN REFINERY",
-    description:
-      "The final system brings planning, fabricated equipment and site execution together into a complete salt refinery setup.",
+    title: "CONNECTED PLANT LINE",
   },
 ];
 
@@ -67,7 +56,7 @@ const executionImages = [
   },
   {
     src: assetPath("/images/common/field-media/fabricated-equipment.webp"),
-    alt: "Large stainless-steel salt processing equipment under fabrication",
+    alt: "Large salt processing equipment under fabrication",
     caption: "HEAVY EQUIPMENT / WORKSHOP",
   },
   {
@@ -77,13 +66,13 @@ const executionImages = [
   },
 ] as const;
 
-function StageRow({ stage }: { stage: ExecutionStage }) {
+function StageRow({ stage, description }: { stage: ExecutionStage; description: string }) {
   return (
     <article className="execution-stage-row">
       <span className="execution-stage-number">{stage.number}</span>
       <div>
         <h3>{stage.title}</h3>
-        <p>{stage.description}</p>
+        <p><RichCopy text={description} /></p>
       </div>
     </article>
   );
@@ -108,7 +97,7 @@ function ExecutionImage({
   );
 }
 
-export default function CompleteExecutionSection() {
+export default function CompleteExecutionSection({ copy }: { copy: PlantCopy["execution"] }) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
@@ -229,13 +218,13 @@ export default function CompleteExecutionSection() {
         <header className="execution-intro">
           <p className="execution-eyebrow">COMPLETE EXECUTION / 03</p>
           <h2 id="complete-execution-title" className="execution-heading">
-            <span className="execution-heading-line"><span>WE BUILD</span></span>
-            <span className="execution-heading-line"><span>SALT REFINERIES</span></span>
-            <span className="execution-heading-line"><span>FROM SCRATCH.</span></span>
+            {copy.heading.split("\n").map((line) => (
+              <span className="execution-heading-line" key={line}><span>{line}</span></span>
+            ))}
           </h2>
           <div className="execution-intro-copy">
             <p className="execution-support">
-              From initial plant layout planning to machinery fabrication and on-site installation, S.K. Engineering Works delivers complete salt refinery execution as one connected engineering system.
+              {copy.support}
             </p>
             <p className="execution-sequence" aria-label="Plan, build, install">
               <span>PLAN</span><span>BUILD</span><span>INSTALL</span>
@@ -245,7 +234,7 @@ export default function CompleteExecutionSection() {
 
         <div className="execution-desktop-story">
           <div className="execution-stage-list">
-            {executionStages.map((stage) => <StageRow key={stage.number} stage={stage} />)}
+            {executionStages.map((stage) => <StageRow key={stage.number} stage={stage} description={copy.stages[stage.number]} />)}
           </div>
 
           <div className="execution-media-composition" aria-label="Salt refinery execution photographs">
@@ -280,13 +269,13 @@ export default function CompleteExecutionSection() {
               <ExecutionImage image={executionImages[groupIndex]} sizes="88vw" />
               {groupIndex === 0 ? (
                 <>
-                  <StageRow stage={executionStages[0]} />
+                  <StageRow stage={executionStages[0]} description={copy.stages[executionStages[0].number]} />
                   <PlantElevationDrawing className="execution-drawing-mobile" anchorId="plant-elevation-mobile" />
-                  <StageRow stage={executionStages[1]} />
+                  <StageRow stage={executionStages[1]} description={copy.stages[executionStages[1].number]} />
                 </>
               ) : executionStages
                   .slice(groupIndex * 2, groupIndex * 2 + 2)
-                  .map((stage) => <StageRow key={stage.number} stage={stage} />)}
+                  .map((stage) => <StageRow key={stage.number} stage={stage} description={copy.stages[stage.number]} />)}
             </div>
           ))}
         </div>

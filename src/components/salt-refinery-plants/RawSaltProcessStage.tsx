@@ -13,7 +13,9 @@ import {
 } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { PlantCopy } from "@/i18n/plant-content/types";
 import { assetPath } from "@/lib/asset-path";
+import RichCopy from "./RichCopy";
 import "./raw-salt-process-stage.css";
 
 type ProcessStage = {
@@ -23,7 +25,6 @@ type ProcessStage = {
   stageLabel: string;
   heading: [string, string];
   equipment: string;
-  description: string;
   relatedEquipment: string;
   mediaType: "video" | "placeholder";
   mediaSrc?: string;
@@ -37,7 +38,6 @@ const processStages: ProcessStage[] = [
     stageLabel: "01 / RAW SALT INTAKE",
     heading: ["RAW SALT", "ENTERS THE LINE."],
     equipment: "HOPPER + BELT CONVEYOR",
-    description: "Raw salt is received through the hopper and transferred by belt conveyor toward the crushing stage.",
     relatedEquipment: "HOPPER / BELT CONVEYOR",
     mediaType: "video",
     mediaSrc: assetPath("/videos/salt-refinery/raw-salt-hover.mp4"),
@@ -49,7 +49,6 @@ const processStages: ProcessStage[] = [
     stageLabel: "02 / CRUSHING",
     heading: ["SALT IS BROKEN", "DOWN FIRST."],
     equipment: "WET MILL",
-    description: "The incoming salt is reduced and conditioned in the Wet Mill to prepare it for the washing process.",
     relatedEquipment: "WET MILL",
     mediaType: "video",
     mediaSrc: assetPath("/videos/salt-refinery/crushing.mp4"),
@@ -61,8 +60,7 @@ const processStages: ProcessStage[] = [
     stageLabel: "03 / WASHING",
     heading: ["IMPURITIES ARE", "WASHED AWAY."],
     equipment: "ELUTRIATION + WASHING SYSTEM",
-    description: "Salt moves through the washing system where unwanted impurities are separated before further processing.",
-    relatedEquipment: "ELUTRIATION TANK / WASHING TANK / SCREW WASHERY",
+    relatedEquipment: "ELUTRIATION TANK / WASHING TANK / SCREW WASHER",
     mediaType: "video",
     mediaSrc: assetPath("/videos/salt-refinery/washing.mp4"),
   },
@@ -73,7 +71,6 @@ const processStages: ProcessStage[] = [
     stageLabel: "04 / CENTRIFUGING",
     heading: ["MOISTURE IS", "REMOVED."],
     equipment: "CENTRIFUGE",
-    description: "Washed salt enters the centrifuge where excess moisture and brine are separated from the salt.",
     relatedEquipment: "CENTRIFUGE",
     mediaType: "video",
     mediaSrc: assetPath("/videos/salt-refinery/centrifuge.mp4"),
@@ -85,7 +82,6 @@ const processStages: ProcessStage[] = [
     stageLabel: "05 / DRYING",
     heading: ["SALT IS DRIED", "FOR PROCESSING."],
     equipment: "DRYER + CYCLONE",
-    description: "The salt is dried using controlled hot-air processing to reduce moisture before screening and grinding.",
     relatedEquipment: "DRYER / CYCLONE",
     mediaType: "video",
     mediaSrc: assetPath("/videos/salt-refinery/dryer.mp4"),
@@ -97,7 +93,6 @@ const processStages: ProcessStage[] = [
     stageLabel: "06 / SCREENING",
     heading: ["SALT IS", "CLASSIFIED."],
     equipment: "VIBRO SCREEN",
-    description: "Dried salt is screened to separate particles by size and maintain a consistent product specification.",
     relatedEquipment: "VIBRO SCREEN",
     mediaType: "video",
     mediaSrc: assetPath("/videos/salt-refinery/screening.mp4"),
@@ -109,7 +104,6 @@ const processStages: ProcessStage[] = [
     stageLabel: "07 / GRINDING",
     heading: ["FINAL SIZE IS", "CONTROLLED."],
     equipment: "PIN MILL",
-    description: "Salt is ground to the required fineness depending on the final product specification.",
     relatedEquipment: "PIN MILL",
     mediaType: "video",
     mediaSrc: assetPath("/videos/salt-refinery/grinding.mp4"),
@@ -117,11 +111,10 @@ const processStages: ProcessStage[] = [
   {
     id: "material-handling",
     number: "08",
-    name: "MATERIAL HANDLING & ALL",
-    stageLabel: "08 / MATERIAL HANDLING & ALL",
+    name: "MATERIAL HANDLING",
+    stageLabel: "08 / MATERIAL HANDLING",
     heading: ["MATERIAL MOVES", "BETWEEN EACH STAGE."],
     equipment: "CONVEYORS + ELEVATORS + TRANSFER SYSTEMS",
-    description: "Processed salt is moved between connected stages using equipment selected for the plant layout and production flow.",
     relatedEquipment: "BELT CONVEYOR / SCREW CONVEYOR / BUCKET ELEVATOR",
     mediaType: "video",
     mediaSrc: assetPath("/videos/salt-refinery/material.mp4"),
@@ -133,7 +126,6 @@ const processStages: ProcessStage[] = [
     stageLabel: "09 / STORAGE & PACKING",
     heading: ["FINISHED SALT", "IS STORED & PACKED."],
     equipment: "STORAGE SILOS + PACKING SYSTEM",
-    description: "Finished salt is stored and prepared for packing according to the required product and packaging format.",
     relatedEquipment: "STORAGE SILOS / PACKING SYSTEM",
     mediaType: "video",
     mediaSrc: assetPath("/videos/salt-refinery/packing.mp4"),
@@ -182,7 +174,7 @@ function StageMedia({
   );
 }
 
-function StageCopy({ stage }: { stage: ProcessStage }) {
+function StageCopy({ stage, description }: { stage: ProcessStage; description: string }) {
   return (
     <>
       <p className="raw-process-copy-eyebrow">{stage.stageLabel}</p>
@@ -191,7 +183,7 @@ function StageCopy({ stage }: { stage: ProcessStage }) {
         <span>{stage.heading[1]}</span>
       </h3>
       <p className="raw-process-equipment">{stage.equipment}</p>
-      <p className="raw-process-description">{stage.description}</p>
+      <p className="raw-process-description">{description}</p>
       <div className="raw-process-related">
         <span>RELATED EQUIPMENT</span>
         <p>{stage.relatedEquipment}</p>
@@ -216,7 +208,7 @@ function syncVideoPlayback(video: HTMLVideoElement | null, shouldPlay: boolean) 
   }
 }
 
-export default function RawSaltProcessStage() {
+export default function RawSaltProcessStage({ copy }: { copy: PlantCopy["process"] }) {
   const root = useRef<HTMLElement>(null);
   const [hoveredStage, setHoveredStage] = useState<string | null>(null);
   const [selectedMobileStage, setSelectedMobileStage] = useState<string | null>("raw-salt");
@@ -450,8 +442,7 @@ export default function RawSaltProcessStage() {
             <span>REFINERY WORKS.</span>
           </h2>
           <p className="raw-process-support">
-            From raw salt intake to final packing,<br />
-            each stage is connected to the next.
+            <RichCopy text={copy.support} />
           </p>
         </header>
 
@@ -528,8 +519,13 @@ export default function RawSaltProcessStage() {
                       <span className="raw-process-stage-marker" aria-hidden="true" />
                     </button>
 
-                    {selected && (
-                      <div id={mobileDetailId} className="raw-process-mobile-detail">
+                    <div
+                      id={mobileDetailId}
+                      className="raw-process-mobile-detail"
+                      hidden={!selected}
+                      style={selected ? undefined : { display: "none" }}
+                    >
+                      {selected && (
                         <div className="raw-process-mobile-media">
                           <StageMedia
                             stage={process}
@@ -538,11 +534,11 @@ export default function RawSaltProcessStage() {
                             loadMedia={isMobile}
                           />
                         </div>
-                        <div className="raw-process-mobile-copy">
-                          <StageCopy stage={process} />
-                        </div>
+                      )}
+                      <div className="raw-process-mobile-copy">
+                        <StageCopy stage={process} description={copy.stages[process.id]} />
                       </div>
-                    )}
+                    </div>
                   </li>
                 );
               })}
@@ -561,7 +557,7 @@ export default function RawSaltProcessStage() {
           </div>
 
           <article ref={copyContent} id="process-stage-copy" className="raw-process-copy" aria-live="polite">
-            <StageCopy stage={renderedProcess} />
+            <StageCopy stage={renderedProcess} description={copy.stages[renderedProcess.id]} />
           </article>
         </div>
       </div>

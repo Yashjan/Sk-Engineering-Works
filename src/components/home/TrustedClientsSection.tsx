@@ -4,49 +4,41 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "@/components/media/ProgressiveImage";
-import { assetPath } from "@/lib/asset-path";
 import "./about-credibility-section.css";
 import "./trusted-clients-section.css";
 
-type Client = { name: string; logo?: string };
-
-const clients: Client[] = [
-  { name: "Goyal Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/goyal-salt.png") },
-  { name: "Rakshak Foods Private Limited" },
-  { name: "Adhinath Chemfood Private Limited" },
-  { name: "Jagdamba Salt Pvt. Ltd." },
-  { name: "Pankaj Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/pankaj-salt.webp") },
-  { name: "Pragati Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/pragati-salt.webp") },
-  { name: "Bharat Salt" },
-  { name: "Arihant Salt Production" },
-  { name: "JK Salt Pvt. Ltd.", logo: assetPath("/images/common/clients/jk-salt.png") },
-  { name: "Divine Chemfood Pvt. Ltd." },
-  { name: "Royal Salt" },
-  { name: "Baba Ramdev", logo: assetPath("/images/common/clients/baba-ramdev.png") },
+// Keep the existing marquee footprint while client relationships and logo permissions are confirmed.
+const workAreas = [
+  "PLANT LAYOUT PLANNING",
+  "PROCESS DESIGN",
+  "MACHINERY FABRICATION",
+  "STRUCTURAL INTEGRATION",
+  "SITE INSTALLATION",
+  "MATERIAL HANDLING",
+  "HOPPERS",
+  "BELT CONVEYORS",
+  "SCREW CONVEYORS",
+  "WET MILLS",
+  "CENTRIFUGES",
+  "DUST COLLECTION",
 ];
 
-const clientRowSplit = Math.ceil(clients.length / 2);
+const rowSplit = Math.ceil(workAreas.length / 2);
 
-function ClientMark({ client, duplicate = false }: { client: Client; duplicate?: boolean }) {
+function WorkMark({ name, duplicate = false }: { name: string; duplicate?: boolean }) {
   return (
-    <li className={`about-client-mark${client.logo ? " has-logo" : ""}`} aria-hidden={duplicate || undefined}>
-      {client.logo ? (
-        <>
-          <Image className="about-client-logo" src={client.logo} alt={`${client.name} logo`} width={160} height={42} sizes="160px" />
-          <small>{client.name}</small>
-        </>
-      ) : <strong>{client.name}</strong>}
+    <li className="about-client-mark" aria-hidden={duplicate || undefined}>
+      <strong>{name}</strong>
     </li>
   );
 }
 
-function MarqueeRow({ items, reverse = false }: { items: Client[]; reverse?: boolean }) {
+function MarqueeRow({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
   return (
-    <div className={`about-marquee-row${reverse ? " is-reverse" : ""}`} role="region" tabIndex={0} aria-label="Client logos">
+    <div className={`about-marquee-row${reverse ? " is-reverse" : ""}`} role="region" tabIndex={0} aria-label="Engineering work areas">
       <ul className="about-marquee-track">
-        {items.map((client) => <ClientMark client={client} key={client.name} />)}
-        {items.map((client) => <ClientMark client={client} duplicate key={`duplicate-${client.name}`} />)}
+        {items.map((name) => <WorkMark name={name} key={name} />)}
+        {items.map((name) => <WorkMark name={name} duplicate key={`duplicate-${name}`} />)}
       </ul>
     </div>
   );
@@ -84,11 +76,11 @@ export default function TrustedClientsSection({ animate = true, standalone = fal
 
   const content = (
     <>
-      <div className="about-trust-meta"><span>INDUSTRY TRUST / {sectionNumber}</span><span>CLIENT NETWORK / {clients.length}+</span></div>
-      <h3 id="about-trust-heading" className="about-trust-heading">TRUSTED BY<br />SALT MANUFACTURERS.</h3>
-      <div className="about-marquees" aria-label="S.K. Engineering Works client network">
-        <MarqueeRow items={clients.slice(0, clientRowSplit)} />
-        <MarqueeRow items={clients.slice(clientRowSplit)} reverse />
+      <div className="about-trust-meta"><span>ENGINEERING WORK / {sectionNumber}</span><span>PROCESS EQUIPMENT / PLANT SYSTEMS</span></div>
+      <h3 id="about-trust-heading" className="about-trust-heading">FABRICATION &amp;<br />PLANT SYSTEMS.</h3>
+      <div className="about-marquees" aria-label="S.K. Engineering Works equipment and plant-system work">
+        <MarqueeRow items={workAreas.slice(0, rowSplit)} />
+        <MarqueeRow items={workAreas.slice(rowSplit)} reverse />
       </div>
     </>
   );

@@ -46,6 +46,24 @@ export function productStructuredData({ name, description, path, image, category
   };
 }
 
+// Service markup describes the offering in the page's own words: no offers, prices, ratings or service areas.
+export function serviceStructuredData({ name, description, path, serviceType }: {
+  name: string;
+  description: string;
+  path: string;
+  serviceType: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name,
+    description,
+    serviceType,
+    url: absoluteUrl(path),
+    provider: { "@id": `${absoluteUrl()}#organization` },
+  };
+}
+
 export function breadcrumbStructuredData(
   items: ReadonlyArray<{ name: string; path: string }>,
 ) {

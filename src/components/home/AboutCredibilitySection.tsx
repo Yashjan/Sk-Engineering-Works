@@ -63,7 +63,7 @@ export default function AboutCredibilitySection() {
               </h2>
               <div className="about-story">
                 <p>For more than three decades, fabrication and equipment engineering have been at the core of S.K. Engineering Works.</p>
-                <p>We manufacture industrial process equipment, material-handling systems and plant machinery. Since entering the salt industry in 2003, we have also helped build complete refinery plants from the ground up.</p>
+                <p>We manufacture industrial process equipment, material-handling systems and plant machinery. Our salt industry work includes machinery fabrication, plant-system integration and installation.</p>
                 <p>From Rajasthan to Gujarat, our experience has been shaped on real workshop and plant floors through fabrication, integration, installation and long-term engineering support.</p>
               </div>
             </div>
@@ -103,14 +103,14 @@ export default function AboutCredibilitySection() {
           </div>
           <div className="about-flash-foot" aria-hidden="true">
             <span className="about-flash-node" />
-            <span>ONE TEAM / END-TO-END EXECUTION</span>
+            <span>FABRICATION / PLANT SYSTEM WORK</span>
           </div>
         </div>
 
         <div className="about-proof">
-          <p className="about-proof-number">10 +</p>
+          <p className="about-proof-number">SK</p>
           <div className="about-proof-copy">
-            <p>COMPLETE FACTORIES<br />BUILT FROM<br />THE GROUND UP.</p>
+            <p>PROCESS EQUIPMENT<br />PLANT SYSTEMS<br />SITE WORK.</p>
             <small>RAJASTHAN <span>→</span> GUJARAT <span>→</span> GLOBAL NEXT</small>
           </div>
           <p className="about-proof-region">From Sambhar and Nawa to Santalpur and Jambusar, our work has taken us across major salt-producing regions.</p>

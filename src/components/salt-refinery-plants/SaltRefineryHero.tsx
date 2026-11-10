@@ -5,6 +5,7 @@ import ProgressiveVideo from "@/components/media/ProgressiveVideo";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import type { PlantCopy } from "@/i18n/plant-content/types";
 import { assetPath } from "@/lib/asset-path";
 import "./salt-refinery-hero.css";
 
@@ -22,7 +23,7 @@ const stages = [
 
 const scope = ["PROCESS DESIGN", "FABRICATION", "INSTALLATION", "UPGRADES"];
 
-export default function SaltRefineryHero() {
+export default function SaltRefineryHero({ copy }: { copy: PlantCopy["hero"] }) {
   const root = useRef<HTMLElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const [motionAllowed, setMotionAllowed] = useState(false);
@@ -87,13 +88,13 @@ export default function SaltRefineryHero() {
       <div className="salt-hero-shell">
         <div className="salt-hero-grid">
           <div className="salt-hero-copy">
-            <p className="salt-hero-eyebrow">SALT REFINERY PLANTS / 01</p>
+            <p className="salt-hero-eyebrow">{copy.eyebrow}</p>
             <h1 id="salt-refinery-heading" className="salt-hero-heading">
               <span className="salt-hero-heading-line">FROM RAW SALT</span>
               <span className="salt-hero-heading-line">TO FINISHED</span>
               <span className="salt-hero-heading-line">PRODUCT.</span>
             </h1>
-            <p className="salt-hero-support">Complete salt refinery engineering, equipment fabrication and plant installation for modern salt production lines.</p>
+            <p className="salt-hero-support">{copy.support}</p>
           </div>
 
           <div className="salt-hero-media" aria-hidden="true">

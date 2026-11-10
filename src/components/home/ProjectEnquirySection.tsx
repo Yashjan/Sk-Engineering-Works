@@ -11,12 +11,13 @@ import "./project-enquiry-section.css";
 const whatsappMessage = "Hello S.K. Engineering Works, I would like to discuss a salt refinery / machinery requirement.";
 
 type ProjectEnquirySectionProps = {
+  support?: string;
   appearance?: "dark" | "light";
   sectionNumber?: string;
   showNavigation?: boolean;
 };
 
-export default function ProjectEnquirySection({ appearance = "dark", sectionNumber = "06", showNavigation = true }: ProjectEnquirySectionProps) {
+export default function ProjectEnquirySection({ support = "From individual machinery to complete salt refinery execution, talk to our team about your plant requirement.", appearance = "dark", sectionNumber = "06", showNavigation = true }: ProjectEnquirySectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -80,7 +81,7 @@ export default function ProjectEnquirySection({ appearance = "dark", sectionNumb
               <span className="enquiry-heading-line"><span>LET&apos;S ENGINEER</span></span>
               <span className="enquiry-heading-line"><span>IT TOGETHER.</span></span>
             </h3>
-            <p className="enquiry-support">From individual machinery to complete salt refinery execution, talk to our team about your plant requirement.</p>
+            <p className="enquiry-support">{support}</p>
             <div className="enquiry-actions">
               <a className="enquiry-primary" href={companyContact.phoneHref}>
                 DISCUSS YOUR PROJECT <span aria-hidden="true">→</span>
@@ -111,9 +112,9 @@ export default function ProjectEnquirySection({ appearance = "dark", sectionNumb
 
         <div className="enquiry-lower">
           <div className="enquiry-lower-proof">
-            <strong>10 +</strong>
+            <strong>SK</strong>
             <div className="enquiry-proof-copy">
-              <p>FACTORIES BUILT<br />FROM SCRATCH.</p>
+              <p>PROCESS EQUIPMENT<br />&amp; PLANT SYSTEMS</p>
               <small>RAJASTHAN + GUJARAT<br />EXECUTION EXPERIENCE</small>
             </div>
           </div>

@@ -353,7 +353,15 @@ export default function MachineryShowcaseSection() {
             })}
           </div>
 
-          <h3 className="machinery-showcase-current-name" aria-live="polite">{activeMachine.name}</h3>
+          <h3 className="machinery-showcase-current-name" aria-live="polite">
+            <Link
+              href={`/machinery/${activeMachine.id}`}
+              onMouseEnter={(event) => { event.currentTarget.style.textDecoration = "underline"; }}
+              onMouseLeave={(event) => { event.currentTarget.style.textDecoration = "none"; }}
+            >
+              {activeMachine.name}
+            </Link>
+          </h3>
         </div>
 
         <footer className="machinery-showcase-footer">

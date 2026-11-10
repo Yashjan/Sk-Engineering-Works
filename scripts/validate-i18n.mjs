@@ -16,11 +16,11 @@ for (const [locale, dictionary] of Object.entries({ hi, ar })) {
   }
 }
 
-// Build-time machinery copy: both languages must cover the same English sentences, in the right script.
-const contentDir = "src/i18n/machinery-content";
+// Build-time copy: both languages must cover the same English sentences, in the right script, with the same inline links.
 const script = { hi: /\p{Script=Devanagari}/u, ar: /\p{Script=Arabic}/u };
 let contentEntries = 0;
-for (const file of fs.readdirSync(contentDir).filter((name) => name.endsWith(".hi.json"))) {
+const linkTargets = (text) => [...text.matchAll(/\[\[([^|\]]+)\|[^\]]+\]\]/g)].map((match) => match[1]).sort().join();
+for (const contentDir of ["src/i18n/machinery-content", "src/i18n/plant-content"]) for (const file of fs.readdirSync(contentDir).filter((name) => name.endsWith(".hi.json"))) {
   const slug = file.replace(".hi.json", "");
   const copy = { hi: JSON.parse(fs.readFileSync(`${contentDir}/${slug}.hi.json`, "utf8")), ar: JSON.parse(fs.readFileSync(`${contentDir}/${slug}.ar.json`, "utf8")) };
   const sources = new Set([...Object.keys(copy.hi), ...Object.keys(copy.ar)]);
@@ -32,6 +32,10 @@ for (const file of fs.readdirSync(contentDir).filter((name) => name.endsWith(".h
         console.error(`${slug} ${locale} has a missing or wrong-script translation:`, source);
         process.exit(1);
       }
+      if (linkTargets(value) !== linkTargets(source)) {
+        console.error(`${slug} ${locale} does not keep the source's inline links:`, source);
+        process.exit(1);
+      }
     }
     if (source in hi || source in ar) {
       console.error(`${slug} copy is also in the client dictionaries, which defeats the split:`, source);
@@ -40,4 +44,4 @@ for (const file of fs.readdirSync(contentDir).filter((name) => name.endsWith(".h
   }
   contentEntries += sources.size;
 }
-console.log(`Validated ${keys.size} shared translation entries for Hindi and Arabic, plus ${contentEntries} build-time machinery entries.`);
+console.log(`Validated ${keys.size} shared translation entries for Hindi and Arabic, plus ${contentEntries} build-time content entries.`);

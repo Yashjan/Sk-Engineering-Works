@@ -4,53 +4,42 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { PlantCopy } from "@/i18n/plant-content/types";
 import "./plant-configuration-section.css";
 
 type ConfigurationFactor = {
   number: string;
   title: string;
-  description: string;
 };
 
 const configurationFactors: ConfigurationFactor[] = [
   {
     number: "01",
     title: "TARGET OUTPUT",
-    description: "How much finished salt the plant needs to produce.",
   },
   {
     number: "02",
     title: "RAW SALT CONDITION",
-    description:
-      "Raw material quality, impurity level and moisture influence the process configuration.",
   },
   {
     number: "03",
     title: "PRODUCT SPECIFICATION",
-    description:
-      "Final particle size, grade and product requirement determine downstream equipment.",
   },
   {
     number: "04",
     title: "AVAILABLE SPACE",
-    description:
-      "Plant layout and machine positioning are planned around the available site and structure.",
   },
   {
     number: "05",
     title: "MOISTURE & DRYING REQUIREMENT",
-    description:
-      "Required final moisture influences centrifuging and drying configuration.",
   },
   {
     number: "06",
     title: "PACKING REQUIREMENT",
-    description:
-      "Final packing format and production flow affect storage and discharge planning.",
   },
 ];
 
-export default function PlantConfigurationSection() {
+export default function PlantConfigurationSection({ copy }: { copy: PlantCopy["configuration"] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -115,7 +104,7 @@ export default function PlantConfigurationSection() {
             </h2>
 
             <p className="configuration-support">
-              Every refinery is planned around the required output, raw material condition, available space and final product specification.
+              {copy.support}
             </p>
 
             <div className="configuration-statement">
@@ -124,7 +113,7 @@ export default function PlantConfigurationSection() {
                 NEED THE SAME CONFIGURATION.
               </p>
               <p className="configuration-statement-copy">
-                Plant layout, equipment selection and process flow are coordinated around the production requirement.
+                {copy.statement}
               </p>
 
               <p className="configuration-principle">
@@ -168,7 +157,7 @@ export default function PlantConfigurationSection() {
                       aria-hidden={!isActive}
                     >
                       <div>
-                        <p>{factor.description}</p>
+                        <p>{copy.factors[factor.number]}</p>
                       </div>
                     </div>
                     <span className="configuration-factor-line" aria-hidden="true" />

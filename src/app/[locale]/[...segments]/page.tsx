@@ -96,7 +96,7 @@ export default async function LocalizedRoutePage({ params }: LocalizedRouteProps
   else if (route === "engineering") page = EngineeringPage();
   else if (route === "machinery") page = MachineryPage();
   else if (route === "projects") page = ProjectsPage();
-  else if (route === "salt-refinery-plants") page = SaltRefineryPage();
+  else if (route === "salt-refinery-plants") page = SaltRefineryPage({ params: Promise.resolve({ locale }) });
   else if (segments[0] === "machinery" && segments[1]) page = MachineDetailPage({ params: Promise.resolve({ slug: segments[1], locale }) });
   else if (segments[0] === "projects" && segments[1] === "jagdamba-salt-15tph") page = JagdambaProjectPage();
   else if (segments[0] === "projects" && segments[1]) page = ProjectDetailPage({ params: Promise.resolve({ slug: segments[1] }) });

@@ -23,6 +23,7 @@ Everything here is review material: nothing in `qa/` is built, bundled or deploy
 | `belt-conveyor-content/final-content-validation.txt`, `export-validation-10-belt-final-content.txt` | Belt Conveyor after removing claims engineering has not confirmed: exact page differences, metadata and JSON-LD, JavaScript per page. |
 | `belt-conveyor-content/final-corrections-validation.txt`, `export-validation-11-belt-arabic-final.txt` | Final Belt Conveyor sentence and Arabic corrupted labels: exact page differences, JavaScript per page, Contact and About in all three languages. |
 | `belt-conveyor-content/pre-release-validation.txt`, `export-validation-12-pre-release.txt` | Before release: enquiry forms and WhatsApp drafts, Contact and About, and the smoke test (animation, media, transitions, 3D) in all three languages. |
+| `salt-refinery-plants/` (`content-audit.md`, `engineering-verification-checklist.md`, `validation.txt`), `export-validation-13-plants.txt` | Complete Salt Refinery Plants content and SEO: audit, claims awaiting engineering confirmation, page differences, JavaScript, Lighthouse and observed LCP, page probe. |
 | `image-quality-webp.txt` | PSNR and worst 8×8-block error for every PNG/JPEG → WebP conversion against the original in git history. |
 
 ### Known, intentional remaining items
@@ -51,6 +52,7 @@ node qa/tools/machinery_page_probe.mjs $QA_NODE_MODULES http://localhost:4300/Sk
 node qa/tools/contact_about_probe.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works   # Contact and About after hydration, EN/HI/AR: corrected labels, raw tokens
 node qa/tools/enquiry_probe.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works   # enquiry forms and WhatsApp drafts, EN/HI/AR
 node qa/tools/release_smoke.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works   # also works on the live URL: load, Lenis, pins, images, video, transitions, 3D
+node qa/tools/plants_page_probe.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works [baseline origin]   # plants page EN/HI/AR: metadata, JSON-LD, stages, links, enquiry
 node qa/tools/js_weight.mjs $QA_NODE_MODULES http://localhost:4300/Sk-Engineering-Works   # JS each page downloads, required vs prefetch
 node qa/tools/i18n_noncontent_audit.mjs                      # lists code-only dictionary keys (add --apply to remove)
 # Build comparison against another commit: export it with `git archive <sha> | tar -x -C <dir>`, build, serve both, then
