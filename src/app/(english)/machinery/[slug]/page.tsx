@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: MachinePageProps): Promise<Me
       title: detail.seo.title,
       description: detail.seo.description,
       path: `/machinery/${slug}`,
+      image: slug === "screw-conveyor" ? detail.hero?.src : undefined,
     });
   }
   return createPageMetadata({

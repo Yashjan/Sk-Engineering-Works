@@ -3,6 +3,8 @@ import type { MachineryConfig } from "@/data/machinery-details/types";
 import { isTranslatedLocale, type Locale, type TranslatedLocale } from "../config";
 import beltConveyorAr from "./belt-conveyor.ar.json";
 import beltConveyorHi from "./belt-conveyor.hi.json";
+import screwConveyorAr from "./screw-conveyor.ar.json";
+import screwConveyorHi from "./screw-conveyor.hi.json";
 
 type MachineCopy = Readonly<Record<string, string>>;
 
@@ -10,6 +12,7 @@ type MachineCopy = Readonly<Record<string, string>>;
 // page's language and never enters a client bundle. Short labels stay in the shared dictionaries.
 const machineCopy: Readonly<Record<string, Record<TranslatedLocale, MachineCopy>>> = {
   "belt-conveyor": { hi: beltConveyorHi, ar: beltConveyorAr },
+  "screw-conveyor": { hi: screwConveyorHi, ar: screwConveyorAr },
 };
 
 export function localizeMachine(machine: MachineryConfig, locale: Locale): MachineryConfig {

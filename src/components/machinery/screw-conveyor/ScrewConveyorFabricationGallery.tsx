@@ -2,15 +2,15 @@
 import ProjectsVisualGallery from "@/components/projects/ProjectsVisualGallery";
 import type { ProjectGalleryItem } from "@/data/projects";
 
-// Verified S.K. Engineering Works workshop and project media. Replace individual
-// entries when dedicated Screw Conveyor fabrication photography is available.
+// General workshop and field records. They provide company context, but are not
+// presented as evidence of this specific Screw Conveyor until provenance is confirmed.
 const fabricationGallery: ProjectGalleryItem[] = [
   {
     id: "workshop-fabrication",
     type: "video",
     src: "/images/projects/jagdamba/fabrication.mp4",
     poster: "/images/common/field-media/fabricated-equipment.webp",
-    alt: "Salt refinery machinery being fabricated in the S.K. Engineering Works workshop",
+    alt: "Salt refinery machinery during workshop fabrication",
     label: "WORKSHOP RECORD",
     detail: "MACHINE FABRICATION",
     format: "landscape",
@@ -20,7 +20,7 @@ const fabricationGallery: ProjectGalleryItem[] = [
     id: "fabricated-equipment",
     type: "image",
     src: "/images/common/field-media/fabricated-equipment.webp",
-    alt: "Stainless-steel process equipment fabricated in the S.K. Engineering Works workshop",
+    alt: "Stainless-steel process equipment on a workshop floor",
     label: "FABRICATION",
     detail: "PROCESS EQUIPMENT / WORKSHOP FLOOR",
     format: "portrait",
@@ -30,9 +30,9 @@ const fabricationGallery: ProjectGalleryItem[] = [
     id: "air-handling-fabrication",
     type: "image",
     src: "/images/common/field-media/fabrication-blower.webp",
-    alt: "Industrial blower fabricated by S.K. Engineering Works",
+    alt: "Industrial blower assembly in a workshop",
     label: "ASSEMBLY",
-    detail: "INDUSTRIAL EQUIPMENT / IN-HOUSE",
+    detail: "INDUSTRIAL EQUIPMENT / WORKSHOP",
     format: "square",
     level: "low",
   },
@@ -51,7 +51,7 @@ const fabricationGallery: ProjectGalleryItem[] = [
     id: "installed-plant-structure",
     type: "image",
     src: "/images/common/field-media/plant-structure.webp",
-    alt: "Fabricated process equipment installed within a salt refinery plant structure",
+    alt: "Process equipment within a salt refinery plant structure",
     label: "INSTALLATION",
     detail: "EQUIPMENT / PLANT SYSTEM",
     format: "landscape",
@@ -62,9 +62,9 @@ const fabricationGallery: ProjectGalleryItem[] = [
     type: "video",
     src: "/images/projects/jagdamba/completed-plant.mp4",
     poster: "/images/projects/jagdamba/cover-image.webp",
-    alt: "Completed salt refinery plant after fabrication and site installation",
-    label: "COMPLETED PLANT",
-    detail: "BUILT / INSTALLED / RUNNING",
+    alt: "Salt refinery plant equipment at an industrial site",
+    label: "PLANT RECORD",
+    detail: "EQUIPMENT / INDUSTRIAL SITE",
     format: "landscape",
     level: "low",
   },
@@ -74,13 +74,13 @@ export default function ScrewConveyorFabricationGallery() {
   return (
     <ProjectsVisualGallery
       items={fabricationGallery}
-      eyebrow="09 / REAL FABRICATION"
-      heading={["FROM 3D ENGINEERING", "TO REAL FABRICATION."]}
+      eyebrow="09 / WORKSHOP & FIELD RECORD"
+      heading={["ENGINEERING CONTEXT", "WORKSHOP & FIELD RECORDS."]}
       headingId="screw-conveyor-fabrication-heading"
-      ariaLabel="Real fabrication and field installation"
+      ariaLabel="General workshop and field records"
       footerPrompt="SCROLL TO MOVE THROUGH THE WORKSHOP"
-      finalLines={["FROM ENGINEERING", "TO FABRICATION", "TO THE FIELD."]}
-      finalLabel="DESIGNED / BUILT / INSTALLED"
+      finalLines={["ENGINEERING", "WORKSHOP", "FIELD RECORDS."]}
+      finalLabel="GENERAL PROJECT RECORD"
       scrollTriggerId="screw-conveyor-fabrication-gallery"
     />
   );

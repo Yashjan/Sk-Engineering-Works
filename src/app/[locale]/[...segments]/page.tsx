@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: LocalizedRouteProps): Promise
     const detail = machineryDetails[segments[1]];
     const localized = detail && localizeMachine(detail, locale);
     if (localized && localized !== detail) {
-      return createLocalizedMetadata({ locale, pathname, title: localized.seo.title, description: localized.seo.description, index: true });
+      return createLocalizedMetadata({ locale, pathname, title: localized.seo.title, description: localized.seo.description, image: segments[1] === "screw-conveyor" ? localized.hero?.src : undefined, index: true });
     }
     return createLocalizedMetadata({
       locale,

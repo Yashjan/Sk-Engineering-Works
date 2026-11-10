@@ -46,7 +46,7 @@ const SCENE_EIGHT_LANDING_DURATION = 0.9;
 const sceneEightStart = sceneSixDuration + SCENE_SEVEN_DURATION;
 const storyDuration = sceneEightStart + SCENE_EIGHT_DURATION;
 
-export default function ScrewConveyorExperience() {
+export default function ScrewConveyorExperience({ tagline }: { tagline: string }) {
   const root = useRef<HTMLElement>(null);
   const detail = useRef(createComponentDetail());
   const detailCopy = useRef<HTMLDivElement>(null);
@@ -768,9 +768,9 @@ export default function ScrewConveyorExperience() {
           <span>From material inlet to continuous discharge.</span>
         </div>
         <div ref={workingSteps} className="screw-conveyor-working-steps" aria-label="Screw conveyor working process">
-          <article><p>01 / FEED</p><span>Material enters the conveyor.</span></article>
-          <article><p>02 / TRANSFER</p><span>Rotating flights continuously move material forward.</span></article>
-          <article><p>03 / DISCHARGE</p><span>Salt exits at the opposite end.</span></article>
+          <article><p>01 / FEED</p><span>Material enters through the configured inlet.</span></article>
+          <article><p>02 / TRANSFER</p><span>Rotating helical flights advance material through the casing.</span></article>
+          <article><p>03 / DISCHARGE</p><span>Material passes through the outlet to the next process stage.</span></article>
         </div>
         <div ref={materialCallout} className="screw-conveyor-material-callout" aria-hidden="true">
           <span>MATERIAL (SALT)</span>
@@ -819,7 +819,7 @@ export default function ScrewConveyorExperience() {
             <span className="screw-conveyor-heading-line"><span>CONVEYOR</span></span>
           </h1>
           <p className="screw-conveyor-function">CONTINUOUS MATERIAL TRANSFER</p>
-          <p className="screw-conveyor-summary">Engineered for controlled material movement across industrial process systems.</p>
+          <p className="screw-conveyor-summary">{tagline}</p>
         </div>
 
         <p ref={scrollCue} className="screw-conveyor-scroll-cue" aria-hidden="true">

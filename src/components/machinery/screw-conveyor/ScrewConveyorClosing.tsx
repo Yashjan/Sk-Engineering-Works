@@ -1,13 +1,13 @@
 /** @jsxImportSource @/i18n/react */
 import { MachineryProcessIntegration, MachineryEngineering } from "../detail/MachineryPlantSections";
-import { screwConveyor as config } from "@/data/machinery-details/screw-conveyor";
+import type { MachineryConfig } from "@/data/machinery-details";
 import TrustedClientsSection from "@/components/home/TrustedClientsSection";
 import MachineryEnquiry from "../detail/MachineryEnquiry";
 import SiteFooter from "@/components/layout/SiteFooter";
 import ScrewConveyorFabricationGallery from "./ScrewConveyorFabricationGallery";
 import "./screw-conveyor-closing.css";
 
-export default function ScrewConveyorClosing() {
+export default function ScrewConveyorClosing({ config }: { config: MachineryConfig }) {
   return <>
     <ScrewConveyorFabricationGallery />
 

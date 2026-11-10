@@ -18,7 +18,7 @@ export default async function MachineryDetailPage({ machine }: { machine: Machin
   const presentationCopy = machine.description === machine.identity.copy ? machine.tagline : machine.description;
   const adapter = machine.has3D ? interactiveExperiences[machine.interactiveExperience] : undefined;
   if (machine.has3D && !adapter) throw new Error(`Unregistered machine experience: ${machine.interactiveExperience}`);
-  const interactive = adapter ? await adapter.render() : null;
+  const interactive = adapter ? await adapter.render(machine) : null;
   if (adapter?.layout === "full-page") {
     content = interactive;
   } else {

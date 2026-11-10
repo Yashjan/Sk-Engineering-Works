@@ -2,15 +2,15 @@
 /** @jsxImportSource @/i18n/react */
 
 export const conveyorParameters = [
-  { title: "CUSTOM LENGTH", description: "Designed to suit plant layout and material transfer distance.", marker: "LENGTH" },
-  { title: "SCREW DIAMETER", description: "Selected according to required material flow and application.", marker: "DIAMETER" },
-  { title: "CAPACITY / TPH", description: "Engineered according to required process capacity.", marker: "PROCESS CAPACITY" },
-  { title: "MATERIAL OF CONSTRUCTION", description: "MS / SS construction available according to application requirements.", marker: "MS / SS" },
-  { title: "INLET CONFIGURATION", description: "Position and arrangement can be adapted to upstream equipment.", marker: "INLET" },
-  { title: "DISCHARGE CONFIGURATION", description: "Configured to connect with downstream process equipment.", marker: "DISCHARGE" },
-  { title: "MOTOR & GEARBOX", description: "Selected to suit conveyor duty and process requirement.", marker: "DRIVE SELECTION" },
-  { title: "SUPPORT ARRANGEMENT", description: "Designed around installation height and site conditions.", marker: "SUPPORT / FRAME" },
-  { title: "PLANT-SPECIFIC INTEGRATION", description: "Designed to work as part of the complete process line.", marker: "PROCESS CONNECTION" },
+  { title: "CUSTOM LENGTH", description: "Length and route are planned between the actual feed and discharge points.", marker: "LENGTH" },
+  { title: "SCREW DIAMETER", description: "Diameter and flight geometry are selected with the material and required flow.", marker: "DIAMETER" },
+  { title: "CAPACITY / TPH", description: "Assessment uses material condition, bulk density, particle size, required TPH and duty.", marker: "PROCESS CAPACITY" },
+  { title: "MATERIAL OF CONSTRUCTION", description: "Material and surface protection are reviewed for corrosion, wear and cleaning needs.", marker: "MATERIAL" },
+  { title: "INLET CONFIGURATION", description: "The inlet is coordinated with the hopper or upstream equipment feeding the conveyor.", marker: "INLET" },
+  { title: "DISCHARGE CONFIGURATION", description: "The outlet position and level are coordinated with the downstream equipment.", marker: "DISCHARGE" },
+  { title: "MOTOR & GEARBOX", description: "Drive and operating speed are selected around the conveying load and duty.", marker: "DRIVE SELECTION" },
+  { title: "SUPPORT ARRANGEMENT", description: "Supports and service clearances are planned around site levels and access.", marker: "SUPPORT / FRAME" },
+  { title: "PLANT-SPECIFIC INTEGRATION", description: "Connections, clearances and access are coordinated with the complete process layout.", marker: "PROCESS CONNECTION" },
 ] as const;
 
 export default function ScrewConveyorConfiguration({ active, onSelect }: { active: number; onSelect: (index: number) => void }) {
