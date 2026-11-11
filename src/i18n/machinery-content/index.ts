@@ -7,6 +7,8 @@ import screwConveyorAr from "./screw-conveyor.ar.json";
 import screwConveyorHi from "./screw-conveyor.hi.json";
 import screwWasherAr from "./screw-washer.ar.json";
 import screwWasherHi from "./screw-washer.hi.json";
+import wetMillAr from "./wet-mill.ar.json";
+import wetMillHi from "./wet-mill.hi.json";
 
 type MachineCopy = Readonly<Record<string, string>>;
 
@@ -16,6 +18,7 @@ const machineCopy: Readonly<Record<string, Record<TranslatedLocale, MachineCopy>
   "belt-conveyor": { hi: beltConveyorHi, ar: beltConveyorAr },
   "screw-conveyor": { hi: screwConveyorHi, ar: screwConveyorAr },
   "screw-washer": { hi: screwWasherHi, ar: screwWasherAr },
+  "wet-mill": { hi: wetMillHi, ar: wetMillAr },
 };
 
 export function localizeMachine(machine: MachineryConfig, locale: Locale): MachineryConfig {
