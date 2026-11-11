@@ -11,6 +11,8 @@ import wetMillAr from "./wet-mill.ar.json";
 import wetMillHi from "./wet-mill.hi.json";
 import centrifugeAr from "./centrifuge.ar.json";
 import centrifugeHi from "./centrifuge.hi.json";
+import idFanBlowerAr from "./id-fan-blower.ar.json";
+import idFanBlowerHi from "./id-fan-blower.hi.json";
 
 type MachineCopy = Readonly<Record<string, string>>;
 
@@ -22,6 +24,7 @@ const machineCopy: Readonly<Record<string, Record<TranslatedLocale, MachineCopy>
   "screw-washer": { hi: screwWasherHi, ar: screwWasherAr },
   "wet-mill": { hi: wetMillHi, ar: wetMillAr },
   "centrifuge": { hi: centrifugeHi, ar: centrifugeAr },
+  "id-fan-blower": { hi: idFanBlowerHi, ar: idFanBlowerAr },
 };
 
 export function localizeMachine(machine: MachineryConfig, locale: Locale): MachineryConfig {
@@ -43,6 +46,11 @@ export function localizeMachine(machine: MachineryConfig, locale: Locale): Machi
     components: describe(machine.components),
     howItWorks: describe(machine.howItWorks),
     customization: describe(machine.customization),
+    realMedia: machine.realMedia.map((media) => ({
+      ...media,
+      alt: text(media.alt),
+      ...(media.caption ? { caption: text(media.caption) } : {}),
+    })),
     process: { ...machine.process, description: text(machine.process.description) },
     engineering: { ...machine.engineering, description: text(machine.engineering.description) },
     enquiry: { ...machine.enquiry, ...(machine.enquiry.description ? { description: text(machine.enquiry.description) } : {}) },
