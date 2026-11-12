@@ -94,11 +94,11 @@ export const processStages: ProcessStage[] = [
     id: "dryer",
     detailHref: "/machinery/dryer",
     name: "DRYER",
-    purpose: "Reduces remaining moisture through controlled drying.",
+    purpose: "Reduces remaining moisture during the drying stage.",
     timelineLabel: "DRYING",
     image: "/images/machinery/catalog/dryer.webp",
     imageAlt: "S.K. Engineering Works salt dryer",
-    labels: ["HOT-AIR DRYING", "MOISTURE REDUCTION"],
+    labels: ["DRYING STAGE", "MOISTURE REDUCTION"],
   },
   {
     id: "bucket-elevator",

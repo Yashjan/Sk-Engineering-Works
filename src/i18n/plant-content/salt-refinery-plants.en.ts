@@ -16,7 +16,7 @@ export const plantCopy: PlantCopy = {
       crushing: "Size reduction prepares the salt for washing. A wet mill grinds it together with brine; crushers can be considered where the raw salt arrives in larger lumps.",
       washing: "Washing separates insoluble matter and other impurities from the salt, usually in brine. The mix of elutriation, settling and screw-washing equipment depends on the raw salt and the product required.",
       centrifuging: "A centrifuge spins brine and surface moisture out of the washed salt. Removing water at this stage reduces the load on the dryer.",
-      drying: "A dryer removes remaining moisture using heat and airflow, while a cyclone and other air-handling equipment deal with the air leaving it. The dryer type is chosen for the product and the required final moisture.",
+      drying: "The drying stage helps reduce moisture where required before downstream handling or processing. The selected arrangement and any connected equipment depend on the product and plant design.",
       screening: "A vibro screen separates dried salt by particle size, so that each product stays within its required size range.",
       grinding: "Where a finer product is needed, a pin mill grinds the salt to the required fineness. Whether this stage is included depends on the finished product.",
       "material-handling": "Belt conveyors, screw conveyors and bucket elevators link the stages. The choice depends on the material's condition, the distance and lift involved, and the plant layout.",
