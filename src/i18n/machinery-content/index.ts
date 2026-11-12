@@ -9,10 +9,14 @@ import screwWasherAr from "./screw-washer.ar.json";
 import screwWasherHi from "./screw-washer.hi.json";
 import wetMillAr from "./wet-mill.ar.json";
 import wetMillHi from "./wet-mill.hi.json";
+import dryerAr from "./dryer.ar.json";
+import dryerHi from "./dryer.hi.json";
 import centrifugeAr from "./centrifuge.ar.json";
 import centrifugeHi from "./centrifuge.hi.json";
 import idFanBlowerAr from "./id-fan-blower.ar.json";
 import idFanBlowerHi from "./id-fan-blower.hi.json";
+import cycloneAr from "./cyclone.ar.json";
+import cycloneHi from "./cyclone.hi.json";
 
 type MachineCopy = Readonly<Record<string, string>>;
 
@@ -24,7 +28,9 @@ const machineCopy: Readonly<Record<string, Record<TranslatedLocale, MachineCopy>
   "screw-washer": { hi: screwWasherHi, ar: screwWasherAr },
   "wet-mill": { hi: wetMillHi, ar: wetMillAr },
   "centrifuge": { hi: centrifugeHi, ar: centrifugeAr },
+  dryer: { hi: dryerHi, ar: dryerAr },
   "id-fan-blower": { hi: idFanBlowerHi, ar: idFanBlowerAr },
+  cyclone: { hi: cycloneHi, ar: cycloneAr },
 };
 
 export function localizeMachine(machine: MachineryConfig, locale: Locale): MachineryConfig {

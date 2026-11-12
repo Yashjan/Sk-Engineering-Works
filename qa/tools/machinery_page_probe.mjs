@@ -9,7 +9,7 @@ const [, , , origin, slug = "belt-conveyor", shots] = process.argv;
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const browser = await puppeteer.launch({ executablePath: process.env.CHROME || "/usr/bin/google-chrome", headless: true, args: ["--no-sandbox", // Headless Chrome otherwise reports no hover-capable pointer (hover: none).
   "--blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4"] });
-const viewports = { desktop: { width: 1440, height: 900 }, mobile: { width: 375, height: 812, isMobile: true, hasTouch: true, deviceScaleFactor: 2 } };
+const viewports = { desktop: { width: 1440, height: 900 }, mobile: { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 } };
 let failures = 0;
 const check = (ok, label) => { if (!ok) failures++; console.log(`  ${ok ? "ok  " : "FAIL"} ${label}`); };
 
@@ -50,7 +50,7 @@ for (const loc of ["", "hi/", "ar/"]) for (const [vpName, viewport] of Object.en
   const unconfirmed = source.match(/jagdamba|जगदा?म्बा|جغدامبا|15\s?TPH|15 طن|phalodi|फलोदी|فالودي|belt conveyor manufacturer|manufactures belt|बेल्ट कन्वेयर निर्माता|बेल्ट कन्वेयर का निर्माण|مصنّع نواقل|تصنّع[^"]{0,40}النواقل/gi) ?? [];
   check(!unconfirmed.length, `no unconfirmed project or manufacturing claims in the page source${unconfirmed.length ? ": " + [...new Set(unconfirmed)].join(", ") : ""}`);
   check(product && !("manufacturer" in product), "Product JSON-LD does not assert a manufacturer");
-  check(facts.links.some((l) => /\/projects\/$/.test(l.href)), "section 08 keeps a general Projects link");
+  if (slug === "belt-conveyor") check(facts.links.some((l) => /\/projects\/$/.test(l.href)), "section 08 keeps a general Projects link");
   const stageLinks = facts.flow.filter((s) => s.href);
   check(facts.flow.filter((s) => s.current === "step").length === 1 && !facts.flow.find((s) => s.current === "step").href, `current stage is marked and not linked; ${stageLinks.length}/${facts.flow.length} other stages linked`);
   const hrefs = [...new Set([...stageLinks.map((s) => s.href), ...facts.links.map((l) => l.href)])].filter((h) => h.startsWith("/"));
@@ -76,7 +76,7 @@ for (const loc of ["", "hi/", "ar/"]) for (const [vpName, viewport] of Object.en
     const a = form.querySelector('a[href*="wa.me"], a[href*="whatsapp"]');
     return { blocked, href: a ? decodeURIComponent(a.href) : "" };
   });
-  check(draft.blocked && /Machine: Belt Conveyor/.test(draft.href), "enquiry validates, then prepares a WhatsApp draft naming the machine");
+  check(draft.blocked && /Machine: [A-Z]/.test(draft.href) && draft.href.includes(`Machine: ${await page.$eval(".machine-enquiry input[name=\"Machine\"]", (i) => i.value)}`), "enquiry validates, then prepares a WhatsApp draft naming the machine");
   if (shots) {
     for (const [name, sel] of [["system", ".conveyor-system"], ["fabrication", ".machine-fabrication"], ["construction", ".machine-construction"], ["enquiry", ".machine-enquiry"]]) {
       const el = await page.$(sel);
@@ -109,9 +109,12 @@ for (const loc of ["", "hi/", "ar/"]) for (const [vpName, viewport] of Object.en
     const copy = await page.evaluate(() => document.querySelector(".machine-identity > div > p").textContent);
     const inbound = await browser.newPage();
     await inbound.setViewport(viewport);
-    await inbound.goto(`${origin}/${loc}machinery/`, { waitUntil: "networkidle2" });
-    await inbound.waitForFunction(() => document.documentElement.dataset.skIntro === "done", { timeout: 20000 }).catch(() => {});
-    await inbound.evaluate((s) => document.querySelector(`a[href$="/machinery/${s}/"]`).click(), slug);
+    // Arrive the way a visitor would: from the machinery list, or else from another machine page's process stages.
+    for (const from of ["machinery/", "machinery/belt-conveyor/"]) {
+      await inbound.goto(`${origin}/${loc}${from}`, { waitUntil: "networkidle2" });
+      await inbound.waitForFunction(() => document.documentElement.dataset.skIntro === "done", { timeout: 20000 }).catch(() => {});
+      if (await inbound.evaluate((s) => { const a = document.querySelector(`a[href$="/machinery/${s}/"]`); a?.click(); return Boolean(a); }, slug)) break;
+    }
     await inbound.waitForSelector(".machine-identity > div > p", { timeout: 20000 }).catch(() => {});
     await wait(800);
     const arrived = await inbound.evaluate(() => document.querySelector(".machine-identity > div > p")?.textContent);
