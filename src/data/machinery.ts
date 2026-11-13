@@ -134,7 +134,7 @@ const catalog: readonly MachineryItem[] = [
     categorySlug: "air-dust-handling",
     mediaType: "image",
     mediaSrc: "/images/machinery/catalog/bag-filter.webp",
-    mediaAlt: "S.K. Engineering Works industrial bag filter",
+    mediaAlt: "Illustrative industrial bag-filter enclosure with duct openings, access structure and lower collection hopper",
     mediaFit: "contain",
     detailHref: "/machinery/bag-filter",
   },

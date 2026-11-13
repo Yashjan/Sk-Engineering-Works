@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: LocalizedRouteProps): Promise
     const detail = machineryDetails[segments[1]];
     const localized = detail && localizeMachine(detail, locale);
     if (localized && localized !== detail) {
-      return createLocalizedMetadata({ locale, pathname, title: localized.seo.title, description: localized.seo.description, image: segments[1] === "screw-conveyor" || segments[1] === "portable-belt-conveyor" ? localized.hero?.src : undefined, index: true });
+      return createLocalizedMetadata({ locale, pathname, title: localized.seo.title, description: localized.seo.description, image: segments[1] === "screw-conveyor" || segments[1] === "portable-belt-conveyor" || segments[1] === "bag-filter" ? localized.hero?.src : undefined, index: true });
     }
     return createLocalizedMetadata({
       locale,

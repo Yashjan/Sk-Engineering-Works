@@ -19,6 +19,8 @@ import cycloneAr from "./cyclone.ar.json";
 import cycloneHi from "./cyclone.hi.json";
 import portableBeltConveyorAr from "./portable-belt-conveyor.ar.json";
 import portableBeltConveyorHi from "./portable-belt-conveyor.hi.json";
+import bagFilterAr from "./bag-filter.ar.json";
+import bagFilterHi from "./bag-filter.hi.json";
 
 type MachineCopy = Readonly<Record<string, string>>;
 
@@ -34,6 +36,7 @@ const machineCopy: Readonly<Record<string, Record<TranslatedLocale, MachineCopy>
   "id-fan-blower": { hi: idFanBlowerHi, ar: idFanBlowerAr },
   cyclone: { hi: cycloneHi, ar: cycloneAr },
   "portable-belt-conveyor": { hi: portableBeltConveyorHi, ar: portableBeltConveyorAr },
+  "bag-filter": { hi: bagFilterHi, ar: bagFilterAr },
 };
 
 export function localizeMachine(machine: MachineryConfig, locale: Locale): MachineryConfig {

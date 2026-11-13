@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: MachinePageProps): Promise<Me
       title: detail.seo.title,
       description: detail.seo.description,
       path: `/machinery/${slug}`,
-      image: slug === "screw-conveyor" || slug === "portable-belt-conveyor" ? detail.hero?.src : undefined,
+      image: slug === "screw-conveyor" || slug === "portable-belt-conveyor" || slug === "bag-filter" ? detail.hero?.src : undefined,
     });
   }
   return createPageMetadata({
