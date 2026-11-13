@@ -60,7 +60,7 @@ const catalog: readonly MachineryItem[] = [
     categorySlug: "material-handling",
     mediaType: "image",
     mediaSrc: "/images/machinery/catalog/portable-belt-conveyor.webp",
-    mediaAlt: "S.K. Engineering Works material receiving hopper",
+    mediaAlt: "Illustrative inclined portable belt conveyor on a wheel-supported chassis",
     mediaFit: "contain",
     detailHref: "/machinery/portable-belt-conveyor",
   },
