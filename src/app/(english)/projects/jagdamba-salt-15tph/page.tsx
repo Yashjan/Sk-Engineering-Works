@@ -27,7 +27,6 @@ export const metadata: Metadata = createPageMetadata({
   description: "Jagdamba Salt Pvt. Ltd. 15 TPH salt refinery project in Phalodi, Rajasthan.",
   path: "/projects/jagdamba-salt-15tph",
   image: "/images/projects/jagdamba/hero/cover-desktop.webp",
-  index: false,
 });
 
 export default function JagdambaProjectPage() {
