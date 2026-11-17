@@ -2,6 +2,8 @@ import { processStages } from "@/data/process";
 import type { MachineMedia, MachineryConfig } from "./types";
 export type MachineContent = {
   slug: string; name: string; stageId?: string; image?: string;
+  /** Shorter search title when the default "<name> for Salt & Industrial Processing" is too long. */
+  seoTitle?: string;
   tagline: string; identity: string; description: string;
   components: readonly (readonly [string, string])[];
   steps: readonly (readonly [string, string])[];
@@ -15,7 +17,7 @@ export function createMachine(content: MachineContent): MachineryConfig {
   return {
     slug: content.slug, name: content.name, has3D: false,
     tagline: content.tagline, description: content.description,
-    seo: { title: `${content.name} for Salt & Industrial Processing`, description: `${content.name} by S.K. Engineering Works. ${content.tagline} Discuss equipment configuration and integration with your process line.` },
+    seo: { title: content.seoTitle ?? `${content.name} for Salt & Industrial Processing`, description: `${content.name} by S.K. Engineering Works. ${content.tagline} Discuss equipment configuration and integration with your process line.` },
     ...(image ? { hero: { type: "image" as const, src: image.startsWith("/") ? image : `/${image}`, alt: `S.K. Engineering Works ${content.name.toLowerCase()}` } } : {}),
     identity: { title: content.identity, copy: content.description },
     components: content.components.map(([title, description]) => ({ title, description })),

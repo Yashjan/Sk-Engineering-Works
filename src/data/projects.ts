@@ -230,7 +230,7 @@ export const projects: Project[] = [
     capacity: "",
     scope: "",
     projectType: "Industrial Equipment",
-    detailHref: "/machinery/chimney",
+    detailHref: "/projects/industrial-chimney",
     coverImage: "/images/machinery/catalog/industrial-chimney.webp",
     media: [
       { id: "fabrication", type: "video", src: "/images/projects/equipment/industrial-chimney/fabrication.mp4", label: "FABRICATION" },

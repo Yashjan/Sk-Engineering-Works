@@ -228,23 +228,28 @@ export const machineryCatalog: readonly MachineryItem[] = catalog.map((machine) 
   return { ...machine, mediaType: "image", mediaSrc: stage.image.startsWith("/") ? stage.image : `/${stage.image}`, mediaAlt: stage.imageAlt, mediaFit: "contain" };
 });
 
-export const materialHandlingMachines = machineryCatalog.filter(
+// Machines without a finished detail page: their routes still build (noindex), but the
+// directory, category theatres and search do not list or link to them.
+const unlistedMachinerySlugs = new Set(["chimney"]);
+export const listedMachinery = machineryCatalog.filter((machine) => !unlistedMachinerySlugs.has(machine.slug));
+
+export const materialHandlingMachines = listedMachinery.filter(
   (machine) => machine.categorySlug === "material-handling",
 );
 
-export const millingMachines = machineryCatalog.filter(
+export const millingMachines = listedMachinery.filter(
   (machine) => machine.categorySlug === "milling-size-reduction",
 );
 
-export const airDustMachines = machineryCatalog.filter(
+export const airDustMachines = listedMachinery.filter(
   (machine) => machine.categorySlug === "air-dust-handling",
 );
 
-export const screeningMachines = machineryCatalog.filter(
+export const screeningMachines = listedMachinery.filter(
   (machine) => machine.categorySlug === "screening-separation",
 );
 
-export const storageMachines = machineryCatalog.filter(
+export const storageMachines = listedMachinery.filter(
   (machine) => machine.categorySlug === "storage-process-equipment",
 );
 

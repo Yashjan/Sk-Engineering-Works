@@ -2,7 +2,7 @@
 /** @jsxImportSource @/i18n/react */
 
 import { useState, type FocusEvent } from "react";
-import { machineryCatalog } from "@/data/machinery";
+import { listedMachinery } from "@/data/machinery";
 import { useMachineryDirectory } from "./MachineryDirectory";
 import "./global-machinery-search.css";
 
@@ -11,7 +11,7 @@ export default function GlobalMachinerySearch() {
   const [query, setQuery] = useState("");
   const normalizedQuery = query.trim().toLocaleLowerCase();
   const results = normalizedQuery
-    ? machineryCatalog.filter((machine) => machine.name.toLocaleLowerCase().includes(normalizedQuery))
+    ? listedMachinery.filter((machine) => machine.name.toLocaleLowerCase().includes(normalizedQuery))
     : [];
 
   const handleBlur = (event: FocusEvent<HTMLDivElement>) => {

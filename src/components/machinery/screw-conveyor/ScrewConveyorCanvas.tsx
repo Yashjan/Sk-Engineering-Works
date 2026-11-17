@@ -804,4 +804,6 @@ export default function ScrewConveyorCanvas({ motion, inspection, onReady, callo
   );
 }
 
-useGLTF.preload(modelUrl);
+// No useGLTF.preload here: the model is fetched when the canvas mounts, after the page has rendered.
+// The GLB uses EXT_meshopt_compression and EXT_texture_webp; drei's useGLTF registers the bundled
+// meshopt decoder by default, so no external decoder file is needed.

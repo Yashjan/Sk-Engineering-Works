@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { machineryDetails } from "@/data/machinery-details";
+import { projectArchive } from "@/data/projects";
 import { absoluteUrl } from "@/config/site";
 import { localizePathname, locales } from "@/i18n/config";
 
@@ -16,7 +17,12 @@ const routes = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = [...routes, ...Object.keys(machineryDetails).map((slug) => ({ path: `/machinery/${slug}`, changeFrequency: "monthly" as const, priority: 0.8 }))];
+  const paths = [
+    ...routes,
+    ...Object.keys(machineryDetails).map((slug) => ({ path: `/machinery/${slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
+    // Project case studies, including the featured Jagdamba page (its own route, same /projects/<slug> path).
+    ...[...new Set(projectArchive.map(({ slug }) => slug))].map((slug) => ({ path: `/projects/${slug}`, changeFrequency: "monthly" as const, priority: 0.7 })),
+  ];
   return locales.flatMap((locale) => paths.map(({ path, changeFrequency, priority }) => ({
     url: absoluteUrl(localizePathname(path, locale)), changeFrequency, priority,
     alternates: { languages: Object.fromEntries(locales.map((alternative) => [alternative, absoluteUrl(localizePathname(path, alternative))])) },

@@ -17,7 +17,7 @@ import { createLocalizedMetadata } from "@/i18n/metadata";
 import { getPageCopy } from "@/i18n/page-copy";
 import { isTranslatedLocale, translatedLocales } from "@/i18n/config";
 import { localizeMachine } from "@/i18n/machinery-content";
-import { localizeServerTree } from "@/i18n/server";
+import { localizeServerTree, translateServerText } from "@/i18n/server";
 
 type LocalizedRouteProps = { params: Promise<{ locale: string; segments: string[] }> };
 
@@ -64,8 +64,8 @@ export async function generateMetadata({ params }: LocalizedRouteProps): Promise
       pathname,
       title: `${machineName ?? "Machinery"} | ${locale === "hi" ? "औद्योगिक मशीनरी" : "الآلات الصناعية"}`,
       description: locale === "hi"
-        ? `${machineName ?? "मशीन"} की अभियांत्रिकी, निर्माण और प्रक्रिया अनुप्रयोग संबंधी जानकारी।`
-        : `معلومات عن هندسة وتصنيع وتطبيقات ${machineName ?? "الآلة"}.`,
+        ? `नमक रिफाइनरी संयंत्रों और औद्योगिक प्रसंस्करण के लिए S.K. Engineering Works का ${machineName ? translateServerText(machineName, "hi") : "उपकरण"}: घटक, कार्य-प्रणाली, विन्यास विकल्प और उत्पादन लाइन के साथ एकीकरण।`
+        : `${machineName ? translateServerText(machineName, "ar") : "معدات"} من S.K. Engineering Works لمصانع تكرير الملح والمعالجة الصناعية: المكونات وطريقة العمل وخيارات التهيئة والتكامل مع خط الإنتاج.`,
       index: Boolean(machineryDetails[segments[1]]),
     });
   }
@@ -77,9 +77,8 @@ export async function generateMetadata({ params }: LocalizedRouteProps): Promise
       locale,
       pathname,
       title: `${name} | ${locale === "hi" ? "परियोजना रिकॉर्ड" : "سجل المشروع"}`,
-      description: locale === "hi" ? `${name} का सत्यापित परियोजना रिकॉर्ड।` : `سجل مشروع موثق لـ ${name}.`,
+      description: locale === "hi" ? `${translateServerText(name, "hi")}: S.K. Engineering Works का प्रलेखित परियोजना रिकॉर्ड, जिसमें उपकरण निर्माण और परियोजना निष्पादन को दिखाने वाले वर्कशॉप और साइट के वास्तविक फुटेज हैं।` : `${translateServerText(name, "ar")}: سجل مشروع موثّق من S.K. Engineering Works، مع لقطات حقيقية من الورشة والموقع توثّق تصنيع المعدات وتنفيذ المشروع.`,
       image: project?.poster ?? (project?.mediaType === "image" ? project.mediaSrc : undefined),
-      index: false,
     });
   }
 

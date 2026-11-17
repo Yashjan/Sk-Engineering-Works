@@ -119,7 +119,6 @@ export async function generateMetadata({ params }: ProjectDetailPageProps): Prom
     description: project ? `${project.name}${project.location ? `, ${project.location}` : ""}. S.K. Engineering Works project field record.` : "S.K. Engineering Works project field record.",
     path: `/projects/${slug}`,
     image: project?.poster ?? (project?.mediaType === "image" ? project.mediaSrc : undefined),
-    index: false,
   });
 }
 
